@@ -14,6 +14,9 @@ const AuthCtx = createContext<Ctx | null>(null);
 export const useAuth = () => useContext(AuthCtx);
 
 const WS_KEY = "taazu-workspace";
+/* Username accounts live in Auth as <username>@taazu.app (see functions/taazu-signup). */
+const USERNAME_DOMAIN = "taazu.app";
+const toEmail = (id: string) => { const v = id.trim().toLowerCase(); return v.includes("@") ? v : `${v}@${USERNAME_DOMAIN}`; };
 const shell = "min-h-dvh flex items-center justify-center bg-gradient-to-b from-orange-50 to-slate-50 px-4 pt-safe pb-safe";
 const card = "w-full max-w-sm bg-white rounded-3xl border border-slate-200 shadow-xl p-6";
 const primary = "w-full inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 py-3 text-sm font-semibold text-white active:bg-orange-700 disabled:opacity-50";
@@ -30,7 +33,7 @@ function Logo() {
 
 function SignIn() {
   const [mode, setMode] = useState<"in" | "up">("in");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); // username or email
   const [pw, setPw] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
@@ -42,12 +45,21 @@ function SignIn() {
   };
   const submit = async (e) => {
     e.preventDefault(); setBusy(true); setMsg("");
-    const fn = mode === "in"
-      ? supabase.auth.signInWithPassword({ email, password: pw })
-      : supabase.auth.signUp({ email, password: pw, options: { emailRedirectTo: window.location.origin } });
-    const { data, error } = await fn;
-    if (error) setMsg(error.message);
-    else if (mode === "up" && !data.session) setMsg("Check your email to confirm, then sign in.");
+    const id = email.trim();
+    if (mode === "up" && !id.includes("@")) {
+      // Username sign-up goes through the edge function (no confirmation email possible).
+      const { data, error } = await supabase.functions.invoke("taazu-signup", { body: { username: id, password: pw } });
+      const fnErr = data?.error || (error && (await (error as any).context?.json?.().catch(() => null))?.error) || (error ? "Could not create account." : "");
+      if (fnErr) { setMsg(fnErr); setBusy(false); return; }
+    } else if (mode === "up") {
+      const { data, error } = await supabase.auth.signUp({ email: id, password: pw, options: { emailRedirectTo: window.location.origin } });
+      if (error) setMsg(error.message);
+      else if (!data.session) setMsg("Check your email to confirm, then sign in.");
+      setBusy(false);
+      return;
+    }
+    const { error } = await supabase.auth.signInWithPassword({ email: toEmail(id), password: pw });
+    if (error) setMsg(/invalid/i.test(error.message) ? "Wrong username/email or password." : error.message);
     setBusy(false);
   };
 
@@ -61,8 +73,8 @@ function SignIn() {
         </button>
         <div className="my-4 flex items-center gap-3 text-xs text-slate-400"><span className="h-px flex-1 bg-slate-200" />or<span className="h-px flex-1 bg-slate-200" /></div>
         <form onSubmit={submit} className="space-y-3">
-          <input className={inputCls} type="email" autoComplete="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input className={inputCls} type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} placeholder="Password (6+ characters)" minLength={6} value={pw} onChange={(e) => setPw(e.target.value)} required />
+          <input className={inputCls} type="text" autoCapitalize="none" autoCorrect="off" spellCheck={false} autoComplete="username" placeholder="Username or email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input className={inputCls} type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} placeholder={mode === "in" ? "Password" : "Password (8+ characters)"} minLength={mode === "in" ? 6 : 8} value={pw} onChange={(e) => setPw(e.target.value)} required />
           <button className={primary} disabled={busy}>{busy && <Loader2 size={16} className="animate-spin" />}{mode === "in" ? "Sign in" : "Create account"}</button>
         </form>
         {msg && <p className="mt-3 text-center text-xs text-slate-600">{msg}</p>}
@@ -75,7 +87,7 @@ function SignIn() {
 }
 
 function PickWorkspace({ session, onPick }: { session: Session; onPick: (w: Workspace) => void }) {
-  const guess = (session.user.user_metadata?.full_name || session.user.email?.split("@")[0] || "").toString();
+  const guess = (session.user.user_metadata?.full_name || session.user.user_metadata?.username || session.user.email?.split("@")[0] || "").toString();
   const [name, setName] = useState(guess);
   const [wsName, setWsName] = useState("Taazu");
   const [code, setCode] = useState("");
@@ -112,7 +124,7 @@ function PickWorkspace({ session, onPick }: { session: Session; onPick: (w: Work
             onClick={() => run("taazu_create_workspace", { ws_name: wsName, my_name: name.trim() })}>Create team</button>
         </div>
         {msg && <p className="mt-3 text-center text-xs text-red-600">{msg}</p>}
-        <button onClick={() => supabase.auth.signOut()} className="mt-4 w-full text-center text-xs text-slate-400">Sign out ({session.user.email})</button>
+        <button onClick={() => supabase.auth.signOut()} className="mt-4 w-full text-center text-xs text-slate-400">Sign out ({session.user.email?.replace("@" + USERNAME_DOMAIN, "")})</button>
       </div>
     </div>
   );

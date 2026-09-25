@@ -31,7 +31,7 @@ export default function TeamPanel({ dark = false }) {
         ))}
       </div>
       <button onClick={signOut} className={`w-full inline-flex items-center justify-center gap-2 rounded-lg py-2 text-xs ${sub}`}>
-        <LogOut size={14} />Sign out {me?.display_name ? `(${me.display_name})` : session.user.email}
+        <LogOut size={14} />Sign out {me?.display_name ? `(${me.display_name})` : session.user.email?.replace("@taazu.app", "")}
       </button>
     </div>
   );
