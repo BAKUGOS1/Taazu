@@ -86,8 +86,9 @@ export const mapUrl = (r) => {
 };
 
 /* ---------------- suppliers (public listings, Sep 2026) ---------------- */
-export const SUP_KEYS = ["cat", "name", "area", "phone", "use", "source"];
+export const SUP_KEYS = ["cat", "name", "area", "phone", "use", "source", "gstin", "contact", "phone2", "email"];
 export const SUPPLIERS = () => enrich(mk([
+  ["Co-packer / bottler", "Parekh Enterprise (Hydr-Aid)", "Makarba, Ahmedabad", "080716 30391", "Already sells an electrolyte drink (₹30 packs) — ask to put the Taazu label on it", "parekhenterprise.net / IndiaMART", "24AFKPP1131N1ZD", "Hiten N Parekh"],
   ["Co-packer / bottler", "Saffron Beverages / Saffron Biotech", "C.G. Road, Ahmedabad", "+91 98985 32774", "Private-label functional & flavoured drinks; ask MOQ for 250 ml PET", "Research report / saffronbeverages.in"],
   ["Co-packer / bottler", "Clear Pani", "Changodar", "via ExportersIndia", "Packaged water 500 ml ₹8, MOQ 1,000; ask if they can dose your premix", "ExportersIndia"],
   ["Co-packer / bottler", "Patel Beverages Pvt Ltd", "Vadodara", "+91 79425 50890", "Contract water 200 ml–2 L PET; ask about flavour/electrolyte dosing", "IndiaMART"],
@@ -95,8 +96,9 @@ export const SUPPLIERS = () => enrich(mk([
   ["Co-packer / bottler", "Freshneer Foods & Services", "Chanakyapuri, Ahmedabad", "not listed", "Local packaged-water brand; ask about job-work", "Google Maps"],
   ["Co-packer / bottler", "Gandhi Beverages", "Naroda GIDC", "+91 73737 35436", "Beverage manufacturer; ask capabilities & licence categories", "Google Maps"],
   ["Co-packer / bottler", "Chill Baby Beverages", "Isanpur", "+91 76005 51314", "Local soft-drink maker; ask about job-work for still drinks", "Google Maps"],
-  ["Co-packer / bottler", "Koladiya Industries (Asterin)", "Mangrol, Surat", "+91 79427 90651", "Functional drinks in cans; MOQ 10k–12.5k (later stage)", "IndiaMART"],
+  ["Co-packer / bottler", "Koladiya Industries (Asterin)", "Mangrol, Surat", "+91 79427 90651", "Functional drinks in cans; MOQ 10k–12.5k — get a benchmark quote", "IndiaMART / asterin.in", "24AAJCK4772F1ZG"],
   ["Co-packer / bottler", "Foodsure", "Noida (serves Gujarat)", "+91 81304 04757", "Formulation + contract manufacturing; 3,000+ units", "foodsure.co.in"],
+  ["Co-packer / bottler", "Ayuray Organics", "Chandigarh (ships India)", "+91 70879 61144", "Electrolyte drink private label — RTD bottles, sachets, cans; ask MOQ", "ayurayorganics.com", "", "", "", "ayurayindia@gmail.com"],
   ["Powder private label", "SevenQ Nutrition", "India", "via sevenqnutrition.com", "Private-label electrolyte sachets (GMP, ISO 22000, FSSAI)", "Website"],
   ["Powder private label", "Biocruz Pharmaceuticals", "India", "via biocruz.in", "Third-party electrolyte powders & custom blends", "Website"],
   ["PET bottles / caps", "Bhavani Corporation", "Odhav GIDC", "+91 73596 32622", "PET bottles; semi & fully automatic lines", "Google Maps"],
@@ -109,7 +111,6 @@ export const SUPPLIERS = () => enrich(mk([
   ["Labels & packaging", "Hynix Label", "Odhav", "+91 95129 59990", "Custom stickers & labels", "Google Maps"],
   ["Labels & packaging", "Vimalachal Print & Pack Pvt Ltd", "Changodar", "+91 79 2656 2643", "Printed laminates — for powder sachets later", "Google Maps"],
   ["Labels & packaging", "Diya Packaging Pvt Ltd", "Changodar", "+91 89802 56187", "Packaging; ask about cartons/shrink", "Google Maps"],
-  ["Flavour / premix", "Parekh Enterprise", "Makarba", "080716 30391", "Flavours, colours, electrolyte drink premix", "Research report / website"],
   ["Flavour / premix", "Bharat Essence", "Sarkhej", "+91 95373 38565", "Food essences & ingredients", "Google Maps"],
   ["Flavour / premix", "Jalaram Essence Store", "Saraspur", "+91 98986 50480", "Essences (wholesale)", "Google Maps"],
   ["Flavour / premix", "Real Beverage", "Danilimda", "+91 98989 17350", "Soda machines + flavours (if you ever make in-house)", "Google Maps"],
@@ -121,7 +122,9 @@ export const SUPPLIERS = () => enrich(mk([
   ["Hydration station", "A K Marketing & Water Supplier", "Chandkheda", "+91 80008 63925", "Event water supply, quick delivery", "Google Maps"],
   ["Future plant", "KP Water Treatment Pvt Ltd", "Vatva GIDC", "+91 98980 71071", "Turnkey bottled-water plants + branding help", "Google Maps"],
   ["Future plant", "Indian Ion Exchange & Chemicals", "Naroda GIDC", "+91 79 6777 0200", "Mineral-water plants & packaging machinery", "Google Maps"],
-], SUP_KEYS, { status: "To call", moq: "", price: "", notes: "" }));
+], SUP_KEYS, { status: "To call", moq: "", price: "", notes: "" }).map((r) => ({ ...r, id: seedId(r.name) })));
+/* Stable ids so the same starter supplier added on two phones is one record. */
+export const seedId = (name) => "sup-" + name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /* ---------------- buyers / leads ---------------- */
 export const BUY_KEYS = ["seg", "name", "area", "phone", "why", "priority", "source"];
@@ -267,3 +270,20 @@ export const survCols = [
   { k: "segment", l: "Who", w: 110, t: "select", o: SEGS }, { k: "flavour", l: "Best flavour", w: 120, t: "select", o: FLAVOURS },
   { k: "pay", l: "Would pay (250 ml)", w: 140, t: "select", o: PAYS }, { k: "comment", l: "Comment", w: 260 },
 ];
+
+/* Bring an existing team's supplier list up to the current starter data without touching their notes:
+ * fill blank GSTIN / contact / alt-number fields, re-file Parekh as a co-packer, and add new starter suppliers. */
+export const upgradeSuppliers = (rows) => {
+  const seed = SUPPLIERS();
+  const byName = new Map(seed.map((s) => [s.name, s]));
+  const out = rows.map((r) => {
+    const name = r.name === "Parekh Enterprise" ? "Parekh Enterprise (Hydr-Aid)" : r.name;
+    const s = byName.get(name);
+    if (!s) return r;
+    const fill = Object.fromEntries(["gstin", "contact", "phone2", "email"].filter((k) => s[k] && !r[k]).map((k) => [k, s[k]]));
+    const moved = name !== r.name ? { name, cat: s.cat, use: s.use, source: s.source } : {};
+    return Object.keys(fill).length || moved.name ? { ...r, ...moved, ...fill } : r;
+  });
+  const have = new Set(out.map((r) => r.name));
+  return [...out, ...seed.filter((s) => !have.has(s.name) && !rows.some((r) => r.id === s.id))];
+};

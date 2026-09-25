@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Phone, MessageCircle, MapPin, LayoutGrid, Table as TableIcon } from "lucide-react";
+import { Phone, MessageCircle, MapPin } from "lucide-react";
 import { STATUS_COL, telHref, waHref, mapUrl } from "../lib/core";
 
 /* ---------------- UI primitives ---------------- */
@@ -77,43 +76,4 @@ export function Bar({ value, max, color = "#EA580C" }) {
 }
 export function Empty({ icon: Icon, text }) {
   return <div className="flex flex-col items-center text-center py-6 text-sm text-slate-500"><Icon size={22} className="text-slate-300 mb-2" />{text}</div>;
-}
-
-/* ---------------- shared List view setting (Table / Cards), remembered ---------------- */
-let VIEW_PREF = "table";
-let VIEW_LOADED = false;
-const VIEW_SUBS = new Set<(x: string) => void>();
-export function useViewPref() {
-  const [v, setV] = useState(VIEW_PREF);
-  useEffect(() => {
-    const fn = (x) => setV(x);
-    VIEW_SUBS.add(fn);
-    if (!VIEW_LOADED && window.storage) {
-      VIEW_LOADED = true;
-      Promise.resolve(window.storage.get("hq-view", false))
-        .then((r) => { if (r && r.value) { VIEW_PREF = r.value; VIEW_SUBS.forEach((f) => f(r.value)); } })
-        .catch(() => {});
-    }
-    return () => { VIEW_SUBS.delete(fn); };
-  }, []);
-  const set = (x) => {
-    VIEW_PREF = x;
-    VIEW_SUBS.forEach((f) => f(x));
-    try { window.storage && Promise.resolve(window.storage.set("hq-view", x, false)).catch(() => {}); } catch (e) { /* ignore */ }
-  };
-  return [v, set] as const;
-}
-export function ViewToggle({ dark = false }) {
-  const [v, setV] = useViewPref();
-  const opts: [string, string, typeof TableIcon][] = [["table", "Table", TableIcon], ["cards", "Cards", LayoutGrid]];
-  return (
-    <div className={`inline-flex rounded-lg p-1 ${dark ? "bg-slate-800" : "bg-slate-100"}`}>
-      {opts.map(([id, l, Icon]) => (
-        <button key={id} onClick={() => setV(id)}
-          className={`flex items-center gap-1 rounded-md px-3 py-1 text-xs font-medium ${v === id ? (dark ? "bg-slate-600 text-white" : "bg-white text-slate-900 shadow-sm") : dark ? "text-slate-400" : "text-slate-500"}`}>
-          <Icon size={14} />{l}
-        </button>
-      ))}
-    </div>
-  );
 }
