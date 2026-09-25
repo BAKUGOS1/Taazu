@@ -25,7 +25,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
           <div className="min-w-0 flex-1">
             <div className="font-semibold text-slate-900 leading-snug">{r.name}</div>
             <div className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
-              <Dot color={COL[cat] || "#64748B"} square /><span className="truncate">{cat}{r.area ? ` · ${r.area}` : ""}</span>
+              <Dot color={COL[cat] || "#64748B"} square /><span className="truncate">{cat}{r.area ? ` · ${r.area}` : ""}{r.city && !String(r.area || "").includes(r.city) ? `, ${r.city}` : ""}</span>
             </div>
           </div>
           <span className="shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ color: col, background: col + "18" }}>{r.status}</span>

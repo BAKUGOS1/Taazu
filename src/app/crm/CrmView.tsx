@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { Search, Plus, BellRing, Columns3, List, PhoneOutgoing } from "lucide-react";
 import { Empty, inputCls } from "../../components/ui";
-import { uid } from "../../lib/core";
+import { uid, cityOf } from "../../lib/core";
 import { usePrefs } from "../../lib/prefs";
 import RecordCard from "./RecordCard";
 import RecordSheet from "./RecordSheet";
@@ -19,6 +19,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   const [tab, setTab] = useState("due");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
+  const [city, setCity] = useState("All cities");
   const [openId, setOpenId] = useState<string | null>(null);
   const [startLog, setStartLog] = useState<string | null>(null);
 
@@ -35,7 +36,12 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
     logs.forEach((l) => { const c = m[l.supplierId]; if (!c || (l.date + (l.at || 0)) > (c.date + (c.at || 0))) m[l.supplierId] = l; });
     return m;
   }, [logs]);
-  const filtered = rows.filter((r) => (cat === "All" || r[cfg.catKey] === cat) && (!q || `${r.name} ${r.area} ${r[cfg.catKey]} ${r.contact || ""} ${r.phone}`.toLowerCase().includes(q.toLowerCase())));
+  const cities = useMemo(() => {
+    const n: Record<string, number> = {};
+    rows.forEach((r) => { const c = cityOf(r); n[c] = (n[c] || 0) + 1; });
+    return Object.entries(n).sort((a, b) => (a[0] === "Ahmedabad" ? -1 : b[0] === "Ahmedabad" ? 1 : b[1] - a[1]));
+  }, [rows]);
+  const filtered = rows.filter((r) => (cat === "All" || r[cfg.catKey] === cat) && (city === "All cities" || cityOf(r) === city) && (!q || `${r.name} ${r.area} ${r[cfg.catKey]} ${r.contact || ""} ${r.phone}`.toLowerCase().includes(q.toLowerCase())));
   const due = dueList(cfg, filtered);
   const fresh = filtered.filter((r) => r.status === cfg.freshStage && !r.follow).sort(cfg.sortFresh || (() => 0));
 
@@ -45,7 +51,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   const current = rows.find((r) => r.id === openId) || null;
 
   const add = () => {
-    const r: CrmRecord = { id: uid(), [cfg.catKey]: cat === "All" ? cfg.defaultCat : cat, name: `New ${cfg.noun}`, area: "", phone: "", source: "Added manually", status: cfg.freshStage, _o: Date.now() };
+    const r: CrmRecord = { id: uid(), [cfg.catKey]: cat === "All" ? cfg.defaultCat : cat, name: `New ${cfg.noun}`, area: "", city: city === "All cities" ? "" : city, phone: "", source: "Added manually", status: cfg.freshStage, _o: Date.now() };
     setRows((rs) => [r, ...rs]);
     open(r);
   };
@@ -77,6 +83,13 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input className={inputCls + " pl-9"} placeholder="Search name, area, phone" value={q} onChange={(e) => setQ(e.target.value)} />
               </div>
+              {cities.length > 1 && (
+                <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="City"
+                  className={`shrink-0 max-w-[34vw] rounded-lg border px-2 text-xs font-medium ${city === "All cities" ? "border-slate-200 bg-white text-slate-600" : "border-slate-900 bg-slate-900 text-white"}`}>
+                  <option>All cities</option>
+                  {cities.map(([c, n]) => <option key={c} value={c}>{c} ({n})</option>)}
+                </select>
+              )}
               <button onClick={add} className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-orange-600 px-3 text-sm font-semibold text-white active:bg-orange-700"><Plus size={16} />Add</button>
             </div>
             <div className="mt-2 flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4">

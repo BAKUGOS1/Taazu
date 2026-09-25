@@ -157,6 +157,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
           <Input f={{ k: "phone", label: "Phone", type: "tel", half: true }} value={r.phone} onChange={(v) => onChange({ phone: v })} />
           <Input f={{ k: "phone2", label: "Other numbers (comma-separated)", type: "tel", placeholder: "e.g. 98xxxxxx01, 079 xxxx xxxx" }} value={r.phone2} onChange={(v) => onChange({ phone2: v })} />
           <Input f={{ k: "area", label: "Area", half: true }} value={r.area} onChange={(v) => onChange({ area: v })} />
+          <Input f={{ k: "city", label: "City", half: true, placeholder: "Ahmedabad" }} value={r.city} onChange={(v) => onChange({ city: v })} />
           <Input f={{ k: cfg.catKey, label: "Category", half: true }} value={cat} onChange={(v) => onChange({ [cfg.catKey]: v })} />
           <Input f={{ k: "email", label: "Email", type: "email" }} value={r.email} onChange={(v) => onChange({ email: v })} />
           {cfg.detailFields.filter((f) => f.k !== "use" || !cfg.checklist).map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}

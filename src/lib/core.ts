@@ -271,6 +271,15 @@ export const survCols = [
   { k: "pay", l: "Would pay (250 ml)", w: 140, t: "select", o: PAYS }, { k: "comment", l: "Comment", w: 260 },
 ];
 
+/* City for filtering: the record's own city, else read from the area text (most starter rows are Ahmedabad GIDCs). */
+const OTHER_CITIES = ["Vadodara", "Surat", "Rajkot", "Anand", "Mehsana", "Gandhinagar", "Noida", "Chandigarh", "Mumbai", "Delhi", "Pune", "Hyderabad", "Bengaluru", "Indore", "Jaipur"];
+export const cityOf = (r) => {
+  if (r.city) return r.city;
+  const a = String(r.area || "");
+  const hit = OTHER_CITIES.find((c) => a.toLowerCase().includes(c.toLowerCase()));
+  return hit || (a && a !== "India" ? "Ahmedabad" : "India-wide");
+};
+
 /* Bring an existing team's supplier list up to the current starter data without touching their notes:
  * fill blank GSTIN / contact / alt-number fields, re-file Parekh as a co-packer, and add new starter suppliers. */
 export const upgradeSuppliers = (rows) => {
