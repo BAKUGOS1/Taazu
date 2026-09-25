@@ -31,35 +31,98 @@ body {
 }
 .sheet-in { animation: sheet-in 200ms cubic-bezier(0.2, 0.9, 0.3, 1); }
 
-/* Floating glass dock (see components/Dock.tsx). */
+/* Floating liquid-glass dock (see components/Dock.tsx) — same as Phere's GlassDockNav. */
 .taazu-dock {
   position: relative;
-  min-height: 64px;
+  min-height: 66px;
   padding: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  /* Press-and-slide gesture owns touches on the dock; never scroll the page. */
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
 }
+/* Resting highlight: a plain neutral capsule behind the active tab. */
 .taazu-dock__pill {
   position: absolute;
   top: 6px;
   bottom: 6px;
   left: 6px;
   border-radius: 999px;
-  background: rgba(234, 88, 12, 0.1);
-  transition: transform 420ms cubic-bezier(0.3, 1.35, 0.35, 1);
+  background: rgba(15, 23, 42, 0.075);
+  transition: transform 420ms cubic-bezier(0.3, 1.35, 0.35, 1), opacity 160ms ease;
+  will-change: transform;
   pointer-events: none;
 }
+.taazu-dock__pill.is-lensed { opacity: 0; }
+
+/* Lens geometry is written every frame by the component — no transitions here. */
+.taazu-dock__lens-wrap {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 0;
+  height: 52px;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 2;
+}
+.taazu-dock__lens {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 25px;
+  /* Opaque on purpose: translucency would show the real icons beside the refracted copy. */
+  background: linear-gradient(155deg, #ffffff 0%, #f8fafc 48%, #ffffff 100%);
+  box-shadow:
+    0 8px 22px rgba(15, 23, 42, 0.18),
+    0 2px 6px rgba(15, 23, 42, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(15, 23, 42, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+  contain: layout paint;
+}
+.taazu-dock__lens-refract {
+  position: absolute;
+  height: 52px;
+  padding: 0 6px;
+  display: grid;
+  color: #64748b;
+}
+.taazu-dock__lens-item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+.taazu-dock__lens-item > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.taazu-dock__lens-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 70% at 30% 8%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(90% 55% at 70% 100%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 70%);
+}
+.taazu-lens-defs { position: absolute; width: 0; height: 0; pointer-events: none; }
+
 .taazu-dock__item {
   position: relative;
   z-index: 1;
   min-width: 0;
   min-height: 52px;
+  padding: 5px 2px;
+  border-radius: 21px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,9 +136,10 @@ body {
 }
 .taazu-dock__item > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .taazu-dock__item.is-active { color: #c2410c; }
-.taazu-dock__item:active { transform: scale(0.94); }
-.taazu-dock__item:focus-visible { outline: 2px solid rgba(234, 88, 12, 0.5); outline-offset: 1px; border-radius: 20px; }
+.taazu-dock__item:active { transform: scale(0.96); }
+.taazu-dock__item:focus-visible { outline: 2px solid rgba(234, 88, 12, 0.5); outline-offset: 1px; }
 
 @media (prefers-reduced-motion: reduce) {
   .taazu-dock__pill, .sheet-in { transition: none; animation: none; }
 }
+

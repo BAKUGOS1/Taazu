@@ -703,6 +703,7 @@ const NAV_GROUPS = [
   { label: "Work", items: [{ id: "Today", icon: Home }, { id: "Buyers", icon: Users }, { id: "Suppliers", icon: Factory }, { id: "Map", icon: MapIcon }, { id: "Tasks", icon: ListChecks }] },
   { label: "Record", items: [{ id: "Survey", icon: ClipboardList }, { id: "QR Survey", icon: QrCode }, { id: "Sales", icon: ShoppingCart }] },
   { label: "Plan", items: [{ id: "Budget", icon: Wallet }, { id: "Brand", icon: Palette }] },
+  { label: "App", items: [{ id: "Settings", icon: Settings }] },
 ];
 const ALL_NAV = NAV_GROUPS.flatMap((g) => g.items);
 const MOBILE_MAIN = ["Today", "Suppliers", "Buyers", "Tasks"];
@@ -716,6 +717,7 @@ const SUBS = {
   Sales: "Pilot rule: cash or UPI only.",
   Budget: "₹55,000 trial — planned vs actual.",
   Brand: "Names, bottle concepts and label rules.",
+  Settings: "Team, login, list view and your data.",
 };
 const STORE_KEY = "elec-tracker-v1";
 const COLLECTIONS = ["sup", "buy", "tasks", "bud", "sales", "surv", "logs"];
@@ -885,14 +887,6 @@ function MainApp() {
             </div>
           ))}
         </nav>
-        <div className="border-t border-slate-800 pt-4 space-y-4">
-          <div>
-            <div className="px-1 mb-2 flex items-center gap-2 text-xs font-medium text-slate-500"><Settings size={13} />List view</div>
-            <ViewToggle dark />
-          </div>
-          <TeamPanel dark />
-          <DataActions dark />
-        </div>
       </aside>
 
       {/* ---------- main ---------- */}
@@ -902,6 +896,7 @@ function MainApp() {
           <div className="w-7 h-7 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={16} /></div>
           <span className="font-semibold text-slate-900">{tab}</span>
           <span className="ml-auto"><SyncBadge status={syncStatus} /></span>
+          <button onClick={() => go("Settings")} aria-label="Settings" className={`-mr-1 p-1.5 rounded-lg ${tab === "Settings" ? "text-orange-600" : "text-slate-500"}`}><Settings size={20} /></button>
         </div></div>
 
         <div className="p-4 md:p-8 max-w-7xl mx-auto">
@@ -1010,6 +1005,13 @@ function MainApp() {
           {tab === "Sales" && <SalesView sales={sales} setSales={setSales} />}
           {tab === "Budget" && <BudgetView bud={bud} setBud={setBud} k={k} />}
           {tab === "Brand" && <BrandView />}
+          {tab === "Settings" && (
+            <div className="max-w-xl space-y-4">
+              <Panel title="List view"><ViewToggle /></Panel>
+              <Panel><TeamPanel /></Panel>
+              <Panel title="Data"><DataActions /></Panel>
+            </div>
+          )}
         </div>
       </main>
 
@@ -1025,16 +1027,18 @@ function MainApp() {
         <div className="md:hidden fixed inset-0 z-40 bg-slate-900 bg-opacity-40" onClick={() => setMore(false)}>
           <div className="sheet-in absolute bottom-0 inset-x-0 max-h-[88dvh] overflow-y-auto bg-white rounded-t-3xl p-4 pb-safe space-y-4" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between"><span className="font-semibold">More</span><button onClick={() => setMore(false)} aria-label="Close" className="text-slate-400"><X size={20} /></button></div>
-            <div className="grid grid-cols-3 gap-2">
-              {ALL_NAV.filter((n) => !MOBILE_MAIN.includes(n.id)).map(({ id, icon: Icon }) => (
-                <button key={id} onClick={() => go(id)} className={`flex flex-col items-center gap-1 rounded-xl border py-3 text-xs ${tab === id ? "border-orange-300 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600"}`}>
-                  <Icon size={20} />{id}{badge(id) > 0 && <span className="text-orange-700 font-medium">{badge(id)} overdue</span>}
-                </button>
-              ))}
-            </div>
-            <div><div className="mb-2 flex items-center gap-2 text-xs font-medium text-slate-500"><Settings size={13} />List view</div><ViewToggle /></div>
-            <TeamPanel />
-            <DataActions />
+            {NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((n) => !MOBILE_MAIN.includes(n.id)) })).filter((g) => g.items.length).map((g) => (
+              <section key={g.label}>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">{g.label}</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {g.items.map(({ id, icon: Icon }) => (
+                    <button key={id} onClick={() => go(id)} className={`flex min-h-[72px] flex-col items-center justify-center gap-1.5 rounded-xl border p-2 text-xs font-semibold ${tab === id ? "border-orange-300 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600"}`}>
+                      <Icon size={20} />{id}{badge(id) > 0 && <span className="text-orange-700 font-medium">{badge(id)} overdue</span>}
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       )}
