@@ -51,7 +51,7 @@ const SUBS = {
   Buyers: "Real Ahmedabad businesses, priority A first. Public listings — confirm details on the first call.",
   Suppliers: "Call, log what they said, set the next follow-up. Public listings — verify before paying.",
   Map: "Everything with an exact location. Plan visits by area.",
-  Tasks: "From now to the February pilot.",
+  Tasks: "Supplier call script, then the to-do list.",
   Survey: "Three taps per person.",
   "QR Survey": "Customers scan and answer on their own phone. Answers land in your Google Sheet.",
   Sales: "Pilot rule: cash or UPI only.",

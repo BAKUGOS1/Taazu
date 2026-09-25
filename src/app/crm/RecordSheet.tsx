@@ -9,8 +9,6 @@ import { LOG_TYPES, FOLLOW_CHIPS, addDays, newLog, stageAfter, answered, type Cr
 
 const TYPE_ICON = { call: Phone, whatsapp: MessageSquare, visit: Footprints, email: Mail };
 const chip = (on: boolean) => `shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition ${on ? "border-orange-500 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600 active:bg-slate-50"}`;
-const Num = ({ n, done = false }) => <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${done ? "bg-green-600 text-white" : "bg-slate-100 text-slate-500"}`}>{done ? "✓" : n}</span>;
-const Say = ({ n, text }) => <li className="flex gap-2.5"><Num n={n} /><div className="text-sm text-slate-800">“{text}”</div></li>;
 const Label = ({ children }) => <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400">{children}</div>;
 
 function Input({ f, value, onChange }: { f: Field; value: any; onChange: (v: string) => void }) {
@@ -78,33 +76,16 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
       )}
       {r.use && <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600"><span className="font-semibold text-slate-700">Why call: </span>{r.use}</div>}
 
-      {/* call script — say each line, type the answer; answers save straight to the record */}
-      {cfg.checklist && on("sup.script") && (
+      {/* quote — one place to keep rate, MOQ etc. up to date (the call script lives in Tasks → Script) */}
+      {cfg.checklist && (cfg.kind !== "sup" || on("sup.quote")) && (
         <section className="mt-5 rounded-2xl border border-slate-200 p-4">
           <div className="mb-3 flex items-center justify-between">
-            <div className="font-semibold text-slate-900 text-sm">Call script</div>
-            <span className="text-xs font-medium text-slate-500">{answered(cfg, r)}/{cfg.checklist.length} answered</span>
+            <div className="font-semibold text-slate-900 text-sm">{cfg.dealTitle}</div>
+            <span className="text-xs font-medium text-slate-500">{answered(cfg, r)}/{cfg.checklist.length} filled</span>
           </div>
-          {cfg.script && (
-            <details className="mb-3 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900">
-              <summary className="cursor-pointer font-semibold">Tips before you dial</summary>
-              <ul className="mt-1.5 list-disc space-y-1 pl-4">{cfg.script.tips.map((t) => <li key={t}>{t}</li>)}</ul>
-            </details>
-          )}
-          <ol className="space-y-3">
-            {cfg.script && <Say n={1} text={cfg.script.open(r)} />}
-            {cfg.checklist.map((f, i) => (
-              <li key={f.k} className="flex gap-2.5">
-                <Num n={i + 2} done={!!String(r[f.k] ?? "").trim()} />
-                <div className="min-w-0 flex-1">
-                  {f.say && <div className="text-sm text-slate-800">“{typeof f.say === "function" ? f.say(r) : f.say}”</div>}
-                  <input className={inputCls + " mt-1.5"} type={f.type || "text"} inputMode={f.inputMode} value={r[f.k] ?? ""} placeholder={`${f.label}${f.placeholder ? " · " + f.placeholder : ""}`} aria-label={f.label} onChange={(e) => onChange({ [f.k]: e.target.value })} />
-                </div>
-              </li>
-            ))}
-            {cfg.script && <Say n={cfg.checklist.length + 2} text={cfg.script.close} />}
-          </ol>
-          <div className="mt-2 text-[11px] text-slate-400">Then log the call below: pick what happened + follow-up date.</div>
+          <div className="grid grid-cols-2 gap-3">
+            {cfg.checklist.map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
+          </div>
           {cfg.verify && (
             <div className="mt-3 flex items-center gap-2">
               <button onClick={() => onChange({ verified: !r.verified })} disabled={!r.gstin && !r.verified}

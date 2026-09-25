@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Plus, Circle, CheckCircle2, CalendarClock, Trash2, ListChecks, Layers, Check } from "lucide-react";
+import { Plus, Circle, CheckCircle2, CalendarClock, Trash2, ListChecks, Layers, Check, ScrollText } from "lucide-react";
+import CallScript from "./CallScript";
 import Sheet from "../../components/Sheet";
 import { Empty, inputCls } from "../../components/ui";
 import { uid, today } from "../../lib/core";
@@ -47,9 +48,10 @@ function TaskRow({ t, onToggle, onOpen }: { t: Task; onToggle: (t: Task) => void
 
 export default function TasksView({ tasks, setTasks }: { tasks: Task[]; setTasks: (t: Task[]) => void }) {
   const { on } = usePrefs();
-  const [chosen, setTab] = useState<"open" | "phases" | "done">("open");
-  const tabList = ([["open", "To do", ListChecks], ["phases", "Phases", Layers], ["done", "Done", Check]] as const).filter(([id]) => id === "open" || on("tasks." + id));
-  const tab = tabList.some(([id]) => id === chosen) ? chosen : "open";
+  // Call script comes first — the team reads it far more than the task list.
+  const [chosen, setTab] = useState<"script" | "open" | "phases" | "done">("script");
+  const tabList = ([["script", "Script", ScrollText], ["open", "To do", ListChecks], ["phases", "Phases", Layers], ["done", "Done", Check]] as const).filter(([id]) => id === "script" || id === "open" || on("tasks." + id));
+  const tab = tabList.some(([id]) => id === chosen) ? chosen : "script";
   const [title, setTitle] = useState("");
   const [due, setDue] = useState(today());
   const [openId, setOpenId] = useState<string | null>(null);
@@ -90,6 +92,7 @@ export default function TasksView({ tasks, setTasks }: { tasks: Task[]; setTasks
             </button>
           ))}
         </div>
+        {tab !== "script" && <>
         <div className="mt-2 flex gap-2">
           <input className={inputCls} placeholder="Add a task…" value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === "Enter" && add()} enterKeyHint="done" />
           <button onClick={add} disabled={!title.trim()} className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-orange-600 px-3 text-sm font-semibold text-white disabled:opacity-40 active:bg-orange-700"><Plus size={16} />Add</button>
@@ -98,9 +101,11 @@ export default function TasksView({ tasks, setTasks }: { tasks: Task[]; setTasks
           {([["Today", 0], ["Tomorrow", 1], ["3 days", 3], ["Next week", 7]] as const).map(([l, n]) => <button key={l} className={chip(due === addDays(n))} onClick={() => setDue(addDays(n))}>{l}</button>)}
           <input type="date" className="shrink-0 rounded-full border border-slate-200 px-3 py-1 text-xs" value={due} onChange={(e) => setDue(e.target.value)} />
         </div>
+        </>}
       </div>
 
       <div className="mt-3 space-y-5">
+        {tab === "script" && <CallScript />}
         {tab === "open" && (open.length ? BUCKETS.map((b) => {
           const list = open.filter((t) => bucketOf(t) === b);
           if (!list.length) return null;
