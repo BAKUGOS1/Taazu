@@ -26,6 +26,8 @@ import TeamPanel from "./app/auth/TeamPanel";
 import SyncBadge from "./components/SyncBadge";
 import { useSync } from "./lib/useSync";
 import BuyersView from "./app/buyers";
+import TasksView from "./app/tasks";
+import SalesView from "./app/sales";
 import { dueList, normalizeStage } from "./app/crm/config";
 import { SUPPLIER_CFG, BUYER_CFG } from "./app/crm/configs";
 
@@ -80,53 +82,6 @@ function Grid({ rows, setRows, cols, blank = {}, filterKey = null, hideToolbar =
 }
 
 /* ---------------- Buyers / Suppliers directory ---------------- */
-function TaskList({ tasks, setTasks }) {
-  const [nt, setNt] = useState({ phase: "Week 1", task: "", due: today() });
-  const [hideDone, setHideDone] = useState(false);
-  const phases = Array.from(new Set<any>(tasks.map((t) => t.phase)));
-  const up = (id, k, v) => setTasks(tasks.map((t) => (t.id === id ? { ...t, [k]: v } : t)));
-  const t0 = today();
-  const add = () => { if (!nt.task.trim()) return; setTasks([...tasks, { id: uid(), ...nt, status: "To do", notes: "" }]); setNt({ ...nt, task: "" }); };
-  return (
-    <div className="space-y-4">
-      <div className="bg-white rounded-xl border border-slate-200 p-3 flex flex-wrap gap-2 items-center">
-        <input className={`${inputCls} flex-1 min-w-48`} placeholder="Add a task and press Enter" value={nt.task} onChange={(e) => setNt({ ...nt, task: e.target.value })} onKeyDown={(e) => e.key === "Enter" && add()} />
-        <input className={`${inputCls} w-32`} placeholder="Phase" value={nt.phase} onChange={(e) => setNt({ ...nt, phase: e.target.value })} />
-        <input className={`${inputCls} w-40`} type="date" value={nt.due} onChange={(e) => setNt({ ...nt, due: e.target.value })} />
-        <button className={btnPrimary} onClick={add}><Plus size={16} />Add</button>
-        <label className="flex items-center gap-2 text-xs text-slate-500 ml-auto"><input type="checkbox" checked={hideDone} onChange={(e) => setHideDone(e.target.checked)} />Hide done</label>
-      </div>
-      {phases.map((p) => {
-        const all = tasks.filter((t) => t.phase === p);
-        const items = hideDone ? all.filter((t) => t.status !== "Done") : all;
-        const done = all.filter((t) => t.status === "Done").length;
-        if (!items.length) return null;
-        return (
-          <Panel key={p} title={p} action={<span className="text-xs text-slate-500">{done}/{all.length}</span>}>
-            <div className="-my-2">
-              {items.map((t) => {
-                const isDone = t.status === "Done";
-                const over = !isDone && t.due && t.due < t0;
-                return (
-                  <div key={t.id} className="flex items-center gap-3 py-2 border-b border-slate-100 last:border-0">
-                    <button onClick={() => up(t.id, "status", isDone ? "To do" : "Done")} aria-label={isDone ? "Mark not done" : "Mark done"} className={isDone ? "text-green-600" : "text-slate-300 hover:text-slate-500"}>
-                      {isDone ? <CheckCircle2 size={20} /> : <Circle size={20} />}
-                    </button>
-                    <input className={`flex-1 min-w-0 bg-transparent text-sm focus:outline-none ${isDone ? "line-through text-slate-400" : "text-slate-800"}`} value={t.task} onChange={(e) => up(t.id, "task", e.target.value)} />
-                    {over && <span className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-red-600"><AlertCircle size={12} />Overdue</span>}
-                    <input type="date" className={`text-xs border rounded-md px-1 py-1 ${over ? "border-red-200 text-red-600" : "border-slate-200 text-slate-500"}`} value={t.due} onChange={(e) => up(t.id, "due", e.target.value)} />
-                    <button className="text-slate-300 hover:text-red-500" aria-label="Delete task" onClick={() => setTasks(tasks.filter((x) => x.id !== t.id))}><Trash2 size={14} /></button>
-                  </div>
-                );
-              })}
-            </div>
-          </Panel>
-        );
-      })}
-    </div>
-  );
-}
-
 /* ---------------- Survey (quick mode) ---------------- */
 function SurveyView({ surv, setSurv }) {
   const [f, setF] = useState({ venue: "", segment: "Garba", flavour: "", pay: "" });
@@ -176,38 +131,6 @@ function SurveyView({ surv, setSurv }) {
 }
 
 /* ---------------- Sales ---------------- */
-function SalesView({ sales, setSales }) {
-  const [f, setF] = useState<any>({ customer: "", product: "Cup 200 ml", qty: 1, rate: 20, paid: "Yes" });
-  const add = (o) => setSales([{ id: uid(), date: today(), notes: "", ...o }, ...sales]);
-  const tot = sales.reduce((s, r) => s + (Number(r.qty) || 0) * (Number(r.rate) || 0), 0);
-  const paid = sales.filter((r) => r.paid === "Yes").reduce((s, r) => s + (Number(r.qty) || 0) * (Number(r.rate) || 0), 0);
-  const units = sales.reduce((s, r) => s + (Number(r.qty) || 0), 0);
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-3">
-        <Stat icon={TrendingUp} label="Revenue" value={inr(tot)} />
-        <Stat icon={Wallet} label="Collected" value={inr(paid)} hint={tot - paid > 0 ? `${inr(tot - paid)} pending` : "Nothing pending"} />
-        <Stat icon={ShoppingCart} label="Units" value={units} />
-      </div>
-      <Panel title="Add sale" icon={Plus}>
-        <div className="flex flex-wrap gap-2 mb-4">
-          <span className="text-xs text-slate-500 self-center mr-1">Walk-in cup:</span>
-          {[10, 15, 20, 30].map((p) => <button key={p} className={btnGhost} onClick={() => add({ customer: "Walk-in", product: "Cup 200 ml", qty: 1, rate: p, paid: "Yes" })}><Plus size={14} />₹{p}</button>)}
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
-          <input className={`${inputCls} col-span-2`} placeholder="Customer" value={f.customer} onChange={(e) => setF({ ...f, customer: e.target.value })} />
-          <input className={inputCls} placeholder="Product" value={f.product} onChange={(e) => setF({ ...f, product: e.target.value })} />
-          <input className={inputCls} type="number" placeholder="Qty" value={f.qty} onChange={(e) => setF({ ...f, qty: e.target.value })} />
-          <input className={inputCls} type="number" placeholder="Rate" value={f.rate} onChange={(e) => setF({ ...f, rate: e.target.value })} />
-          <select className={inputCls} value={f.paid} onChange={(e) => setF({ ...f, paid: e.target.value })}><option value="Yes">Paid</option><option value="No">Not paid</option></select>
-        </div>
-        <button className={`${btnPrimary} mt-3`} onClick={() => { if (!f.customer.trim()) return; add(f); setF({ ...f, customer: "" }); }}><Plus size={16} />Add sale</button>
-      </Panel>
-      {sales.length ? <Grid rows={sales} setRows={setSales} cols={saleCols} blank={{ date: today(), product: "Cup 200 ml", qty: 1, rate: 20, paid: "Yes" }} /> : <Panel><Empty icon={ShoppingCart} text="No sales yet. Use the buttons above at your stall." /></Panel>}
-    </div>
-  );
-}
-
 /* ---------------- Budget ---------------- */
 function BudgetView({ bud, setBud, k }) {
   const left = k.plan - k.spent;
@@ -999,10 +922,10 @@ function MainApp() {
           {tab === "Buyers" && <BuyersView rows={buy} setRows={setBuy} logs={logs} setLogs={setLogs} me={me} />}
           {tab === "Suppliers" && <SuppliersView rows={sup} setRows={setSup} logs={logs} setLogs={setLogs} me={me} />}
           {tab === "Map" && <MapView sup={sup} buy={buy} />}
-          {tab === "Tasks" && <TaskList tasks={tasks} setTasks={setTasks} />}
+          {tab === "Tasks" && <TasksView tasks={tasks} setTasks={setTasks} />}
           {tab === "Survey" && <SurveyView surv={surv} setSurv={setSurv} />}
           {tab === "QR Survey" && <QrSurveyView surv={surv} setSurv={setSurv} />}
-          {tab === "Sales" && <SalesView sales={sales} setSales={setSales} />}
+          {tab === "Sales" && <SalesView sales={sales} setSales={setSales} me={me} />}
           {tab === "Budget" && <BudgetView bud={bud} setBud={setBud} k={k} />}
           {tab === "Brand" && <BrandView />}
           {tab === "Settings" && (
