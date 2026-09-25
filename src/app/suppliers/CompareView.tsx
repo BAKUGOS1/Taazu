@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react";
 import { Trophy, Scale } from "lucide-react";
 import { Empty } from "../../components/ui";
-import { STAGE_COL, unitPrice, type Supplier } from "./model";
+import { SUPPLIER_CFG } from "../crm/configs";
+import type { CrmRecord as Supplier } from "../crm/config";
+
+const STAGE_COL = SUPPLIER_CFG.stageCol;
+const unitPrice = (r: Supplier) => { const p = Number(r.price); return p > 0 ? p : null; };
 
 const MOQ_LIMIT = 2000;
 const PRICE_LIMIT = 15;

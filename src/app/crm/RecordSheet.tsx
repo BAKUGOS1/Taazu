@@ -3,27 +3,24 @@ import { Phone, MessageCircle, MapPin, Trash2, Check, MessageSquare, Footprints,
 import Sheet from "../../components/Sheet";
 import { Dot, inputCls } from "../../components/ui";
 import { COL, mapUrl, telHref, waHref, today } from "../../lib/core";
-import {
-  STAGES, STAGE_COL, LOG_TYPES, OUTCOMES, FOLLOW_CHIPS, addDays, newLog, stageAfter, waMessage,
-  type Supplier, type ContactLog,
-} from "./model";
+import { LOG_TYPES, FOLLOW_CHIPS, addDays, newLog, stageAfter, type CrmConfig, type CrmRecord, type ContactLog, type Field } from "./config";
 
 const TYPE_ICON = { call: Phone, whatsapp: MessageSquare, visit: Footprints, email: Mail };
 const chip = (on: boolean) => `shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition ${on ? "border-orange-500 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600 active:bg-slate-50"}`;
 const Label = ({ children }) => <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400">{children}</div>;
 
-function Field({ label, value, onChange, type = "text", placeholder = "", inputMode = undefined }) {
+function Input({ f, value, onChange }: { f: Field; value: any; onChange: (v: string) => void }) {
   return (
-    <label className="block">
-      <span className="text-xs text-slate-500">{label}</span>
-      <input className={inputCls + " mt-1"} type={type} inputMode={inputMode} value={value ?? ""} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+    <label className={`block ${f.half ? "" : "col-span-2"}`}>
+      <span className="text-xs text-slate-500">{f.label}</span>
+      <input className={inputCls + " mt-1"} type={f.type || "text"} inputMode={f.inputMode} value={value ?? ""} placeholder={f.placeholder || ""} onChange={(e) => onChange(e.target.value)} />
     </label>
   );
 }
 
-export default function SupplierSheet({ r, logs, startLog, onClose, onChange, onAddLog, onDeleteLog, onDelete }: {
-  r: Supplier | null; logs: ContactLog[]; startLog: string | null; onClose: () => void;
-  onChange: (patch: Partial<Supplier>) => void; onAddLog: (l: ContactLog, patch: Partial<Supplier>) => void;
+export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange, onAddLog, onDeleteLog, onDelete }: {
+  cfg: CrmConfig; r: CrmRecord | null; logs: ContactLog[]; startLog: string | null; onClose: () => void;
+  onChange: (patch: Partial<CrmRecord>) => void; onAddLog: (l: ContactLog, patch: Partial<CrmRecord>) => void;
   onDeleteLog: (id: string) => void; onDelete: () => void;
 }) {
   const [type, setType] = useState("call");
@@ -33,7 +30,7 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
   const [next, setNext] = useState("");
   const [armDel, setArmDel] = useState(false);
 
-  // Fresh form each time a different supplier opens (or a Call/WhatsApp tap pre-selects the type).
+  // Fresh form each time a different record opens (or a Call/WhatsApp tap pre-selects the type).
   useEffect(() => {
     setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setNext(r?.next || ""); setArmDel(false);
   }, [r?.id, startLog]);
@@ -41,8 +38,9 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
   if (!r) return null;
   const tel = telHref(r.phone), wa = waHref(r.phone), map = mapUrl(r);
   const mine = logs.filter((l) => l.supplierId === r.id).sort((a, b) => (b.date + (b.at || 0)).localeCompare(a.date + (a.at || 0)));
-  const suggested = stageAfter(r.status, outcome);
-  const noFollow = outcome === "Not interested" || outcome === "Wrong number";
+  const suggested = stageAfter(cfg, r.status, outcome);
+  const noFollow = outcome === "Not interested" || outcome === "Wrong number" || cfg.closedStages.includes(suggested);
+  const cat = r[cfg.catKey];
 
   const save = () => {
     if (!outcome && !note.trim()) return;
@@ -52,8 +50,8 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
 
   const title = (
     <div>
-      <div className="text-lg font-bold text-slate-900 leading-tight">{r.name}</div>
-      <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500"><Dot color={COL[r.cat] || "#64748B"} square />{r.cat} · {r.area}</div>
+      <input className="w-full text-lg font-bold text-slate-900 leading-tight bg-transparent focus:outline-none focus:bg-slate-50 rounded" value={r.name} onChange={(e) => onChange({ name: e.target.value })} aria-label="Name" />
+      <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500"><Dot color={COL[cat] || "#64748B"} square />{cat}{r.area ? ` · ${r.area}` : ""}</div>
     </div>
   );
 
@@ -62,7 +60,7 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
       {/* contact buttons */}
       <div className="grid grid-cols-3 gap-2">
         <a href={tel || undefined} onClick={() => setType("call")} className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${tel ? "bg-slate-900 text-white active:bg-slate-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><Phone size={18} />Call</a>
-        <a href={wa ? `${wa}?text=${encodeURIComponent(waMessage(r))}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
+        <a href={wa ? `${wa}?text=${encodeURIComponent(cfg.waMessage(r))}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
           className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${wa ? "bg-green-600 text-white active:bg-green-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MessageCircle size={18} />WhatsApp</a>
         <a href={map || undefined} target="_blank" rel="noreferrer" className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${map ? "bg-blue-50 text-blue-700 active:bg-blue-100" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MapPin size={18} />Map</a>
       </div>
@@ -75,9 +73,9 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
           {LOG_TYPES.map((t) => <button key={t.id} className={chip(type === t.id)} onClick={() => setType(t.id)}>{t.label}</button>)}
         </div>
         <div className="mt-3"><Label>What happened?</Label>
-          <div className="flex flex-wrap gap-2">{OUTCOMES.map((o) => <button key={o} className={chip(outcome === o)} onClick={() => setOutcome(outcome === o ? "" : o)}>{o}</button>)}</div>
+          <div className="flex flex-wrap gap-2">{cfg.outcomes.map((o) => <button key={o} className={chip(outcome === o)} onClick={() => setOutcome(outcome === o ? "" : o)}>{o}</button>)}</div>
         </div>
-        <textarea className={inputCls + " mt-3 min-h-[72px]"} placeholder="Notes — rate, MOQ, who you spoke to…" value={note} onChange={(e) => setNote(e.target.value)} />
+        <textarea className={inputCls + " mt-3 min-h-[72px]"} placeholder="Notes — what they said, who you spoke to…" value={note} onChange={(e) => setNote(e.target.value)} />
         {!noFollow && (
           <div className="mt-3"><Label>Follow up</Label>
             <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
@@ -86,8 +84,8 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
             </div>
           </div>
         )}
-        <input className={inputCls + " mt-3"} placeholder="Next step (e.g. send label size, visit factory)" value={next} onChange={(e) => setNext(e.target.value)} />
-        {suggested !== r.status && <div className="mt-2 text-xs text-slate-600">Stage will move to <b style={{ color: STAGE_COL[suggested] }}>{suggested}</b></div>}
+        <input className={inputCls + " mt-3"} placeholder="Next step" value={next} onChange={(e) => setNext(e.target.value)} />
+        {suggested !== r.status && <div className="mt-2 text-xs text-slate-600">Stage will move to <b style={{ color: cfg.stageCol[suggested] }}>{suggested}</b></div>}
         <button onClick={save} disabled={!outcome && !note.trim()} className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 py-3 text-sm font-semibold text-white disabled:opacity-40 active:bg-orange-700">
           <Check size={16} />Save log
         </button>
@@ -96,36 +94,40 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
       {/* stage */}
       <section className="mt-5"><Label>Stage</Label>
         <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
-          {STAGES.map((s) => (
+          {cfg.stages.map((s) => (
             <button key={s} onClick={() => onChange({ status: s })} className="shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold"
-              style={r.status === s ? { background: STAGE_COL[s], borderColor: STAGE_COL[s], color: "#fff" } : { borderColor: "#E2E8F0", color: STAGE_COL[s] }}>{s}</button>
+              style={r.status === s ? { background: cfg.stageCol[s], borderColor: cfg.stageCol[s], color: "#fff" } : { borderColor: "#E2E8F0", color: cfg.stageCol[s] }}>{s}</button>
           ))}
         </div>
       </section>
 
-      {/* quote */}
-      <section className="mt-5"><Label>Quote</Label>
+      {cfg.kind === "buy" && (
+        <section className="mt-5"><Label>Priority</Label>
+          <div className="flex gap-2">
+            {["A", "B", "C"].map((p) => <button key={p} onClick={() => onChange({ priority: p })} className={chip(r.priority === p) + " w-12"}>{p}</button>)}
+          </div>
+        </section>
+      )}
+
+      {/* deal / quote */}
+      <section className="mt-5"><Label>{cfg.dealTitle}</Label>
         <div className="grid grid-cols-2 gap-3">
-          <Field label="₹ per unit" value={r.price} inputMode="decimal" onChange={(v) => onChange({ price: v })} />
-          <Field label="MOQ (units)" value={r.moq} inputMode="numeric" onChange={(v) => onChange({ moq: v })} />
-          <Field label="Lead time" value={r.lead} placeholder="e.g. 10 days" onChange={(v) => onChange({ lead: v })} />
-          <Field label="Sample cost ₹" value={r.sampleCost} inputMode="decimal" onChange={(v) => onChange({ sampleCost: v })} />
+          {cfg.dealFields.map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
         </div>
-        <div className="mt-3"><Field label="Payment terms" value={r.terms} placeholder="e.g. 50% advance, rest on delivery" onChange={(v) => onChange({ terms: v })} /></div>
       </section>
 
       {/* details */}
       <section className="mt-5"><Label>Details</Label>
         <div className="grid grid-cols-2 gap-3">
-          <Field label="Contact person" value={r.contact} onChange={(v) => onChange({ contact: v })} />
-          <Field label="Phone" value={r.phone} type="tel" onChange={(v) => onChange({ phone: v })} />
-        </div>
-        <div className="mt-3 space-y-3">
-          <Field label="Email" value={r.email} type="email" onChange={(v) => onChange({ email: v })} />
-          <Field label="What we need from them" value={r.use} onChange={(v) => onChange({ use: v })} />
-          <label className="block"><span className="text-xs text-slate-500">Notes</span>
+          <Input f={{ k: "contact", label: "Contact person", half: true }} value={r.contact} onChange={(v) => onChange({ contact: v })} />
+          <Input f={{ k: "phone", label: "Phone", type: "tel", half: true }} value={r.phone} onChange={(v) => onChange({ phone: v })} />
+          <Input f={{ k: "area", label: "Area", half: true }} value={r.area} onChange={(v) => onChange({ area: v })} />
+          <Input f={{ k: cfg.catKey, label: "Category", half: true }} value={cat} onChange={(v) => onChange({ [cfg.catKey]: v })} />
+          <Input f={{ k: "email", label: "Email", type: "email" }} value={r.email} onChange={(v) => onChange({ email: v })} />
+          {cfg.detailFields.map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
+          <label className="block col-span-2"><span className="text-xs text-slate-500">Notes</span>
             <textarea className={inputCls + " mt-1 min-h-[64px]"} value={r.notes || ""} onChange={(e) => onChange({ notes: e.target.value })} /></label>
-          <div className="text-xs text-slate-400">Source: {r.source || "—"}</div>
+          <div className="col-span-2 text-xs text-slate-400">Source: {r.source || "—"}</div>
         </div>
       </section>
 
@@ -149,7 +151,7 @@ export default function SupplierSheet({ r, logs, startLog, onClose, onChange, on
       </section>
 
       <button onClick={() => (armDel ? onDelete() : setArmDel(true))} className={`mt-6 w-full rounded-xl py-2.5 text-xs font-medium ${armDel ? "bg-red-600 text-white" : "text-slate-400"}`}>
-        <Trash2 size={13} className="inline mr-1" />{armDel ? "Tap again to delete supplier" : "Delete supplier"}
+        <Trash2 size={13} className="inline mr-1" />{armDel ? `Tap again to delete ${cfg.noun}` : `Delete ${cfg.noun}`}
       </button>
     </Sheet>
   );

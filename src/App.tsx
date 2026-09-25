@@ -25,7 +25,9 @@ import AuthGate, { useAuth } from "./app/auth/AuthGate";
 import TeamPanel from "./app/auth/TeamPanel";
 import SyncBadge from "./components/SyncBadge";
 import { useSync } from "./lib/useSync";
-import { dueList, normalizeStage } from "./app/suppliers/model";
+import BuyersView from "./app/buyers";
+import { dueList, normalizeStage } from "./app/crm/config";
+import { SUPPLIER_CFG, BUYER_CFG } from "./app/crm/configs";
 
 /* ---------------- editable table ---------------- */
 function Grid({ rows, setRows, cols, blank = {}, filterKey = null, hideToolbar = false }) {
@@ -78,93 +80,6 @@ function Grid({ rows, setRows, cols, blank = {}, filterKey = null, hideToolbar =
 }
 
 /* ---------------- Buyers / Suppliers directory ---------------- */
-function Directory({ rows, setRows, kind }) {
-  const isB = kind === "buyer";
-  const catKey = isB ? "seg" : "cat";
-  const statuses = isB ? BUY_STATUS : SUP_STATUS;
-  const [q, setQ] = useState("");
-  const [cat, setCat] = useState("All");
-  const [st, setSt] = useState("All");
-  const [view] = useViewPref();
-  const cats = ["All", ...Array.from(new Set<any>(rows.map((r) => r[catKey])))];
-  const up = (id, k, v) => setRows(rows.map((r) => (r.id === id ? { ...r, [k]: v } : r)));
-  const shown = rows
-    .filter((r) => (cat === "All" || r[catKey] === cat) && (st === "All" || r.status === st) && (!q || JSON.stringify(r).toLowerCase().includes(q.toLowerCase())))
-    .sort((a, b) => (isB ? (a.priority || "Z").localeCompare(b.priority || "Z") : 0));
-  const blank = isB ? { seg: "Gym", status: "New", priority: "B", name: "New lead" } : { cat: "Co-packer / bottler", status: "To call", name: "New supplier" };
-  const counts = statuses.map((s) => ({ s, n: rows.filter((r) => r.status === s).length }));
-
-  return (
-    <div>
-      {/* status filter chips */}
-      <div className="flex gap-2 overflow-x-auto pb-2 mb-3">
-        {[{ s: "All", n: rows.length }, ...counts].map(({ s, n }) => (
-          <button key={s} onClick={() => setSt(s)}
-            className={`shrink-0 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium border ${st === s ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"}`}>
-            {s !== "All" && <Dot color={STATUS_COL[s]} />}{s}<span className={st === s ? "text-slate-300" : "text-slate-400"}>{n}</span>
-          </button>
-        ))}
-      </div>
-      {/* toolbar */}
-      <div className="flex flex-wrap gap-2 items-center mb-4">
-        <div className="relative flex-1 min-w-48"><Search size={16} className="absolute left-3 top-3 text-slate-400" /><input className={`${inputCls} pl-9`} placeholder="Search name, area, notes" value={q} onChange={(e) => setQ(e.target.value)} /></div>
-        <select className={`${inputCls} w-auto`} value={cat} onChange={(e) => setCat(e.target.value)}>{cats.map((c) => <option key={c}>{c}</option>)}</select>
-        <ViewToggle />
-        <button className={btnPrimary} onClick={() => setRows([{ id: uid(), ...blank }, ...rows])}><Plus size={16} />Add</button>
-      </div>
-
-      {view === "table" ? (
-        <Grid rows={shown} setRows={(next) => {
-          const ids = new Set(shown.map((r) => r.id));
-          const nextIds = new Set(next.map((r) => r.id));
-          const kept = rows.filter((r) => !ids.has(r.id) || nextIds.has(r.id)).map((r) => next.find((x) => x.id === r.id) || r);
-          setRows(kept);
-        }} cols={isB ? buyCols : supCols} hideToolbar />
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
-          {shown.map((r) => (
-            <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-4 flex flex-col gap-3">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0 flex-1">
-                  <Tag color={COL[r[catKey]]}>{r[catKey]}</Tag>
-                  <input className="block w-full font-semibold text-slate-900 mt-1 bg-transparent focus:outline-none" value={r.name} onChange={(e) => up(r.id, "name", e.target.value)} />
-                  <div className="text-xs text-slate-500 flex items-center gap-1 mt-1"><MapPin size={12} />{r.area || "—"}</div>
-                </div>
-                {isB && (
-                  <select value={r.priority} onChange={(e) => up(r.id, "priority", e.target.value)} title="Priority"
-                    className={`text-xs font-bold rounded-md px-2 py-1 border ${r.priority === "A" ? "border-orange-300 text-orange-700 bg-orange-50" : "border-slate-200 text-slate-500"}`}>
-                    {["A", "B", "C"].map((p) => <option key={p}>{p}</option>)}
-                  </select>
-                )}
-              </div>
-              <p className="text-sm text-slate-600">{isB ? r.why : r.use}</p>
-              <div className="flex flex-wrap gap-2 items-center">
-                <StatusSelect value={r.status} options={statuses} onChange={(v) => up(r.id, "status", v)} />
-                {!isB && (<>
-                  <input className="border border-slate-200 rounded-md px-2 py-1 text-xs w-20" type="number" placeholder="MOQ" value={r.moq} onChange={(e) => up(r.id, "moq", e.target.value)} />
-                  <input className="border border-slate-200 rounded-md px-2 py-1 text-xs w-20" type="number" placeholder="₹/unit" value={r.price} onChange={(e) => up(r.id, "price", e.target.value)} />
-                </>)}
-                {isB && <input className="border border-slate-200 rounded-md px-2 py-1 text-xs" type="date" value={r.follow} onChange={(e) => up(r.id, "follow", e.target.value)} title="Follow-up date" />}
-              </div>
-              {isB && <input className="border border-slate-200 rounded-md px-3 py-2 text-xs" placeholder="Next step" value={r.next} onChange={(e) => up(r.id, "next", e.target.value)} />}
-              <input className="border border-slate-200 rounded-md px-3 py-2 text-xs" placeholder="Notes" value={r.notes} onChange={(e) => up(r.id, "notes", e.target.value)} />
-              <div className="flex items-center justify-between border-t border-slate-100 pt-2">
-                <span className="text-xs text-slate-400">{r.phone}</span>
-                <span className="flex items-center">
-                  <ContactIcons r={r} />
-                  <button className="w-8 h-8 inline-flex items-center justify-center text-slate-300 hover:text-red-500" title="Delete" aria-label="Delete" onClick={() => setRows(rows.filter((x) => x.id !== r.id))}><Trash2 size={16} /></button>
-                </span>
-              </div>
-            </div>
-          ))}
-          {!shown.length && <div className="sm:col-span-2 xl:col-span-3"><Empty icon={Search} text="Nothing matches this filter." /></div>}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ---------------- Tasks ---------------- */
 function TaskList({ tasks, setTasks }) {
   const [nt, setNt] = useState({ phase: "Week 1", task: "", due: today() });
   const [hideDone, setHideDone] = useState(false);
@@ -832,7 +747,7 @@ function MainApp() {
   const me = auth.me?.display_name || auth.session.user.email?.split("@")[0] || "";
   const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs }), [sup, buy, tasks, bud, sales, surv, logs]);
   const replaceAll = useCallback((d) => {
-    d.sup && setSup(enrich(d.sup).map((r) => ({ ...r, status: normalizeStage(r.status) })));
+    d.sup && setSup(enrich(d.sup).map((r) => ({ ...r, status: normalizeStage(SUPPLIER_CFG, r.status, { Called: "Contacted", Selected: "Finalized" }) })));
     d.buy && setBuy(enrich(d.buy)); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud);
     d.sales && setSales(d.sales); d.surv && setSurv(d.surv); d.logs && setLogs(d.logs);
   }, []);
@@ -867,8 +782,9 @@ function MainApp() {
     const overdue = open.filter((t) => t.due && t.due < t0);
     const follow = buy.filter((r) => r.follow && r.follow <= t0 && !["Customer", "Lost"].includes(r.status)).sort((a, b) => a.follow.localeCompare(b.follow));
     const nextCalls = buy.filter((r) => r.status === "New" && r.priority === "A").slice(0, 5);
-    const supDue = dueList(sup);
-    return { supDue, spent, plan, saleAmt, paid, warm, cust, contacted, quotes: quotes.length, okMoq, minP, n, pct, done, open, overdue, follow, nextCalls };
+    const supDue = dueList(SUPPLIER_CFG, sup);
+    const buyDue = dueList(BUYER_CFG, buy);
+    return { supDue, buyDue, spent, plan, saleAmt, paid, warm, cust, contacted, quotes: quotes.length, okMoq, minP, n, pct, done, open, overdue, follow, nextCalls };
   }, [sup, buy, tasks, bud, sales, surv]);
 
   const gates = [
@@ -1085,7 +1001,7 @@ function MainApp() {
             </div>
           )}
           {tab !== "Today" && <PageHead title={tab} sub={SUBS[tab]} />}
-          {tab === "Buyers" && <Directory rows={buy} setRows={setBuy} kind="buyer" />}
+          {tab === "Buyers" && <BuyersView rows={buy} setRows={setBuy} logs={logs} setLogs={setLogs} me={me} />}
           {tab === "Suppliers" && <SuppliersView rows={sup} setRows={setSup} logs={logs} setLogs={setLogs} me={me} />}
           {tab === "Map" && <MapView sup={sup} buy={buy} />}
           {tab === "Tasks" && <TaskList tasks={tasks} setTasks={setTasks} />}
