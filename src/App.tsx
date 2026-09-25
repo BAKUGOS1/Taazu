@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import * as XLSX from "xlsx";
 import {
   Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette,
@@ -9,8 +9,7 @@ import {
 
 /* =========================================================
    HYDRATION HQ — Ahmedabad electrolyte pilot tracker
-   Inside Claude it saves with window.storage.
-   When self-hosted, add the storage polyfill in main.jsx.
+   Team data syncs through Supabase (see lib/useSync.ts).
    ========================================================= */
 
 /* ---------------- helpers ---------------- */
@@ -22,6 +21,10 @@ import {
 } from "./components/ui";
 import SuppliersView from "./app/suppliers";
 import Dock from "./components/Dock";
+import AuthGate, { useAuth } from "./app/auth/AuthGate";
+import TeamPanel from "./app/auth/TeamPanel";
+import SyncBadge from "./components/SyncBadge";
+import { useSync } from "./lib/useSync";
 import { dueList, normalizeStage } from "./app/suppliers/model";
 
 /* ---------------- editable table ---------------- */
@@ -800,11 +803,12 @@ const SUBS = {
   Brand: "Names, bottle concepts and label rules.",
 };
 const STORE_KEY = "elec-tracker-v1";
+const COLLECTIONS = ["sup", "buy", "tasks", "bud", "sales", "surv", "logs"];
 
 /* Customers who scan the QR (link has ?s=1) see only the survey form. */
 export default function App() {
   const isSurvey = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("s") === "1";
-  return isSurvey ? <PublicSurvey /> : <MainApp />;
+  return isSurvey ? <PublicSurvey /> : <AuthGate><MainApp /></AuthGate>;
 }
 
 function MainApp() {
@@ -816,7 +820,6 @@ function MainApp() {
   const [sales, setSales] = useState([]);
   const [surv, setSurv] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [loaded, setLoaded] = useState(false);
   const [toast, setToast] = useState("");
   const [armReset, setArmReset] = useState(false);
   const [more, setMore] = useState(false);
@@ -824,28 +827,25 @@ function MainApp() {
   const say = (m) => { setToast(m); setTimeout(() => setToast(""), 2200); };
   const go = (id) => { setTab(id); setMore(false); };
 
-  /* load + autosave */
-  useEffect(() => {
-    (async () => {
-      try {
-        if (window.storage) {
-          const r = await window.storage.get(STORE_KEY, false);
-          if (r && r.value) {
-            const d = JSON.parse(r.value);
-            d.sup && setSup(enrich(d.sup).map((r) => ({ ...r, status: normalizeStage(r.status) }))); d.logs && setLogs(d.logs); d.buy && setBuy(enrich(d.buy)); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud); d.sales && setSales(d.sales); d.surv && setSurv(d.surv);
-          }
-        }
-      } catch (e) { /* nothing saved yet */ }
-      setLoaded(true);
-    })();
+  /* cloud sync (Supabase, realtime) */
+  const auth = useAuth();
+  const me = auth.me?.display_name || auth.session.user.email?.split("@")[0] || "";
+  const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs }), [sup, buy, tasks, bud, sales, surv, logs]);
+  const replaceAll = useCallback((d) => {
+    d.sup && setSup(enrich(d.sup).map((r) => ({ ...r, status: normalizeStage(r.status) })));
+    d.buy && setBuy(enrich(d.buy)); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud);
+    d.sales && setSales(d.sales); d.surv && setSurv(d.surv); d.logs && setLogs(d.logs);
   }, []);
-  useEffect(() => {
-    if (!loaded || !window.storage) return;
-    const t = setTimeout(async () => {
-      try { await window.storage.set(STORE_KEY, JSON.stringify({ sup, buy, tasks, bud, sales, surv, logs }), false); } catch (e) { say("Couldn't save — download Excel to keep a copy"); }
-    }, 700);
-    return () => clearTimeout(t);
-  }, [sup, buy, tasks, bud, sales, surv, logs, loaded]);
+  const seed = useCallback(() => {
+    // First sync of a new team: this device's old local data, else the starter lists.
+    let d: any = null;
+    try { const raw = localStorage.getItem(STORE_KEY); d = raw ? JSON.parse(raw) : null; if (typeof d === "string") d = JSON.parse(d); } catch { d = null; }
+    const base = { sup: SUPPLIERS(), buy: BUYERS(), tasks: TASKS(), bud: BUDGET(), sales: [], surv: [], logs: [] };
+    const out = { ...base, ...(d || {}) };
+    const ordered = (rows) => rows.map((r, i) => ({ ...r, _o: r._o ?? i }));
+    return Object.fromEntries(Object.entries(out).map(([k, v]) => [k, ordered(v as any[])]));
+  }, []);
+  const { status: syncStatus } = useSync({ workspaceId: auth.workspace.id, userId: auth.session.user.id, collections: COLLECTIONS, data, replaceAll, seed });
 
   const k = useMemo(() => {
     const spent = bud.reduce((s, r) => s + (Number(r.actual) || 0), 0);
@@ -954,6 +954,7 @@ function MainApp() {
         <div className="flex items-center gap-2 px-2 mb-6">
           <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={18} /></div>
           <div className="text-white font-semibold">Taazu HQ</div>
+          <span className="ml-auto"><SyncBadge status={syncStatus} compact /></span>
         </div>
         <nav className="flex-1 overflow-y-auto space-y-5">
           {NAV_GROUPS.map((g) => (
@@ -973,6 +974,7 @@ function MainApp() {
             <div className="px-1 mb-2 flex items-center gap-2 text-xs font-medium text-slate-500"><Settings size={13} />List view</div>
             <ViewToggle dark />
           </div>
+          <TeamPanel dark />
           <DataActions dark />
         </div>
       </aside>
@@ -983,6 +985,7 @@ function MainApp() {
         <div className="md:hidden sticky top-0 z-20 bg-white/85 backdrop-blur border-b border-slate-200 pt-safe"><div className="px-4 py-3 flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={16} /></div>
           <span className="font-semibold text-slate-900">{tab}</span>
+          <span className="ml-auto"><SyncBadge status={syncStatus} /></span>
         </div></div>
 
         <div className="p-4 md:p-8 max-w-7xl mx-auto">
@@ -1083,7 +1086,7 @@ function MainApp() {
           )}
           {tab !== "Today" && <PageHead title={tab} sub={SUBS[tab]} />}
           {tab === "Buyers" && <Directory rows={buy} setRows={setBuy} kind="buyer" />}
-          {tab === "Suppliers" && <SuppliersView rows={sup} setRows={setSup} logs={logs} setLogs={setLogs} />}
+          {tab === "Suppliers" && <SuppliersView rows={sup} setRows={setSup} logs={logs} setLogs={setLogs} me={me} />}
           {tab === "Map" && <MapView sup={sup} buy={buy} />}
           {tab === "Tasks" && <TaskList tasks={tasks} setTasks={setTasks} />}
           {tab === "Survey" && <SurveyView surv={surv} setSurv={setSurv} />}
@@ -1104,7 +1107,7 @@ function MainApp() {
       {/* ---------- mobile "More" sheet ---------- */}
       {more && (
         <div className="md:hidden fixed inset-0 z-40 bg-slate-900 bg-opacity-40" onClick={() => setMore(false)}>
-          <div className="sheet-in absolute bottom-0 inset-x-0 bg-white rounded-t-3xl p-4 pb-safe space-y-4" onClick={(e) => e.stopPropagation()}>
+          <div className="sheet-in absolute bottom-0 inset-x-0 max-h-[88dvh] overflow-y-auto bg-white rounded-t-3xl p-4 pb-safe space-y-4" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between"><span className="font-semibold">More</span><button onClick={() => setMore(false)} aria-label="Close" className="text-slate-400"><X size={20} /></button></div>
             <div className="grid grid-cols-3 gap-2">
               {ALL_NAV.filter((n) => !MOBILE_MAIN.includes(n.id)).map(({ id, icon: Icon }) => (
@@ -1114,6 +1117,7 @@ function MainApp() {
               ))}
             </div>
             <div><div className="mb-2 flex items-center gap-2 text-xs font-medium text-slate-500"><Settings size={13} />List view</div><ViewToggle /></div>
+            <TeamPanel />
             <DataActions />
           </div>
         </div>
