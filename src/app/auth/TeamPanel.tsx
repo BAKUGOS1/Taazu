@@ -1,6 +1,49 @@
-import { useState } from "react";
-import { Copy, MessageCircle, LogOut, Users, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Copy, MessageCircle, LogOut, Users, Check, AtSign } from "lucide-react";
 import { useAuth } from "./AuthGate";
+import { supabase } from "../../lib/supabase";
+
+/* Claim a username so this account can sign in with it instead of the email. */
+function UsernameRow({ dark, sub }) {
+  const { session } = useAuth();
+  const [current, setCurrent] = useState<string | null>(null);
+  const [edit, setEdit] = useState(false);
+  const [val, setVal] = useState("");
+  const [msg, setMsg] = useState("");
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    supabase.from("taazu_usernames").select("username").eq("user_id", session.user.id).maybeSingle()
+      .then(({ data }) => setCurrent(data?.username || null));
+  }, [session.user.id]);
+  const save = async () => {
+    setBusy(true); setMsg("");
+    const { data, error } = await supabase.rpc("taazu_set_username", { new_username: val });
+    setBusy(false);
+    if (error) setMsg(/taken/.test(error.message) ? "Ye username le liya gaya hai." : /invalid/.test(error.message) ? "3–20 chhote letters, numbers, . ya _" : error.message);
+    else { setCurrent(data as string); setEdit(false); }
+  };
+  const field = dark ? "bg-slate-900 border-slate-700 text-slate-100" : "bg-white border-slate-200";
+  return (
+    <div className={`rounded-xl p-3 ${dark ? "bg-slate-800 text-slate-100" : "bg-slate-50 border border-slate-200 text-slate-800"}`}>
+      <div className={`flex items-center gap-1 text-[11px] ${sub}`}><AtSign size={12} />Login username</div>
+      {edit ? (
+        <div className="mt-2 flex gap-2">
+          <input autoFocus autoCapitalize="none" autoCorrect="off" spellCheck={false} maxLength={20} value={val}
+            onChange={(e) => setVal(e.target.value.toLowerCase())} placeholder="e.g. taazu"
+            className={`min-w-0 flex-1 rounded-lg border px-2 py-1.5 text-sm ${field}`} />
+          <button onClick={save} disabled={busy || val.length < 3} className="rounded-lg bg-orange-600 px-3 text-xs font-semibold text-white disabled:opacity-50">Save</button>
+        </div>
+      ) : (
+        <div className="mt-1 flex items-center gap-2">
+          <span className="flex-1 font-semibold">{current || <span className={sub}>Not set</span>}</span>
+          <button onClick={() => { setVal(current || ""); setEdit(true); setMsg(""); }} className="text-xs font-semibold text-orange-600">{current ? "Change" : "Set username"}</button>
+        </div>
+      )}
+      {msg && <div className="mt-1 text-xs text-red-500">{msg}</div>}
+      {current && !edit && <div className={`mt-1 text-[11px] ${sub}`}>Login mein email ki jagah "{current}" likh sakte ho.</div>}
+    </div>
+  );
+}
 
 /* Team code to invite partners, who is in, and sign-out. */
 export default function TeamPanel({ dark = false }) {
@@ -30,6 +73,7 @@ export default function TeamPanel({ dark = false }) {
           </span>
         ))}
       </div>
+      <UsernameRow dark={dark} sub={sub} />
       <button onClick={signOut} className={`w-full inline-flex items-center justify-center gap-2 rounded-lg py-2 text-xs ${sub}`}>
         <LogOut size={14} />Sign out {me?.display_name ? `(${me.display_name})` : session.user.email?.replace("@taazu.app", "")}
       </button>

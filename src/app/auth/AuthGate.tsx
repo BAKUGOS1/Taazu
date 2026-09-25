@@ -16,7 +16,6 @@ export const useAuth = () => useContext(AuthCtx);
 const WS_KEY = "taazu-workspace";
 /* Username accounts live in Auth as <username>@taazu.app (see functions/taazu-signup). */
 const USERNAME_DOMAIN = "taazu.app";
-const toEmail = (id: string) => { const v = id.trim().toLowerCase(); return v.includes("@") ? v : `${v}@${USERNAME_DOMAIN}`; };
 const shell = "min-h-dvh flex items-center justify-center bg-gradient-to-b from-orange-50 to-slate-50 px-4 pt-safe pb-safe";
 const card = "w-full max-w-sm bg-white rounded-3xl border border-slate-200 shadow-xl p-6";
 const primary = "w-full inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 py-3 text-sm font-semibold text-white active:bg-orange-700 disabled:opacity-50";
@@ -58,8 +57,17 @@ function SignIn() {
       setBusy(false);
       return;
     }
-    const { error } = await supabase.auth.signInWithPassword({ email: toEmail(id), password: pw });
-    if (error) setMsg(/invalid/i.test(error.message) ? "Wrong username/email or password." : error.message);
+    if (!id.includes("@")) {
+      // Username → real email is resolved server-side so emails never reach the browser.
+      const { data, error } = await supabase.functions.invoke("taazu-login", { body: { username: id, password: pw } });
+      const fnErr = data?.error || (error && (await (error as any).context?.json?.().catch(() => null))?.error) || (error ? "Could not sign in." : "");
+      if (fnErr) setMsg(fnErr);
+      else await supabase.auth.setSession({ access_token: data.access_token, refresh_token: data.refresh_token });
+      setBusy(false);
+      return;
+    }
+    const { error } = await supabase.auth.signInWithPassword({ email: id.toLowerCase(), password: pw });
+    if (error) setMsg(/invalid/i.test(error.message) ? "Wrong email or password." : error.message);
     setBusy(false);
   };
 

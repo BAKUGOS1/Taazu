@@ -30,7 +30,11 @@ Deno.serve(async (req) => {
   const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  const { error } = await admin.auth.admin.createUser({
+  // A username claimed by an email/Google account can't be reused here.
+  const { data: claimed } = await admin.from("taazu_usernames").select("username").eq("username", username).maybeSingle();
+  if (claimed) return json({ error: "That username is taken." }, 409);
+
+  const { data: created, error } = await admin.auth.admin.createUser({
     email: `${username}@${USERNAME_DOMAIN}`,
     password,
     email_confirm: true,
@@ -40,5 +44,6 @@ Deno.serve(async (req) => {
     const taken = /already|registered|exists/i.test(error.message);
     return json({ error: taken ? "That username is taken." : "Could not create account." }, taken ? 409 : 500);
   }
+  await admin.from("taazu_usernames").insert({ username, user_id: created.user.id });
   return json({ ok: true });
 });
