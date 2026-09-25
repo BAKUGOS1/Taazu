@@ -3,6 +3,7 @@ import { Map as MapIcon, List, MapPin, Phone, MessageCircle } from "lucide-react
 import Sheet from "../../components/Sheet";
 import { Dot, Empty } from "../../components/ui";
 import { COL, STATUS_COL, mapUrl, telHref, waHref } from "../../lib/core";
+import { usePrefs } from "../../lib/prefs";
 
 const AREAS: [string, number, number][] = [["Changodar", 22.925, 72.445], ["Bopal", 23.036, 72.462], ["Prahlad Nagar", 23.004, 72.508], ["SG Hwy / Bodakdev", 23.05, 72.505], ["Navrangpura", 23.052, 72.556], ["Motera", 23.112, 72.6], ["Naroda GIDC", 23.1, 72.68], ["Odhav", 23.012, 72.672], ["Vatva GIDC", 22.965, 72.64], ["Chandkheda", 23.125, 72.57], ["Sarkhej", 22.978, 72.49]];
 const W = 900, H = 560, B = { n: 23.14, s: 22.88, w: 72.4, e: 72.72 };
@@ -28,7 +29,10 @@ function ActionRow({ p, big = false }: { p: Pt; big?: boolean }) {
 }
 
 export default function MapView({ sup, buy }: { sup: any[]; buy: any[] }) {
-  const [view, setView] = useState<"map" | "list">("map");
+  const { on } = usePrefs();
+  const [chosen, setView] = useState<"map" | "list">("map");
+  const listOn = on("map.list");
+  const view = listOn ? chosen : "map";
   const [show, setShow] = useState({ s: true, b: true });
   const [grp, setGrp] = useState("All");
   const [sel, setSel] = useState<Pt | null>(null);
@@ -48,11 +52,11 @@ export default function MapView({ sup, buy }: { sup: any[]; buy: any[] }) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 rounded-xl bg-slate-200/70 p-1 mb-3">
+      {listOn && <div className="grid grid-cols-2 rounded-xl bg-slate-200/70 p-1 mb-3">
         {([["map", "Map", MapIcon], ["list", "By area", List]] as const).map(([id, l, Icon]) => (
           <button key={id} onClick={() => setView(id)} className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold ${view === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}><Icon size={14} />{l}</button>
         ))}
-      </div>
+      </div>}
       <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
         <button className={chip(show.s)} onClick={() => { setShow({ ...show, s: !show.s }); setGrp("All"); }}><span className="h-2 w-2 rounded-sm bg-current" />Suppliers</button>
         <button className={chip(show.b)} onClick={() => { setShow({ ...show, b: !show.b }); setGrp("All"); }}><span className="h-2 w-2 rounded-full bg-current" />Buyers</button>

@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { Search, Plus, BellRing, Columns3, List, PhoneOutgoing } from "lucide-react";
 import { Empty, inputCls } from "../../components/ui";
 import { uid } from "../../lib/core";
+import { usePrefs } from "../../lib/prefs";
 import RecordCard from "./RecordCard";
 import RecordSheet from "./RecordSheet";
 import { isActive, dueList, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
@@ -14,6 +15,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   logs: ContactLog[]; setLogs: (fn: (logs: ContactLog[]) => ContactLog[]) => void; me?: string;
   stats: (rows: CrmRecord[], due: number) => Stat[]; extra?: Extra | null;
 }) {
+  const { on } = usePrefs();
   const [tab, setTab] = useState("due");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
@@ -21,11 +23,12 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   const [startLog, setStartLog] = useState<string | null>(null);
 
   const tabs = [
-    { id: "due", label: "Due", icon: BellRing },
-    { id: "board", label: "Pipeline", icon: Columns3 },
+    ...(on(cfg.kind + ".due") ? [{ id: "due", label: "Due", icon: BellRing }] : []),
+    ...(on(cfg.kind + ".board") ? [{ id: "board", label: "Pipeline", icon: Columns3 }] : []),
     { id: "all", label: "All", icon: List },
     ...(extra ? [{ id: extra.id, label: extra.label, icon: extra.icon }] : []),
   ];
+  const active = tabs.some((t) => t.id === tab) ? tab : tabs[0].id; // a tab switched off in Settings falls back
   const cats = useMemo(() => ["All", ...Array.from(new Set(rows.map((r) => r[cfg.catKey]).filter(Boolean)))], [rows, cfg.catKey]);
   const lastLog = useMemo(() => {
     const m: Record<string, ContactLog> = {};
@@ -62,12 +65,12 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
       <div className="sticky top-[calc(57px+env(safe-area-inset-top))] md:top-0 z-10 -mx-4 px-4 py-2 bg-slate-50/90 backdrop-blur">
         <div className="grid rounded-xl bg-slate-200/70 p-1" style={{ gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))` }}>
           {tabs.map(({ id, label, icon: Icon }) => (
-            <button key={id} onClick={() => setTab(id)} className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold ${tab === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>
+            <button key={id} onClick={() => setTab(id)} className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold ${active === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>
               <Icon size={14} />{label}
             </button>
           ))}
         </div>
-        {tab !== extra?.id && (
+        {active !== extra?.id && (
           <>
             <div className="mt-2 flex gap-2">
               <div className="relative flex-1">
@@ -86,7 +89,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
       </div>
 
       <div className="mt-3">
-        {tab === "due" && (
+        {active === "due" && (
           <div className="space-y-6">
             <section>
               <h2 className="mb-2 text-sm font-semibold text-slate-900">Follow-ups due <span className="text-slate-400 font-normal">{due.length}</span></h2>
@@ -99,7 +102,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
           </div>
         )}
 
-        {tab === "board" && (
+        {active === "board" && (
           <div className="-mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-4 xl:grid-cols-7 md:overflow-visible">
             {cfg.stages.map((s) => {
               const col = filtered.filter((r) => r.status === s);
@@ -118,14 +121,14 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
           </div>
         )}
 
-        {tab === "all" && (
+        {active === "all" && (
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {[...filtered].sort((a, b) => Number(!isActive(cfg, a.status)) - Number(!isActive(cfg, b.status))).map(card)}
             {!filtered.length && <Empty icon={Search} text={`No ${cfg.noun} matches.`} />}
           </div>
         )}
 
-        {extra && tab === extra.id && extra.render(open)}
+        {extra && active === extra.id && extra.render(open)}
       </div>
 
       <RecordSheet

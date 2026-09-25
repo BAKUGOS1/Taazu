@@ -1,9 +1,11 @@
 import { Scale } from "lucide-react";
 import CrmView from "../crm/CrmView";
+import { usePrefs } from "../../lib/prefs";
 import { SUPPLIER_CFG as cfg } from "../crm/configs";
 import CompareView from "./CompareView";
 
 export default function SuppliersView({ rows, setRows, logs, setLogs, me = "" }) {
+  const { on } = usePrefs();
   return (
     <CrmView
       cfg={cfg} rows={rows} setRows={setRows} logs={logs} setLogs={setLogs} me={me}
@@ -13,7 +15,7 @@ export default function SuppliersView({ rows, setRows, logs, setLogs, me = "" })
         ["Quotes", rs.filter((r) => Number(r.price) > 0).length, cfg.stageCol["Quote received"]],
         ["Final", rs.filter((r) => r.status === "Finalized").length, cfg.stageCol.Finalized],
       ]}
-      extra={{ id: "compare", label: "Compare", icon: Scale, render: (open) => <CompareView rows={rows} onOpen={open} /> }}
+      extra={on("sup.compare") ? { id: "compare", label: "Compare", icon: Scale, render: (open) => <CompareView rows={rows} onOpen={open} /> } : null}
     />
   );
 }

@@ -3,6 +3,7 @@ import { Plus, Minus, ShoppingCart, Trash2, Wallet, TrendingUp, Undo2 } from "lu
 import Sheet from "../../components/Sheet";
 import { Empty, inputCls } from "../../components/ui";
 import { uid, today, inr } from "../../lib/core";
+import { usePrefs } from "../../lib/prefs";
 
 type Sale = { id: string; date: string; customer: string; product: string; qty: number | string; rate: number | string; paid: string; notes?: string };
 
@@ -18,7 +19,10 @@ const dayLabel = (d: string) => {
 };
 
 export default function SalesView({ sales, setSales, me = "" }: { sales: Sale[]; setSales: (s: Sale[]) => void; me?: string }) {
-  const [filter, setFilter] = useState<"all" | "unpaid" | "today">("all");
+  const { on } = usePrefs();
+  const quickOn = on("sales.quick"), track = on("sales.unpaid");
+  const [chosen, setFilter] = useState<"all" | "unpaid" | "today">("all");
+  const filter = !track && chosen === "unpaid" ? "all" : chosen;
   const [openId, setOpenId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
   const [flash, setFlash] = useState<{ id: string; text: string } | null>(null);
@@ -53,31 +57,31 @@ export default function SalesView({ sales, setSales, me = "" }: { sales: Sale[];
           <div className="text-3xl font-bold">{inr(todayAmt)}</div>
           <div className="pb-1 text-xs text-slate-400">{todays.reduce((s, r) => s + (Number(r.qty) || 0), 0)} units · {todays.length} sales</div>
         </div>
-        <div className="mt-4 grid grid-cols-4 gap-2">
+        {quickOn && <div className="mt-4 grid grid-cols-4 gap-2">
           {RATES.map((p) => (
             <button key={p} onClick={() => quick(p)} className="rounded-2xl bg-orange-600 py-4 text-lg font-bold active:scale-95 active:bg-orange-700 transition">₹{p}</button>
           ))}
-        </div>
-        <div className="mt-2 h-6 text-xs">
+        </div>}
+        {quickOn && <div className="mt-2 h-6 text-xs">
           {flash
             ? <span className="inline-flex items-center gap-2 text-green-300">✓ {flash.text} <button onClick={undo} className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-semibold text-white"><Undo2 size={11} />Undo</button></span>
             : <span className="text-slate-500">One tap = 1 walk-in cup, paid. Cash or UPI only.</span>}
-        </div>
+        </div>}
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        {([[TrendingUp, "Revenue", inr(total), "#0F172A"], [Wallet, "Collected", inr(collected), "#16A34A"], [Wallet, "Pending", inr(pending), pending > 0 ? "#DC2626" : "#64748B"]] as const).map(([Icon, l, v, c]) => (
+      <div className={`mt-3 grid gap-2 ${track ? "grid-cols-3" : "grid-cols-2"}`}>
+        {([[TrendingUp, "Revenue", inr(total), "#0F172A"], ...(track ? [[Wallet, "Collected", inr(collected), "#16A34A"], [Wallet, "Pending", inr(pending), pending > 0 ? "#DC2626" : "#64748B"]] : [[ShoppingCart, "Units sold", String(units), "#16A34A"]])] as any[]).map(([Icon, l, v, c]) => (
           <div key={l} className="rounded-2xl bg-white border border-slate-200 px-3 py-2.5">
             <div className="flex items-center gap-1 text-[11px] text-slate-500"><Icon size={12} />{l}</div>
             <div className="mt-0.5 text-lg font-bold" style={{ color: c }}>{v}</div>
           </div>
         ))}
       </div>
-      <div className="mt-1 text-center text-[11px] text-slate-400">{units} units sold in total</div>
+      {track && <div className="mt-1 text-center text-[11px] text-slate-400">{units} units sold in total</div>}
 
       <div className="sticky top-[calc(57px+env(safe-area-inset-top))] md:top-0 z-10 -mx-4 px-4 py-2 mt-2 bg-slate-50/90 backdrop-blur flex items-center gap-2">
-        <div className="grid flex-1 grid-cols-3 rounded-xl bg-slate-200/70 p-1">
-          {([["all", "All"], ["today", "Today"], ["unpaid", `Unpaid${unpaidN ? ` · ${unpaidN}` : ""}`]] as const).map(([id, l]) => (
+        <div className="grid flex-1 rounded-xl bg-slate-200/70 p-1" style={{ gridTemplateColumns: `repeat(${track ? 3 : 2}, minmax(0, 1fr))` }}>
+          {([["all", "All"], ["today", "Today"], ...(track ? [["unpaid", `Unpaid${unpaidN ? ` · ${unpaidN}` : ""}`]] : [])] as any[]).map(([id, l]) => (
             <button key={id} onClick={() => setFilter(id)} className={`rounded-lg py-2 text-xs font-semibold ${filter === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>{l}</button>
           ))}
         </div>
@@ -102,9 +106,9 @@ export default function SalesView({ sales, setSales, me = "" }: { sales: Sale[];
                     </button>
                     <div className="pr-3 text-right">
                       <div className="text-sm font-bold text-slate-900">{inr(amt(r))}</div>
-                      <button onClick={() => up(r.id, { paid: isPaid(r) ? "No" : "Yes" })} className={`mt-0.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${isPaid(r) ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+                      {track && <button onClick={() => up(r.id, { paid: isPaid(r) ? "No" : "Yes" })} className={`mt-0.5 rounded-full px-2 py-0.5 text-[11px] font-semibold ${isPaid(r) ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
                         {isPaid(r) ? "Paid" : "Unpaid · tap when paid"}
-                      </button>
+                      </button>}
                     </div>
                   </div>
                 ))}
@@ -136,6 +140,8 @@ function Stepper({ label, value, onChange, step = 1, min = 0 }: { label: string;
 }
 
 function PaidToggle({ paid, onChange }: { paid: boolean; onChange: (p: boolean) => void }) {
+  const { on } = usePrefs();
+  if (!on("sales.unpaid")) return null;
   return (
     <div className="grid grid-cols-2 gap-2">
       <button type="button" onClick={() => onChange(true)} className={`rounded-xl border py-2.5 text-sm font-semibold ${paid ? "border-green-600 bg-green-600 text-white" : "border-slate-200 text-green-700"}`}>Paid</button>

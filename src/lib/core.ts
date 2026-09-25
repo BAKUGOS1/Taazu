@@ -275,7 +275,7 @@ export const survCols = [
  * fill blank GSTIN / contact / alt-number fields, re-file Parekh as a co-packer, and add new starter suppliers. */
 export const upgradeSuppliers = (rows) => {
   const seed = SUPPLIERS();
-  const byName = new Map(seed.map((s) => [s.name, s]));
+  const byName = new Map<string, any>(seed.map((s: any) => [s.name, s]));
   const out = rows.map((r) => {
     const name = r.name === "Parekh Enterprise" ? "Parekh Enterprise (Hydr-Aid)" : r.name;
     const s = byName.get(name);

@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { Phone, MessageCircle, MapPin, Trash2, Check, MessageSquare, Footprints, Mail } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Trash2, Check, MessageSquare, Footprints, Mail, ShieldCheck, ExternalLink, PhoneForwarded } from "lucide-react";
 import Sheet from "../../components/Sheet";
+import { usePrefs } from "../../lib/prefs";
+import { CalcButton } from "../calculator";
 import { Dot, inputCls } from "../../components/ui";
 import { COL, mapUrl, telHref, waHref, today } from "../../lib/core";
-import { LOG_TYPES, FOLLOW_CHIPS, addDays, newLog, stageAfter, type CrmConfig, type CrmRecord, type ContactLog, type Field } from "./config";
+import { LOG_TYPES, FOLLOW_CHIPS, addDays, newLog, stageAfter, answered, type CrmConfig, type CrmRecord, type ContactLog, type Field } from "./config";
 
 const TYPE_ICON = { call: Phone, whatsapp: MessageSquare, visit: Footprints, email: Mail };
 const chip = (on: boolean) => `shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition ${on ? "border-orange-500 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600 active:bg-slate-50"}`;
+const Num = ({ n, done = false }) => <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${done ? "bg-green-600 text-white" : "bg-slate-100 text-slate-500"}`}>{done ? "✓" : n}</span>;
+const Say = ({ n, text }) => <li className="flex gap-2.5"><Num n={n} /><div className="text-sm text-slate-800">“{text}”</div></li>;
 const Label = ({ children }) => <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400">{children}</div>;
 
 function Input({ f, value, onChange }: { f: Field; value: any; onChange: (v: string) => void }) {
@@ -35,8 +39,10 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
     setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setNext(r?.next || ""); setArmDel(false);
   }, [r?.id, startLog]);
 
+  const { on, module: moduleOn } = usePrefs(); // before the early return: hooks must run in the same order every render
   if (!r) return null;
-  const tel = telHref(r.phone), wa = waHref(r.phone), map = mapUrl(r);
+  const tel = telHref(r.phone), wa = waHref(r.phone) || waHref(r.phone2), map = mapUrl(r);
+  const alts = String(r.phone2 || "").split(/[,/]/).map((p) => p.trim()).filter((p) => telHref(p));
   const mine = logs.filter((l) => l.supplierId === r.id).sort((a, b) => (b.date + (b.at || 0)).localeCompare(a.date + (a.at || 0)));
   const suggested = stageAfter(cfg, r.status, outcome);
   const noFollow = outcome === "Not interested" || outcome === "Wrong number" || cfg.closedStages.includes(suggested);
@@ -51,7 +57,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
   const title = (
     <div>
       <input className="w-full text-lg font-bold text-slate-900 leading-tight bg-transparent focus:outline-none focus:bg-slate-50 rounded" value={r.name} onChange={(e) => onChange({ name: e.target.value })} aria-label="Name" />
-      <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500"><Dot color={COL[cat] || "#64748B"} square />{cat}{r.area ? ` · ${r.area}` : ""}</div>
+      <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500"><Dot color={COL[cat] || "#64748B"} square />{cat}{r.area ? ` · ${r.area}` : ""}<span className="ml-auto">{moduleOn("Calculator") && <CalcButton />}</span></div>
     </div>
   );
 
@@ -65,6 +71,53 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
         <a href={map || undefined} target="_blank" rel="noreferrer" className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${map ? "bg-blue-50 text-blue-700 active:bg-blue-100" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MapPin size={18} />Map</a>
       </div>
       <div className="mt-2 text-center text-xs text-slate-500">{r.phone || "No phone"}{r.contact ? ` · ${r.contact}` : ""}</div>
+      {alts.length > 0 && (
+        <div className="mt-2 flex flex-wrap justify-center gap-2">
+          {alts.map((p) => <a key={p} href={telHref(p)} onClick={() => setType("call")} className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700 active:bg-slate-50"><PhoneForwarded size={12} />{p}</a>)}
+        </div>
+      )}
+      {r.use && <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600"><span className="font-semibold text-slate-700">Why call: </span>{r.use}</div>}
+
+      {/* call script — say each line, type the answer; answers save straight to the record */}
+      {cfg.checklist && on("sup.script") && (
+        <section className="mt-5 rounded-2xl border border-slate-200 p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <div className="font-semibold text-slate-900 text-sm">Call script</div>
+            <span className="text-xs font-medium text-slate-500">{answered(cfg, r)}/{cfg.checklist.length} answered</span>
+          </div>
+          {cfg.script && (
+            <details className="mb-3 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-900">
+              <summary className="cursor-pointer font-semibold">Tips before you dial</summary>
+              <ul className="mt-1.5 list-disc space-y-1 pl-4">{cfg.script.tips.map((t) => <li key={t}>{t}</li>)}</ul>
+            </details>
+          )}
+          <ol className="space-y-3">
+            {cfg.script && <Say n={1} text={cfg.script.open(r)} />}
+            {cfg.checklist.map((f, i) => (
+              <li key={f.k} className="flex gap-2.5">
+                <Num n={i + 2} done={!!String(r[f.k] ?? "").trim()} />
+                <div className="min-w-0 flex-1">
+                  {f.say && <div className="text-sm text-slate-800">“{typeof f.say === "function" ? f.say(r) : f.say}”</div>}
+                  <input className={inputCls + " mt-1.5"} type={f.type || "text"} inputMode={f.inputMode} value={r[f.k] ?? ""} placeholder={`${f.label}${f.placeholder ? " · " + f.placeholder : ""}`} aria-label={f.label} onChange={(e) => onChange({ [f.k]: e.target.value })} />
+                </div>
+              </li>
+            ))}
+            {cfg.script && <Say n={cfg.checklist.length + 2} text={cfg.script.close} />}
+          </ol>
+          <div className="mt-2 text-[11px] text-slate-400">Then log the call below: pick what happened + follow-up date.</div>
+          {cfg.verify && (
+            <div className="mt-3 flex items-center gap-2">
+              <button onClick={() => onChange({ verified: !r.verified })} disabled={!r.gstin && !r.verified}
+                className={`flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-semibold disabled:opacity-40 ${r.verified ? "bg-green-600 text-white" : "border border-green-600 text-green-700"}`}>
+                <ShieldCheck size={15} />{r.verified ? "Verified ✓" : "Mark verified"}
+              </button>
+              <a href="https://services.gst.gov.in/services/searchtp" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2.5 text-xs text-slate-600">GST<ExternalLink size={12} /></a>
+              <a href="https://foscos.fssai.gov.in/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-xl border border-slate-200 px-3 py-2.5 text-xs text-slate-600">FSSAI<ExternalLink size={12} /></a>
+            </div>
+          )}
+          {cfg.verify && !r.verified && <div className="mt-1.5 text-[11px] text-slate-400">Verify = GSTIN shows Active with the same business name, and FSSAI licence lists beverages.</div>}
+        </section>
+      )}
 
       {/* log a contact */}
       <section className="mt-5 rounded-2xl border border-orange-200 bg-orange-50/40 p-4">
@@ -110,21 +163,22 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
       )}
 
       {/* deal / quote */}
-      <section className="mt-5"><Label>{cfg.dealTitle}</Label>
+      {cfg.dealFields.length > 0 && (cfg.kind === "sup" || on("buy.deal")) && <section className="mt-5"><Label>{cfg.dealTitle}</Label>
         <div className="grid grid-cols-2 gap-3">
           {cfg.dealFields.map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
         </div>
-      </section>
+      </section>}
 
       {/* details */}
       <section className="mt-5"><Label>Details</Label>
         <div className="grid grid-cols-2 gap-3">
           <Input f={{ k: "contact", label: "Contact person", half: true }} value={r.contact} onChange={(v) => onChange({ contact: v })} />
           <Input f={{ k: "phone", label: "Phone", type: "tel", half: true }} value={r.phone} onChange={(v) => onChange({ phone: v })} />
+          <Input f={{ k: "phone2", label: "Other numbers (comma-separated)", type: "tel", placeholder: "e.g. 98xxxxxx01, 079 xxxx xxxx" }} value={r.phone2} onChange={(v) => onChange({ phone2: v })} />
           <Input f={{ k: "area", label: "Area", half: true }} value={r.area} onChange={(v) => onChange({ area: v })} />
           <Input f={{ k: cfg.catKey, label: "Category", half: true }} value={cat} onChange={(v) => onChange({ [cfg.catKey]: v })} />
           <Input f={{ k: "email", label: "Email", type: "email" }} value={r.email} onChange={(v) => onChange({ email: v })} />
-          {cfg.detailFields.map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
+          {cfg.detailFields.filter((f) => f.k !== "use" || !cfg.checklist).map((f) => <Input key={f.k} f={f} value={r[f.k]} onChange={(v) => onChange({ [f.k]: v })} />)}
           <label className="block col-span-2"><span className="text-xs text-slate-500">Notes</span>
             <textarea className={inputCls + " mt-1 min-h-[64px]"} value={r.notes || ""} onChange={(e) => onChange({ notes: e.target.value })} /></label>
           <div className="col-span-2 text-xs text-slate-400">Source: {r.source || "—"}</div>

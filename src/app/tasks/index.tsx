@@ -3,6 +3,7 @@ import { Plus, Circle, CheckCircle2, CalendarClock, Trash2, ListChecks, Layers, 
 import Sheet from "../../components/Sheet";
 import { Empty, inputCls } from "../../components/ui";
 import { uid, today } from "../../lib/core";
+import { usePrefs } from "../../lib/prefs";
 
 type Task = { id: string; phase: string; task: string; due: string; status: string; notes?: string };
 
@@ -45,7 +46,10 @@ function TaskRow({ t, onToggle, onOpen }: { t: Task; onToggle: (t: Task) => void
 }
 
 export default function TasksView({ tasks, setTasks }: { tasks: Task[]; setTasks: (t: Task[]) => void }) {
-  const [tab, setTab] = useState<"open" | "phases" | "done">("open");
+  const { on } = usePrefs();
+  const [chosen, setTab] = useState<"open" | "phases" | "done">("open");
+  const tabList = ([["open", "To do", ListChecks], ["phases", "Phases", Layers], ["done", "Done", Check]] as const).filter(([id]) => id === "open" || on("tasks." + id));
+  const tab = tabList.some(([id]) => id === chosen) ? chosen : "open";
   const [title, setTitle] = useState("");
   const [due, setDue] = useState(today());
   const [openId, setOpenId] = useState<string | null>(null);
@@ -79,8 +83,8 @@ export default function TasksView({ tasks, setTasks }: { tasks: Task[]; setTasks
       </div>
 
       <div className="sticky top-[calc(57px+env(safe-area-inset-top))] md:top-0 z-10 -mx-4 px-4 py-2 bg-slate-50/90 backdrop-blur">
-        <div className="grid grid-cols-3 rounded-xl bg-slate-200/70 p-1">
-          {([["open", "To do", ListChecks], ["phases", "Phases", Layers], ["done", "Done", Check]] as const).map(([id, label, Icon]) => (
+        <div className="grid rounded-xl bg-slate-200/70 p-1" style={{ gridTemplateColumns: `repeat(${tabList.length}, minmax(0, 1fr))` }}>
+          {tabList.map(([id, label, Icon]) => (
             <button key={id} onClick={() => setTab(id)} className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold ${tab === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>
               <Icon size={14} />{label}
             </button>

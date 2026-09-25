@@ -1,7 +1,7 @@
-import { Phone, MessageCircle, CalendarClock } from "lucide-react";
+import { Phone, MessageCircle, CalendarClock, ShieldCheck, Star } from "lucide-react";
 import { COL, telHref, waHref, today } from "../../lib/core";
 import { Dot } from "../../components/ui";
-import type { CrmConfig, CrmRecord, ContactLog } from "./config";
+import { answered, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
 
 const fmtDate = (d: string) => new Date(d + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 
@@ -9,8 +9,10 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
   cfg: CrmConfig; r: CrmRecord; lastLog?: ContactLog | null;
   onOpen: (r: CrmRecord) => void; onCall: (r: CrmRecord, via: string) => void;
 }) {
-  const tel = telHref(r.phone);
-  const wa = waHref(r.phone);
+  const tel = telHref(r.phone) || telHref(String(r.phone2 || "").split(/[,/]/)[0]);
+  const wa = waHref(r.phone) || waHref(r.phone2);
+  const tag = cfg.tag?.(r);
+  const qa = cfg.checklist ? answered(cfg, r) : 0;
   const late = r.follow && r.follow < today();
   const due = r.follow && r.follow <= today();
   const col = cfg.stageCol[r.status] || "#64748B";
@@ -34,6 +36,9 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
               <CalendarClock size={13} />{due ? (late ? "Overdue · " : "Today · ") : ""}{fmtDate(r.follow)}
             </span>
           )}
+          {tag && <span className="inline-flex items-center gap-1 font-semibold text-orange-700"><Star size={12} fill="currentColor" />{tag}</span>}
+          {r.verified && <span className="inline-flex items-center gap-1 font-semibold text-green-700"><ShieldCheck size={13} />Verified</span>}
+          {qa > 0 && <span className="text-slate-500">{qa}/{cfg.checklist.length} answered</span>}
           {badge && <span className="text-slate-600">{badge}</span>}
         </div>
         {(r.next || lastLog) && (

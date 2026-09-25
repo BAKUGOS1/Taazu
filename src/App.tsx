@@ -32,6 +32,9 @@ import SurveyView from "./app/survey";
 import BudgetView from "./app/budget";
 import MapView from "./app/map";
 import BrandView from "./app/brand";
+import SettingsView from "./app/settings";
+import { CalculatorHost } from "./app/calculator";
+import { PrefsCtx, usePrefsValue } from "./lib/prefs";
 import { QrSurveyView, PublicSurvey } from "./app/qr";
 import { dueList, normalizeStage } from "./app/crm/config";
 import { SUPPLIER_CFG, BUYER_CFG } from "./app/crm/configs";
@@ -43,7 +46,7 @@ const NAV_GROUPS = [
   { label: "App", items: [{ id: "Settings", icon: Settings }] },
 ];
 const ALL_NAV = NAV_GROUPS.flatMap((g) => g.items);
-const MOBILE_MAIN = ["Today", "Suppliers", "Buyers", "Tasks"];
+const MOBILE_PREF = ["Today", "Suppliers", "Buyers", "Tasks", "Sales", "Survey", "Map", "Budget", "QR Survey", "Brand"]; // dock order; first 4 that are on
 const SUBS = {
   Buyers: "Real Ahmedabad businesses, priority A first. Public listings — confirm details on the first call.",
   Suppliers: "Call, log what they said, set the next follow-up. Public listings — verify before paying.",
@@ -54,7 +57,7 @@ const SUBS = {
   Sales: "Pilot rule: cash or UPI only.",
   Budget: "₹55,000 trial — planned vs actual.",
   Brand: "Names, bottle concepts and label rules.",
-  Settings: "Team, login and your data.",
+  Settings: "Choose which screens and features you use, plus team and data.",
 };
 const STORE_KEY = "elec-tracker-v1";
 const COLLECTIONS = ["sup", "buy", "tasks", "bud", "sales", "surv", "logs", "cfg"];
@@ -76,8 +79,8 @@ function MainApp() {
   const [surv, setSurv] = useState([]);
   const [logs, setLogs] = useState([]);
   const [cfgRows, setCfgRows] = useState<any[]>([]);
-  const surveyCfg = { endpoint: "", key: "", base: "", venue: "", ...(cfgRows[0] || {}) };
-  const saveSurveyCfg = (next) => setCfgRows([{ ...next, id: "survey" }]);
+  const surveyCfg = { endpoint: "", key: "", base: "", venue: "", ...(cfgRows.find((r) => r.id === "survey") || {}) };
+  const saveSurveyCfg = (next) => setCfgRows((rs) => [...rs.filter((r) => r.id !== "survey"), { ...next, id: "survey" }]);
   const [toast, setToast] = useState("");
   const [armReset, setArmReset] = useState(false);
   const [more, setMore] = useState(false);
@@ -87,6 +90,12 @@ function MainApp() {
 
   /* cloud sync (Supabase, realtime) */
   const auth = useAuth();
+  const prefs = usePrefsValue(auth.session.user.id, cfgRows, setCfgRows);
+  const navGroups = NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((n) => n.id === "Settings" || prefs.module(n.id)) })).filter((g) => g.items.length);
+  const allNav = navGroups.flatMap((g) => g.items);
+  const mobileMain = MOBILE_PREF.filter((id) => allNav.some((n) => n.id === id)).slice(0, 4);
+  // A screen switched off while open (or via an old link) falls back to the first one still on.
+  useEffect(() => { if (tab !== "Settings" && !prefs.module(tab)) setTab(allNav[0]?.id || "Settings"); }, [tab, prefs, allNav]);
   const me = auth.me?.display_name || auth.session.user.email?.split("@")[0] || "";
   const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs, cfg: cfgRows }), [sup, buy, tasks, bud, sales, surv, logs, cfgRows]);
   const replaceAll = useCallback((d) => {
@@ -209,6 +218,8 @@ function MainApp() {
   const badge = (id) => (id === "Suppliers" && k.supDue.length ? k.supDue.length : id === "Buyers" && k.follow.length ? k.follow.length : id === "Tasks" && k.overdue.length ? k.overdue.length : 0);
 
   return (
+    <PrefsCtx.Provider value={prefs}>
+    <CalculatorHost enabled={prefs.module("Calculator")}>
     <div className="min-h-screen bg-slate-50 text-slate-800 md:flex font-sans antialiased">
       {/* ---------- sidebar (desktop) ---------- */}
       <aside className="hidden md:flex md:flex-col w-60 shrink-0 bg-slate-900 text-slate-300 h-screen sticky top-0 px-3 py-4">
@@ -218,7 +229,7 @@ function MainApp() {
           <span className="ml-auto"><SyncBadge status={syncStatus} compact /></span>
         </div>
         <nav className="flex-1 overflow-y-auto space-y-5">
-          {NAV_GROUPS.map((g) => (
+          {navGroups.map((g) => (
             <div key={g.label}>
               <div className="px-3 mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">{g.label}</div>
               {g.items.map(({ id, icon: Icon }) => (
@@ -247,14 +258,14 @@ function MainApp() {
             <div>
               <PageHead title="Today" sub={new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" })} />
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-                <Stat icon={Users} label="Leads contacted" value={`${k.contacted}/${buy.length}`} hint={`${k.warm} warm · ${k.cust} customers`} />
-                <Stat icon={Factory} label="Suppliers contacted" value={`${sup.filter((r) => r.status !== "To call").length}/${sup.length}`} hint={`${k.quotes} with quotes · ${k.supDue.length} due`} />
-                <Stat icon={TrendingUp} label="Sales" value={inr(k.saleAmt)} hint={`${inr(k.paid)} collected`} />
-                <Stat icon={Wallet} label="Budget left" value={inr(k.plan - k.spent)} hint={`${inr(k.spent)} spent`} />
+                {prefs.module("Buyers") && <Stat icon={Users} label="Leads contacted" value={`${k.contacted}/${buy.length}`} hint={`${k.warm} warm · ${k.cust} customers`} />}
+                {prefs.module("Suppliers") && <Stat icon={Factory} label="Suppliers contacted" value={`${sup.filter((r) => r.status !== "To call").length}/${sup.length}`} hint={`${k.quotes} with quotes · ${k.supDue.length} due`} />}
+                {prefs.module("Sales") && <Stat icon={TrendingUp} label="Sales" value={inr(k.saleAmt)} hint={`${inr(k.paid)} collected`} />}
+                {prefs.module("Budget") && <Stat icon={Wallet} label="Budget left" value={inr(k.plan - k.spent)} hint={`${inr(k.spent)} spent`} />}
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div className="lg:col-span-2 space-y-4 min-w-0">
-                  <Panel title="Supplier follow-ups" icon={Factory} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Suppliers")}>Open suppliers</button>}>
+                  {prefs.on("today.sup") && <Panel title="Supplier follow-ups" icon={Factory} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Suppliers")}>Open suppliers</button>}>
                     {k.supDue.length ? (
                       <div className="-my-2">
                         {k.supDue.slice(0, 6).map((r) => (
@@ -269,8 +280,8 @@ function MainApp() {
                         ))}
                       </div>
                     ) : <p className="text-sm text-slate-500">No supplier follow-ups due. {sup.filter((r) => r.status === "To call").length} suppliers still to call.</p>}
-                  </Panel>
-                  <Panel title="Buyer follow-ups" icon={Bell} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Buyers")}>All buyers</button>}>
+                  </Panel>}
+                  {prefs.on("today.buy") && <Panel title="Buyer follow-ups" icon={Bell} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Buyers")}>All buyers</button>}>
                     {k.follow.length ? (
                       <div className="-my-2">
                         {k.follow.slice(0, 6).map((r) => (
@@ -297,8 +308,8 @@ function MainApp() {
                         </div>
                       </div>
                     ) : <Empty icon={Bell} text="Nothing to follow up." />}
-                  </Panel>
-                  <Panel title="Next tasks" icon={ListChecks} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Tasks")}>All tasks</button>}>
+                  </Panel>}
+                  {prefs.on("today.tasks") && <Panel title="Next tasks" icon={ListChecks} action={<button className="text-xs text-orange-700 font-medium" onClick={() => go("Tasks")}>All tasks</button>}>
                     {k.open.length ? (
                       <div className="-my-2">
                         {k.open.slice(0, 6).map((t) => (
@@ -310,10 +321,10 @@ function MainApp() {
                         ))}
                       </div>
                     ) : <Empty icon={CheckCircle2} text="All tasks done." />}
-                  </Panel>
+                  </Panel>}
                 </div>
                 <div className="space-y-4">
-                  <Panel title="Pilot gates" icon={Target} action={<span className="text-xs text-slate-500">{gatesOk}/4</span>}>
+                  {prefs.on("today.gates") && <Panel title="Pilot gates" icon={Target} action={<span className="text-xs text-slate-500">{gatesOk}/4</span>}>
                     <div className="space-y-3">
                       {gates.map((g) => (
                         <div key={g.l} className="flex items-start gap-2">
@@ -323,8 +334,8 @@ function MainApp() {
                       ))}
                     </div>
                     <p className="text-xs text-slate-500 mt-4 pt-3 border-t border-slate-100">All four passed means go ahead with the February batch.</p>
-                  </Panel>
-                  <Panel title="Pipeline" icon={Users}>
+                  </Panel>}
+                  {prefs.on("today.pipeline") && <Panel title="Pipeline" icon={Users}>
                     <div className="space-y-2">
                       {BUY_STATUS.map((s) => { const n = buy.filter((r) => r.status === s).length; return (
                         <div key={s} className="grid grid-cols-5 items-center gap-2 text-sm">
@@ -333,7 +344,7 @@ function MainApp() {
                           <span className="text-right font-medium">{n}</span>
                         </div>); })}
                     </div>
-                  </Panel>
+                  </Panel>}
                 </div>
               </div>
             </div>
@@ -349,18 +360,18 @@ function MainApp() {
           {tab === "Budget" && <BudgetView bud={bud} setBud={setBud} />}
           {tab === "Brand" && <BrandView />}
           {tab === "Settings" && (
-            <div className="max-w-xl space-y-4">
+            <SettingsView>
               <Panel><TeamPanel /></Panel>
               <Panel title="Data"><DataActions /></Panel>
-            </div>
+            </SettingsView>
           )}
         </div>
       </main>
 
       {/* ---------- mobile dock ---------- */}
       <Dock
-        items={[...MOBILE_MAIN.map((id) => ({ id, label: id, icon: ALL_NAV.find((n) => n.id === id).icon, badge: badge(id) })), { id: "__more", label: "More", icon: MoreHorizontal, badge: 0 }]}
-        activeIndex={more || !MOBILE_MAIN.includes(tab) ? MOBILE_MAIN.length : MOBILE_MAIN.indexOf(tab)}
+        items={[...mobileMain.map((id) => ({ id, label: id, icon: ALL_NAV.find((n) => n.id === id).icon, badge: badge(id) })), { id: "__more", label: "More", icon: MoreHorizontal, badge: 0 }]}
+        activeIndex={more || !mobileMain.includes(tab) ? mobileMain.length : mobileMain.indexOf(tab)}
         onSelect={(id) => (id === "__more" ? setMore(true) : go(id))}
       />
 
@@ -369,7 +380,7 @@ function MainApp() {
         <div className="md:hidden fixed inset-0 z-40 bg-slate-900 bg-opacity-40" onClick={() => setMore(false)}>
           <div className="sheet-in absolute bottom-0 inset-x-0 max-h-[88dvh] overflow-y-auto bg-white rounded-t-3xl p-4 pb-safe space-y-4" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between"><span className="font-semibold">More</span><button onClick={() => setMore(false)} aria-label="Close" className="text-slate-400"><X size={20} /></button></div>
-            {NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((n) => !MOBILE_MAIN.includes(n.id)) })).filter((g) => g.items.length).map((g) => (
+            {navGroups.map((g) => ({ ...g, items: g.items.filter((n) => !mobileMain.includes(n.id)) })).filter((g) => g.items.length).map((g) => (
               <section key={g.label}>
                 <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">{g.label}</p>
                 <div className="grid grid-cols-3 gap-2">
@@ -387,5 +398,7 @@ function MainApp() {
 
       {toast && <div className="fixed bottom-28 md:bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm rounded-lg px-4 py-2 shadow-lg z-50">{toast}</div>}
     </div>
+    </CalculatorHost>
+    </PrefsCtx.Provider>
   );
 }
