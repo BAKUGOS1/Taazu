@@ -42,6 +42,7 @@ export const SUPPLIER_CFG: CrmConfig = {
   dealTitle: "Quote & order",
   dealFields: [],
   detailFields: [
+    { k: "about", label: "Expert in" },
     { k: "use", label: "What we need from them" },
   ],
   // One call script for every supplier type (Tasks -> Script); only the "what we need" line changes with the category.

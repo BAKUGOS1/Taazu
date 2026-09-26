@@ -87,6 +87,97 @@ export const mapUrl = (r) => {
 
 /* ---------------- suppliers (public listings, Sep 2026) ---------------- */
 export const SUP_KEYS = ["cat", "name", "area", "phone", "use", "source", "gstin", "contact", "phone2", "email", "city", "fssai"];
+/* One line on what each starter supplier is good at — shown on the supplier card. */
+export const SUP_ABOUT: Record<string, string> = {
+  "Parekh Enterprise (Hydr-Aid)": "Trader of Hydr-Aid electrolyte drink powder pouches",
+  "Saffron Beverages / Saffron Biotech": "Private-label functional and flavoured drinks",
+  "Clear Pani": "Packaged drinking water in 500 ml bottles",
+  "Patel Beverages Pvt Ltd": "Contract packaged water, 200 ml to 2 L PET",
+  "Skyocean": "Packaged water and empty PET bottles",
+  "Freshneer Foods & Services": "Local packaged-water brand",
+  "Gandhi Beverages": "Beverage manufacturing at Naroda GIDC",
+  "Chill Baby Beverages": "Local soft-drink bottling",
+  "Koladiya Industries (Asterin)": "Canned functional and electrolyte drinks, large MOQ",
+  "Foodsure": "Drink formulation and contract manufacturing",
+  "Ayuray Organics": "Electrolyte drink private label: bottles, sachets, cans",
+  "SevenQ Nutrition": "Private-label electrolyte sachets (GMP, FSSAI)",
+  "Biocruz Pharmaceuticals": "Third-party electrolyte powders and custom blends",
+  "Bhavani Corporation": "PET bottle making",
+  "Nexus Polyplast Pvt Ltd": "PET jars and bottles, small orders OK",
+  "Mundal Polyplast Industries": "Food-grade PET jars and containers",
+  "Siddhi Vinayak Plastics (Neo Plast)": "PET bottles, preforms and PP caps",
+  "Shree Sudarshan Plast": "PET preforms",
+  "Gunatit Label": "Bottle labels, incl. water-bottle brands",
+  "Raditap Labels India Pvt Ltd": "Printed stickers and labels",
+  "Hynix Label": "Custom stickers and labels",
+  "Vimalachal Print & Pack Pvt Ltd": "Printed laminates for sachets and pouches",
+  "Diya Packaging Pvt Ltd": "Cartons and general packaging",
+  "Bharat Essence": "Food essences and flavour ingredients",
+  "Jalaram Essence Store": "Wholesale food essences",
+  "Real Beverage": "Soda machines and soda flavours",
+  "Accurate Universal Laboratories": "Food and water testing",
+  "Gujarat Test Lab Pvt Ltd": "Food testing",
+  "Hitechlab Healthcare & Research": "Food and water tests at good rates",
+  "CIS Laboratory": "Food testing, NABL applied",
+  "JAL Water Jar Supplier": "20 L water jars for events",
+  "A K Marketing & Water Supplier": "Event water supply with quick delivery",
+  "KP Water Treatment Pvt Ltd": "Turnkey bottled-water plants",
+  "Indian Ion Exchange & Chemicals": "Mineral-water plants and packing machines",
+  "Energy Beverages Pvt. Ltd.": "Packaged water bottling with private branding",
+  "Pharmaco Healthcare": "Energy drink and electrolyte effervescent tablets",
+  "Umiya Beverages": "Carbonated soft drinks (Meet brand)",
+  "Zeel Beverages": "Soda and mango juice in 200/300 ml PET",
+  "Shri Gajanand Gruh Udhyog": "Small-batch soda and jeera soda",
+  "Tauhid Enterprise": "Soft drinks and PET-bottled mango drink",
+  "J T Beverages": "Soft drinks and mango juice in PET",
+  "Force India Beverages": "Soft drinks, fruit drinks and club soda",
+  "Radius Healthcare Private Limited": "Pharma franchise; sells an electrolyte energy drink",
+  "UBM Pharmaceuticals": "Nutraceuticals and an energy booster drink",
+  "Mbitions Foods & Nutrients Pvt. Ltd.": "Plant-based sports and energy drink powders",
+  "Aquapop Bottlers": "Contract bottling of electrolyte and sports drinks",
+  "Biocruz Pharmaceuticals Private Limited": "Private-label electrolyte powder",
+  "Ahem Lifecare LLP": "Dextrose and electrolyte sachets, third-party",
+  "Nexlife Bioscience Private Limited": "Electrolyte effervescent tablets",
+  "Leo Nutriscience LLP": "Nutraceuticals incl. electrolyte sachets",
+  "Nulite Formulation": "Third-party nutraceutical tablets and powders",
+  "Calibro Nutrasciences": "Effervescent tablets, protein powder, gummies",
+  "Nutraway Healthcare": "Electrolyte powder sachets and stick packs",
+  "RITS Lifesciences Private Limited": "Electrolyte tablets and drink premixes",
+  "Nutra Healthcare Private Limited": "Electrolyte effervescent tablets, third-party",
+  "Higer Health Sciences LLP": "Electrolyte drinks, sweeteners, coconut water powder",
+  "Mangalam Enterprise": "Instant drink premix powders and flavours",
+  "Pruthvi's Foods Pvt Ltd": "Maltodextrin, dextrose and flavour concentrates",
+  "Kee Pet Containers (Adeshwar Containers)": "PET bottles and jars in many sizes",
+  "Topcap Industries LLP": "Bottle caps incl. 28 mm PCO",
+  "Veeglow Industries Pvt Ltd (Cap & Closure)": "Flip-top caps, closures and pumps",
+  "Satyam Plastic": "28 mm flip-top and screw caps",
+  "Dhiren Plastic Industries": "Flip-top and sports bottle caps",
+  "Prutha Packaging Pvt Ltd": "Flip-top caps 20 to 28 mm",
+  "A-One Pet Industries": "Fridge bottles, PET jars and caps",
+  "S.K. Packaging & Polymers": "28 mm water-bottle caps",
+  "Sanblue Plastic Industries": "PET preforms and beverage caps",
+  "Chandan Packplast": "PET preforms for 200 ml water bottles",
+  "Vton Plastic Industries Pvt Ltd": "PET preforms for 500 ml and 1 L bottles",
+  "Shreeji Plastic": "PET preforms and bottles",
+  "Gopinath Plast": "PET water bottles and preforms",
+  "Parmeshwar Engineering": "Preform moulds and caps",
+  "Mahavir Trading Company": "PET bottles and caps trading since 1980",
+  "Prakash Printers And Coaters Private Limited": "Shrink sleeves and water-bottle labels",
+  "Marvel Pack Industries": "5-ply corrugated cartons",
+  "Dharmananda Offset": "Printed corrugated boxes",
+  "Dhanashree Packaging Industry": "Corrugated carton boxes",
+  "Zenex Packaging": "Corrugated boxes",
+  "Navkar Packaging": "Printed sachet and pouch laminates",
+  "Sky Flexi Pack": "Laminated pouch and sachet printing",
+  "Balahanuman Plastic Ind Private Limited": "Laminated pouch and sachet printing",
+  "Om Print Pack": "Small-run digital label printing",
+  "Rajshree Technosource": "Digital and sticker label printing",
+  "Public Health Laboratory, Ahmedabad (Municipal)": "NABL govt lab for beverages and packaged water",
+  "SWA Environmental Pvt Ltd": "NABL water and packaged-water testing",
+  "SGS India Pvt. Ltd. - Ahmedabad": "Global food and beverage testing",
+  "Intertek India - Ahmedabad": "Global food and beverage testing",
+  "Eureka Analytical Services Pvt Ltd": "Food, water and pharma testing",
+};
 export const SUPPLIERS = () => enrich(mk([
   ["Co-packer / bottler", "Parekh Enterprise (Hydr-Aid)", "A-811 Siddhi Vinayak Tower, Nr Kataria Arcade, off S.G. Highway, Makarba, Ahmedabad-380051", "080719 31816", "Sells Hydr-Aid electrolyte drink powder (64 g pouch, ₹30) — IndiaMART lists them as trader/distributor, so likely not a bottler; ask who manufactures Hydr-Aid and whether they can put the Taazu label on it.", "https://razorpay.com/gst-number-search/24AFKPP1131N1ZD/ — Verified 26 Sep 2026: GST registry shows HITEN NAVNITLAL PAREKH, Active, regd 30 Jun 2017 (proprietorship); same GSTIN + phone on parekhenterprise.net/contact-us.html", "24AFKPP1131N1ZD", "Hiten N Parekh", "080716 30391", "", "", "No FSSAI number published — ask for licence copy and check on FoSCoS"],
   ["Co-packer / bottler", "Saffron Beverages / Saffron Biotech", "C.G. Road, Ahmedabad", "+91 98985 32774", "Private-label functional & flavoured drinks; ask MOQ for 250 ml PET", "Research report / saffronbeverages.in"],
@@ -177,7 +268,7 @@ export const SUPPLIERS = () => enrich(mk([
   ["Testing lab", "SGS India Pvt. Ltd. - Ahmedabad", "201, Sumel II, Nr. Gurudwara, Thaltej", "+91 79 6160 3103", "Global testing/inspection company with Ahmedabad food lab; ask for FSSAI-compliant packaged beverage test panel and turnaround/cost for launch batch. · ⚠ confirm number/GSTIN on call", "https://www.sgs.com — Address, contact name, and two phone numbers found via web search result citing SGS India contact listing; recommend confirming number directly before relying on it.", "", "Purvi Shah (Laboratory In-Charge)", "+91 898 000 1575", "", "Ahmedabad", "NABL-accredited multinational lab network (cert no. not captured)"],
   ["Testing lab", "Intertek India - Ahmedabad", "214, 2nd Floor, Flexi Business Hub, Opp. Gwalia Sweets, Nr. Stadium Cross Road, Navrangpura", "+91 95052 22645", "Global testing company with Ahmedabad food-testing office; ask for packaged beverage FSSAI test panel and pricing for a small launch batch. · ⚠ confirm number/GSTIN on call", "https://www.intertek.com/india/food-testing/contact/ — Address and phone numbers found via Intertek contact listing in web search result; confirm directly before relying.", "", "", "+91 40 42015258", "", "Ahmedabad", "NABL-accredited multinational lab network (cert no. not captured)"],
   ["Testing lab", "Eureka Analytical Services Pvt Ltd", "1420, Shilp Epitome, Nr. InfosTech, B/H Rajpath Club, Bodakdev", "+91 7795833308", "Food, water and pharma testing lab in Ahmedabad; ask for FSSAI-compliant test panel and cost/turnaround for a 250ml electrolyte drink batch.", "https://eurekaserv.com/contact-us/ — Confirmed phone, address, email directly on company contact page.", "", "Sanjeev Khatri (CEO)", "", "info@eurekaserv.com", "Ahmedabad", "NABL/FSSAI-recognized food & water testing lab (cert no. not captured)"],
-], SUP_KEYS, { status: "To call", moq: "", price: "", notes: "" }).map((r) => ({ ...r, id: seedId(r.name) })));
+], SUP_KEYS, { status: "To call", moq: "", price: "", notes: "" }).map((r) => ({ ...r, id: seedId(r.name), about: SUP_ABOUT[r.name] || "" })));
 /* Stable ids so the same starter supplier added on two phones is one record. */
 export const seedId = (name) => "sup-" + name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -340,7 +431,7 @@ export const FLAVOURS = ["Nimbu-namak", "Jeera", "Kokum", "Aam panna", "Other"];
 export const PAYS = ["₹50", "₹30", "₹20", "₹10", "None"];
 
 export const supCols = [
-  { k: "cat", l: "Category", w: 140 }, { k: "name", l: "Supplier", w: 200 }, { k: "area", l: "Area", w: 120 }, { k: "_act", l: "Contact", w: 84, t: "link" }, { k: "phone", l: "Phone", w: 130 },
+  { k: "cat", l: "Category", w: 140 }, { k: "name", l: "Supplier", w: 200 }, { k: "about", l: "Expert in", w: 200 }, { k: "area", l: "Area", w: 120 }, { k: "_act", l: "Contact", w: 84, t: "link" }, { k: "phone", l: "Phone", w: 130 },
   { k: "use", l: "What for", w: 240 }, { k: "status", l: "Status", w: 120, t: "select", o: SUP_STATUS }, { k: "moq", l: "MOQ", w: 70, t: "number" },
   { k: "price", l: "₹/unit", w: 70, t: "number" }, { k: "notes", l: "Notes", w: 180 }, { k: "source", l: "Source", w: 120 },
 ];
@@ -410,7 +501,7 @@ export const upgradeSuppliers = (rows) => {
     const name = r.name === "Parekh Enterprise" ? "Parekh Enterprise (Hydr-Aid)" : r.name;
     const s = byName.get(name);
     if (!s) return r;
-    const fill = Object.fromEntries(["gstin", "contact", "phone2", "email", "city", "fssai"].filter((k) => s[k] && !r[k]).map((k) => [k, s[k]]));
+    const fill = Object.fromEntries(["gstin", "contact", "phone2", "email", "city", "fssai", "about"].filter((k) => s[k] && !r[k]).map((k) => [k, s[k]]));
     const before = SEED_BEFORE_VERIFY[name] || {};
     Object.keys(before).forEach((k) => { if (r[k] === before[k] && s[k] !== r[k]) fill[k] = s[k]; });
     const moved = name !== r.name ? { name, cat: s.cat, use: s.use, source: s.source } : {};
