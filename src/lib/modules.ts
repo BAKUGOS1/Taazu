@@ -1,4 +1,4 @@
-import { Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette, QrCode, Calculator } from "lucide-react";
+import { Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette, QrCode, Calculator, NotebookPen } from "lucide-react";
 
 /*
  * Everything a partner can switch on or off in Settings.
@@ -41,6 +41,7 @@ export const MODULES: ModuleDef[] = [
     { key: "sales.quick", label: "One-tap cup buttons", desc: "₹10 / ₹15 / ₹20 / ₹30 walk-in sale" },
     { key: "sales.unpaid", label: "Payment tracking", desc: "Paid / Unpaid tags, pending amount" },
   ] },
+  { id: "Plans", label: "Plans", icon: NotebookPen, desc: "Your plans as cards: import, open, update.", features: [] },
   { id: "Budget", label: "Budget", icon: Wallet, desc: "₹55,000 trial: planned vs spent.", features: [] },
   { id: "Brand", label: "Brand", icon: Palette, desc: "Name ideas, bottle mockups, label rules.", features: [] },
   { id: "Calculator", label: "Calculator", icon: Calculator, desc: "Quick maths while you talk: cost, margin, GST, order total.", tab: false, features: [] },
@@ -51,6 +52,6 @@ export const TAB_IDS = MODULES.filter((m) => m.tab !== false).map((m) => m.id);
 
 export const PRESETS: { id: string; label: string; desc: string; modules: string[] }[] = [
   { id: "all", label: "Everything", desc: "All screens on", modules: MODULES.map((m) => m.id) },
-  { id: "sourcing", label: "Supplier hunting", desc: "Calling suppliers, quotes, budget", modules: ["Today", "Suppliers", "Tasks", "Budget", "Map", "Calculator"] },
-  { id: "selling", label: "Buyers & stall", desc: "Buyers, sales and surveys", modules: ["Today", "Buyers", "Sales", "Survey", "QR Survey", "Map", "Tasks", "Calculator"] },
+  { id: "sourcing", label: "Supplier hunting", desc: "Calling suppliers, quotes, budget", modules: ["Today", "Suppliers", "Tasks", "Plans", "Budget", "Map", "Calculator"] },
+  { id: "selling", label: "Buyers & stall", desc: "Buyers, sales and surveys", modules: ["Today", "Buyers", "Sales", "Survey", "QR Survey", "Map", "Tasks", "Plans", "Calculator"] },
 ];
