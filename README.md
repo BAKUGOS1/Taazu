@@ -53,3 +53,12 @@ To enable live Google Sheets synchronization for customer QR codes:
 2. Navigate to **Extensions → Apps Script**.
 3. Paste the Apps Script snippet provided in the **QR Survey** setup panel.
 4. Set a custom secret key, deploy as a Web App (access: Anyone), and paste the `/exec` URL and secret back into Taazu.
+
+## Backend: shared Supabase project (important)
+
+Taazu stores its data in **Phere's Supabase project** (`hrwqsgwnwpteykmigvae`), fully separated by name:
+
+- Everything Taazu owns starts with `taazu_`: tables `taazu_workspaces`, `taazu_members`, `taazu_records`, `taazu_usernames`; functions `taazu_*`; edge functions `taazu-login`, `taazu-signup`.
+- Every one of those tables and functions carries a database comment starting **"TAAZU APP — separate project … NOT part of Phere"**.
+- Taazu never reads or writes Phere tables, and Phere must never touch `taazu_*` objects.
+- Taazu migrations live in `supabase/migrations/` of **this** repo only. Don't run Phere's migration tooling against `taazu_*` objects, and don't run Taazu migrations from the Phere repo.
