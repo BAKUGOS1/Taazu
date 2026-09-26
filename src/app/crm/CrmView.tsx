@@ -19,6 +19,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   const [tab, setTab] = useState("due");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
+  const [showAllFresh, setShowAllFresh] = useState(false);
   const [city, setCity] = useState("All cities");
   const [openId, setOpenId] = useState<string | null>(null);
   const [startLog, setStartLog] = useState<string | null>(null);
@@ -110,7 +111,14 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
             </section>
             <section>
               <h2 className="mb-2 text-sm font-semibold text-slate-900 flex items-center gap-2"><PhoneOutgoing size={15} />Not contacted yet <span className="text-slate-400 font-normal">{fresh.length}</span></h2>
-              {fresh.length ? <div className="grid gap-3 md:grid-cols-2">{fresh.slice(0, 12).map(card)}</div> : <Empty icon={PhoneOutgoing} text={`Every ${cfg.noun} has been contacted.`} />}
+              {fresh.length ? <>
+                <div className="grid gap-3 md:grid-cols-2">{(showAllFresh ? fresh : fresh.slice(0, 12)).map(card)}</div>
+                {fresh.length > 12 && (
+                  <button onClick={() => setShowAllFresh(!showAllFresh)} className="mt-3 w-full rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-50">
+                    {showAllFresh ? "Show less" : `Show all ${fresh.length}`}
+                  </button>
+                )}
+              </> : <Empty icon={PhoneOutgoing} text={`Every ${cfg.noun} has been contacted.`} />}
             </section>
           </div>
         )}

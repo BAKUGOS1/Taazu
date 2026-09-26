@@ -56,8 +56,10 @@ export function useSync(opts: {
       }
     }
     confirmed.current.forEach((j, k) => {
-      if (!seen.has(k) && j !== "__deleted") {
-        const [c, id] = k.split("\u0000");
+      const [c, id] = k.split("\u0000");
+      // Only delete what this version of the app manages; never touch collections it doesn't know
+      // (an older app on another phone must not wipe data a newer app added, e.g. settings in "cfg").
+      if (!seen.has(k) && j !== "__deleted" && collections.includes(c)) {
         rows.push({ workspace_id: workspaceId, collection: c, id, data: {}, deleted: true, _j: "__deleted", _k: k });
       }
     });
@@ -97,7 +99,7 @@ export function useSync(opts: {
     }
     confirmed.current.clear();
     const live = all.filter((r) => !r.deleted);
-    all.forEach((r) => confirmed.current.set(keyOf(r.collection, r.id), r.deleted ? "__deleted" : JSON.stringify(r.data)));
+    all.filter((r) => collections.includes(r.collection)).forEach((r) => confirmed.current.set(keyOf(r.collection, r.id), r.deleted ? "__deleted" : JSON.stringify(r.data)));
     if (!live.length) {
       // New workspace: upload what this device has (old local data or starter lists).
       replaceRef.current(seed());
