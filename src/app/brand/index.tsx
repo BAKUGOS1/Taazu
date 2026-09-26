@@ -1,5 +1,50 @@
-import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type } from "lucide-react";
+import { Suspense, lazy, useState } from "react";
+import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight } from "lucide-react";
 import { Panel } from "../../components/ui";
+import dropIcon from "../../../brand-kit/logos/concept-A-icon-reverse.svg?url";
+
+// The kit tabs pull in fonts, the exporter and the QR code, so they load only when opened.
+const LogosPanel = lazy(() => import("./kit/LogosPanel"));
+const Creatives = lazy(() => import("./kit/Creatives"));
+const Slogans = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Slogans })));
+const Strategy = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Strategy })));
+const Prompts = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Prompts })));
+
+const TABS = [
+  { id: "overview", label: "Overview", icon: LayoutGrid },
+  { id: "logos", label: "Logos", icon: Shapes },
+  { id: "creatives", label: "Creatives", icon: Images },
+  { id: "slogans", label: "Slogans", icon: MessageSquareQuote },
+  { id: "strategy", label: "Strategy", icon: Compass },
+  { id: "prompts", label: "AI prompts", icon: Wand2 },
+] as const;
+type TabId = (typeof TABS)[number]["id"];
+const TAB_KEY = "taazu.brand.tab";
+
+export default function BrandView() {
+  const [tab, setTabState] = useState<TabId>(() => { try { const t = localStorage.getItem(TAB_KEY); return (TABS.some((x) => x.id === t) ? t : "overview") as TabId; } catch { return "overview"; } });
+  const setTab = (t: TabId) => { setTabState(t); try { localStorage.setItem(TAB_KEY, t); } catch { /* storage blocked */ } };
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-6">
+        {TABS.map(({ id, label, icon: Icon }) => (
+          <button key={id} type="button" onClick={() => setTab(id)} aria-pressed={tab === id}
+            className={`flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition ${tab === id ? "bg-white text-orange-700 shadow-sm" : "text-stone-500 hover:text-stone-800"}`}>
+            <Icon size={14} />{label}
+          </button>
+        ))}
+      </div>
+      <Suspense fallback={<div className="rounded-2xl bg-white p-8 text-center text-sm text-stone-500">Brand kit khul raha hai…</div>}>
+        {tab === "overview" && <Overview go={setTab} />}
+        {tab === "logos" && <LogosPanel />}
+        {tab === "creatives" && <Creatives />}
+        {tab === "slogans" && <Slogans />}
+        {tab === "strategy" && <Strategy />}
+        {tab === "prompts" && <Prompts />}
+      </Suspense>
+    </div>
+  );
+}
 
 /*
  * Brand: Taazu only. One identity, one product prototype, and the hydration facts we
@@ -126,7 +171,7 @@ function BackLabel() {
   );
 }
 
-export default function BrandView() {
+function Overview({ go }: { go: (t: TabId) => void }) {
   const must = [
     "Brand + true name: \"Non-carbonated water-based flavoured beverage with electrolytes\"",
     "Ingredients in descending order; green veg logo",
@@ -147,7 +192,7 @@ export default function BrandView() {
         <div className="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><Droplets size={26} /></div>
+              <img src={dropIcon} alt="" className="h-12 w-12" />
               <div>
                 <div className="text-4xl font-black tracking-tight leading-none">taazu</div>
                 <div className="text-sm text-orange-100">{TAAZU.gujarati} · {TAAZU.meaning}</div>
@@ -159,6 +204,22 @@ export default function BrandView() {
           <div className="hidden md:block rounded-2xl bg-white/95 p-3"><Bottle id="hero" liquid="#F3F0B8" accent="#F5D83B" flavour="Nimbu-Namak" sub="Nimbu · Sendha namak" /></div>
         </div>
       </section>
+
+      {/* brand kit shortcuts */}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {([
+          ["logos", Shapes, "Logos", "4 concepts + seal · SVG, PNG 4096px"],
+          ["creatives", Images, "Creatives", "9 posts & posters · edit, Max download"],
+          ["slogans", MessageSquareQuote, "Slogans", "Hinglish, Gujarati, English"],
+          ["prompts", Wand2, "AI prompts", "24 image & video prompts"],
+        ] as const).map(([id, Icon, title, sub]) => (
+          <button key={id} type="button" onClick={() => go(id)} className="group flex flex-col gap-2 rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-sm transition hover:border-orange-300">
+            <div className="flex items-center justify-between"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50 text-orange-600"><Icon size={18} /></div><ArrowRight size={16} className="text-stone-300 transition group-hover:text-orange-600" /></div>
+            <div className="font-bold text-stone-900">{title}</div>
+            <div className="text-xs text-stone-500">{sub}</div>
+          </button>
+        ))}
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Panel title="Colours" icon={Palette}>
