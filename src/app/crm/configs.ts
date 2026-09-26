@@ -17,7 +17,8 @@ export const NEED: Record<string, T> = {
   "Testing lab": { en: "We need an FSSAI / NABL test for a packaged drink — nutrition, micro, sodium-potassium. Can you do it?", hi: "Hamein packaged drink ka FSSAI / NABL test karwana hai — nutrition, micro, sodium-potassium — kar sakte hain?" },
   "Hydration station": { en: "We need 20 L water jars / dispensers for events, with delivery. Can you supply them?", hi: "Hamein events ke liye 20 L water jars / dispensers chahiye — delivery ke saath de sakte hain?" },
 };
-const tierOf = (r: CrmRecord) => (TIER1.has(r.name) ? 0 : TIER2.has(r.name) ? 1 : r.cat === "Co-packer / bottler" ? 2 : 3);
+// Verified suppliers (GSTIN checked) come first, then the hand-picked tiers.
+const tierOf = (r: CrmRecord) => (r.verified ? -1 : TIER1.has(r.name) ? 0 : TIER2.has(r.name) ? 1 : r.cat === "Co-packer / bottler" ? 2 : 3);
 export const SUP_STAGES = ["To call", "Contacted", "Quote received", "Sample", "Negotiation", "Finalized", "Rejected"] as const;
 
 export const SUPPLIER_CFG: CrmConfig = {
