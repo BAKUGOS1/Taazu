@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Download, ImagePlus, RotateCcw, Share2, Trash2 } from "lucide-react";
 import { Panel, btnGhost, btnPrimary, inputCls } from "../../../components/ui";
-import { TEMPLATES, customTemplate, type Shared, type Tpl, type Values } from "./templates";
+import { LogoConceptCtx, TEMPLATES, customTemplate, type Shared, type Tpl, type Values } from "./templates";
+import { useBrandLogo } from "../../../lib/brandLogo";
 import { loadFonts } from "./fonts";
 import { canShareFiles, maxScale, nodeToPng, saveBlob, shareBlob, slug } from "./export";
 import { Chips, Label, readStore, writeStore } from "./bits";
@@ -53,6 +54,7 @@ export default function Creatives() {
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const share = useMemo(canShareFiles, []);
+  const { concept } = useBrandLogo();
   const exportRef = useRef<HTMLDivElement>(null);
   const [previewBox, previewW] = useWidth<HTMLDivElement>();
   const [galleryBox, galleryW] = useWidth<HTMLDivElement>();
@@ -101,6 +103,7 @@ export default function Creatives() {
   const previewWidth = Math.min(previewW, tpl.h > tpl.w * 1.5 ? 360 : 460);
 
   return (
+    <LogoConceptCtx.Provider value={concept}>
     <div className="space-y-4">
       <Panel title="Price aur WhatsApp · har creative mein">
         <div className="grid gap-3 sm:grid-cols-2">
@@ -189,5 +192,6 @@ export default function Creatives() {
         <div ref={exportRef} style={{ width: tpl.w, height: tpl.h }}>{tpl.render(v, s)}</div>
       </div>
     </div>
+    </LogoConceptCtx.Provider>
   );
 }

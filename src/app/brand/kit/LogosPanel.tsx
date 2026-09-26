@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
-import { Download, FileCode2, Share2, Sparkles } from "lucide-react";
+import { BadgeCheck, Download, FileCode2, Share2, Sparkles } from "lucide-react";
+import { useBrandLogo } from "../../../lib/brandLogo";
+import { AppIcon, Lockup } from "../../../components/BrandMark";
 import { Panel, btnGhost, btnPrimary } from "../../../components/ui";
 import { BACKGROUNDS, CONCEPTS, LAYOUT_LABEL, STYLE_BG, STYLE_LABEL, buildLogo, logoFileName, type LogoOpts, type Style } from "./logos";
 import { MAX_PIXELS, canShareFiles, saveBlob, shareBlob, svgToPng } from "./export";
@@ -13,7 +15,7 @@ const PRESETS: { l: string; hint: string; o: LogoOpts }[] = [
   { l: "Bottle label", hint: "Stacked, transparent", o: { concept: "A", layout: "stacked", style: "color", bg: "none", pad: 0.04, square: false } },
   { l: "Banner / letterhead", hint: "Side, transparent", o: { concept: "A", layout: "horizontal", style: "color", bg: "none", pad: 0.04, square: false } },
   { l: "Dark photo par", hint: "White, one colour", o: { concept: "A", layout: "horizontal", style: "white", bg: "none", pad: 0.04, square: false } },
-  { l: "App icon", hint: "t-wave, square", o: { concept: "C", layout: "icon", style: "color", bg: "none", pad: 0, square: true } },
+  { l: "App icon", hint: "Square, orange", o: { concept: "A", layout: "icon", style: "reverse", bg: "orange", pad: 0.14, square: true } },
   { l: "Cup sticker", hint: "Seal", o: { concept: "S", layout: "seal", style: "color", bg: "none", pad: 0.02, square: true } },
 ];
 
@@ -25,6 +27,8 @@ export default function LogosPanel() {
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const share = useMemo(canShareFiles, []);
+  const app = useBrandLogo();
+  const isApp = app.concept === o.concept;
   const concept = CONCEPTS.find((c) => c.id === o.concept) || CONCEPTS[0];
 
   const set = (p: Partial<LogoOpts>) => setO((cur) => {
@@ -60,7 +64,7 @@ export default function LogosPanel() {
   return (
     <div className="space-y-4">
       <Panel title="Logo concepts" icon={Sparkles}>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
           {CONCEPTS.map((c) => {
             const prev = buildLogo({ concept: c.id, layout: c.layouts[0], style: "color", bg: "cream", pad: 0.12, square: true });
             return (
@@ -69,13 +73,27 @@ export default function LogosPanel() {
                 <img src={svgUrl(prev.svg)} alt={`${c.name} logo`} className="aspect-square w-full rounded-xl" />
                 <div className="mt-2 flex items-center justify-between gap-1 px-1">
                   <span className="text-sm font-bold text-stone-900">{c.id === "S" ? c.name : `${c.id} · ${c.name}`}</span>
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${c.id === "A" ? "bg-green-50 text-green-700" : "bg-stone-100 text-stone-500"}`}>{c.tag}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${app.concept === c.id ? "bg-orange-600 text-white" : c.id === "A" ? "bg-green-50 text-green-700" : "bg-stone-100 text-stone-500"}`}>{app.concept === c.id ? "App logo" : c.tag}</span>
                 </div>
               </button>
             );
           })}
         </div>
         <p className="mt-3 text-sm text-stone-600">{concept.idea}</p>
+        <div className={`mt-4 flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center ${isApp ? "bg-green-50" : "bg-orange-50"}`}>
+          <div className="flex items-center gap-3">
+            <AppIcon className="h-11 w-11" />
+            <Lockup className="h-9 w-auto" />
+          </div>
+          <div className="flex-1 text-sm text-stone-700">
+            {isApp
+              ? <><b>Yeh app ka logo hai.</b> Header, sidebar, login, Pitch, Brand tab, creatives aur browser tab mein yahi dikh raha hai. Team ke sab phones par sync hota hai.</>
+              : <>Abhi app mein upar wala logo hai. <b>{concept.name}</b> ko app logo banane se yeh sab jagah badal jayega: header, sidebar, login, Pitch, Brand tab, creatives aur browser tab.</>}
+          </div>
+          {isApp
+            ? <span className="inline-flex items-center gap-1.5 text-sm font-bold text-green-700"><BadgeCheck size={18} />App logo</span>
+            : <button className={btnPrimary} onClick={() => app.setConcept(o.concept)}><BadgeCheck size={16} />Isko app logo banao</button>}
+        </div>
       </Panel>
 
       <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr]">

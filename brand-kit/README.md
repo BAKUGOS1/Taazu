@@ -4,7 +4,7 @@ Taazu (તાજું, Gujarati for "fresh") is a still nimbu-namak electrolyte
 
 | Folder / file | What's inside |
 | --- | --- |
-| `logos/` | 4 logo concepts, each as icon-only and with name, in SVG (print) and PNG (social). Text is converted to shapes, so the SVGs open correctly anywhere without the font. |
+| `logos/` | 3 logo concepts + seal, each as icon-only and with name, in SVG (print) and PNG (social). Text is converted to shapes, so the SVGs open correctly anywhere without the font. |
 | `creatives/` | 8 ready awareness creatives: 5 Instagram posts (1080×1350), 1 story (1080×1920), 1 A4 counter poster (300 dpi), 1 Navratri post. |
 | `AI-PROMPTS.md` | Prompts for Midjourney, Ideogram, ChatGPT, Gemini, Firefly and video tools, plus captions for each creative. |
 
@@ -45,7 +45,7 @@ Claims rule for everything below: keep hydration facts general and sourced. Neve
 
 ### Step 4: Identity lock karo
 
-- **Logo:** Concept A (Nimbu Drop) primary. Seal secondary, cups aur stickers ke liye. Details section 2 mein.
+- **Logo:** Concept A (Nimbu Drop) primary; change it any time from Brand → Logos. Seal secondary, cups aur stickers ke liye. Details section 2 mein.
 - **Colours:** Taazu Orange `#EA580C`, Nimbu `#F5D83B`, Leaf `#1F7A3A`, Cream `#FFF8E7`, Ink `#1C1917`. Ek creative mein ek hi strong background colour.
 - **Fonts:** Baloo Bhai 2 ExtraBold for headlines (Latin + Gujarati), Baloo 2 for Hindi, Plus Jakarta Sans for body text. Sab Google Fonts par free hain aur Canva mein bhi milte hain.
 - **Graphics:** paani ki boond, nimbu slice, suraj. Photos mein asli Amdavadi log, dhoop, paseena, turfs, pol ki galiyan.
@@ -83,9 +83,10 @@ Followers se zyada yeh dekho: samples diye → kitne ne dobara khareeda, survey 
 | --- | --- | --- | --- | --- |
 | **A · Nimbu Drop** (recommended) | `concept-A-icon-color` | `concept-A-horizontal-color`, `concept-A-stacked-color` | Paani ki boond ke andar nimbu slice: drink + nimbu ek nazar mein. | Label, cap, WhatsApp DP, sab kuch. Chhote size par bhi saaf. |
 | **B · Sun Drop** | `concept-B-icon-color` | `concept-B-horizontal-color`, `concept-B-stacked-color` | Suraj ke saamne thandi boond: "garmi ka jawab". | Summer campaigns, banners. Chhote size par details kho jaati hain. |
-| **C · t-wave monogram** | `concept-C-icon-color` | `concept-C-horizontal-color`, `concept-C-stacked-color` | Lowercase "t" ki crossbar ek lehar, saath mein nimbu-yellow boond. | App icon, Instagram DP, merch. |
 | **D · Anusvara wordmark** | (name-only) | `concept-D-wordmark-color` | તાજું mein "ં" ka dot boond ban kar "u" ke upar aa gaya. | Banners, lambi labels, jahan icon ki jagah nahi. |
 | **Seal** | `seal-color`, `seal-reverse` | | "Taazu · Amdavad · Paani se aage" round stamp. | Cup sleeves, stickers, cap-top, delivery bags. |
+
+**App logo:** in the app, Brand → Logos → "Isko app logo banao" makes the chosen concept the logo everywhere (header, login, pitch, creatives, browser tab) for the whole team. `app-icon-*`, `lockup-*` and `wordmark-*` files are the versions the app uses.
 
 Every concept has a `-reverse` version for orange or dark backgrounds, and `concept-A-horizontal-cream-transparent` for placing on photos.
 
