@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "./supabase";
+import { applyRemote, fromServer, pendingRows, type Collections } from "./syncMerge";
 
 /*
  * Record-level sync with Supabase.
@@ -16,11 +17,10 @@ import { supabase } from "./supabase";
  * localStorage lets the app open instantly and offline.
  */
 
-export type Collections = Record<string, any[]>;
+export type { Collections };
 export type SyncStatus = "loading" | "synced" | "saving" | "offline" | "error";
 
 const cacheKey = (ws: string) => `taazu-cache-${ws}`;
-const keyOf = (c: string, id: string) => `${c}\u0000${id}`;
 
 export function useSync(opts: {
   workspaceId: string | null;
@@ -45,24 +45,7 @@ export function useSync(opts: {
   const flush = useCallback(async (given?: Collections) => {
     if (!supabase || !workspaceId || flushing.current) return;
     const snap = given || dataRef.current;
-    const rows: any[] = [];
-    const seen = new Set<string>();
-    for (const c of collections) {
-      for (const r of snap[c] || []) {
-        if (!r?.id) continue;
-        const k = keyOf(c, r.id), j = JSON.stringify(r);
-        seen.add(k);
-        if (confirmed.current.get(k) !== j) rows.push({ workspace_id: workspaceId, collection: c, id: r.id, data: r, deleted: false, _j: j, _k: k });
-      }
-    }
-    confirmed.current.forEach((j, k) => {
-      const [c, id] = k.split("\u0000");
-      // Only delete what this version of the app manages; never touch collections it doesn't know
-      // (an older app on another phone must not wipe data a newer app added, e.g. settings in "cfg").
-      if (!seen.has(k) && j !== "__deleted" && collections.includes(c)) {
-        rows.push({ workspace_id: workspaceId, collection: c, id, data: {}, deleted: true, _j: "__deleted", _k: k });
-      }
-    });
+    const rows = pendingRows(workspaceId, collections, snap, confirmed.current);
     const saveCache = () => { try { localStorage.setItem(cacheKey(workspaceId), JSON.stringify({ data: snap, confirmed: [...confirmed.current] })); } catch { /* storage full or blocked */ } };
     saveCache();
     if (!rows.length) { setStatus(navigator.onLine ? "synced" : "offline"); return; }
@@ -97,18 +80,14 @@ export function useSync(opts: {
       all.push(...rows);
       if (rows.length < 1000) break;
     }
-    confirmed.current.clear();
-    const live = all.filter((r) => !r.deleted);
-    all.filter((r) => collections.includes(r.collection)).forEach((r) => confirmed.current.set(keyOf(r.collection, r.id), r.deleted ? "__deleted" : JSON.stringify(r.data)));
-    if (!live.length) {
+    const { confirmed: fresh, data: next } = fromServer(all, collections);
+    confirmed.current = fresh;
+    if (!next) {
       // New workspace: upload what this device has (old local data or starter lists).
       replaceRef.current(seed());
       setReady(true);
       return;
     }
-    const next: Collections = Object.fromEntries(collections.map((c) => [c, []]));
-    live.forEach((r) => { if (next[r.collection]) next[r.collection].push(r.data); });
-    for (const c of collections) next[c].sort((a, b) => (a._o ?? 1e15) - (b._o ?? 1e15));
     replaceRef.current(next);
     setReady(true);
     setStatus("synced");
@@ -141,20 +120,8 @@ export function useSync(opts: {
     let dropped = false;
     const ch = supabase.channel(`taazu-${workspaceId}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "taazu_records", filter: `workspace_id=eq.${workspaceId}` }, (p: any) => {
-        const r = p.new;
-        if (!r?.collection || !r.id) return;
-        const k = keyOf(r.collection, r.id);
-        const j = r.deleted ? "__deleted" : JSON.stringify(r.data);
-        if (confirmed.current.get(k) === j) return; // our own echo
-        confirmed.current.set(k, j);
-        const cur = dataRef.current;
-        const list = cur[r.collection] || [];
-        const idx = list.findIndex((x) => x.id === r.id);
-        let nextList = list;
-        if (r.deleted) nextList = list.filter((x) => x.id !== r.id);
-        else if (idx >= 0) { nextList = [...list]; nextList[idx] = r.data; }
-        else nextList = [...list, r.data];
-        replaceRef.current({ ...cur, [r.collection]: nextList });
+        const next = applyRemote(dataRef.current, p.new, confirmed.current);
+        if (next) replaceRef.current(next);
       })
       .subscribe((s) => {
         if (s === "SUBSCRIBED" && dropped) { dropped = false; flush().then(load).catch(() => {}); }
