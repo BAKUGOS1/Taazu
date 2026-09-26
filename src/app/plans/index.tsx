@@ -110,31 +110,39 @@ function PlanSheet({ plan, n, onClose, save, remove, onUpdateFromFile }: { plan:
   const copyAll = async () => { try { await navigator.clipboard.writeText(plan.body); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch { /* clipboard blocked */ } };
   const saveEdit = () => { const { title, period } = readPlan(draft, plan.title); save(plan.id, { body: draft, title, period }); setEdit(false); };
 
+  const icon = "flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 active:bg-slate-100";
+
   return (
     <Sheet open onClose={onClose}
       title={<div><div className="text-[11px] font-bold uppercase tracking-wide text-orange-600">Plan {n}</div><div className="font-bold leading-snug text-slate-900">{plan.title}</div>{plan.period && <div className="text-xs text-slate-500">{plan.period}</div>}</div>}
       footer={edit ? (
         <div className="flex gap-2"><button className={btnGhost} onClick={() => { setDraft(plan.body); setEdit(false); }}>Cancel</button><button className={`${btnPrimary} flex-1`} onClick={saveEdit}><Check size={16} />Save plan</button></div>
-      ) : (
-        <div className="flex flex-wrap gap-2">
-          <button className={btnGhost} onClick={() => { setDraft(plan.body); setEdit(true); }}><Pencil size={16} />Edit</button>
-          <button className={btnGhost} onClick={onUpdateFromFile}><FileUp size={16} />Update from file</button>
-          <button className={btnGhost} onClick={copyAll}>{copied ? <Check size={16} /> : <Copy size={16} />}Copy</button>
-          <button className={`${btnGhost} ml-auto ${arm ? "!border-red-300 !text-red-600" : ""}`} onClick={() => { if (arm) remove(plan.id); else { setArm(true); setTimeout(() => setArm(false), 4000); } }}>
-            <Trash2 size={16} />{arm ? "Tap again to delete" : "Delete"}
-          </button>
-        </div>
-      )}>
-      <div className="mb-4 flex gap-1.5">
-        {PLAN_STATUS.map((s) => (
-          <button key={s} onClick={() => save(plan.id, { status: s })} className={`rounded-full border px-3 py-1 text-xs font-semibold ${plan.status === s ? "border-orange-300 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-500"}`}>{s}</button>
-        ))}
-        {plan.updated && <span className="ml-auto self-center text-[11px] text-slate-400">Updated {plan.updated}{plan.by ? ` · ${plan.by}` : ""}</span>}
+      ) : null}>
+      {/* one slim row: status on the left, actions as icons on the right */}
+      <div className="sticky top-0 z-10 -mx-5 mb-4 flex items-center gap-1 border-b border-slate-100 bg-white px-5 pb-2">
+        <select aria-label="Status" value={plan.status} onChange={(e) => save(plan.id, { status: e.target.value })}
+          className="rounded-full border border-slate-200 bg-white py-1 pl-3 pr-7 text-xs font-semibold text-slate-600">
+          {PLAN_STATUS.map((s) => <option key={s}>{s}</option>)}
+        </select>
+        {!edit && (
+          <div className="ml-auto flex items-center">
+            <button className={icon} aria-label="Edit" title="Edit" onClick={() => { setDraft(plan.body); setEdit(true); }}><Pencil size={18} /></button>
+            <button className={icon} aria-label="Update from file" title="Update from file" onClick={onUpdateFromFile}><FileUp size={18} /></button>
+            <button className={icon} aria-label="Copy plan" title="Copy plan" onClick={copyAll}>{copied ? <Check size={18} className="text-green-600" /> : <Copy size={18} />}</button>
+            <button className={arm ? "ml-1 rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600" : icon} aria-label="Delete plan" title="Delete plan"
+              onClick={() => { if (arm) remove(plan.id); else { setArm(true); setTimeout(() => setArm(false), 4000); } }}>
+              {arm ? "Delete?" : <Trash2 size={18} />}
+            </button>
+          </div>
+        )}
       </div>
       {edit ? (
         <textarea className={`${inputCls} min-h-[55dvh] font-mono text-xs leading-relaxed`} value={draft} onChange={(e) => setDraft(e.target.value)} />
       ) : (
-        <Markdown src={plan.body} hideTitle />
+        <>
+          <Markdown src={plan.body} hideTitle />
+          {plan.updated && <p className="mt-6 text-center text-[11px] text-slate-400">Updated {plan.updated}{plan.by ? ` by ${plan.by}` : ""}</p>}
+        </>
       )}
     </Sheet>
   );

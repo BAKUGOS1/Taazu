@@ -118,9 +118,23 @@ export default function Markdown({ src, hideTitle = false }: { src: string; hide
           return <L key={i} className={`space-y-1 pl-5 ${b.t === "ul" ? "list-disc" : "list-decimal"} marker:text-slate-400`}>{b.items.map((it, j) => <li key={j} className="leading-relaxed"><Inline text={it} /></li>)}</L>;
         }
         if (b.t !== "table") return null;
+        // A leading row-number column ("#", "Priority" 1, 2, 3…) adds nothing when rows are read one by one.
+        const numbered = b.head.length > 1 && b.rows.every((r) => /^\d{0,2}$/.test((r[0] || "").trim()));
+        const keep = b.head.map((_, j) => j).filter((j) => !(j === 0 && numbered));
         return (
-          <div key={i} className="-mx-1 overflow-x-auto">
-            <table className="w-full min-w-[480px] border-collapse text-xs">
+          <div key={i}>
+            {/* phones: each row is a small card, so nothing is cut off or scrolls sideways */}
+            <div className="space-y-2 md:hidden">
+              {b.rows.map((r, j) => (
+                <div key={j} className="rounded-xl bg-slate-50 px-3 py-2.5">
+                  <div className="leading-snug text-slate-900"><Inline text={r[keep[0]] || ""} /></div>
+                  {keep.slice(1).filter((x) => r[x]).map((x) => (
+                    <div key={x} className="mt-1 text-[13px] leading-snug text-slate-600"><span className="text-slate-400">{b.head[x]}: </span><Inline text={r[x]} /></div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <table className="hidden w-full border-collapse text-xs md:table">
               <thead><tr>{b.head.map((h, j) => <th key={j} className="border-b border-slate-200 px-2 py-1.5 text-left font-semibold text-slate-600"><Inline text={h} /></th>)}</tr></thead>
               <tbody>{b.rows.map((r, j) => <tr key={j} className="align-top">{r.map((c, x) => <td key={x} className="border-b border-slate-100 px-2 py-1.5"><Inline text={c} /></td>)}</tr>)}</tbody>
             </table>
