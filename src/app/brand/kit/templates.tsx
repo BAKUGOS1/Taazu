@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import { createContext, useContext, type CSSProperties, type ReactNode } from "react";
 import { Check, X } from "lucide-react";
 import QRCode from "qrcode";
 import { BRAND as C, logoSvg, type ConceptId, type Layout, type Style } from "./logos";
@@ -62,8 +62,15 @@ export function Rich({ text, accent, s }: { text: string; accent: string; s: Sha
   );
 }
 
-function Logo({ concept = "A", layout = "horizontal", style, width }: { concept?: ConceptId; layout?: Layout; style: Style; width: number }) {
-  const { svg } = logoSvg(concept, layout, style);
+/** The app logo picked in Brand → Logos; creatives follow it. */
+export const LogoConceptCtx = createContext<ConceptId>("A");
+
+function Logo({ layout = "horizontal", style, width }: { layout?: Layout; style: Style; width: number }) {
+  const concept = useContext(LogoConceptCtx);
+  // Name-only (D) always shows the wordmark; the seal is round, so it gets less width.
+  const use: Layout = concept === "D" ? "wordmark" : concept === "S" ? "seal" : layout;
+  if (concept === "S") width = Math.round(width * (layout === "stacked" ? 0.8 : 0.42));
+  const { svg } = logoSvg(concept, use, style);
   return <div style={{ width, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: svg.replace("<svg ", '<svg style="width:100%;height:auto;display:block" ') }} />;
 }
 
@@ -349,7 +356,8 @@ export const customTemplate = (format: string): Tpl => {
 /* The 250 ml bottle from the product prototype, used on the A4 poster. */
 const BOTTLE = "M65,40 L95,40 L95,70 C95,86 140,98 140,130 L140,345 C140,362 128,372 112,372 L48,372 C32,372 20,362 20,345 L20,130 C20,98 65,86 65,70 Z";
 function Bottle({ width }: { width: number }) {
-  const icon = logoSvg("A", "icon", "color").svg.replace(/^<svg[^>]*>|<\/svg>$/g, "");
+  const concept = useContext(LogoConceptCtx);
+  const icon = logoSvg(concept === "D" ? "A" : concept, concept === "S" ? "seal" : "icon", "color").svg.replace(/^<svg[^>]*>|<\/svg>$/g, "");
   return (
     <svg viewBox="0 0 160 390" width={width} style={{ display: "block" }}>
       <defs>

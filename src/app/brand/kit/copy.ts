@@ -42,7 +42,6 @@ export const PROMPTS: { g: string; d: string; items: Prompt[] }[] = [
   ]},
   {g:"Logo exploration",d:"Sirf ideas ke liye. Final logo clean vector (logos/ folder ki SVG) hi rahe, aur trademark check ke baad.",items:[
     {t:"E1 · Drop + lemon",u:"Concept A ke variations",ar:"1:1",noStyle:true,p:"Minimal flat vector logo mark: a water drop containing a lemon slice, saffron orange and lemon yellow, geometric, bold, works at small sizes, centered on white, no text"},
-    {t:"E2 · t-wave app icon",u:"Concept C ke variations",ar:"1:1",noStyle:true,p:"Minimal flat vector logo mark: a lowercase letter t whose crossbar is a wave, with a small yellow drop beside it, inside an orange rounded square app icon, no other text"},
     {t:"E3 · Badge",u:"Seal ke variations",ar:"1:1",noStyle:true,p:"Circular badge logo for a beverage brand from Ahmedabad: a drop and a sun inside a ring, flat vector, orange and cream, vintage stamp style, leave the ring empty (no text)"},
   ]},
   {g:"Video · Reels",d:"Veo, Kling, Runway ya Sora. 9:16, 5 se 8 second.",items:[

@@ -8,14 +8,13 @@ const FILES: Record<string, string> = Object.fromEntries(Object.entries(RAW).map
 
 export const BRAND = { orange: "#EA580C", deep: "#C2410C", nimbu: "#F5D83B", leaf: "#1F7A3A", cream: "#FFF8E7", ink: "#1C1917", white: "#FFFFFF" };
 
-export type ConceptId = "A" | "B" | "C" | "D" | "S";
+export type ConceptId = "A" | "B" | "D" | "S";
 export type Layout = "icon" | "horizontal" | "stacked" | "wordmark" | "seal";
 export type Style = "color" | "reverse" | "ink" | "white";
 
 export const CONCEPTS: { id: ConceptId; name: string; tag: string; idea: string; layouts: Layout[] }[] = [
   { id: "A", name: "Nimbu Drop", tag: "Primary", idea: "Boond ke andar nimbu slice: drink + nimbu ek nazar mein. Label, cap, DP sab par.", layouts: ["icon", "horizontal", "stacked"] },
   { id: "B", name: "Sun Drop", tag: "Campaign", idea: "Suraj ke saamne thandi boond: garmi ka jawab. Summer banners ke liye.", layouts: ["icon", "horizontal", "stacked"] },
-  { id: "C", name: "t-wave", tag: "App icon", idea: "\"t\" ki crossbar ek lehar, saath mein nimbu-yellow boond. App icon aur DP.", layouts: ["icon", "horizontal", "stacked"] },
   { id: "D", name: "Anusvara", tag: "Name only", idea: "તાજું ke \"ં\" ka dot boond ban kar \"u\" ke upar. Banners aur lambi labels.", layouts: ["wordmark"] },
   { id: "S", name: "Seal", tag: "Sticker", idea: "Round stamp: cup sleeves, cap-top sticker, delivery bags.", layouts: ["seal"] },
 ];
@@ -64,7 +63,7 @@ export function buildLogo(o: LogoOpts): { svg: string; w: number; h: number } {
     const main = o.style === "ink" ? BRAND.ink : BRAND.white;
     // Cut-outs (cream parts) take the background colour, so the mark still reads in one colour.
     const knock = bgHex || (o.style === "ink" ? BRAND.white : BRAND.ink);
-    const knockouts = new Set([BRAND.cream.toLowerCase(), ...(o.concept === "C" ? [BRAND.nimbu.toLowerCase()] : [])]);
+    const knockouts = new Set([BRAND.cream.toLowerCase()]);
     inner = inner.replace(HEX, (x) => (knockouts.has(x.toLowerCase()) ? knock : main));
   }
 

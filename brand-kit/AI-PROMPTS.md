@@ -130,9 +130,6 @@ Use these only to explore ideas. The final logo must be clean vector work (the S
 Minimal flat vector logo mark: a water drop containing a lemon slice, saffron orange and lemon yellow, geometric, bold, works at small sizes, centered on white, no text
 ```
 ```
-Minimal flat vector logo mark: a lowercase letter t whose crossbar is a wave, with a small yellow drop beside it, inside an orange rounded square app icon, no other text
-```
-```
 Circular badge logo for a beverage brand from Ahmedabad: a drop and a sun inside a ring, flat vector, orange and cream, vintage stamp style, leave the ring empty (no text)
 ```
 

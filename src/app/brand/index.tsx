@@ -1,21 +1,23 @@
 import { Suspense, lazy, useState } from "react";
-import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight } from "lucide-react";
+import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight, QrCode } from "lucide-react";
 import { Panel } from "../../components/ui";
-import dropIcon from "../../../brand-kit/logos/concept-A-icon-color.svg?url";
 import wordLeaf from "../../../brand-kit/logos/wordmark-leaf.svg?url";
-import { Lockup } from "../../components/BrandMark";
+import { Lockup, markUrl } from "../../components/BrandMark";
+import { useBrandLogo } from "../../lib/brandLogo";
 
 // The kit tabs pull in fonts, the exporter and the QR code, so they load only when opened.
 const LogosPanel = lazy(() => import("./kit/LogosPanel"));
 const Creatives = lazy(() => import("./kit/Creatives"));
 const Slogans = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Slogans })));
 const Strategy = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Strategy })));
+const QrMaker = lazy(() => import("./kit/QrMaker"));
 const Prompts = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Prompts })));
 
 const TABS = [
   { id: "overview", label: "Overview", icon: LayoutGrid },
   { id: "logos", label: "Logos", icon: Shapes },
   { id: "creatives", label: "Creatives", icon: Images },
+  { id: "qr", label: "QR code", icon: QrCode },
   { id: "slogans", label: "Slogans", icon: MessageSquareQuote },
   { id: "strategy", label: "Strategy", icon: Compass },
   { id: "prompts", label: "AI prompts", icon: Wand2 },
@@ -28,7 +30,7 @@ export default function BrandView() {
   const setTab = (t: TabId) => { setTabState(t); try { localStorage.setItem(TAB_KEY, t); } catch { /* storage blocked */ } };
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-6">
+      <div className="grid grid-cols-4 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-7">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} type="button" onClick={() => setTab(id)} aria-pressed={tab === id}
             className={`flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition ${tab === id ? "bg-white text-orange-700 shadow-sm" : "text-stone-500 hover:text-stone-800"}`}>
@@ -40,6 +42,7 @@ export default function BrandView() {
         {tab === "overview" && <Overview go={setTab} />}
         {tab === "logos" && <LogosPanel />}
         {tab === "creatives" && <Creatives />}
+        {tab === "qr" && <QrMaker />}
         {tab === "slogans" && <Slogans />}
         {tab === "strategy" && <Strategy />}
         {tab === "prompts" && <Prompts />}
@@ -99,6 +102,7 @@ export const FACTS = [
 const BOTTLE = "M65,40 L95,40 L95,70 C95,86 140,98 140,130 L140,345 C140,362 128,372 112,372 L48,372 C32,372 20,362 20,345 L20,130 C20,98 65,86 65,70 Z";
 
 function Bottle({ id, liquid, accent, flavour, sub }: { id: string; liquid: string; accent: string; flavour: string; sub: string }) {
+  const dropIcon = markUrl(useBrandLogo().concept);
   return (
     <svg viewBox="0 0 160 390" width="150" height="366" role="img" aria-label={`Taazu ${flavour} bottle`}>
       <defs>
@@ -131,6 +135,7 @@ function Bottle({ id, liquid, accent, flavour, sub }: { id: string; liquid: stri
 }
 
 function Stick() {
+  const dropIcon = markUrl(useBrandLogo().concept);
   return (
     <svg viewBox="0 0 120 300" width="96" height="240" role="img" aria-label="Taazu stick sachet">
       <path d="M22,18 L98,18 L98,282 L22,282 Z" fill="#FFF8E7" stroke="#E7DCC0" />
@@ -203,9 +208,9 @@ function Overview({ go }: { go: (t: TabId) => void }) {
       {/* brand kit shortcuts */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {([
-          ["logos", Shapes, "Logos", "4 concepts + seal · SVG, PNG 4096px"],
+          ["logos", Shapes, "Logos", "3 concepts + seal · app logo yahin se"],
           ["creatives", Images, "Creatives", "9 posts & posters · edit, Max download"],
-          ["slogans", MessageSquareQuote, "Slogans", "Hinglish, Gujarati, English"],
+          ["qr", QrCode, "QR code", "WhatsApp, UPI, Wi-Fi, location…"],
           ["prompts", Wand2, "AI prompts", "24 image & video prompts"],
         ] as const).map(([id, Icon, title, sub]) => (
           <button key={id} type="button" onClick={() => go(id)} className="group flex flex-col gap-2 rounded-2xl border border-stone-200 bg-white p-4 text-left shadow-sm transition hover:border-orange-300">
