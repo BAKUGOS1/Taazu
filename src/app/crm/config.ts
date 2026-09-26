@@ -56,7 +56,7 @@ export const LOG_TYPES = [
   { id: "email", label: "Email" },
 ] as const;
 
-export const FOLLOW_CHIPS: [string, number][] = [["Tomorrow", 1], ["3 days", 3], ["1 week", 7], ["2 weeks", 14]];
+export const FOLLOW_CHIPS: [string, number][] = [["Today", 0], ["Tomorrow", 1], ["3 days", 3], ["1 week", 7], ["2 weeks", 14]];
 export const addDays = (n: number) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
 
 export const newLog = (recordId: string, p: Partial<ContactLog>): ContactLog =>
@@ -74,8 +74,27 @@ export const stageAfter = (cfg: CrmConfig, cur: string, outcome: string) => {
 
 export const dueList = (cfg: CrmConfig, rows: CrmRecord[]) => {
   const t = today();
-  return rows.filter((r) => isActive(cfg, r.status) && r.follow && r.follow <= t).sort((a, b) => a.follow.localeCompare(b.follow));
+  return rows.filter((r) => isActive(cfg, r.status) && r.follow && r.follow <= t).sort((a, b) => (a.follow + (a.followTime || "")).localeCompare(b.follow + (b.followTime || "")));
 };
 
 export const normalizeStage = (cfg: CrmConfig, s: string, legacy: Record<string, string> = {}) =>
   legacy[s] || (cfg.stages.includes(s) ? s : cfg.freshStage);
+
+/* Scheduled follow-ups for the Due tab, split into overdue / today / next 7 days. */
+export const agenda = (cfg: CrmConfig, rows: CrmRecord[]) => {
+  const t = today(), wk = addDays(7);
+  const key = (r: CrmRecord) => r.follow + (r.followTime || "99:99");
+  const sched = rows.filter((r) => isActive(cfg, r.status) && r.follow).sort((a, b) => key(a).localeCompare(key(b)));
+  return {
+    overdue: sched.filter((r) => r.follow < t),
+    today: sched.filter((r) => r.follow === t),
+    upcoming: sched.filter((r) => r.follow > t && r.follow <= wk),
+  };
+};
+
+/* "3:30 pm" from "15:30". */
+export const fmtTime = (hm?: string) => {
+  if (!hm) return "";
+  const [h, m] = hm.split(":").map(Number);
+  return `${((h + 11) % 12) + 1}:${String(m).padStart(2, "0")} ${h < 12 ? "am" : "pm"}`;
+};

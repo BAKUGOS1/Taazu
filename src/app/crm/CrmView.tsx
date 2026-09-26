@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
-import { Search, Plus, BellRing, Columns3, List, PhoneOutgoing } from "lucide-react";
+import { Search, Plus, BellRing, Columns3, List } from "lucide-react";
 import { Empty, inputCls } from "../../components/ui";
 import { uid, cityOf } from "../../lib/core";
 import { usePrefs } from "../../lib/prefs";
 import RecordCard from "./RecordCard";
 import RecordSheet from "./RecordSheet";
-import { isActive, dueList, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
+import { isActive, dueList, agenda, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
 
 type Extra = { id: string; label: string; icon: any; render: (open: (r: CrmRecord) => void) => any };
 type Stat = [string, number, string];
@@ -16,18 +16,18 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   stats: (rows: CrmRecord[], due: number) => Stat[]; extra?: Extra | null;
 }) {
   const { on } = usePrefs();
-  const [tab, setTab] = useState("due");
+  const [tab, setTab] = useState("all");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
-  const [showAllFresh, setShowAllFresh] = useState(false);
   const [city, setCity] = useState("All cities");
   const [openId, setOpenId] = useState<string | null>(null);
   const [startLog, setStartLog] = useState<string | null>(null);
 
+  const dueCount = dueList(cfg, rows).length;
   const tabs = [
-    ...(on(cfg.kind + ".due") ? [{ id: "due", label: "Due", icon: BellRing }] : []),
-    ...(on(cfg.kind + ".board") ? [{ id: "board", label: "Pipeline", icon: Columns3 }] : []),
     { id: "all", label: "All", icon: List },
+    ...(on(cfg.kind + ".due") ? [{ id: "due", label: dueCount ? `Due ${dueCount}` : "Due", icon: BellRing }] : []),
+    ...(on(cfg.kind + ".board") ? [{ id: "board", label: "Pipeline", icon: Columns3 }] : []),
     ...(extra ? [{ id: extra.id, label: extra.label, icon: extra.icon }] : []),
   ];
   const active = tabs.some((t) => t.id === tab) ? tab : tabs[0].id; // a tab switched off in Settings falls back
@@ -44,7 +44,9 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   }, [rows]);
   const filtered = rows.filter((r) => (cat === "All" || r[cfg.catKey] === cat) && (city === "All cities" || cityOf(r) === city) && (!q || `${r.name} ${r.area} ${r[cfg.catKey]} ${r.contact || ""} ${r.phone}`.toLowerCase().includes(q.toLowerCase())));
   const due = dueList(cfg, filtered);
-  const fresh = filtered.filter((r) => r.status === cfg.freshStage && !r.follow).sort(cfg.sortFresh || (() => 0));
+  const plan = agenda(cfg, filtered);
+  // All: open records first, then the config's own order ("Call first" suppliers / priority-A buyers), then the rest.
+  const allSorted = [...filtered].sort((a, b) => Number(!isActive(cfg, a.status)) - Number(!isActive(cfg, b.status)) || (cfg.sortFresh ? cfg.sortFresh(a, b) : 0));
 
   const open = useCallback((r: CrmRecord, via: string | null = null) => { setOpenId(r.id); setStartLog(via); }, []);
   const close = useCallback(() => { setOpenId(null); setStartLog(null); }, []);
@@ -105,21 +107,19 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
       <div className="mt-3">
         {active === "due" && (
           <div className="space-y-6">
-            <section>
-              <h2 className="mb-2 text-sm font-semibold text-slate-900">Follow-ups due <span className="text-slate-400 font-normal">{due.length}</span></h2>
-              {due.length ? <div className="grid gap-3 md:grid-cols-2">{due.map(card)}</div> : <Empty icon={BellRing} text="No follow-ups due. Nice." />}
-            </section>
-            <section>
-              <h2 className="mb-2 text-sm font-semibold text-slate-900 flex items-center gap-2"><PhoneOutgoing size={15} />Not contacted yet <span className="text-slate-400 font-normal">{fresh.length}</span></h2>
-              {fresh.length ? <>
-                <div className="grid gap-3 md:grid-cols-2">{(showAllFresh ? fresh : fresh.slice(0, 12)).map(card)}</div>
-                {fresh.length > 12 && (
-                  <button onClick={() => setShowAllFresh(!showAllFresh)} className="mt-3 w-full rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-50">
-                    {showAllFresh ? "Show less" : `Show all ${fresh.length}`}
-                  </button>
-                )}
-              </> : <Empty icon={PhoneOutgoing} text={`Every ${cfg.noun} has been contacted.`} />}
-            </section>
+            {([
+              ["Overdue", plan.overdue, "text-red-600", "Missed — call these first."],
+              ["Today", plan.today, "text-orange-700", "Today's calls and appointments."],
+              ["Next 7 days", plan.upcoming, "text-slate-700", ""],
+            ] as const).map(([title, list, col, sub]) => (
+              <section key={title}>
+                <h2 className={`mb-1 text-sm font-semibold ${col}`}>{title} <span className="font-normal text-slate-400">{list.length}</span></h2>
+                {sub && list.length > 0 && <p className="mb-2 text-xs text-slate-500">{sub}</p>}
+                {list.length ? <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">{list.map(card)}</div>
+                  : <div className="rounded-2xl border border-dashed border-slate-200 py-4 text-center text-xs text-slate-400">Nothing {title === "Next 7 days" ? "scheduled" : title.toLowerCase()}.</div>}
+              </section>
+            ))}
+            <p className="text-xs text-slate-500">To schedule a call: open a {cfg.noun} → <b>Log this contact</b> → pick a day (and time) under <b>Follow up</b> → Save.</p>
           </div>
         )}
 
@@ -144,7 +144,7 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
 
         {active === "all" && (
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {[...filtered].sort((a, b) => Number(!isActive(cfg, a.status)) - Number(!isActive(cfg, b.status))).map(card)}
+            {allSorted.map(card)}
             {!filtered.length && <Empty icon={Search} text={`No ${cfg.noun} matches.`} />}
           </div>
         )}

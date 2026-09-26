@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { X } from "lucide-react";
 
 /* Bottom sheet on phones, centred dialog on desktop. */
-export default function Sheet({ open, onClose, title, children, footer = null, z = "z-50" }: { open: boolean; onClose: () => void; title: any; children: any; footer?: any; z?: string }) {
+export default function Sheet({ open, onClose, title, children, footer = null, z = "z-50", keepMounted = false }: { open: boolean; onClose: () => void; title: any; children: any; footer?: any; z?: string; keepMounted?: boolean }) {
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -11,9 +11,10 @@ export default function Sheet({ open, onClose, title, children, footer = null, z
     window.addEventListener("keydown", onKey);
     return () => { document.body.style.overflow = prev; window.removeEventListener("keydown", onKey); };
   }, [open, onClose]);
-  if (!open) return null;
+  // keepMounted: stay in the page while closed so whatever was typed is still there next time.
+  if (!open && !keepMounted) return null;
   return (
-    <div className={`fixed inset-0 ${z} flex items-end md:items-center justify-center bg-slate-900/40`} onClick={onClose}>
+    <div className={`fixed inset-0 ${z} ${open ? "flex" : "hidden"} items-end md:items-center justify-center bg-slate-900/40`} onClick={onClose}>
       <div role="dialog" aria-modal="true" aria-label={typeof title === "string" ? title : undefined}
         className="sheet-in w-full md:max-w-xl max-h-[92dvh] flex flex-col bg-white rounded-t-3xl md:rounded-2xl shadow-2xl"
         onClick={(e) => e.stopPropagation()}>

@@ -33,7 +33,7 @@ import BudgetView from "./app/budget";
 import MapView from "./app/map";
 import BrandView from "./app/brand";
 import SettingsView from "./app/settings";
-import { CalculatorHost } from "./app/calculator";
+import { CalculatorHost, SidebarCalc } from "./app/calculator";
 import { PrefsCtx, usePrefsValue } from "./lib/prefs";
 import { QrSurveyView, PublicSurvey } from "./app/qr";
 import { dueList, normalizeStage } from "./app/crm/config";
@@ -241,6 +241,7 @@ function MainApp() {
             </div>
           ))}
         </nav>
+        {prefs.module("Calculator") && <div className="mt-2 border-t border-slate-800 pt-2"><SidebarCalc /></div>}
       </aside>
 
       {/* ---------- main ---------- */}

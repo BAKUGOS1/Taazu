@@ -29,12 +29,13 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
   const [outcome, setOutcome] = useState("");
   const [note, setNote] = useState("");
   const [follow, setFollow] = useState("");
+  const [followTime, setFollowTime] = useState("");
   const [next, setNext] = useState("");
   const [armDel, setArmDel] = useState(false);
 
   // Fresh form each time a different record opens (or a Call/WhatsApp tap pre-selects the type).
   useEffect(() => {
-    setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setNext(r?.next || ""); setArmDel(false);
+    setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setFollowTime(""); setNext(r?.next || ""); setArmDel(false);
   }, [r?.id, startLog]);
 
   const { on, module: moduleOn, lang } = usePrefs(); // before the early return: hooks must run in the same order every render
@@ -48,7 +49,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
 
   const save = () => {
     if (!outcome && !note.trim()) return;
-    onAddLog(newLog(r.id, { type, outcome, note: note.trim() }), { status: suggested, follow: noFollow ? "" : follow, next: next.trim() });
+    onAddLog(newLog(r.id, { type, outcome, note: note.trim() }), { status: suggested, follow: noFollow ? "" : follow, followTime: noFollow ? "" : followTime, next: next.trim() });
     setOutcome(""); setNote("");
   };
 
@@ -115,6 +116,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
             <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
               {FOLLOW_CHIPS.map(([l, n]) => <button key={l} className={chip(follow === addDays(n))} onClick={() => setFollow(addDays(n))}>{l}</button>)}
               <input type="date" className="shrink-0 rounded-full border border-slate-200 px-3 py-1 text-xs" value={follow} min={today()} onChange={(e) => setFollow(e.target.value)} />
+              <input type="time" aria-label="Time" className="shrink-0 rounded-full border border-slate-200 px-3 py-1 text-xs" value={followTime} onChange={(e) => setFollowTime(e.target.value)} />
             </div>
           </div>
         )}

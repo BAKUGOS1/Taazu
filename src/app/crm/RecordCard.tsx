@@ -2,7 +2,7 @@ import { Phone, MessageCircle, CalendarClock, ShieldCheck, Star } from "lucide-r
 import { COL, telHref, waHref, today } from "../../lib/core";
 import { Dot } from "../../components/ui";
 import { usePrefs } from "../../lib/prefs";
-import { answered, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
+import { answered, fmtTime, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
 
 const fmtDate = (d: string) => new Date(d + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 
@@ -35,7 +35,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
           {r.follow && (
             <span className={`inline-flex items-center gap-1 ${late ? "text-red-600 font-semibold" : due ? "text-orange-700 font-semibold" : "text-slate-500"}`}>
-              <CalendarClock size={13} />{due ? (late ? "Overdue · " : "Today · ") : ""}{fmtDate(r.follow)}
+              <CalendarClock size={13} />{due ? (late ? "Overdue · " : "Today · ") : ""}{fmtDate(r.follow)}{r.followTime ? ` · ${fmtTime(r.followTime)}` : ""}
             </span>
           )}
           {tag && <span className="inline-flex items-center gap-1 font-semibold text-orange-700"><Star size={12} fill="currentColor" />{tag}</span>}

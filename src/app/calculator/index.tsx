@@ -14,6 +14,14 @@ export const useCalc = () => useContext(CalcCtx);
 const TABS = [["calc", "Calc"], ["cost", "Cost"], ["margin", "Margin"], ["gst", "GST"], ["order", "Order"]] as const;
 type Tab = (typeof TABS)[number][0];
 
+/* Like useState, but remembered on this device, so numbers survive closing the calculator or reloading. */
+function useStored<T>(key: string, init: T): [T, (v: T) => void] {
+  const k = "taazu-calc-" + key;
+  const [v, setV] = useState<T>(() => { try { const s = localStorage.getItem(k); return s === null ? init : JSON.parse(s); } catch { return init; } });
+  const set = useCallback((x: T) => { setV(x); try { localStorage.setItem(k, JSON.stringify(x)); } catch { /* storage blocked */ } }, [k]);
+  return [v, set];
+}
+
 const chip = (on: boolean) => `shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold ${on ? "border-orange-500 bg-orange-50 text-orange-700" : "border-slate-200 text-slate-600 active:bg-slate-50"}`;
 
 /* ---------- small building blocks ---------- */
@@ -49,7 +57,7 @@ const Rates = ({ value, onPick, list = [0, 5, 12, 18, 28] }: { value: string; on
 
 const KEYS = ["C", "⌫", "%", "÷", "7", "8", "9", "×", "4", "5", "6", "-", "1", "2", "3", "+", "00", "0", ".", "="];
 
-function Keypad({ hist, setHist }: { hist: string[]; setHist: (h: string[]) => void }) {
+function Keypad({ hist, setHist, active }: { hist: string[]; setHist: (h: string[]) => void; active: boolean }) {
   const [expr, setExpr] = useState("");
   const [copied, setCopied] = useState(false);
   const live = useMemo(() => evaluate(expr), [expr]);
@@ -84,6 +92,7 @@ function Keypad({ hist, setHist }: { hist: string[]; setHist: (h: string[]) => v
 
   // Physical keyboard on desktop.
   useEffect(() => {
+    if (!active) return;
     const onKey = (ev: KeyboardEvent) => {
       const t = ev.target as HTMLElement;
       if (t && /INPUT|TEXTAREA|SELECT/.test(t.tagName)) return;
@@ -94,7 +103,7 @@ function Keypad({ hist, setHist }: { hist: string[]; setHist: (h: string[]) => v
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [press]);
+  }, [press, active]);
 
   const copy = async () => { if (live === null) return; try { await navigator.clipboard.writeText(trimNumber(live)); setCopied(true); } catch { /* clipboard blocked */ } };
 
@@ -136,9 +145,9 @@ function Keypad({ hist, setHist }: { hist: string[]; setHist: (h: string[]) => v
 const COST_ITEMS = ["Bottling / job-work", "Bottle + cap", "Label", "Premix / flavour", "Carton / packing", "Other"];
 
 function Cost() {
-  const [items, setItems] = useState<string[]>(COST_ITEMS.map(() => ""));
-  const [freight, setFreight] = useState("");
-  const [qty, setQty] = useState("1000");
+  const [items, setItems] = useStored<string[]>("cost.items", COST_ITEMS.map(() => ""));
+  const [freight, setFreight] = useStored("cost.freight", "");
+  const [qty, setQty] = useStored("cost.qty", "1000");
   const r = landed({ items: items.map(num), freight: num(freight), qty: num(qty) });
   const ok = r.landedUnit > 0 && r.landedUnit <= 15;
   return (
@@ -162,22 +171,30 @@ function Cost() {
 }
 
 function Margin() {
-  const [cost, setCost] = useState("");
-  const [price, setPrice] = useState("");
-  const [qty, setQty] = useState("1000");
-  const [target, setTarget] = useState("30");
-  const m = margin(num(cost), num(price), num(qty));
-  const quote = priceForMargin(num(cost), num(target));
+  const [cost, setCost] = useStored("margin.cost", "");
+  const [price, setPrice] = useStored("margin.price", "");
+  const [qty, setQty] = useStored("margin.qty", "1000");
+  const [target, setTarget] = useStored("margin.target", "30");
+  const [gstIn, setGstIn] = useStored("margin.gstIn", "0");
+  // Price the customer pays usually includes GST; what you keep is the price without it.
+  const net = num(price) / (1 + num(gstIn) / 100);
+  const m = margin(num(cost), net, num(qty));
+  const quote = priceForMargin(num(cost), num(target)) * (1 + num(gstIn) / 100);
   const neg = num(price) > 0 && m.profit < 0;
   return (
     <div className="space-y-3">
       <div className="grid grid-cols-2 gap-3">
         <Field label="Your cost per unit" prefix="₹" value={cost} onChange={setCost} />
-        <Field label="Selling price per unit" prefix="₹" value={price} onChange={setPrice} />
+        <Field label="Selling price (MRP)" prefix="₹" value={price} onChange={setPrice} />
         <Field label="Quantity" value={qty} onChange={setQty} suffix="pcs" />
         <Field label="Target margin" value={target} onChange={setTarget} suffix="%" />
       </div>
       <Rates value={target} onPick={setTarget} list={[15, 20, 30, 40, 50]} />
+      <div>
+        <div className="mb-1.5 text-xs text-slate-500">GST included in the selling price</div>
+        <Rates value={gstIn} onPick={setGstIn} list={[0, 5, 18, 40]} />
+        {num(gstIn) > 0 && num(price) > 0 && <div className="mt-1.5 text-xs text-slate-500">You keep {money(net)} of every {money(num(price))}; {money(num(price) - net)} goes to GST.</div>}
+      </div>
       <div className="grid grid-cols-2 gap-2">
         <Result label="Profit per unit" value={money(m.profit)} big tone={neg ? "bg-red-50" : num(price) > 0 ? "bg-green-50" : ""} />
         <Result label="Total profit" value={money(m.total, 0)} big tone={neg ? "bg-red-50" : ""} />
@@ -190,9 +207,9 @@ function Margin() {
 }
 
 function Gst() {
-  const [amount, setAmount] = useState("");
-  const [rate, setRate] = useState("18");
-  const [mode, setMode] = useState<"add" | "remove">("add");
+  const [amount, setAmount] = useStored("gst.amount", "");
+  const [rate, setRate] = useStored("gst.rate", "18");
+  const [mode, setMode] = useStored<"add" | "remove">("gst.mode", "add");
   const g = gst(num(amount), num(rate), mode);
   return (
     <div className="space-y-3">
@@ -218,11 +235,11 @@ function Gst() {
 }
 
 function Order() {
-  const [qty, setQty] = useState("1000");
-  const [rate, setRate] = useState("");
-  const [disc, setDisc] = useState("");
-  const [tax, setTax] = useState("12");
-  const [budget, setBudget] = useState("");
+  const [qty, setQty] = useStored("order.qty", "1000");
+  const [rate, setRate] = useStored("order.rate", "");
+  const [disc, setDisc] = useStored("order.disc", "");
+  const [tax, setTax] = useStored("order.tax", "12");
+  const [budget, setBudget] = useStored("order.budget", "");
   const o = order(num(qty), num(rate), num(disc), num(tax));
   const units = o.perUnit > 0 && num(budget) > 0 ? Math.floor(num(budget) / o.perUnit) : 0;
   return (
@@ -253,31 +270,32 @@ function Order() {
 
 export function CalculatorHost({ enabled, children }: { enabled: boolean; children: any }) {
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<Tab>("calc");
-  const [hist, setHist] = useState<string[]>([]);
+  const [tab, setTab] = useStored<Tab>("tab", "calc");
+  const [hist, setHist] = useStored<string[]>("hist", []);
   const api = useMemo<CalcApi>(() => ({ open: () => setOpen(true) }), []);
+  const close = useCallback(() => setOpen(false), []);
 
   return (
     <CalcCtx.Provider value={api}>
       {children}
       {enabled && !open && (
         <button onClick={() => setOpen(true)} aria-label="Open calculator"
-          className="fixed right-4 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg active:scale-95 md:bottom-6 md:right-6"
+          className="fixed right-4 z-30 flex md:hidden h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg active:scale-95 md:bottom-6 md:right-6"
           style={{ bottom: "calc(96px + env(safe-area-inset-bottom))" }}>
           <CalcIcon size={22} />
         </button>
       )}
-      <Sheet open={open} onClose={() => setOpen(false)} z="z-[70]" title={<div className="text-lg font-bold text-slate-900">Calculator</div>}>
+      <Sheet open={open} onClose={close} keepMounted z="z-[70]" title={<div className="text-lg font-bold text-slate-900">Calculator</div>}>
         <div className="mb-4 flex gap-1.5 overflow-x-auto no-scrollbar rounded-xl bg-slate-200/70 p-1">
           {TABS.map(([id, l]) => (
             <button key={id} onClick={() => setTab(id)} className={`flex-1 shrink-0 rounded-lg px-3 py-2 text-xs font-semibold ${tab === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>{l}</button>
           ))}
         </div>
-        {tab === "calc" && <Keypad hist={hist} setHist={setHist} />}
-        {tab === "cost" && <Cost />}
-        {tab === "margin" && <Margin />}
-        {tab === "gst" && <Gst />}
-        {tab === "order" && <Order />}
+        <div hidden={tab !== "calc"}><Keypad hist={hist} setHist={setHist} active={open && tab === "calc"} /></div>
+        <div hidden={tab !== "cost"}><Cost /></div>
+        <div hidden={tab !== "margin"}><Margin /></div>
+        <div hidden={tab !== "gst"}><Gst /></div>
+        <div hidden={tab !== "order"}><Order /></div>
       </Sheet>
     </CalcCtx.Provider>
   );
@@ -289,6 +307,16 @@ export function CalcButton({ className = "" }: { className?: string }) {
   return (
     <button type="button" onClick={open} aria-label="Open calculator" className={`inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 active:bg-slate-50 ${className}`}>
       <CalcIcon size={14} />Calculator
+    </button>
+  );
+}
+
+/* Desktop sidebar entry (the round button is phone-only so it never covers cards). */
+export function SidebarCalc() {
+  const { open } = useCalc();
+  return (
+    <button type="button" onClick={open} className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+      <CalcIcon size={18} />Calculator
     </button>
   );
 }
