@@ -1,0 +1,563 @@
+<title>Taazu Brand Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500;800&family=Baloo+2:wght@500;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --orange:#EA580C; --deep:#C2410C; --nimbu:#F5D83B; --leaf:#1F7A3A; --cream:#FFF8E7; --ink:#1C1917;
+  --bg:#FFFBF3; --surface:#FFFFFF; --sunk:#F6EEDC; --text:#1C1917; --muted:#6B5F52; --line:#EADFC8;
+  --accent:#C2410C; --accent-soft:#FDE9D9; --good:#1F7A3A; --good-soft:#E3F1E6; --warn:#8A5A00; --warn-soft:#FDF3C4; --bad:#B42318; --bad-soft:#FDE7E4;
+  --display:"Baloo Bhai 2","Baloo 2",system-ui,sans-serif; --hi:"Baloo 2",system-ui,sans-serif;
+  --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15110E; --surface:#1F1915; --sunk:#2A221C; --text:#F6EEDF; --muted:#BDAE9A; --line:#3A3028;
+  --accent:#FB8A45; --accent-soft:#3A2214; --good:#7ED39A; --good-soft:#1C3324; --warn:#F5D83B; --warn-soft:#3A3212; --bad:#FF9A8A; --bad-soft:#3E1D18;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#15110E; --surface:#1F1915; --sunk:#2A221C; --text:#F6EEDF; --muted:#BDAE9A; --line:#3A3028;
+  --accent:#FB8A45; --accent-soft:#3A2214; --good:#7ED39A; --good-soft:#1C3324; --warn:#F5D83B; --warn-soft:#3A3212; --bad:#FF9A8A; --bad-soft:#3E1D18;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--body);padding-inline:16px}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,5vw,52px)}
+h3{font-size:24px}
+p{margin:0}
+a{color:var(--accent)}
+.eyebrow{font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+.gu{font-family:"Baloo Bhai 2",sans-serif}.hi{font-family:var(--hi)}
+
+/* hero */
+.hero{margin-top:16px;background:var(--orange);color:var(--cream);border-radius:28px;padding:clamp(24px,5vw,56px);display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:center;overflow:hidden;position:relative}
+.hero h1{font-size:clamp(48px,8vw,96px);letter-spacing:-.03em}
+.hero h1 span{color:var(--nimbu)}
+.hero p{max-width:52ch;font-size:17px;opacity:.95;margin-top:14px}
+.hero .lock{background:transparent}
+.hero .lock img{width:100%;max-width:360px;display:block;margin-left:auto}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.sw{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.14);border-radius:999px;padding:5px 12px 5px 5px;font:600 12px var(--mono)}
+.sw i{width:22px;height:22px;border-radius:50%;display:block;border:2px solid rgba(255,255,255,.55)}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero .lock img{margin:0;max-width:260px}}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;margin-top:8px;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav a{flex:none;text-decoration:none;color:var(--text);font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--sunk)}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+
+section{padding-block:56px 8px;scroll-margin-top:64px}
+.sec-head{display:grid;gap:10px;margin-bottom:28px;max-width:70ch}
+.sec-head p{color:var(--muted);font-size:17px}
+
+.grid{display:grid;gap:16px}
+.grid > *{min-width:0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.g3{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px}
+.card h3{margin-bottom:10px}
+
+/* strategy */
+.positioning{background:var(--leaf);color:var(--cream);border-radius:24px;padding:clamp(22px,4vw,40px)}
+.positioning q{display:block;font:800 clamp(22px,3.2vw,32px)/1.25 var(--display);quotes:none;margin-top:12px;max-width:40ch}
+.positioning .eyebrow{color:var(--nimbu)}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:10px 16px;font-size:15px}
+.kv dt{font-weight:800;color:var(--muted);font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
+.kv dd{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:700 13px/1 var(--body);padding:8px 12px;border-radius:999px;background:var(--sunk)}
+.chip b{color:var(--accent);margin-right:4px}
+ul.clean{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ul.clean li{display:flex;gap:10px;align-items:flex-start}
+.mark{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:800 12px var(--body);margin-top:2px}
+.mark.y{background:var(--good-soft);color:var(--good)}.mark.n{background:var(--bad-soft);color:var(--bad)}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;white-space:nowrap}
+.phases{display:grid;gap:0;counter-reset:ph}
+.phase{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line)}
+.phase:first-child{border-top:0}
+.phase .when{font:800 13px var(--body);color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.phase .when span{display:block;font:800 22px/1.1 var(--display);color:var(--text);text-transform:none;letter-spacing:0;margin-top:4px}
+@media (max-width:620px){.phase{grid-template-columns:1fr;gap:6px}}
+.pillar{display:flex;flex-direction:column;gap:6px}
+.pillar .n{font:800 13px var(--mono);color:var(--accent)}
+.pillar b{font-size:17px}
+
+/* logos */
+.concept{display:grid;gap:16px}
+.concept-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.badge{font:800 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:var(--good-soft);color:var(--good)}
+.badge.alt{background:var(--sunk);color:var(--muted)}
+.tiles{display:grid;grid-template-columns:.8fr 1.6fr;gap:12px}
+.tiles.even{grid-template-columns:1fr 1fr}
+@media (max-width:620px){.tiles,.tiles.even{grid-template-columns:1fr}}
+.tile{border-radius:16px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line)}
+.tile .art{flex:1;display:grid;place-items:center;padding:22px;min-height:180px}
+.tile .art img{max-height:170px;width:auto;max-width:100%}
+.tile .cap{font:700 12px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;background:var(--surface);color:var(--muted);border-top:1px solid var(--line)}
+.on-cream{background:#FFF8E7}.on-orange{background:#EA580C}.on-ink{background:#1C1917}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-size:15px}
+.why div{background:var(--sunk);border-radius:14px;padding:12px 14px}
+.why b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+@media (max-width:760px){.why{grid-template-columns:1fr}}
+.concepts{display:grid;gap:40px}
+
+/* slogans */
+.tagline{background:var(--ink);color:var(--cream);border-radius:24px;padding:clamp(24px,4vw,44px);display:grid;gap:18px}
+:root[data-theme="dark"] .tagline{border:1px solid var(--line)}
+.tagline .big{font:800 clamp(44px,7vw,84px)/1 var(--display);letter-spacing:-.02em}
+.tagline .big span{color:var(--nimbu)}
+.tagline .alts{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:18px}
+.tagline .alts em{font-style:normal;opacity:.7;font-size:13px;display:block;letter-spacing:.06em;text-transform:uppercase}
+.slogan{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.slogan:first-of-type{border-top:0}
+.slogan .t{font:800 20px/1.25 var(--display)}
+.slogan .tr{font-size:13px;color:var(--muted)}
+
+/* buttons */
+button.copy{flex:none;font:700 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 12px;cursor:pointer}
+button.copy:hover{border-color:var(--accent);color:var(--accent)}
+button.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.copy.done{background:var(--good-soft);color:var(--good);border-color:transparent}
+
+/* creatives */
+.cr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.cr{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.cr a.img{display:block;background:var(--sunk);aspect-ratio:4/5;overflow:hidden}
+.cr a.img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .3s}
+.cr a.img:hover img{transform:scale(1.02)}
+.cr .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cr .meta b{font-size:16px}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pill{font:700 11px/1 var(--body);padding:6px 9px;border-radius:999px;background:var(--sunk);color:var(--muted);letter-spacing:.03em}
+.pill.ready{background:var(--good-soft);color:var(--good)}
+.pill.fill{background:var(--warn-soft);color:var(--warn)}
+.cr .note{font-size:13px;color:var(--muted)}
+.cr .meta .row:last-child{margin-top:auto}
+
+/* prompts */
+.tips{counter-reset:tip}
+.tips li{counter-increment:tip}
+.tips li::before{content:counter(tip);flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:800 13px/26px var(--body);text-align:center}
+.style-line{display:grid;gap:10px}
+pre{margin:0;font:400 13.5px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;background:var(--sunk);border-radius:12px;padding:14px 16px;color:var(--text)}
+.pgroup{display:grid;gap:14px;margin-top:34px}
+.pgroup > h3{font-size:28px}
+.pgroup > p{color:var(--muted);max-width:70ch}
+.prompt{display:grid;gap:10px}
+.prompt .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.prompt .top b{font-size:16px}
+.prompt .top .for{font-size:13px;color:var(--muted)}
+.toggle{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--orange)}
+.callout{border-radius:16px;padding:16px 18px;background:var(--warn-soft);color:var(--text);font-size:15px}
+.callout b{color:var(--warn)}
+footer{padding-block:56px 40px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow" style="color:var(--nimbu)">Brand kit · Ahmedabad pilot</div>
+      <h1 style="margin-top:12px">taazu <span class="gu">તાજું</span></h1>
+      <p>Gujarati mein "taazu" matlab fresh. Yahan Taazu nimbu-namak electrolyte drink ka poora brand hai: brand kaise banayein, logo concepts (naam ke saath aur bina naam), slogans, post karne layak creatives, aur AI tools ke liye prompts.</p>
+      <div class="swatches">
+        <span class="sw"><i style="background:#EA580C"></i>#EA580C Orange</span>
+        <span class="sw"><i style="background:#F5D83B"></i>#F5D83B Nimbu</span>
+        <span class="sw"><i style="background:#1F7A3A"></i>#1F7A3A Leaf</span>
+        <span class="sw"><i style="background:#FFF8E7"></i>#FFF8E7 Cream</span>
+        <span class="sw"><i style="background:#1C1917"></i>#1C1917 Ink</span>
+      </div>
+    </div>
+    <div class="lock"><img src="logos/concept-A-horizontal-cream-transparent.png" alt="Taazu logo: an orange drop with a lemon slice next to the word taazu"></div>
+  </header>
+</div>
+
+<nav aria-label="Sections"><div class="wrap">
+  <a href="#strategy">Brand kaise banayein</a><a href="#logo">Logo</a><a href="#slogans">Slogans</a><a href="#creatives">Creatives</a><a href="#prompts">AI prompts</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ================= STRATEGY ================= -->
+<section id="strategy">
+  <div class="sec-head">
+    <div class="eyebrow">Part 1</div>
+    <h2>Brand kaise develop karein</h2>
+    <p>Brand ka matlab sirf logo nahi. Log Taazu ke baare mein kya sochte hain, woh har jagah ek jaisa dikhne, bolne aur kaam karne se banta hai. Yeh 7 steps usi order mein karo.</p>
+  </div>
+
+  <div class="grid" style="gap:20px">
+    <div class="positioning">
+      <div class="eyebrow">Step 1 · Positioning statement</div>
+      <q>Amdavad mein jo log garmi mein khelte ya kaam karte hain, unke liye Taazu ek desi nimbu-namak electrolyte drink hai jo paseene mein gaya namak wapas deta hai. Cold drink jitna easy, pocket-friendly, ghar ke nimbu-paani jaisa taste.</q>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Brand ka core</h3>
+        <dl class="kv">
+          <dt>Naam</dt><dd>Taazu · <span class="gu">તાજું</span> · "fresh"</dd>
+          <dt>Ek line</dt><dd>Amdavad ka apna electrolyte drink.</dd>
+          <dt>Kyun maanein</dt><dd>Asli nimbu aur namak, potassium, NABL lab-tested label, FSSAI licence, Ahmedabad mein bana.</dd>
+          <dt>Personality</dt><dd>Desi, cheerful, seedhi baat. Ek samajhdar dost jo coach bhi hai.</dd>
+          <dt>Tagline</dt><dd><b>Paani se aage.</b></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Step 2 · Kiske liye (priority order)</h3>
+        <div class="chips" style="margin-bottom:16px">
+          <span class="chip"><b>1</b>Gym + box cricket, 18–35</span>
+          <span class="chip"><b>2</b>Runners, cyclists</span>
+          <span class="chip"><b>3</b>Site aur factory workers</span>
+          <span class="chip"><b>4</b>Delivery riders, students</span>
+          <span class="chip"><b>5</b>Navratri garba (seasonal)</span>
+        </div>
+        <p class="muted" style="font-size:15px">Pehle 1 aur 2 par focus karo: turfs, gyms aur clubs ek jagah bahut log dete hain, aur woh jaldi dusron ko batate hain. Workers tak contractor ya canteen ke through pahuncho.</p>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Voice: aise bolo</h3>
+        <ul class="clean">
+          <li><span class="mark y">✓</span>Hinglish, aur Gujarati words jahan natural lage</li>
+          <li><span class="mark y">✓</span>Chhote sentences, ek post mein ek baat</li>
+          <li><span class="mark y">✓</span>Har fact ke saath source ki chhoti line</li>
+          <li><span class="mark y">✓</span>Asli Amdavadi jagah aur log</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Voice: yeh kabhi nahi</h3>
+        <ul class="clean">
+          <li><span class="mark n">✕</span>"ORS" word, kisi bhi tarah (FSSAI rules)</li>
+          <li><span class="mark n">✕</span>Ilaaj, bachav, cure, "doctor recommended", "health drink"</li>
+          <li><span class="mark n">✕</span>"Low sugar" jab tak lab report na ho</li>
+          <li><span class="mark n">✕</span>Heatstroke ka darr dikha kar bechna</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:12px">Step 3 · Competition mein Taazu ki jagah</h3>
+      <div class="tablebox"><table>
+        <thead><tr><th>Log abhi kya peete hain</th><th>Kyun</th><th>Taazu ka angle</th></tr></thead>
+        <tbody>
+          <tr><td>ORS (pharmacy)</td><td>Beemari mein</td><td>Taazu roz ka drink hai, dawai nahi. Comparison bhi mat karo.</td></tr>
+          <tr><td>Glucon-D / Tang type powder</td><td>Sasta, meetha</td><td>Ready-to-drink, chilled. Sugar-first nahi, salt-first.</td></tr>
+          <tr><td>Sports drinks (Gatorade type)</td><td>Gym image</td><td>Desi nimbu taste, local price, Amdavadi brand.</td></tr>
+          <tr><td>Nimbu soda / shikanji</td><td>Sasta, taste</td><td>Sealed bottle, har baar same taste, label par sab likha.</td></tr>
+          <tr><td>Cold drinks</td><td>Thanda, aadat</td><td>Sirf sugar nahi, paseene ka namak bhi wapas.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h3>Step 4 · Identity lock karo</h3>
+      <div class="grid g3" style="margin-top:6px">
+        <div><b>Logo</b><p class="muted" style="font-size:15px">Concept A (Nimbu Drop) primary. Seal cups aur stickers ke liye. Neeche Part 2 dekho.</p></div>
+        <div><b>Fonts</b><p class="muted" style="font-size:15px"><span class="gu" style="font-weight:800;color:var(--text)">Baloo Bhai 2</span> headlines (English + Gujarati), <span class="hi" style="font-weight:800;color:var(--text)">Baloo 2</span> Hindi, Plus Jakarta Sans body. Sab Canva mein free.</p></div>
+        <div><b>Graphics</b><p class="muted" style="font-size:15px">Boond, nimbu slice, suraj. Photos mein dhoop, paseena, turfs, pol ki galiyan. Ek creative mein ek hi strong background colour.</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Step 5 · Launch roadmap</h3>
+      <div class="phases">
+        <div class="phase"><div class="when">Week 1–2<span>Foundation</span></div><p>Logo final karo. IP India par class 32 mein "Taazu" search karke trademark file karo (₹4,500, proprietor/MSME). Instagram, WhatsApp Business aur Google Business Profile same naam se. Launch se pehle 9 posts ready rakho taaki profile khali na lage.</p></div>
+        <div class="phase"><div class="when">Week 3–6<span>Sampling</span></div><p>Gyms aur turfs par A4 standee + free tasting. QR se survey bharwao. 50+ reviews aur photos collect karo (customer ki permission lekar). Jo cheez log baar-baar bolein, wahi agla post.</p></div>
+        <div class="phase"><div class="when">October<span>Navratri</span></div><p>Garba grounds par Taazu station. "Garba ki raat lambi hai" campaign, roz reels. 5–10 local micro-creators (5–10k followers, food/fitness) ke saath barter.</p></div>
+        <div class="phase"><div class="when">Nov–Feb<span>Off-season</span></div><p>Sardi mein gyms, cricket academies, marathons aur corporate canteens. WhatsApp reorder list banao, repeat customers ko pehle naya flavour chakhao.</p></div>
+        <div class="phase"><div class="when">Mar–Jun<span>Summer peak</span></div><p>Site workers, delivery riders, bazaar. Gujarati heat campaign <span class="gu">"ગરમીમાં પણ તાજું"</span>. Yahi asli season hai, stock aur stations pehle se ready rakho.</p></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:12px">Step 6 · Content ke 5 pillars</h3>
+      <div class="grid g3">
+        <div class="card pillar"><span class="n">P1</span><b>Jo log nahi jaante</b><p class="muted" style="font-size:15px">Sourced facts ki series: paseena, 2%, pyaas late.</p></div>
+        <div class="card pillar"><span class="n">P2</span><b>Amdavad ki garmi</b><p class="muted" style="font-size:15px">Local temperature, pol, riverfront, Gujarati lines.</p></div>
+        <div class="card pillar"><span class="n">P3</span><b>Khiladi aur kaamgar</b><p class="muted" style="font-size:15px">Asli customers ki photos aur chhote videos.</p></div>
+        <div class="card pillar"><span class="n">P4</span><b>Behind the scenes</b><p class="muted" style="font-size:15px">Lab test, label printing, co-packer visit, pehla batch.</p></div>
+        <div class="card pillar"><span class="n">P5</span><b>Kahan milega</b><p class="muted" style="font-size:15px">Stations, gyms, offers, WhatsApp order.</p></div>
+        <div class="card pillar" style="background:var(--accent-soft);border-color:transparent"><span class="n">Rhythm</span><b>Har hafte</b><p style="font-size:15px">3 posts + 1 reel + roz WhatsApp Status. Har post par logo same corner mein.</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Step 7 · Kya measure karein</h3>
+      <p>Followers se zyada yeh 3 numbers dekho: <b>samples ke baad dobara khareedne wale</b>, survey mein <b>"would buy" %</b>, aur <b>WhatsApp par reorder messages</b>. Sab Taazu app ke Survey aur Sales tab mein log karo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOGO ================= -->
+<section id="logo">
+  <div class="sec-head">
+    <div class="eyebrow">Part 2</div>
+    <h2>Logo concepts</h2>
+    <p>Chaar directions, har ek bina naam (sirf icon) aur naam ke saath. Sab files <code>brand-kit/logos/</code> mein SVG (print) aur PNG (social) mein hain. Text shapes mein convert hai, isliye kisi bhi software mein font ke bina sahi khulega.</p>
+  </div>
+
+  <div class="concepts">
+    <article class="concept">
+      <div class="concept-head"><h3 style="font-size:30px">A · Nimbu Drop</h3><span class="badge">Recommended primary</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-A-icon-color.png" alt="Concept A icon: orange drop with a lemon slice inside"></div><div class="cap">Bina naam · icon</div></div>
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-A-horizontal-color.png" alt="Concept A with the name taazu"></div><div class="cap">Naam ke saath · horizontal</div></div>
+      </div>
+      <div class="tiles even">
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-A-stacked-color.png" alt="Concept A stacked lockup"></div><div class="cap">Stacked · label front, standee</div></div>
+        <div class="tile"><div class="art on-orange"><img src="logos/concept-A-horizontal-reverse.png" alt="Concept A reversed on orange"></div><div class="cap">Reverse · orange ya dark background</div></div>
+      </div>
+      <div class="why"><div><b>Idea</b>Paani ki boond ke andar nimbu slice. Drink aur nimbu ek nazar mein samajh aata hai.</div><div><b>Best for</b>Label, bottle cap, WhatsApp DP, standee. 12 mm par bhi saaf dikhta hai.</div><div><b>Kyun primary</b>App aur label prototype ke colours se already match karta hai. Koi naya system nahi banana padega.</div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-head"><h3 style="font-size:30px">B · Sun Drop</h3><span class="badge alt">Campaign option</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-B-icon-color.png" alt="Concept B icon: a cool drop in front of a yellow sun"></div><div class="cap">Bina naam · icon</div></div>
+        <div class="tile"><div class="art on-orange"><img src="logos/concept-B-horizontal-reverse.png" alt="Concept B with the name taazu on orange"></div><div class="cap">Naam ke saath · reverse</div></div>
+      </div>
+      <div class="why"><div><b>Idea</b>Suraj ke saamne thandi boond: Amdavad ki garmi ka jawab.</div><div><b>Best for</b>Summer campaign, banners, turf boards.</div><div><b>Dhyan rakho</b>Chhote size (cap, favicon) par suraj ki kirne kho jaati hain.</div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-head"><h3 style="font-size:30px">C · t-wave monogram</h3><span class="badge alt">App icon / DP</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-C-icon-color.png" alt="Concept C icon: lowercase t with a wave crossbar and a yellow drop, in an orange rounded square"></div><div class="cap">Bina naam · app icon</div></div>
+        <div class="tile"><div class="art on-ink"><img src="logos/concept-C-horizontal-reverse.png" alt="Concept C with the name taazu on dark"></div><div class="cap">Naam ke saath · dark</div></div>
+      </div>
+      <div class="why"><div><b>Idea</b>"t" ki crossbar ek lehar, saath mein nimbu-yellow boond.</div><div><b>Best for</b>Taazu app icon, Instagram DP, t-shirts aur caps.</div><div><b>Dhyan rakho</b>Akele "t" se drink samajh nahi aata, naam ke saath hi use karo shuru mein.</div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-head"><h3 style="font-size:30px">D · Anusvara wordmark</h3><span class="badge alt">Name-only</span></div>
+      <div class="tiles even">
+        <div class="tile"><div class="art on-cream"><img src="logos/concept-D-wordmark-color.png" alt="Concept D: the word taazu with an orange drop above the u"></div><div class="cap">Wordmark · colour</div></div>
+        <div class="tile"><div class="art on-orange"><img src="logos/concept-D-wordmark-reverse.png" alt="Concept D reversed on orange"></div><div class="cap">Wordmark · reverse</div></div>
+      </div>
+      <div class="why"><div><b>Idea</b><span class="gu">તાજું</span> mein "ં" (anusvara) ka dot boond ban kar "u" ke upar aa gaya. Gujarati roots ek chhoti detail mein.</div><div><b>Best for</b>Banners, lambi labels, delivery bags, jahan icon ki jagah na ho.</div><div><b>Tip</b>Concept A ke icon ke saath bhi yeh wordmark chal sakta hai.</div></div>
+    </article>
+
+    <article class="concept">
+      <div class="concept-head"><h3 style="font-size:30px">Seal · sticker</h3><span class="badge alt">Secondary</span></div>
+      <div class="tiles even">
+        <div class="tile"><div class="art on-cream"><img src="logos/seal-color.png" alt="Round seal: Taazu Amdavad, Paani se aage"></div><div class="cap">Seal · orange</div></div>
+        <div class="tile"><div class="art on-orange"><img src="logos/seal-reverse.png" alt="Round seal in cream on orange"></div><div class="cap">Seal · cream</div></div>
+      </div>
+      <div class="why"><div><b>Kahan</b>Cup sleeves, cap-top sticker, delivery bag, stall banner corner.</div><div><b>Print</b>50 mm round sticker, glossy vinyl.</div><div><b>Rule</b>Seal primary logo ki jagah nahi leta, uske saath aata hai.</div></div>
+    </article>
+
+    <div class="card">
+      <h3>Logo rules</h3>
+      <ul class="clean">
+        <li><span class="mark y">✓</span>Logo ke charon taraf kam se kam "a" letter ki height jitni khali jagah.</li>
+        <li><span class="mark y">✓</span>Photo par lagana ho to orange block par reverse version, ya <code>concept-A-horizontal-cream-transparent</code>.</li>
+        <li><span class="mark n">✕</span>Stretch, shadow, outline ya naye colours nahi.</li>
+        <li><span class="mark y">✓</span>Printing se pehle final logo designer se clean karwao aur trademark file karo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLOGANS ================= -->
+<section id="slogans">
+  <div class="sec-head">
+    <div class="eyebrow">Part 3</div>
+    <h2>Slogans</h2>
+    <p>Ek main tagline jo har jagah rahe, ek hashtag, aur campaign ke hisaab se lines. Copy button se seedha Canva ya caption mein paste karo.</p>
+  </div>
+
+  <div class="tagline">
+    <div class="eyebrow" style="color:var(--nimbu)">Main tagline · recommended</div>
+    <div class="big">Paani se <span>aage.</span></div>
+    <div class="alts">
+      <div><em>Hindi</em><span class="hi">पानी से आगे।</span></div>
+      <div><em>English</em>More than water.</div>
+      <div><em>Gujarati line</em><span class="gu">ગરમીમાં પણ તાજું.</span></div>
+      <div><em>Hashtag</em>#TaazuRaho</div>
+    </div>
+    <p style="opacity:.85;max-width:62ch;font-size:15px">Kyun: yeh category samjhata hai (paani se zyada kuch) bina medical claim ke, aur Hindi, Gujarati, English teeno mein chhota rehta hai. <span class="gu">ગરમીમાં પણ તાજું</span> naam ka matlab hi use karta hai: "garmi mein bhi fresh".</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:20px">
+    <div class="card" id="sl-hinglish"><h3>Hinglish</h3></div>
+    <div class="card" id="sl-gujarati"><h3>Gujarati</h3></div>
+    <div class="card" id="sl-english"><h3>English</h3></div>
+    <div class="card" id="sl-campaign"><h3>Campaign lines</h3></div>
+  </div>
+  <div class="callout" style="margin-top:16px"><b>Yeh lines kabhi mat likho:</b> "ORS jaisa", "dehydration ka ilaaj", "heatstroke se bachaye", "doctor recommended", "health drink".</div>
+</section>
+
+<!-- ================= CREATIVES ================= -->
+<section id="creatives">
+  <div class="sec-head">
+    <div class="eyebrow">Part 4</div>
+    <h2>Awareness creatives</h2>
+    <p>8 ready files <code>brand-kit/creatives/</code> mein: Instagram posts (1080×1350), story (1080×1920), aur A4 poster (300 dpi, print ready). Har fact ke neeche source likha hai. Image par tap karke full size kholo. Price ₹25 aur WhatsApp 91737 36652 sab files mein bhara hai; poster ka QR scan karte hi WhatsApp chat khulti hai.</p>
+  </div>
+  <div class="cr-grid" id="cr-grid"></div>
+  <p class="muted" style="margin-top:16px;font-size:15px">Price ya number badle to Claude ko batao, woh files dobara bana dega. Navratri post mein 250 ml bottle ka ₹25 likha hai; cup mein alag price rakhna ho to batana.</p>
+</section>
+
+<!-- ================= PROMPTS ================= -->
+<section id="prompts">
+  <div class="sec-head">
+    <div class="eyebrow">Part 5</div>
+    <h2>AI image prompts</h2>
+    <p>Midjourney, Ideogram, ChatGPT, Gemini, Adobe Firefly, Leonardo aur video tools (Veo, Kling, Runway) ke liye. Sab English mein hain kyunki yeh tools English prompts sabse achhe samajhte hain.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Pehle yeh padho</h3>
+      <ul class="clean tips">
+        <li>AI se sirf photo ya background banwao. Headline, logo aur source Canva mein lagao, kyunki AI Hindi aur Gujarati text bigaad deta hai.</li>
+        <li>Har prompt ke end mein brand style line jodo, taaki saari images ek family jaisi lagein.</li>
+        <li>Asli bottle dikhana ho to ChatGPT ya Gemini mein bottle ki photo upload karke A3 wala prompt use karo. AI ko label dobara mat banane do.</li>
+        <li>Log asli dikhein: Indian faces, Amdavadi jagah. Workers ko respect ke saath dikhao.</li>
+      </ul>
+    </div>
+    <div class="card style-line">
+      <h3>Brand style line</h3>
+      <pre id="style-line">warm sunlit palette of saffron orange (#EA580C), lemon yellow (#F5D83B), fresh leaf green (#1F7A3A) and cream (#FFF8E7), clean commercial photography, natural Indian skin tones, realistic, high detail, no text, no logos, no watermark</pre>
+      <label class="toggle" for="add-style"><input type="checkbox" id="add-style" checked> Copy karte waqt style line saath jodo</label>
+      <p class="muted" style="font-size:13px">Negative prompt (Leonardo, Firefly, SD): <span style="font-family:var(--mono)">text, letters, logo, watermark, extra fingers, distorted hands, plastic skin, oversaturated, cartoonish, western setting</span></p>
+    </div>
+  </div>
+
+  <div id="prompt-groups"></div>
+</section>
+
+</main>
+<footer class="wrap">
+  Files: <a href="https://github.com/BAKUGOS1/Taazu/tree/claude/loving-einstein-vuh14p/brand-kit" target="_blank" rel="noreferrer">BAKUGOS1/Taazu · brand-kit/</a> (logos SVG + PNG, creatives, <code>README.md</code>, <code>AI-PROMPTS.md</code>). Fonts: Baloo Bhai 2, Baloo 2, Plus Jakarta Sans (Google Fonts, free to use). Facts sourced from Baker 2017, ACSM 2007, ILO 2019; claims kept general and non-medical.
+</footer>
+
+<script>
+const SLOGANS = {
+  "sl-hinglish": [["Jo paseene mein gaya, woh wapas.",""],["Pyaas se pehle, Taazu.",""],["Garmi ka desi jawab.",""],["Nimbu, namak, aur thoda science.",""],["Amdavad ka apna electrolyte.",""]],
+  "sl-gujarati": [["ગરમીમાં પણ તાજું.","Garmi ma pan taazu · fresh, even in the heat"],["અમદાવાદનું પોતાનું.","Amdavad nu potanu · Ahmedabad's own"],["પરસેવો ગયો? તાજું લો.","Parsevo gayo? Taazu lo · sweat gone? have Taazu"]],
+  "sl-english": [["More than water.",""],["Put back what the heat takes.",""],["Fresh, even at 44°C.",""]],
+  "sl-campaign": [["Garba ki raat lambi hai.","Navratri"],["Last over tak taazu.","Box cricket"],["Set ke beech, ek sip Taazu.","Gym"],["Kaam lamba, dhoop tez. Taazu saath.","Site workers"]],
+};
+
+const CREATIVES = [
+  {f:"01-paseena-sirf-paani-nahi",t:"Paseena sirf paani nahi",fmt:"Post 4:5",ready:true,note:"~1 g sodium per litre of sweat · Baker 2017",cap:"Paseena sirf paani nahi hota. Har litre paseene ke saath lagbhag 1 gram sodium bhi nikal jaata hai, aur plain paani woh wapas nahi deta. 💧🍋\nGarmi mein khelte ho ya kaam karte ho? Paani ke saath namak bhi wapas lo. Order: WhatsApp 91737 36652\nSource: Baker LB, Sports Medicine 2017.\n#Taazu #TaazuRaho #Amdavad #Ahmedabad #JoLogNahiJaante"},
+  {f:"02-sirf-2-percent",t:"Sirf 2% kam",fmt:"Post 4:5",ready:true,note:"2% body water loss · ACSM 2007",cap:"Body ka sirf ~2% paani kam hua, aur stamina, focus, reaction time girne lagte hain. Aur pata bhi nahi chalta. 🔋\nSource: ACSM Position Stand, 2007.\n#Taazu #TaazuRaho #AhmedabadFitness #JoLogNahiJaante"},
+  {f:"03-pyaas-late-lagti-hai",t:"Pyaas lagi? Late ho gaye",fmt:"Post 4:5",ready:true,note:"Drink before thirst · ACSM 2007",cap:"Pyaas lagi? Thoda late ho gaye. Garmi mein pyaas se pehle piyo, thoda-thoda, din bhar. ⏰\n#Taazu #TaazuRaho #Amdavad #Garmi"},
+  {f:"04-amdavad-44-degree-gujarati",t:"44°C · આ અમદાવાદ છે",fmt:"Post 4:5",ready:true,note:"Gujarati heat post",cap:"44°C. આ અમદાવાદ છે. 🌞\nગરમીમાં પણ તાજું. Nimbu, namak ane thandak.\n#Taazu #GarmiMaPanTaazu #Amdavad #Ahmedabad #Gujarat"},
+  {f:"08-hindi-site-workers",t:"धूप में काम? (Hindi)",fmt:"Post 4:5 · A4 bhi",ready:true,note:"Sites, factories, canteens",cap:"धूप में काम? पसीने के साथ नमक भी जाता है। पानी पियो, नमक भी वापस लो, छाँव में थोड़ा आराम करो।\nContractors aur canteens: sample ke liye WhatsApp karein 91737 36652.\n#Taazu #Ahmedabad"},
+  {f:"05-story-paani-vs-taazu",t:"Story: Paani vs Taazu",fmt:"Story 9:16",ready:false,fill:"Recipe confirm",note:"WhatsApp 91737 36652 bhara hai. Final recipe mein namak + potassium confirm hone ke baad hi post karo.",cap:"Story par WhatsApp link sticker aur poll lagao: \"Match ke baad tum kya peete ho?\" Paani / Cold drink / Nimbu soda / Kuch nahi."},
+  {f:"06-poster-a4-gym-turf",t:"A4 poster · gym aur turf",fmt:"A4 print 300 dpi",ready:true,note:"₹25 + WhatsApp QR. 300 gsm matte par print, laminate, acrylic standee mein counter par.",cap:"Match ke baad sirf paani? Garmi mein 1 ghante khelne se aadha se 2 litre tak paseena ja sakta hai. Saath mein namak bhi. Taazu: Paani se aage. Chilled 250 ml ₹25. WhatsApp order: 91737 36652"},
+  {f:"07-navratri-garba-station",t:"Navratri · Garba station",fmt:"Post 4:5",ready:true,note:"250 ml ₹25. Station ke bahar bhi print karke lagao.",cap:"Garba ki raat lambi hai. 💃🕺 Round ke beech mein ek chilled Taazu. Station dhoondo, 250 ml sirf ₹25, wapas circle mein.\n#Taazu #Navratri #Garba #Amdavad #TaazuRaho"},
+];
+
+const PROMPTS = [
+  {g:"Product shots",d:"Bottle aur ingredients ki photos: website, menu card, WhatsApp catalogue ke liye.",items:[
+    {t:"A1 · Hero bottle",u:"Catalogue, launch post",ar:"4:5",p:"Studio product photo of a small 250 ml clear PET bottle filled with a pale, slightly cloudy lemon-yellow drink, bright orange cap, plain cream wrap-around label, cold condensation droplets on the bottle, standing on crushed ice with fresh lemon halves, a few mint leaves and pink rock salt crystals, solid saffron-orange background, crisp hard summer light with a sharp shadow"},
+    {t:"A2 · Ingredients flat lay",u:"\"Andar kya hai\" post",ar:"1:1",p:"Top-down flat lay on cream linen: a glass of cloudy chilled nimbu-pani, sliced lemons, a small brass bowl of pink rock salt, roasted cumin seeds, mint leaves, ice cubes, soft morning sunlight, Indian kitchen feel, lots of empty space on the left for text"},
+    {t:"A3 · Asli bottle scene mein",u:"ChatGPT / Gemini: pehle bottle photo upload karo",ar:"4:5",ref:true,p:"Use the attached bottle exactly as it is. Do not change its shape, label, colours or text. Place it on a wooden table at a box-cricket turf at night, floodlights behind, cold condensation on the bottle, shallow depth of field, players blurred in the background. Photorealistic."},
+    {t:"A4 · Gym fridge",u:"Retailer pitch, post",ar:"4:5",p:"Front view of a small glass-door beverage cooler at a gym reception in India, filled with rows of small bottles with orange caps and pale yellow drink, cool light inside the fridge, warm light outside, a hand reaching for one bottle"},
+  ]},
+  {g:"Lifestyle · awareness",d:"Inke upar ready creatives wala text lagao, ya naye posts banao.",items:[
+    {t:"B1 · Box cricket raat mein",u:"\"Match ke baad sirf paani?\"",ar:"4:5",p:"Young Indian men in casual sportswear playing box cricket on an illuminated rooftop turf in Ahmedabad at night, one player taking a break and drinking from a small bottle, sweat on his forehead, floodlights, candid cinematic sports photography"},
+    {t:"B2 · Gym break",u:"Gym partners ke posts",ar:"4:5",p:"Indian woman in her twenties resting between sets at a neighbourhood gym, towel on her shoulder, drinking from a small chilled bottle, light sweat, warm tungsten light, candid documentary style, space at the top for text"},
+    {t:"B3 · Sabarmati Riverfront runners",u:"Running clubs, marathon",ar:"4:5",p:"Group of Indian runners on the Sabarmati Riverfront promenade in Ahmedabad at sunrise, one runner paused and drinking, golden light, light heat haze over the river, wide shot, energetic and hopeful"},
+    {t:"B4 · Site worker break",u:"Hindi poster, contractors",ar:"4:5",p:"Construction worker in Ahmedabad sitting in the shade of a building under construction during a midday break, wearing a yellow helmet and reflective vest, drinking from a small bottle, bright harsh sun outside the shade, dignified documentary portrait, respectful, eye level"},
+    {t:"B5 · Delivery rider",u:"Summer campaign",ar:"4:5",p:"Food delivery rider on a scooter parked under a neem tree on a hot Ahmedabad afternoon, helmet on the mirror, drinking from a small chilled bottle, heat shimmer on the road behind, candid street photography"},
+    {t:"B6 · Navratri garba",u:"Navratri station post",ar:"4:5",p:"Garba dancers in colourful chaniya choli and kediyu dancing in circles at a lit garba ground in Gujarat at night, motion blur of swirling skirts, dandiya sticks, string lights; in the foreground a small table with chilled drinks in paper cups on ice"},
+    {t:"B7 · Amdavad ki garmi",u:"44°C post ka background",ar:"4:5",p:"Narrow pol street in old Ahmedabad at noon in peak summer, blazing sun, heat shimmer, carved wooden houses, strong short shadows, almost empty street, sun flare in the top right, vivid orange tones, lots of empty sky for text"},
+    {t:"B8 · Paseena macro",u:"\"Paseena sirf paani nahi\" background",ar:"4:5",p:"Extreme close-up macro of sweat droplets on a sun-tanned forearm, fine white salt traces where the sweat has dried, shallow depth of field, warm orange backlight"},
+  ]},
+  {g:"Illustration aur mascot",d:"Fact carousels, stickers aur packaging pattern ke liye.",items:[
+    {t:"C1 · Mascot \"Boondu\"",u:"Stickers, kids-friendly posts",ar:"1:1",p:"Flat vector mascot: a cheerful water-drop character with a lemon-slice belly, small arms giving a thumbs up, bold rounded shapes, thick clean outlines, saffron orange drop, lemon-yellow slice, cream highlights, white background, sticker style"},
+    {t:"C2 · Fact carousel illustration",u:"Jo log nahi jaante series",ar:"4:5",p:"Flat vector infographic illustration of a person jogging with small drops of sweat leaving the body, each drop containing a tiny salt crystal, simple rounded shapes, orange, lemon yellow, green and cream palette, plenty of empty space for text, no text"},
+    {t:"C3 · Pattern",u:"Cup sleeves, packaging, banners",ar:"1:1",p:"Seamless repeating pattern of lemon slices, water drops and small suns, flat vector, saffron orange, lemon yellow and leaf green on a cream background, playful but tidy spacing"},
+  ]},
+  {g:"Mockups",d:"Ready creatives ko inke andar lagao, taaki post mein asli jaisa dikhe.",items:[
+    {t:"D1 · Counter standee",u:"A4 poster dikhane ke liye",ar:"4:5",p:"Photorealistic mockup of a blank A4 acrylic counter standee on a gym reception desk next to a small drinks cooler, soft daylight, the standee faces the camera straight on so a poster can be placed on it"},
+    {t:"D2 · Turf wall poster",u:"Retailer pitch",ar:"4:5",p:"Photorealistic mockup of a blank A3 poster taped on a painted wall beside a box-cricket turf entrance at night, floodlight spill, straight-on view"},
+    {t:"D3 · Phone mockup",u:"Instagram grid preview",ar:"9:16",p:"Photorealistic phone mockup held in a hand outdoors in bright sunlight, screen blank and facing the camera, Indian street background softly blurred"},
+  ]},
+  {g:"Logo exploration",d:"Sirf ideas ke liye. Final logo clean vector (logos/ folder ki SVG) hi rahe, aur trademark check ke baad.",items:[
+    {t:"E1 · Drop + lemon",u:"Concept A ke variations",ar:"1:1",noStyle:true,p:"Minimal flat vector logo mark: a water drop containing a lemon slice, saffron orange and lemon yellow, geometric, bold, works at small sizes, centered on white, no text"},
+    {t:"E2 · t-wave app icon",u:"Concept C ke variations",ar:"1:1",noStyle:true,p:"Minimal flat vector logo mark: a lowercase letter t whose crossbar is a wave, with a small yellow drop beside it, inside an orange rounded square app icon, no other text"},
+    {t:"E3 · Badge",u:"Seal ke variations",ar:"1:1",noStyle:true,p:"Circular badge logo for a beverage brand from Ahmedabad: a drop and a sun inside a ring, flat vector, orange and cream, vintage stamp style, leave the ring empty (no text)"},
+  ]},
+  {g:"Video · Reels",d:"Veo, Kling, Runway ya Sora. 9:16, 5 se 8 second.",items:[
+    {t:"F1 · Lemon splash",u:"Reel opener",ar:"9:16 · 5s",p:"Slow motion: a lemon slice and a pinch of pink rock salt drop into a glass of cold pale-yellow drink, splash and bubbles, bright saffron-orange backdrop, crisp studio light"},
+    {t:"F2 · Garmi se taazu",u:"Summer reel",ar:"9:16 · 8s",p:"Hot Ahmedabad street at noon with heat shimmer, camera pushes in on a young man wiping sweat, he opens a cold small bottle with an orange cap, condensation drips, he smiles, warm colours turning slightly cooler"},
+    {t:"F3 · Garba break",u:"Navratri reel",ar:"9:16 · 6s",p:"Night garba ground, dancers spinning in colourful clothes, cut to a dancer stepping out of the circle, laughing, taking a cup of chilled drink from a stall, festive lights, handheld camera"},
+  ]},
+];
+
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function copyBtn(text, label = "Copy") {
+  const b = document.createElement("button");
+  b.className = "copy"; b.type = "button"; b.textContent = label;
+  b.addEventListener("click", () => {
+    const val = typeof text === "function" ? text() : text;
+    const done = () => { b.textContent = "Copied"; b.classList.add("done"); setTimeout(() => { b.textContent = label; b.classList.remove("done"); }, 1500); };
+    const fallback = () => { const t = document.createElement("textarea"); t.value = val; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); done(); } catch (e) { b.textContent = "Select & copy"; } t.remove(); };
+    try { navigator.clipboard.writeText(val).then(done, fallback); } catch (e) { fallback(); }
+  });
+  return b;
+}
+
+for (const [id, list] of Object.entries(SLOGANS)) {
+  const box = document.getElementById(id);
+  for (const [t, tr] of list) {
+    const row = document.createElement("div"); row.className = "slogan";
+    const gu = /[઀-૿]/.test(t);
+    row.innerHTML = `<div><div class="t${gu ? " gu" : ""}">${esc(t)}</div>${tr ? `<div class="tr">${esc(tr)}</div>` : ""}</div>`;
+    row.appendChild(copyBtn(t));
+    box.appendChild(row);
+  }
+}
+
+const grid = document.getElementById("cr-grid");
+for (const c of CREATIVES) {
+  const el = document.createElement("article"); el.className = "cr";
+  el.innerHTML = `<a class="img" href="creatives/${c.f}.png" target="_blank" rel="noreferrer"><img src="creatives/${c.f}.png" alt="${esc(c.t)} creative" loading="lazy"></a>
+    <div class="meta"><b>${esc(c.t)}</b>
+    <div class="row"><span class="pill">${esc(c.fmt)}</span>${c.ready ? '<span class="pill ready">Ready to post</span>' : `<span class="pill fill">Fill: ${esc(c.fill)}</span>`}</div>
+    <p class="note">${esc(c.note)}</p><div class="row"></div></div>`;
+  el.querySelector(".row:last-child").appendChild(copyBtn(c.cap, "Copy caption"));
+  grid.appendChild(el);
+}
+
+const styleLine = document.getElementById("style-line").textContent.trim();
+const addStyle = document.getElementById("add-style");
+try { const v = localStorage.getItem("taazu-add-style"); if (v !== null) addStyle.checked = v === "1"; } catch (e) {}
+addStyle.addEventListener("change", () => { try { localStorage.setItem("taazu-add-style", addStyle.checked ? "1" : "0"); } catch (e) {} });
+
+const groups = document.getElementById("prompt-groups");
+for (const g of PROMPTS) {
+  const sec = document.createElement("div"); sec.className = "pgroup";
+  sec.innerHTML = `<h3>${esc(g.g)}</h3><p>${esc(g.d)}</p><div class="grid g2"></div>`;
+  const gg = sec.querySelector(".grid");
+  for (const p of g.items) {
+    const card = document.createElement("div"); card.className = "card prompt";
+    card.innerHTML = `<div class="top"><div><b>${esc(p.t)}</b><div class="for">${esc(p.u)}</div></div><span class="pill">${esc(p.ar)}</span></div><pre>${esc(p.p)}</pre><div class="row"></div>`;
+    const full = () => (addStyle.checked && !p.noStyle && !p.ref ? `${p.p}, ${styleLine}` : p.p) + (!p.ref && /^[\d:]+$/.test(p.ar) ? ` --ar ${p.ar}` : "");
+    card.querySelector(".row").appendChild(copyBtn(full, "Copy prompt"));
+    gg.appendChild(card);
+  }
+  groups.appendChild(sec);
+}
+</script>
