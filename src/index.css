@@ -19,6 +19,8 @@ body {
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
 }
+/* No rubber-band on the page itself (the app shell scrolls <main> instead). */
+html { overscroll-behavior: none; }
 
 /* Inputs under 16px make iOS Safari zoom the page on focus. */
 @media (max-width: 767px) {

@@ -47,7 +47,7 @@ export default function SurveyView({ surv, setSurv }: { surv: Resp[]; setSurv: (
     setFlash(`Saved · response #${n + 1}`);
     try { navigator.vibrate?.(12); } catch { /* no haptics */ }
     setTimeout(() => setFlash(""), 2500);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("app-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
   };
   const up = (id: string, p: Partial<Resp>) => setSurv(surv.map((r) => (r.id === id ? { ...r, ...p } : r)));
 
