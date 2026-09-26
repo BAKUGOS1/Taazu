@@ -1,7 +1,9 @@
 import { Suspense, lazy, useState } from "react";
 import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight } from "lucide-react";
 import { Panel } from "../../components/ui";
-import dropIcon from "../../../brand-kit/logos/concept-A-icon-reverse.svg?url";
+import dropIcon from "../../../brand-kit/logos/concept-A-icon-color.svg?url";
+import wordLeaf from "../../../brand-kit/logos/wordmark-leaf.svg?url";
+import { Lockup } from "../../components/BrandMark";
 
 // The kit tabs pull in fonts, the exporter and the QR code, so they load only when opened.
 const LogosPanel = lazy(() => import("./kit/LogosPanel"));
@@ -110,12 +112,10 @@ function Bottle({ id, liquid, accent, flavour, sub }: { id: string; liquid: stri
         <rect x="0" y="150" width="160" height="165" fill="#FFF8E7" />
         <rect x="0" y="150" width="160" height="7" fill="#EA580C" />
         <rect x="0" y="308" width="160" height="7" fill="#EA580C" />
-        {/* lemon slice */}
-        <circle cx="121" cy="189" r="26" fill={accent} /><circle cx="121" cy="189" r="20" fill="#FFFBE0" opacity=".9" />
-        {[0, 45, 90, 135].map((a) => <line key={a} x1={121 - 20 * Math.cos((a * Math.PI) / 180)} y1={189 - 20 * Math.sin((a * Math.PI) / 180)} x2={121 + 20 * Math.cos((a * Math.PI) / 180)} y2={189 + 20 * Math.sin((a * Math.PI) / 180)} stroke={accent} strokeWidth="1.6" />)}
-        {/* drop mark + wordmark */}
-        <path d="M34,176 C40,186 43,192 39,199 C37,203 31,203 29,199 C25,192 28,186 34,176 Z" fill="#EA580C" />
-        <text x="26" y="238" fontSize="34" fontWeight="900" fill="#1F7A3A" letterSpacing="-1">taazu</text>
+        {/* Nimbu Drop + wordmark (same files as the Logos tab) */}
+        <image href={dropIcon} x="22" y="163" width="44" height="44" />
+        <circle cx="128" cy="176" r="8" fill={accent} stroke="#fff" strokeWidth="2" />
+        <image href={wordLeaf} x="26" y="213" width="104" height="27" />
         <text x="28" y="252" fontSize="9" fontWeight="600" fill="#1F7A3A" opacity=".75">તાજું</text>
         <text x="28" y="272" fontSize="9" fontWeight="800" fill="#EA580C" letterSpacing=".5">{flavour.toUpperCase()}</text>
         <text x="28" y="285" fontSize="7" fill="#44403C">{sub}</text>
@@ -136,8 +136,8 @@ function Stick() {
       <path d="M22,18 L98,18 L98,282 L22,282 Z" fill="#FFF8E7" stroke="#E7DCC0" />
       {[...Array(8)].map((_, i) => <path key={i} d={`M${22 + i * 9.5},18 l4.75,-6 l4.75,6`} fill="#FFF8E7" stroke="#E7DCC0" />)}
       <rect x="22" y="36" width="76" height="8" fill="#EA580C" />
-      <text x="60" y="160" textAnchor="middle" fontSize="30" fontWeight="900" fill="#1F7A3A" transform="rotate(-90 60 160)">taazu</text>
-      <circle cx="60" cy="226" r="11" fill="#F5D83B" /><circle cx="60" cy="226" r="7" fill="#FFFBE0" />
+      <image href={wordLeaf} x="4" y="146" width="112" height="29" transform="rotate(-90 60 160)" />
+      <image href={dropIcon} x="48" y="222" width="24" height="24" />
       <text x="60" y="256" textAnchor="middle" fontSize="7" fontWeight="800" fill="#EA580C">STICK · MAKES 500 ml</text>
       <rect x="22" y="266" width="76" height="8" fill="#EA580C" />
     </svg>
@@ -149,7 +149,7 @@ function BackLabel() {
   return (
     <div className="mx-auto w-full max-w-sm rounded-xl border border-stone-300 bg-[#FFF8E7] p-4 text-stone-800 shadow-sm">
       <div className="flex items-baseline justify-between">
-        <span className="text-xl font-black tracking-tight text-[#1F7A3A]">taazu</span>
+        <img src={wordLeaf} alt="taazu" className="h-5 w-auto" />
         <span className="text-[10px] font-bold uppercase text-[#EA580C]">Nimbu-Namak · 250 ml</span>
       </div>
       <p className="mt-1 text-[11px] leading-snug">Non-carbonated water-based flavoured beverage with electrolytes.</p>
@@ -191,13 +191,8 @@ function Overview({ go }: { go: (t: TabId) => void }) {
         <div className="absolute -bottom-16 right-16 h-36 w-36 rounded-full bg-white/10" />
         <div className="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <div className="flex items-center gap-3">
-              <img src={dropIcon} alt="" className="h-12 w-12" />
-              <div>
-                <div className="text-4xl font-black tracking-tight leading-none">taazu</div>
-                <div className="text-sm text-orange-100">{TAAZU.gujarati} · {TAAZU.meaning}</div>
-              </div>
-            </div>
+            <Lockup tone="cream" className="h-16 w-auto md:h-20" />
+            <div className="mt-2 text-sm text-orange-100">{TAAZU.gujarati} · {TAAZU.meaning}</div>
             <h2 className="mt-6 text-3xl font-extrabold leading-tight md:text-4xl">{TAAZU.tagline.en}<br /><span className="text-orange-100">{TAAZU.tagline.hi}</span></h2>
             <p className="mt-3 max-w-xl text-sm text-orange-50">{TAAZU.promise}</p>
           </div>
@@ -236,13 +231,12 @@ function Overview({ go }: { go: (t: TabId) => void }) {
         </Panel>
         <Panel title="Wordmark & type" icon={Type}>
           <div className="flex items-center gap-4 rounded-xl bg-[#FFF8E7] p-4">
-            <span className="text-5xl font-black tracking-tight text-[#1F7A3A]">taazu</span>
-            <span className="text-lg font-semibold text-[#1F7A3A]/70">તાજું</span>
+            <Lockup className="h-16 w-auto" />
           </div>
           <ul className="mt-3 space-y-1.5 text-sm text-slate-700">
             <li>• Always lowercase <b>taazu</b> in the logo; "Taazu" in sentences.</li>
-            <li>• Heavy rounded sans (e.g. Poppins Black / Nunito Black) for the wordmark; regular sans for text.</li>
-            <li>• Orange drop mark sits left of the wordmark; keep one drop-height of space around the logo.</li>
+            <li>• Wordmark: Baloo Bhai 2 ExtraBold, already outlined in the logo files. Text: Plus Jakarta Sans. Hindi: Baloo 2.</li>
+            <li>• Nimbu Drop sits left of the wordmark; keep one "a"-height of space around the logo. All versions are in the Logos tab.</li>
             <li>• Voice: warm, local, straight — Hinglish OK, no medical talk.</li>
           </ul>
         </Panel>

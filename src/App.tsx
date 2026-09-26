@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette,
   Download, Upload, Phone, MessageCircle, MapPin, Search, Plus, Trash2, LayoutGrid, Table as TableIcon,
-  RotateCcw, Droplets, Settings, MoreHorizontal, Bell, CheckCircle2, Circle, AlertCircle, Star, Check, X, Target, TrendingUp,
+  RotateCcw, Settings, MoreHorizontal, Bell, CheckCircle2, Circle, AlertCircle, Star, Check, X, Target, TrendingUp,
   QrCode, Copy, RefreshCw, ExternalLink, Link2, Send, NotebookPen,
 } from "lucide-react";
 
@@ -32,6 +32,7 @@ import BudgetView from "./app/budget";
 import PlansView from "./app/plans";
 import MapView from "./app/map";
 import BrandView from "./app/brand";
+import { AppIcon, Wordmark } from "./components/BrandMark";
 import SettingsView from "./app/settings";
 import DataPanel from "./app/dataio/DataPanel";
 import { exportAll } from "./lib/dataio/xlsx";
@@ -187,8 +188,8 @@ function MainApp() {
       {/* ---------- sidebar (desktop) ---------- */}
       <aside className="hidden md:flex md:flex-col w-64 shrink-0 bg-gradient-to-b from-stone-900 via-stone-900 to-stone-950 text-stone-400 h-full px-3 py-5 border-r border-white/5">
         <div className="flex items-center gap-2 px-2 mb-6">
-          <div className="w-9 h-9 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={19} /></div>
-          <div className="leading-tight"><div className="text-white text-lg font-extrabold tracking-tight">taazu</div><div className="text-[11px] text-stone-500">Electrolyte launch</div></div>
+          <AppIcon className="h-9 w-9" />
+          <div className="leading-tight"><Wordmark tone="cream" className="h-[19px] w-auto" /><div className="mt-1 text-[11px] text-stone-500">Electrolyte launch</div></div>
           <span className="ml-auto"><SyncBadge status={syncStatus} compact /></span>
         </div>
         <nav className="flex-1 overflow-y-auto space-y-5">
@@ -212,7 +213,7 @@ function MainApp() {
       <main id="app-scroll" className="h-full flex-1 min-w-0 overflow-y-auto overscroll-contain pb-32 md:pb-0">
         {/* mobile header */}
         <div className="md:hidden sticky top-0 z-20 bg-[#FAF8F5]/80 backdrop-blur-xl border-b border-stone-200/70 pt-safe"><div className="px-4 py-3 flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={17} /></div>
+          <AppIcon className="h-8 w-8" />
           <span className="text-base font-extrabold tracking-tight text-stone-900">{tab}</span>
           <span className="ml-auto"><SyncBadge status={syncStatus} /></span>
           <button onClick={() => go("Settings")} aria-label="Settings" className={`-mr-1 p-1.5 rounded-lg ${tab === "Settings" ? "text-orange-600" : "text-slate-500"}`}><Settings size={20} /></button>
