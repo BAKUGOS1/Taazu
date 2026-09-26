@@ -15,7 +15,7 @@ A high-performance operational cockpit and pilot tracker for launching an electr
 - **Sales & Cash Collection Log**: On-site cup and pack sales ledger tracking UPI/cash settlement.
 - **₹55,000 Trial Budget Tracker**: Real-time variance tracking (planned vs. actual).
 - **Brand Strategy & Mockups**: Name evaluations (RANN, JalKavach, Taazu, etc.), 250ml stock PET bottle mockups, and regulatory packaging guidelines (FSSAI / Legal Metrology).
-- **Excel Two-Way Sync**: Complete workbook export and import using SheetJS (`.xlsx`) with coordinate and place ID preservation.
+- **CRM-style import & export** (Settings → Data): import any .xlsx, .xls, .csv or .ods (HubSpot, Zoho, Tally, IndiaMART, JustDial, Google Sheets) with automatic column matching, a preview, duplicate handling by phone / GSTIN / email / name, an error report and undo. Export each module or everything, and download a sample .xlsx template per module. Column definitions live in `src/lib/dataio/schema.ts`.
 - **Persistent Storage**: Polyfilled `window.storage` backed by `localStorage` so data survives page refreshes and browser restarts.
 
 ## Getting Started

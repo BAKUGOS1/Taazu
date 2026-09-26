@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import * as XLSX from "xlsx";
 import {
   Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette,
   Download, Upload, Phone, MessageCircle, MapPin, Search, Plus, Trash2, LayoutGrid, Table as TableIcon,
@@ -33,6 +32,8 @@ import BudgetView from "./app/budget";
 import MapView from "./app/map";
 import BrandView from "./app/brand";
 import SettingsView from "./app/settings";
+import DataPanel from "./app/dataio/DataPanel";
+import { exportAll } from "./lib/dataio/xlsx";
 import { CalculatorHost, SidebarCalc } from "./app/calculator";
 import { PrefsCtx, usePrefsValue } from "./lib/prefs";
 import { QrSurveyView, PublicSurvey } from "./app/qr";
@@ -149,71 +150,28 @@ function MainApp() {
   ];
   const gatesOk = gates.filter((g) => g.ok).length;
 
-  /* ---- Excel export / import ---- */
-  const plain = (cols) => cols.filter((c) => c.t !== "link");
-  const rowsFor = (cols, rows) => rows.map((r) => { const o = {}; plain(cols).forEach((c) => (o[c.l] = c.calc ? c.calc(r) : r[c.k])); return o; });
-  const sheet = (data, cols) => { const ws = XLSX.utils.json_to_sheet(data); ws["!cols"] = plain(cols).map((c) => ({ wch: Math.max(8, Math.round(c.w / 7)) })); return ws; };
-  const geoSheet = (cols, rows) => {
-    const data = rows.map((r) => ({ ...rowsFor(cols, [r])[0], Latitude: r.lat || "", Longitude: r.lng || "", "Place ID": r.pid || "", "Google Maps link": mapUrl(r) }));
-    const ws = XLSX.utils.json_to_sheet(data);
-    ws["!cols"] = [...plain(cols).map((c) => ({ wch: Math.max(8, Math.round(c.w / 7)) })), { wch: 11 }, { wch: 11 }, { wch: 14 }, { wch: 45 }];
-    const ci = Object.keys(data[0] || {}).indexOf("Google Maps link");
-    data.forEach((d, i) => { const ref = XLSX.utils.encode_cell({ r: i + 1, c: ci }); if (ws[ref] && ws[ref].v) ws[ref].l = { Target: ws[ref].v, Tooltip: "Open in Google Maps" }; });
-    return ws;
-  };
-  const exportXlsx = () => {
-    const wb = XLSX.utils.book_new();
-    const dash = [
+  /* ---- Excel export (import lives in app/dataio) ---- */
+  const exportEverything = () => {
+    const summary = [
       { Metric: "Budget planned", Value: k.plan }, { Metric: "Budget spent", Value: k.spent }, { Metric: "Budget left", Value: k.plan - k.spent },
       { Metric: "Sales total", Value: k.saleAmt }, { Metric: "Cash collected", Value: k.paid }, { Metric: "Leads contacted", Value: k.contacted },
       { Metric: "Warm leads", Value: k.warm }, { Metric: "Customers", Value: k.cust }, { Metric: "Supplier quotes", Value: k.quotes },
       { Metric: "Survey replies", Value: k.n }, { Metric: "% willing to pay ₹30+", Value: k.pct }, { Metric: "Tasks done", Value: `${k.done}/${tasks.length}` },
       ...gates.map((g) => ({ Metric: "Gate: " + g.l, Value: `${g.v} — ${g.ok ? "Pass" : "Not yet"}` })),
     ];
-    const ws0 = XLSX.utils.json_to_sheet(dash); ws0["!cols"] = [{ wch: 44 }, { wch: 26 }];
-    XLSX.utils.book_append_sheet(wb, ws0, "Summary");
-    XLSX.utils.book_append_sheet(wb, geoSheet(supCols, sup), "Suppliers");
-    XLSX.utils.book_append_sheet(wb, geoSheet(buyCols, buy), "Buyers");
-    XLSX.utils.book_append_sheet(wb, sheet(rowsFor(taskCols, tasks), taskCols), "Tasks");
-    const b = rowsFor(budCols, bud); b.push({ Bucket: "TOTAL", "Planned ₹": k.plan, "Actual ₹": k.spent, "Left ₹": k.plan - k.spent });
-    XLSX.utils.book_append_sheet(wb, sheet(b, budCols), "Budget");
-    XLSX.utils.book_append_sheet(wb, sheet(rowsFor(saleCols, sales.length ? sales : [{}]), saleCols), "Sales");
-    XLSX.utils.book_append_sheet(wb, sheet(rowsFor(survCols, surv.length ? surv : [{}]), survCols), "Survey");
-    const bn = XLSX.utils.json_to_sheet(BRANDS.map((x) => ({ Name: x.name, Meaning: x.meaning, "Why it works": x.why, "Trademark risk (guess)": x.risk, Verdict: x.pick })));
-    bn["!cols"] = [{ wch: 14 }, { wch: 45 }, { wch: 55 }, { wch: 22 }, { wch: 16 }];
-    XLSX.utils.book_append_sheet(wb, bn, "Brand names");
-    XLSX.writeFile(wb, `Taazu_${today()}.xlsx`);
-    say("Excel downloaded");
+    const names = new Map([...sup, ...buy].map((r) => [r.id, r.name]));
+    const callLog = [...logs].sort((a, b) => (b.at || 0) - (a.at || 0)).map((l) => ({ Date: l.date, With: names.get(l.supplierId) || "", Type: l.type, Outcome: l.outcome, Note: l.note, By: l.by || "" }));
+    const brands = BRANDS.map((x) => ({ Name: x.name, Meaning: x.meaning, "Why it works": x.why, "Trademark risk (guess)": x.risk, Verdict: x.pick }));
+    exportAll({ sup, buy, tasks, bud, sales, surv }, summary, [{ name: "Call log", rows: callLog }, { name: "Brand names", rows: brands }]);
   };
-  const importXlsx = async (file) => {
-    try {
-      const wb = XLSX.read(await file.arrayBuffer());
-      const back = (name, cols, extra = {}) => {
-        const ws = wb.Sheets[name]; if (!ws) return null;
-        return XLSX.utils.sheet_to_json(ws, { defval: "" })
-          .filter((d) => Object.values(d).some((v) => v !== "") && d["Bucket"] !== "TOTAL")
-          .map((d) => { const o = { id: uid() }; plain(cols).forEach((c) => { if (!c.calc) o[c.k] = d[c.l] ?? ""; }); Object.entries(extra).forEach(([lab, key]: [string, any]) => { if (d[lab] !== "" && d[lab] !== undefined) o[key] = d[lab]; }); return o; });
-      };
-      const geo = { Latitude: "lat", Longitude: "lng", "Place ID": "pid" };
-      const s = back("Suppliers", supCols, geo), bu = back("Buyers", buyCols, geo), t = back("Tasks", taskCols), bd = back("Budget", budCols), sa = back("Sales", saleCols), sv = back("Survey", survCols);
-      s && setSup(enrich(s)); bu && setBuy(enrich(bu)); t && setTasks(t); bd && setBud(bd); sa && setSales(sa); sv && setSurv(sv);
-      say("Data imported");
-    } catch (e) { say("Import failed — use a file exported from this app"); }
+  const stores = {
+    sup: { rows: sup, set: setSup, after: enrich }, buy: { rows: buy, set: setBuy, after: enrich }, tasks: { rows: tasks, set: setTasks },
+    bud: { rows: bud, set: setBud }, sales: { rows: sales, set: setSales }, surv: { rows: surv, set: setSurv },
   };
   const resetAll = () => {
     if (!armReset) { setArmReset(true); setTimeout(() => setArmReset(false), 4000); return; }
     setSup(SUPPLIERS()); setBuy(BUYERS()); setTasks(TASKS()); setBud(BUDGET()); setSales([]); setSurv([]); setArmReset(false); say("Reset to starting data");
   };
-
-  const DataActions = ({ dark = false }) => (
-    <div className="space-y-2">
-      <button onClick={exportXlsx} className={`${btn} w-full ${dark ? "bg-slate-800 text-slate-100 hover:bg-slate-700" : "bg-white border border-slate-200 text-slate-700"}`}><Download size={16} />Download Excel</button>
-      <label className={`${btn} w-full cursor-pointer ${dark ? "bg-slate-800 text-slate-100 hover:bg-slate-700" : "bg-white border border-slate-200 text-slate-700"}`}>
-        <Upload size={16} />Import Excel<input type="file" accept=".xlsx" className="hidden" onChange={(e) => { e.target.files[0] && importXlsx(e.target.files[0]); e.target.value = ""; }} />
-      </label>
-      <button onClick={resetAll} className={`${btn} w-full text-xs ${armReset ? "bg-red-600 text-white" : dark ? "text-slate-500 hover:text-slate-300" : "text-slate-500"}`}><RotateCcw size={14} />{armReset ? "Tap again to confirm reset" : "Reset to starting data"}</button>
-    </div>
-  );
 
   const badge = (id) => (id === "Suppliers" && k.supDue.length ? k.supDue.length : id === "Buyers" && k.follow.length ? k.follow.length : id === "Tasks" && k.overdue.length ? k.overdue.length : 0);
 
@@ -366,7 +324,7 @@ function MainApp() {
           {tab === "Settings" && (
             <SettingsView>
               <Panel><TeamPanel /></Panel>
-              <Panel title="Data"><DataActions /></Panel>
+              <DataPanel stores={stores} exportEverything={exportEverything} resetAll={resetAll} armReset={armReset} say={say} />
             </SettingsView>
           )}
         </div>
