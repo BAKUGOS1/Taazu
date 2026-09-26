@@ -50,7 +50,7 @@ export default function TeamPanel({ dark = false }) {
   const { workspace, members, session, me, signOut } = useAuth();
   const [copied, setCopied] = useState(false);
   const link = window.location.origin;
-  const invite = `Taazu HQ join karo: ${link}\nSign in karke ye team code daalna: ${workspace.join_code}`;
+  const invite = `Taazu join karo: ${link}\nSign in karke ye team code daalna: ${workspace.join_code}`;
   const copy = async () => { try { await navigator.clipboard.writeText(workspace.join_code); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch { /* clipboard blocked */ } };
   const sub = dark ? "text-slate-400" : "text-slate-500";
   const box = dark ? "bg-slate-800 text-slate-100" : "bg-slate-50 border border-slate-200 text-slate-800";

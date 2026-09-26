@@ -1,8 +1,10 @@
 import { Phone } from "lucide-react";
-import { SUPPLIER_CFG as cfg, NEED } from "../crm/configs";
+import { SUPPLIER_CFG, NEED } from "../crm/configs";
+import type { CrmConfig, T } from "../crm/config";
 import { usePrefs } from "../../lib/prefs";
 
-/* One supplier call script for the whole team — read it once, then fill answers in the supplier card. */
+/* One call script for the whole team — read it once, then fill answers in the record card.
+ * Suppliers by default; Buyers → Pitch passes the buyer config and segment hooks. */
 const Step = ({ n, children }) => (
   <li className="flex gap-3">
     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-orange-100 text-xs font-bold text-orange-700">{n}</span>
@@ -10,7 +12,16 @@ const Step = ({ n, children }) => (
   </li>
 );
 
-export default function CallScript() {
+const SUP_AFTER = [
+  <>Suppliers → tap the supplier's name.</>,
+  <>Fill <b>Quote & order</b>: rate, MOQ, delivery, payment, sample, GSTIN, FSSAI.</>,
+  <>In <b>Log this contact</b>: pick what happened, add a note, choose a follow-up day → Save.</>,
+  <>GSTIN checked on the GST site? Tap <b>Mark verified</b>.</>,
+];
+
+export default function CallScript({ cfg = SUPPLIER_CFG, lines = NEED, title = "Supplier call script", lineIntro = { en: "Say what we need — pick the line for this supplier type:", hi: "Batao hamein kya chahiye — supplier ke type ke hisaab se:" }, after = SUP_AFTER }: {
+  cfg?: CrmConfig; lines?: Record<string, T>; title?: string; lineIntro?: T; after?: any[];
+}) {
   const { lang } = usePrefs();
   const s = cfg.script!;
   const asks = (cfg.checklist || []).filter((f) => f.say);
@@ -23,13 +34,13 @@ export default function CallScript() {
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">
-        <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900"><Phone size={15} />Supplier call script</div>
+        <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900"><Phone size={15} />{title}</div>
         <ol className="space-y-3">
           <Step n={1}>“{s.open({} as any, lang)}”</Step>
           <Step n={2}>
-            <div className="mb-1.5">{lang === "hi" ? "Batao hamein kya chahiye — supplier ke type ke hisaab se:" : "Say what we need — pick the line for this supplier type:"}</div>
+            <div className="mb-1.5">{lineIntro[lang]}</div>
             <div className="space-y-1.5">
-              {Object.entries(NEED).map(([cat, line]) => (
+              {Object.entries(lines).map(([cat, line]) => (
                 <div key={cat} className="rounded-lg bg-slate-50 px-2.5 py-1.5"><span className="text-xs font-semibold text-slate-500">{cat}: </span>“{line[lang]}”</div>
               ))}
             </div>
@@ -41,12 +52,7 @@ export default function CallScript() {
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">
         <div className="mb-2 text-sm font-semibold text-slate-900">After the call (1 minute)</div>
-        <ol className="list-decimal space-y-1 pl-4 text-sm text-slate-700">
-          <li>Suppliers → tap the supplier's name.</li>
-          <li>Fill <b>Quote & order</b>: rate, MOQ, delivery, payment, sample, GSTIN, FSSAI.</li>
-          <li>In <b>Log this contact</b>: pick what happened, add a note, choose a follow-up day → Save.</li>
-          <li>GSTIN checked on the GST site? Tap <b>Mark verified</b>.</li>
-        </ol>
+        <ol className="list-decimal space-y-1 pl-4 text-sm text-slate-700">{after.map((a, i) => <li key={i}>{a}</li>)}</ol>
       </section>
     </div>
   );

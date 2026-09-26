@@ -1,4 +1,4 @@
-# Hydration HQ — Ahmedabad Electrolyte Pilot Tracker
+# Taazu — Ahmedabad Electrolyte Pilot Tracker
 
 A high-performance operational cockpit and pilot tracker for launching an electrolyte beverage business in Ahmedabad, Gujarat.
 
@@ -52,4 +52,4 @@ To enable live Google Sheets synchronization for customer QR codes:
 1. Open [sheets.new](https://sheets.new) and create a sheet named `Survey responses`.
 2. Navigate to **Extensions → Apps Script**.
 3. Paste the Apps Script snippet provided in the **QR Survey** setup panel.
-4. Set a custom secret key, deploy as a Web App (access: Anyone), and paste the `/exec` URL and secret back into Hydration HQ.
+4. Set a custom secret key, deploy as a Web App (access: Anyone), and paste the `/exec` URL and secret back into Taazu.

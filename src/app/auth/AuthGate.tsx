@@ -24,7 +24,7 @@ function Logo() {
   return (
     <div className="flex flex-col items-center mb-6">
       <div className="w-14 h-14 rounded-2xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-600/30"><Droplets size={28} /></div>
-      <div className="mt-3 text-xl font-bold text-slate-900">Taazu HQ</div>
+      <div className="mt-3 text-xl font-bold text-slate-900">Taazu</div>
       <div className="text-xs text-slate-500">Suppliers · buyers · pilot — shared with your team</div>
     </div>
   );

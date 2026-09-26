@@ -182,7 +182,7 @@ export const SUPPLIERS = () => enrich(mk([
 export const seedId = (name) => "sup-" + name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /* ---------------- buyers / leads ---------------- */
-export const BUY_KEYS = ["seg", "name", "area", "phone", "why", "priority", "source"];
+export const BUY_KEYS = ["seg", "name", "area", "phone", "why", "priority", "source", "contact"];
 export const BUYERS = () => enrich(mk([
   ["Gym", "Life Fitness Pro", "Prahladnagar", "not listed", "1,000+ reviews, busy gym", "A", "Google Maps"],
   ["Gym", "Plus Fitness 24/7 Bodakdev", "Bodakdev", "+91 75750 29999", "24/7 gym, 1,100+ reviews", "A", "Google Maps"],
@@ -231,7 +231,56 @@ export const BUYERS = () => enrich(mk([
   ["Events", "ArtCore Event", "Usmanpura", "+91 77780 66999", "Events & exhibitions", "B", "Google Maps"],
   ["Events", "Pacific Events", "Prahlad Nagar", "+91 84879 89345", "Event planner", "C", "Google Maps"],
   ["Events", "Aum Event and Promotions", "Navrangpura", "+91 98240 27387", "Weddings & conferences", "C", "Google Maps"],
-], BUY_KEYS, { status: "New", next: "", follow: "", notes: "" }));
+  /* researched 27 Sep 2026 (buyers_b2b.json) — phones from IndiaMART / JustDial / Google listings */
+  ["Factory", "Real Techno Forge", "Ahmedabad", "+91 7949344629", "Hot forging process shop floor, industrial workforce exposed to heat", "A", "https://dir.indiamart.com/ahmedabad/steel-forgings.html", ""],
+  ["Factory", "Shree Dhwarkadhish Engineering", "Ahmedabad", "+91 8047309413", "Stainless steel forging manufacturer, hot shop floor workers", "A", "https://dir.indiamart.com/ahmedabad/steel-forgings.html", ""],
+  ["Factory", "Sulohak Cast", "Ahmedabad", "+91 8048211982", "Steel casting/foundry, high-heat process floor", "A", "https://dir.indiamart.com/ahmedabad/steel-forgings.html", ""],
+  ["Factory", "Horizon Metal Components", "Ahmedabad", "+91 7942873681", "Forgings manufacturer, hot metal working environment", "B", "https://www.indiamart.com", ""],
+  ["Factory", "Charvi Enterprise", "Vatva GIDC, Ahmedabad", "+91 8046065072", "Chemical manufacturer (SHMP/dispersing agents) in Vatva GIDC, shop-floor + fumes/heat exposure", "A", "https://www.indiamart.com/proddetail/shmp-chemical-16591487762.html", ""],
+  ["Factory", "Shrihari Chemicals Trading", "Vatva GIDC, Ahmedabad", "+91 9664870887", "Detergent/industrial chemical manufacturer in Vatva GIDC, plant floor workforce", "B", "https://www.indiamart.com/shriharichemicalstrading/", "Mihir Soni (Owner)"],
+  ["Factory", "Parul Textiles", "Ahmedabad", "+91 8043894300", "Textile mill - hot processing floors (dyeing/weaving), large daily workforce", "A", "https://dir.indiamart.com/ahmedabad/textile-mills.html", ""],
+  ["Factory", "Sungrow Enterprises", "Ahmedabad", "+91 7949348585", "Textile mill, hot shop floor, blue-collar workforce", "B", "https://dir.indiamart.com/ahmedabad/textile-mills.html", ""],
+  ["Factory", "Krishna Engineering Works", "Ahmedabad", "+91 8047636402", "Engineering/textile machinery works, hot floor operations", "B", "https://dir.indiamart.com/ahmedabad/textile-mills.html", ""],
+  ["Construction", "Mahadev Design And Construction", "Ahmedabad", "+91 7942828186", "Civil contractor handling residential/commercial live sites", "A", "https://dir.indiamart.com/ahmedabad/civil-contractors.html", ""],
+  ["Construction", "Shree Shailaja Developers", "Ahmedabad", "+91 8047817192", "Developer/EPC firm with commercial construction projects, live sites", "A", "https://dir.indiamart.com/ahmedabad/commercial-construction-projects.html", ""],
+  ["Construction", "Pan Engineers", "Ahmedabad", "+91 7948217190", "Civil engineering contractor, active project sites", "B", "https://dir.indiamart.com/ahmedabad/civil-contractors.html", ""],
+  ["Construction", "Sunlight Infra Energy Private Limited", "Ahmedabad", "+91 7949357759", "EPC contractor (infra/energy), outdoor site crews exposed to heat", "A", "https://dir.indiamart.com/ahmedabad/epc-contractor.html", ""],
+  ["Construction", "Gayatri Energy Corporation", "Ahmedabad", "+91 8047312244", "EPC firm, outdoor site workforce", "B", "https://dir.indiamart.com/ahmedabad/epc-contractor.html", ""],
+  ["Canteen / facility partner", "Kavintan Enterprises Private Limited", "Ahmedabad", "+91 8047787526", "Industrial canteen service provider, serves factory workforces", "A", "https://dir.indiamart.com/ahmedabad/canteen-service.html", ""],
+  ["Canteen / facility partner", "Ronika Caterers", "Ahmedabad", "+91 8043803029", "Canteen/catering contractor for industrial and office clients", "B", "https://dir.indiamart.com/ahmedabad/canteen-service.html", ""],
+  ["Canteen / facility partner", "SCS Facility Management", "Thaltej, Ahmedabad", "+91 8045909301", "Facility management + pantry services provider for offices/factories", "A", "https://dir.indiamart.com/ahmedabad/pantry-service.html", ""],
+  ["Canteen / facility partner", "Swaraj Men Management Private Limited", "Sabarmati, Ahmedabad", "+91 8047303853", "Manpower/housekeeping facility firm serving factories and offices, large reach (4.2/5, 254 reviews)", "A", "https://dir.indiamart.com/ahmedabad/facility-management-services.html", ""],
+  ["Canteen / facility partner", "Keydus Management Service (OPC) Private Limited", "Jivraj Park, Ahmedabad", "+91 7942706135", "Facility/housekeeping management company serving corporate and industrial clients", "B", "https://dir.indiamart.com/ahmedabad/facility-management-services.html", ""],
+  ["Events", "Storm Event Setup", "Ahmedabad", "+91 8047636014", "Event setup incl. dhol/garba-type events, 4.3/5 rating with 40 reviews", "A", "https://dir.indiamart.com/ahmedabad/event-management-services.html", ""],
+  ["Events", "Imperial Events", "Navrangpura, Ahmedabad", "+91 7942722264", "Exhibition/trade fair organiser, outdoor crews during setup", "A", "https://dir.indiamart.com/ahmedabad/trade-fair-organizer.html", ""],
+  ["Events", "Rising Star", "Ahmedabad", "+91 7949224658", "Event management company, corporate/sports event organiser", "B", "https://dir.indiamart.com/ahmedabad/corporate-event-management.html", ""],
+  ["Events", "Brahmani Works", "Ahmedabad", "+91 7942831988", "Event management company for corporate/large gatherings", "B", "https://dir.indiamart.com/ahmedabad/corporate-event-management.html", ""],
+  ["Events", "Crest Marcom LLP", "Ahmedabad", "+91 8048204094", "Event management services provider", "C", "https://dir.indiamart.com/ahmedabad/event-management-services.html", ""],
+  ["Office", "Aainz Cafe", "Ahmedabad", "+91 7942815507", "Tea/coffee vending supplier for offices - pantry vendor entry point for IT parks/offices", "B", "https://dir.indiamart.com/ahmedabad/tea-coffee-vending-machine.html", ""],
+  ["Office", "Ultimate Vending Systems", "Ahmedabad", "+91 8048211491", "Vending machine service for large offices, recurring pantry vendor relationship", "B", "https://dir.indiamart.com/ahmedabad/tea-coffee-vending-machine.html", ""],
+  ["Office", "Paics India", "Ahmedabad", "+91 8047824387", "Tea/coffee vending supplier serving corporate offices", "C", "https://dir.indiamart.com/ahmedabad/tea-coffee-vending-machine.html", ""],
+  ["Office", "MM Enterprise", "Nana Chiloda, Ahmedabad", "+91 7949323352", "Office housekeeping/facility services, admin point of contact for offices", "C", "https://dir.indiamart.com/ahmedabad/facility-management-services.html", ""],
+  /* researched 27 Sep 2026 (buyers_sport.json) — phones from IndiaMART / JustDial / Google listings */
+  ["Box cricket / turf", "Guts & Glory Box Cricket & Football", "South Bopal", "+91 79474 21853", "5.0 rating, 62 reviews, box cricket + football turf, busy evenings", "A", "https://www.justdial.com/Ahmedabad/Guts-Glory-Box-Cricket-Football-Opposite-Appollo-School-South-Bopal/079PXX79-XX79-231108162434-M5A2_BZDET", ""],
+  ["Gym", "World Gym", "Bodakdev", "+91 79471 51251", "4.9 rating, 149 reviews, 8 years in business, aerobics/zumba/crossfit, open till 10pm", "A", "https://www.justdial.com/Ahmedabad/World-Gym-Nr-Pakwan-Cross-Road-Bodakdev/079PXX79-XX79-180714070733-Q9S9_BZDET", ""],
+  ["Gym", "Infinity Fitness Gym", "Bodakdev (SG Highway)", "+91 79471 08515", "4.8 rating, 234 reviews, offers gym/zumba/crossfit/tabata classes", "A", "https://www.justdial.com/Ahmedabad/Infinity-Fitness-Gym-Near-Grand-Bhagwati-Bodakdev/079PXX79-XX79-240906200626-H3W8_BZDET", ""],
+  ["Gym", "Sneha's Zumba & Fitness Studio", "Bopal", "+91 79471 09080", "5.0 rating, 337 reviews, women-owned studio, Zumba/gym/aerial yoga, open 6:30am-9:30pm", "A", "https://www.justdial.com/Ahmedabad/Snehas-Zumba-Fitness-Studio-Near-Government-Tubewell-Opposite-Hp-Petrol-Pump-Bopal/079PXX79-XX79-211001132123-J6K8_BZDET", ""],
+  ["Box cricket / turf", "THE PICKLE KING", "South Bopal", "+91 79471 38343", "5.0 rating, 66 reviews, dedicated pickleball venue, open till 12:30am", "A", "https://www.justdial.com/Ahmedabad/THE-PICKLE-KING-NrKavisha-Panorama-South-Bopal/079PXX79-XX79-240605151915-G6W4_BZDET", ""],
+  ["Running", "Cyclone Cycling Club", "Tulsibag Society (near Bodakdev)", "+91 79471 10012", "Established cycling club, active event photos, but only 8 ratings on JD", "C", "https://www.justdial.com/Ahmedabad/Cyclone-Cycling-Club-Behind-Rajpath-Rangoli-Rd-Bodakdev/079PXX79-XX79-181008131635-D5T4_BZDET", "Vinod Purohit"],
+  ["Box cricket / turf", "Bang Bang", "Bodakdev", "+91 78788 81199", "566 reviews - extremely high footfall turf/sports venue in Bodakdev", "A", "https://www.justdial.com/Ahmedabad/Sprint-Cricket-Academy-Thaltej/079PXX79-XX79-220610222431-U9S8_BZDET", ""],
+  ["Box cricket / turf", "Turf Sports", "Bodakdev", "+91 79471 10597", "538 reviews - very busy turf sports venue", "A", "https://www.justdial.com/Ahmedabad/Sprint-Cricket-Academy-Thaltej/079PXX79-XX79-220610222431-U9S8_BZDET", ""],
+  ["Box cricket / turf", "Colosseum", "Bodakdev", "+91 79471 05942", "527 reviews - very busy sports turf venue", "A", "https://www.justdial.com/Ahmedabad/Sprint-Cricket-Academy-Thaltej/079PXX79-XX79-220610222431-U9S8_BZDET", ""],
+  ["Box cricket / turf", "Versus The Arena", "Menaka Society, Thaltej", "+91 79426 84862", "160 reviews, busy turf/sports arena in Thaltej", "B", "https://www.justdial.com/Ahmedabad/Sprint-Cricket-Academy-Thaltej/079PXX79-XX79-220610222431-U9S8_BZDET", ""],
+  ["Gym", "Gym Lounge Premium Navrangpura", "Navrangpura", "+91 79471 11660", "5.0 rating, 612 reviews, Crossfit+Zumba, 4 years in business, open till 10pm", "A", "https://www.justdial.com/Ahmedabad/Gym-Lounge-Premium-Navrangpura-Navrangpura/079PXX79-XX79-231230180036-Y9G9_BZDET", ""],
+  ["Box cricket / turf", "Mishty Box Cricket", "Navrangpura (Memnagar)", "+91 79426 92069", "4.0 rating, 218 reviews, open 24 hours - high volume venue", "A", "https://www.justdial.com/Ahmedabad/Mishty-Box-Cricket-Near-Doctor-Vikram-Sarabhai-BridgeMemnagar/079PXX79-XX79-230331221307-R2G7_BZDET", ""],
+  ["Box cricket / turf", "Dk Badminton Academy", "Chandkheda", "+91 79474 15976", "5.0 rating, 93 reviews, 384+ photos uploaded - very active badminton academy", "A", "https://www.justdial.com/Ahmedabad/Dk-Badminton-Academy-Chandkheda/079PXX79-XX79-220520221349-R7L1_BZDET", ""],
+  ["Gym", "Body Fuel Gym", "Gota Road", "+91 96649 80728", "5.0 rating, 1439 reviews, 11 years in business, Crossfit+Zumba - one of the busiest gyms in list", "A", "https://www.justdial.com/Ahmedabad/Body-Fuel-Gym-Near-Vande-Matram-Cross-Road-Opposite-Aatam-School-Gota-Road/079PXX79-XX79-150131170103-T3F2_BZDET", ""],
+  ["Gym", "Champions Martial Art Academy", "Thaltej", "+91 99806 48565", "5.0 rating, 303 reviews, MMA/boxing/taekwondo classes, 373 photos - very active", "A", "https://www.justdial.com/Ahmedabad/Champions-Martial-Art-Academy-Near-Cambay-Grand-Hotel-Thaltej/079PXX79-XX79-180924225528-F5H6_BZDET", ""],
+  ["Gym", "Neel Taekwondo Academy Satellite", "Satellite", "+91 79471 33611", "5.0 rating, 260 reviews, 10 years in business, biggest taekwondo academy in city per reviews", "A", "https://www.justdial.com/Ahmedabad/Neel-Taekwondo-Academy-Satellite-Beside-Riddhi-Tower-Jodhpur-Satellite/079PXX79-XX79-190720090207-H7K3_BZDET", ""],
+  ["Box cricket / turf", "Swingzone Box Cricket", "Gota / Jagatpur", "+91 79426 98396", "4.0 rating, 147 reviews, open 24 hours", "B", "https://www.justdial.com/Ahmedabad/Swingzone-Box-Cricket-Near-Chacha-Chaudhary-Tea-And-Snacks-Corner-Opposite-Godrej-Garden-City-Gota-Jagatpur/079PXX79-XX79-230819100041-C8Z1_BZDET", ""],
+  ["Cricket academy", "Ahmedabad Sports Academy - Satellite", "Satellite (Visatnagar Talavdi)", "+91 79471 20202", "5.0 rating, 186 reviews, table tennis + yoga/soccer/karate programs, 65+ photos", "B", "https://www.justdial.com/Ahmedabad/Ahmedabad-Sports-Academy-Satellite/079PXX79-XX79-230324000925-Z6P6_BZDET", ""],
+  ["Gym", "Anytime Fitness", "Satellite (Iskcon Cross Road)", "+91 99806 44594", "4.8 rating, 860 reviews, open 24hrs, franchise but very high footfall", "A", "https://www.justdial.com/Ahmedabad/Anytime-Fitness-Satellite/079PXX79-XX79-190107163408-G6K2_BZDET", ""],
+], BUY_KEYS, { status: "New", next: "", follow: "", notes: "" }).map((r) => ({ ...r, id: "buy-" + r.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") })));
 
 export const TASKS = () => mk([
   ["Week 1", "Apply FSSAI basic registration on FoSCoS (₹100)", "2026-09-30"],
@@ -350,4 +399,10 @@ export const upgradeSuppliers = (rows) => {
   });
   const have = new Set(out.map((r) => r.name));
   return [...out, ...seed.filter((s) => !have.has(s.name) && !rows.some((r) => r.id === s.id))];
+};
+
+/* Same for buyers: add starter buyers the team doesn't have yet (matched by name or id), never touching existing ones. */
+export const upgradeBuyers = (rows) => {
+  const have = new Set(rows.flatMap((r) => [r.name, r.id]));
+  return [...rows, ...BUYERS().filter((b) => !have.has(b.name) && !have.has(b.id))];
 };

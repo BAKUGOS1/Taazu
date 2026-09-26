@@ -8,13 +8,13 @@ import {
 } from "lucide-react";
 
 /* =========================================================
-   HYDRATION HQ — Ahmedabad electrolyte pilot tracker
+   TAAZU — Ahmedabad electrolyte launch
    Team data syncs through Supabase (see lib/useSync.ts).
    ========================================================= */
 
 /* ---------------- helpers ---------------- */
 import {
-  uid, mk, inr, today, telHref, waHref, GEO, enrich, mapUrl, SUP_KEYS, SUPPLIERS, upgradeSuppliers, BUY_KEYS, BUYERS, TASKS, BUDGET, BRANDS, SUP_STATUS, BUY_STATUS, STATUS_COL, COL, SEGS, FLAVOURS, PAYS, supCols, buyCols, taskCols, budCols, saleCols, survCols,
+  uid, mk, inr, today, telHref, waHref, GEO, enrich, mapUrl, SUP_KEYS, SUPPLIERS, upgradeSuppliers, upgradeBuyers, BUY_KEYS, BUYERS, TASKS, BUDGET, BRANDS, SUP_STATUS, BUY_STATUS, STATUS_COL, COL, SEGS, FLAVOURS, PAYS, supCols, buyCols, taskCols, budCols, saleCols, survCols,
 } from "./lib/core";
 import {
   inputCls, btn, btnPrimary, btnGhost, Dot, Tag, StatusSelect, IconLink, ContactIcons, PageHead, Panel, Stat, Bar, Empty,
@@ -100,7 +100,7 @@ function MainApp() {
   const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs, cfg: cfgRows }), [sup, buy, tasks, bud, sales, surv, logs, cfgRows]);
   const replaceAll = useCallback((d) => {
     d.sup && setSup(enrich(upgradeSuppliers(d.sup)).map((r) => ({ ...r, status: normalizeStage(SUPPLIER_CFG, r.status, { Called: "Contacted", Selected: "Finalized" }) })));
-    d.buy && setBuy(enrich(d.buy)); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud);
+    d.buy && setBuy(enrich(upgradeBuyers(d.buy))); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud);
     d.sales && setSales(d.sales); d.surv && setSurv(d.surv); d.logs && setLogs(d.logs); d.cfg && setCfgRows(d.cfg);
   }, []);
   const seed = useCallback(() => {
@@ -182,7 +182,7 @@ function MainApp() {
     const bn = XLSX.utils.json_to_sheet(BRANDS.map((x) => ({ Name: x.name, Meaning: x.meaning, "Why it works": x.why, "Trademark risk (guess)": x.risk, Verdict: x.pick })));
     bn["!cols"] = [{ wch: 14 }, { wch: 45 }, { wch: 55 }, { wch: 22 }, { wch: 16 }];
     XLSX.utils.book_append_sheet(wb, bn, "Brand names");
-    XLSX.writeFile(wb, `Hydration_HQ_${today()}.xlsx`);
+    XLSX.writeFile(wb, `Taazu_${today()}.xlsx`);
     say("Excel downloaded");
   };
   const importXlsx = async (file) => {
@@ -225,7 +225,7 @@ function MainApp() {
       <aside className="hidden md:flex md:flex-col w-60 shrink-0 bg-slate-900 text-slate-300 h-screen sticky top-0 px-3 py-4">
         <div className="flex items-center gap-2 px-2 mb-6">
           <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={18} /></div>
-          <div className="text-white font-semibold">Taazu HQ</div>
+          <div className="text-white font-semibold">Taazu</div>
           <span className="ml-auto"><SyncBadge status={syncStatus} compact /></span>
         </div>
         <nav className="flex-1 overflow-y-auto space-y-5">

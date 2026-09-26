@@ -10,8 +10,8 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png', 'logo.svg'],
       manifest: {
         id: '/',
-        name: 'Taazu HQ — Supplier & Pilot Tracker',
-        short_name: 'Taazu HQ',
+        name: 'Taazu — Electrolyte Launch',
+        short_name: 'Taazu',
         description: 'Call suppliers, log every conversation, compare quotes and track the Ahmedabad electrolyte pilot.',
         start_url: '/?source=pwa',
         scope: '/',

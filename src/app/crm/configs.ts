@@ -85,6 +85,18 @@ export const SUPPLIER_CFG: CrmConfig = {
 };
 
 /* ---------------- buyers ---------------- */
+// Line 2 of the buyer call: open with the problem this kind of buyer already feels.
+export const HOOK: Record<string, T> = {
+  Gym: { en: "Your members lose sodium and potassium in sweat, not just water — that's the cramps and the post-workout crash. A chilled Taazu at your counter fixes that, and you earn on every bottle.", hi: "Members paseene mein sirf paani nahi, sodium aur potassium bhi khote hain — isliye cramps aur workout ke baad thakaan. Counter pe chilled Taazu — aur har bottle pe aapka margin." },
+  "Box cricket / turf": { en: "After an hour in the heat, players' energy drops. Keep Taazu chilled at the counter — players buy it themselves, you keep the margin.", hi: "Garmi mein ek ghante ke baad players ki energy girti hai. Counter pe thanda Taazu rakho — player khud khareedenge, margin aapka." },
+  "Cricket academy": { en: "Kids practise 2–3 hours in the sun. Parents like seeing that the academy takes hydration seriously.", hi: "Bachche dhoop mein 2–3 ghante practice karte hain. Parents ko achha lagta hai ki academy hydration ka dhyan rakhti hai." },
+  Running: { en: "On long runs, water alone can dilute your sodium. We'd like to be your group's hydration partner.", hi: "Long run mein sirf paani se sodium kam ho sakta hai. Hum aapke group ke hydration partner banna chahte hain." },
+  Construction: { en: "Ahmedabad's Heat Action Plan names outdoor workers as high-risk. We run a March–June weekly hydration supply with a usage log for your safety file.", hi: "AMC ka Heat Action Plan outdoor workers ko high-risk kehta hai. Hum March–June weekly hydration supply dete hain, safety file ke liye usage log ke saath." },
+  Factory: { en: "On a hot shop floor, output and safety both dip in the afternoon. Weekly Taazu delivery, one monthly bill.", hi: "Garam shop floor pe dopahar mein output aur safety dono girte hain. Weekly Taazu delivery, ek monthly bill." },
+  "Canteen / facility partner": { en: "A summer hydration add-on for your clients — margin for you, reach for us. Can we trial it in one canteen?", hi: "Aapke clients ke liye summer hydration add-on — aapko margin, humein reach. Ek canteen mein trial karein?" },
+  Events: { en: "A Taazu hydration station or chilled bottles at your events — something new for guests, extra revenue for you.", hi: "Aapke events pe Taazu hydration station ya chilled bottles — guests ke liye naya, aapke liye extra revenue." },
+  Office: { en: "A healthier pantry option — a low-sugar electrolyte drink instead of soda. One week free trial?", hi: "Pantry ke liye healthy option — soda ki jagah kam-sugar electrolyte drink. Ek hafta free trial?" },
+};
 export const BUY_STAGES = ["New", "Contacted", "Meeting", "Trial", "Customer", "Lost"] as const;
 const PRI_RANK: Record<string, number> = { A: 0, B: 1, C: 2 };
 
@@ -105,10 +117,30 @@ export const BUYER_CFG: CrmConfig = {
     "Sample given": "Trial", "Order placed": "Customer", "Not interested": "Lost",
   },
   dealTitle: "Deal",
-  dealFields: [
-    { k: "qty", label: "Bottles / month", inputMode: "numeric", half: true },
-    { k: "rate", label: "Our price ₹/unit", inputMode: "decimal", half: true },
-    { k: "decision", label: "Decision maker", placeholder: "e.g. owner, HR, EHS head", half: true },
+  dealFields: [],
+  // One buyer call script (Buyers → Pitch); line 2 changes with the segment (HOOK).
+  script: {
+    open: (r, lang) => lang === "hi"
+      ? `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu se bol raha hoon — Ahmedabad ka apna electrolyte drink. 2 minute baat kar sakte hain?`
+      : `Hello${r.contact ? " " + r.contact : ""}, this is [your name] from Taazu — Ahmedabad's own electrolyte drink. Do you have 2 minutes?`,
+    close: {
+      en: "We'll drop a free crate of 24 chilled bottles for one week. If it sells, we deliver every Monday — one bill, no credit. Which day suits you for the sample?",
+      hi: "Hum ek hafte ke liye 24 chilled bottle ka free crate chhod dete hain. Bike to har Monday delivery — ek bill, no credit. Sample kis din drop karein?",
+    },
+    tips: [
+      { en: "Ask for the owner / HR / admin head — the person who decides. Take their name and direct number.", hi: "Owner / HR / admin head se baat karo — jo decide karta hai. Naam aur direct number le lo." },
+      { en: "Call gyms and turfs late morning to afternoon (off-peak). Call sites and factories 10–12 am.", hi: "Gym aur turf ko 11 se 4 ke beech call karo (off-peak). Site aur factory ko 10–12 baje." },
+      { en: "Lead with their problem (heat, cramps, tired workers), not with the product.", hi: "Pehle unki problem bolo (garmi, cramps, thake workers), product baad mein." },
+      { en: "Never say ORS, cure or medicine. Say: electrolyte drink, low sugar.", hi: "ORS, ilaaj ya dawai kabhi mat bolna. Bolo: electrolyte drink, kam sugar." },
+    ],
+  },
+  checklist: [
+    { k: "decision", label: "Decision maker", say: { en: "Who decides on drinks / supplies here?", hi: "Yahan drinks / supplies ka decision kaun leta hai?" }, placeholder: "Owner, HR, EHS head", half: true },
+    { k: "people", label: "People / day", say: { en: "Roughly how many people (members / workers / players) a day?", hi: "Roz lagbhag kitne log aate hain — members / workers / players?" }, inputMode: "numeric", placeholder: "e.g. 150", half: true },
+    { k: "now", label: "What they use now", say: { en: "What do they drink now — plain water, Glucon-D, ORS, cold drinks?", hi: "Abhi kya peete hain — sirf paani, Glucon-D, ORS, cold drink?" }, placeholder: "Water, Glucon-D, nothing…" },
+    { k: "qty", label: "Bottles / month", say: { en: "If they like it, how many bottles a week could you use?", hi: "Pasand aaye to hafte mein kitni bottle lag sakti hain?" }, inputMode: "numeric", half: true },
+    { k: "rate", label: "Our price ₹/unit", say: { en: "Our price is ₹__ per bottle; you sell at ₹30. Does that work?", hi: "Hamara rate ₹__ per bottle hai, aap ₹30 mein bechoge. Chalega?" }, inputMode: "decimal", half: true },
+    { k: "sampleDay", label: "Sample drop day", placeholder: "e.g. Mon 11 am", half: true },
     { k: "start", label: "Can start", type: "date", half: true },
   ],
   detailFields: [
