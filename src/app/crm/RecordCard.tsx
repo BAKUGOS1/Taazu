@@ -1,4 +1,5 @@
-import { Phone, MessageCircle, CalendarClock, ShieldCheck, Star } from "lucide-react";
+import { useState } from "react";
+import { Phone, MessageCircle, CalendarClock, ShieldCheck, Star, ChevronDown } from "lucide-react";
 import { COL, telHref, waHref, today } from "../../lib/core";
 import { Dot } from "../../components/ui";
 import { usePrefs } from "../../lib/prefs";
@@ -11,6 +12,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
   onOpen: (r: CrmRecord) => void; onCall: (r: CrmRecord, via: string) => void;
 }) {
   const { lang } = usePrefs();
+  const [open, setOpen] = useState(false); // details start closed; tap "Details" to view
   const tel = telHref(r.phone) || telHref(String(r.phone2 || "").split(/[,/]/)[0]);
   const wa = waHref(r.phone) || waHref(r.phone2);
   const tag = cfg.tag?.(r);
@@ -29,7 +31,6 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
             <div className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
               <Dot color={COL[cat] || "#64748B"} square /><span className="truncate">{cat}{r.area ? ` · ${r.area}` : ""}{r.city && !String(r.area || "").includes(r.city) ? `, ${r.city}` : ""}</span>
             </div>
-            {r.about && <div className="mt-1 text-xs text-slate-600 line-clamp-1"><span className="text-slate-400">Expert in: </span>{r.about}</div>}
           </div>
           <span className="shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ color: col, background: col + "18" }}>{r.status}</span>
         </div>
@@ -50,6 +51,23 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
           </div>
         )}
       </button>
+      {(r.about || r.gstin || r.contact || r.source) && (
+        <div className="px-4 pb-2">
+          <button onClick={() => setOpen((v) => !v)} aria-expanded={open} className="inline-flex items-center gap-1 text-xs font-semibold text-orange-700">
+            Details<ChevronDown size={14} className={`transition ${open ? "rotate-180" : ""}`} />
+          </button>
+          {open && (
+            <div className="mt-1.5 space-y-1 rounded-xl bg-stone-50 px-3 py-2 text-xs text-slate-600">
+              {r.about && <div><span className="text-slate-400">Expert in: </span>{r.about}</div>}
+              {r.area && <div><span className="text-slate-400">Address: </span>{r.area}</div>}
+              {(r.contact || r.phone2) && <div><span className="text-slate-400">Contact: </span>{[r.contact, r.phone2].filter(Boolean).join(" · ")}</div>}
+              {r.gstin && <div><span className="text-slate-400">GSTIN: </span>{r.gstin}</div>}
+              {r.fssai && <div><span className="text-slate-400">FSSAI: </span>{r.fssai}</div>}
+              {r.source && <div className="break-words"><span className="text-slate-400">Checked: </span>{r.source}</div>}
+            </div>
+          )}
+        </div>
+      )}
       <div className="grid grid-cols-2 border-t border-stone-100 bg-stone-50/60 text-sm font-semibold">
         {tel
           ? <a href={tel} onClick={() => onCall(r, "call")} className="flex items-center justify-center gap-2 py-3 text-slate-700 active:bg-slate-50"><Phone size={16} />Call</a>
