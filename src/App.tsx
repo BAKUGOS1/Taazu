@@ -3,7 +3,7 @@ import {
   Home, Users, Factory, Map as MapIcon, ListChecks, ClipboardList, ShoppingCart, Wallet, Palette,
   Download, Upload, Phone, MessageCircle, MapPin, Search, Plus, Trash2, LayoutGrid, Table as TableIcon,
   RotateCcw, Droplets, Settings, MoreHorizontal, Bell, CheckCircle2, Circle, AlertCircle, Star, Check, X, Target, TrendingUp,
-  QrCode, Copy, RefreshCw, ExternalLink, Link2, Send,
+  QrCode, Copy, RefreshCw, ExternalLink, Link2, Send, NotebookPen,
 } from "lucide-react";
 
 /* =========================================================
@@ -29,6 +29,7 @@ import TasksView from "./app/tasks";
 import SalesView from "./app/sales";
 import SurveyView from "./app/survey";
 import BudgetView from "./app/budget";
+import PlansView from "./app/plans";
 import MapView from "./app/map";
 import BrandView from "./app/brand";
 import SettingsView from "./app/settings";
@@ -43,11 +44,11 @@ import { SUPPLIER_CFG, BUYER_CFG } from "./app/crm/configs";
 const NAV_GROUPS = [
   { label: "Work", items: [{ id: "Today", icon: Home }, { id: "Buyers", icon: Users }, { id: "Suppliers", icon: Factory }, { id: "Map", icon: MapIcon }, { id: "Tasks", icon: ListChecks }] },
   { label: "Record", items: [{ id: "Survey", icon: ClipboardList }, { id: "QR Survey", icon: QrCode }, { id: "Sales", icon: ShoppingCart }] },
-  { label: "Plan", items: [{ id: "Budget", icon: Wallet }, { id: "Brand", icon: Palette }] },
+  { label: "Plan", items: [{ id: "Plans", icon: NotebookPen }, { id: "Budget", icon: Wallet }, { id: "Brand", icon: Palette }] },
   { label: "App", items: [{ id: "Settings", icon: Settings }] },
 ];
 const ALL_NAV = NAV_GROUPS.flatMap((g) => g.items);
-const MOBILE_PREF = ["Today", "Suppliers", "Buyers", "Tasks", "Sales", "Survey", "Map", "Budget", "QR Survey", "Brand"]; // dock order; first 4 that are on
+const MOBILE_PREF = ["Today", "Suppliers", "Buyers", "Tasks", "Sales", "Survey", "Map", "Budget", "Plans", "QR Survey", "Brand"]; // dock order; first 4 that are on
 const SUBS = {
   Buyers: "Real Ahmedabad businesses, priority A first. Public listings — confirm details on the first call.",
   Suppliers: "Call, log what they said, set the next follow-up. Public listings — verify before paying.",
@@ -56,12 +57,13 @@ const SUBS = {
   Survey: "Three taps per person.",
   "QR Survey": "Customers scan and answer on their own phone. Answers land in your Google Sheet.",
   Sales: "Pilot rule: cash or UPI only.",
+  Plans: "One card per plan. Import a .md or .txt file, or update a card from a new file.",
   Budget: "₹55,000 trial — planned vs actual.",
   Brand: "Taazu identity, product prototype, label rules and hydration facts with sources.",
   Settings: "Choose which screens and features you use, plus team and data.",
 };
 const STORE_KEY = "elec-tracker-v1";
-const COLLECTIONS = ["sup", "buy", "tasks", "bud", "sales", "surv", "logs", "cfg"];
+const COLLECTIONS = ["sup", "buy", "tasks", "bud", "sales", "surv", "logs", "cfg", "plans"];
 const CFG_LOCAL_KEY = "hq-survey-cfg"; // where the pre-team app kept the QR survey settings
 
 /* Customers who scan the QR (link has ?s=1) see only the survey form. */
@@ -79,6 +81,7 @@ function MainApp() {
   const [sales, setSales] = useState([]);
   const [surv, setSurv] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [plans, setPlans] = useState<any[]>([]);
   const [cfgRows, setCfgRows] = useState<any[]>([]);
   const surveyCfg = { endpoint: "", key: "", base: "", venue: "", ...(cfgRows.find((r) => r.id === "survey") || {}) };
   const saveSurveyCfg = (next) => setCfgRows((rs) => [...rs.filter((r) => r.id !== "survey"), { ...next, id: "survey" }]);
@@ -98,11 +101,11 @@ function MainApp() {
   // A screen switched off while open (or via an old link) falls back to the first one still on.
   useEffect(() => { if (tab !== "Settings" && !prefs.module(tab)) setTab(allNav[0]?.id || "Settings"); }, [tab, prefs, allNav]);
   const me = auth.me?.display_name || auth.session.user.email?.split("@")[0] || "";
-  const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs, cfg: cfgRows }), [sup, buy, tasks, bud, sales, surv, logs, cfgRows]);
+  const data = useMemo(() => ({ sup, buy, tasks, bud, sales, surv, logs, cfg: cfgRows, plans }), [sup, buy, tasks, bud, sales, surv, logs, cfgRows, plans]);
   const replaceAll = useCallback((d) => {
     d.sup && setSup(enrich(upgradeSuppliers(d.sup)).map((r) => ({ ...r, status: normalizeStage(SUPPLIER_CFG, r.status, { Called: "Contacted", Selected: "Finalized" }) })));
     d.buy && setBuy(enrich(upgradeBuyers(d.buy))); d.tasks && setTasks(d.tasks); d.bud && setBud(d.bud);
-    d.sales && setSales(d.sales); d.surv && setSurv(d.surv); d.logs && setLogs(d.logs); d.cfg && setCfgRows(d.cfg);
+    d.sales && setSales(d.sales); d.surv && setSurv(d.surv); d.logs && setLogs(d.logs); d.cfg && setCfgRows(d.cfg); d.plans && setPlans(d.plans);
   }, []);
   const seed = useCallback(() => {
     // First sync of a new team: this device's old local data, else the starter lists.
@@ -110,7 +113,7 @@ function MainApp() {
     try { const raw = localStorage.getItem(STORE_KEY); d = raw ? JSON.parse(raw) : null; if (typeof d === "string") d = JSON.parse(d); } catch { d = null; }
     let cfg: any[] = [];
     try { let c: any = JSON.parse(localStorage.getItem(CFG_LOCAL_KEY) || "null"); if (typeof c === "string") c = JSON.parse(c); if (c?.endpoint) cfg = [{ ...c, id: "survey" }]; } catch { /* no old settings */ }
-    const base = { sup: SUPPLIERS(), buy: BUYERS(), tasks: TASKS(), bud: BUDGET(), sales: [], surv: [], logs: [], cfg };
+    const base = { sup: SUPPLIERS(), buy: BUYERS(), tasks: TASKS(), bud: BUDGET(), sales: [], surv: [], logs: [], cfg, plans: [] };
     const out = { ...base, ...(d || {}) };
     const ordered = (rows) => rows.map((r, i) => ({ ...r, _o: r._o ?? i }));
     return Object.fromEntries(Object.entries(out).map(([k, v]) => [k, ordered(v as any[])]));
@@ -170,7 +173,7 @@ function MainApp() {
   };
   const resetAll = () => {
     if (!armReset) { setArmReset(true); setTimeout(() => setArmReset(false), 4000); return; }
-    setSup(SUPPLIERS()); setBuy(BUYERS()); setTasks(TASKS()); setBud(BUDGET()); setSales([]); setSurv([]); setArmReset(false); say("Reset to starting data");
+    setSup(SUPPLIERS()); setBuy(BUYERS()); setTasks(TASKS()); setBud(BUDGET()); setSales([]); setSurv([]); setPlans([]); setArmReset(false); say("Reset to starting data");
   };
 
   const badge = (id) => (id === "Suppliers" && k.supDue.length ? k.supDue.length : id === "Buyers" && k.follow.length ? k.follow.length : id === "Tasks" && k.overdue.length ? k.overdue.length : 0);
@@ -319,6 +322,7 @@ function MainApp() {
           {tab === "Survey" && <SurveyView surv={surv} setSurv={setSurv} />}
           {tab === "QR Survey" && <QrSurveyView surv={surv} setSurv={setSurv} cfg={surveyCfg} saveCfg={saveSurveyCfg} />}
           {tab === "Sales" && <SalesView sales={sales} setSales={setSales} me={me} />}
+          {tab === "Plans" && <PlansView plans={plans} setPlans={setPlans} me={me} />}
           {tab === "Budget" && <BudgetView bud={bud} setBud={setBud} />}
           {tab === "Brand" && <BrandView />}
           {tab === "Settings" && (
