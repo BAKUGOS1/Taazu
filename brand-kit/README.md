@@ -136,11 +136,11 @@ Before printing: final logo ko ek designer se clean karwao aur IP India par trad
 | `02-sirf-2-percent.png` | Post 4:5 | 2% body water loss | Ready |
 | `03-pyaas-late-lagti-hai.png` | Post 4:5 | Drink before thirst | Ready |
 | `04-amdavad-44-degree-gujarati.png` | Post 4:5 | Gujarati heat post | Ready |
-| `05-story-paani-vs-taazu.png` | Story 9:16 | Paani vs Taazu | Put your WhatsApp number in place of 9XXXX XXXXX. Post only after the final recipe has salt and potassium. |
-| `06-poster-a4-gym-turf.png` | A4 print, 300 dpi | Counter standee for gyms and turfs | Add the price in place of ₹__ and your QR code in the dashed box. |
-| `07-navratri-garba-station.png` | Post 4:5 | Navratri station | Add the cup price in place of ₹__. |
-| `08-hindi-site-workers.png` | Post 4:5 | Hindi poster for sites and factories | Ready. Print A4 for canteens too. |
+| `05-story-paani-vs-taazu.png` | Story 9:16 | Paani vs Taazu | WhatsApp 91737 36652 filled in. Post only after the final recipe has salt and potassium. |
+| `06-poster-a4-gym-turf.png` | A4 print, 300 dpi | Counter standee for gyms and turfs | Ready: ₹25 and a WhatsApp QR code (opens a chat with 91737 36652). |
+| `07-navratri-garba-station.png` | Post 4:5 | Navratri station | Ready: 250 ml ₹25. |
+| `08-hindi-site-workers.png` | Post 4:5 | Hindi poster for sites and factories | Ready, with WhatsApp number. Print A4 for canteens too. |
 
-Placeholders are easiest to fill in Canva: upload the PNG, put a text box over the placeholder in Baloo Bhai 2 ExtraBold. Or ask Claude to re-render with the real price and number.
+Price (₹25) and WhatsApp (91737 36652) are filled in. If either changes, ask Claude to re-render, or edit in Canva with a text box in Baloo Bhai 2 ExtraBold.
 
 Captions and AI prompts are in [`AI-PROMPTS.md`](AI-PROMPTS.md).

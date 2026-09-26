@@ -159,7 +159,7 @@ Night garba ground, dancers spinning in colourful clothes, cut to a dancer stepp
 
 **01 · Paseena sirf paani nahi**
 > Paseena sirf paani nahi hota. Har litre paseene ke saath lagbhag 1 gram sodium bhi nikal jaata hai, aur plain paani woh wapas nahi deta. 💧🍋
-> Garmi mein khelte ho ya kaam karte ho? Paani ke saath namak bhi wapas lo.
+> Garmi mein khelte ho ya kaam karte ho? Paani ke saath namak bhi wapas lo. Order: WhatsApp 91737 36652
 > Source: Baker LB, Sports Medicine 2017.
 > #Taazu #TaazuRaho #Amdavad #Ahmedabad #JoLogNahiJaante
 
@@ -183,10 +183,10 @@ Night garba ground, dancers spinning in colourful clothes, cut to a dancer stepp
 **06 · A4 poster** — print on 300 gsm matte, laminate, put it in an acrylic standee at the counter.
 
 **07 · Navratri**
-> Garba ki raat lambi hai. 💃🕺 Round ke beech mein ek chilled Taazu. Station dhoondo, cup lo, wapas circle mein.
+> Garba ki raat lambi hai. 💃🕺 Round ke beech mein ek chilled Taazu. Station dhoondo, 250 ml sirf ₹25, wapas circle mein.
 > #Taazu #Navratri #Garba #Amdavad #TaazuRaho
 
 **08 · Hindi site workers**
 > धूप में काम? पसीने के साथ नमक भी जाता है। पानी पियो, नमक भी वापस लो, छाँव में थोड़ा आराम करो।
-> Contractors and canteens: sample ke liye WhatsApp karein.
+> Contractors aur canteens: sample ke liye WhatsApp karein 91737 36652.
 > #Taazu #Ahmedabad
