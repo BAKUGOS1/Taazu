@@ -220,36 +220,37 @@ function MainApp() {
   return (
     <PrefsCtx.Provider value={prefs}>
     <CalculatorHost enabled={prefs.module("Calculator")}>
-    <div className="min-h-screen bg-slate-50 text-slate-800 md:flex font-sans antialiased">
+    <div className="min-h-screen text-stone-800 md:flex font-sans antialiased">
       {/* ---------- sidebar (desktop) ---------- */}
-      <aside className="hidden md:flex md:flex-col w-60 shrink-0 bg-slate-900 text-slate-300 h-screen sticky top-0 px-3 py-4">
+      <aside className="hidden md:flex md:flex-col w-64 shrink-0 bg-gradient-to-b from-stone-900 via-stone-900 to-stone-950 text-stone-400 h-screen sticky top-0 px-3 py-5 border-r border-white/5">
         <div className="flex items-center gap-2 px-2 mb-6">
-          <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={18} /></div>
-          <div className="text-white font-semibold">Taazu</div>
+          <div className="w-9 h-9 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={19} /></div>
+          <div className="leading-tight"><div className="text-white text-lg font-extrabold tracking-tight">taazu</div><div className="text-[11px] text-stone-500">Electrolyte launch</div></div>
           <span className="ml-auto"><SyncBadge status={syncStatus} compact /></span>
         </div>
         <nav className="flex-1 overflow-y-auto space-y-5">
           {navGroups.map((g) => (
             <div key={g.label}>
-              <div className="px-3 mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">{g.label}</div>
+              <div className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-[.14em] text-stone-600">{g.label}</div>
               {g.items.map(({ id, icon: Icon }) => (
-                <button key={id} onClick={() => go(id)} className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${tab === id ? "bg-slate-800 text-white font-medium" : "hover:bg-slate-800 hover:text-white"}`}>
-                  <Icon size={17} />{id}
-                  {badge(id) > 0 && <span className="ml-auto text-xs bg-orange-600 text-white rounded-full px-2">{badge(id)}</span>}
+                <button key={id} onClick={() => go(id)} className={`relative w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${tab === id ? "bg-gradient-to-r from-orange-500/20 to-orange-500/5 text-white" : "hover:bg-white/5 hover:text-white"}`}>
+                  {tab === id && <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-orange-500" />}
+                  <Icon size={17} className={tab === id ? "text-orange-400" : ""} />{id}
+                  {badge(id) > 0 && <span className="ml-auto text-[11px] font-bold bg-orange-600 text-white rounded-full px-2 py-0.5">{badge(id)}</span>}
                 </button>
               ))}
             </div>
           ))}
         </nav>
-        {prefs.module("Calculator") && <div className="mt-2 border-t border-slate-800 pt-2"><SidebarCalc /></div>}
+        {prefs.module("Calculator") && <div className="mt-2 border-t border-white/5 pt-2"><SidebarCalc /></div>}
       </aside>
 
       {/* ---------- main ---------- */}
       <main className="flex-1 min-w-0 pb-32 md:pb-0">
         {/* mobile header */}
-        <div className="md:hidden sticky top-0 z-20 bg-white/85 backdrop-blur border-b border-slate-200 pt-safe"><div className="px-4 py-3 flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={16} /></div>
-          <span className="font-semibold text-slate-900">{tab}</span>
+        <div className="md:hidden sticky top-0 z-20 bg-[#FAF8F5]/80 backdrop-blur-xl border-b border-stone-200/70 pt-safe"><div className="px-4 py-3 flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={17} /></div>
+          <span className="text-base font-extrabold tracking-tight text-stone-900">{tab}</span>
           <span className="ml-auto"><SyncBadge status={syncStatus} /></span>
           <button onClick={() => go("Settings")} aria-label="Settings" className={`-mr-1 p-1.5 rounded-lg ${tab === "Settings" ? "text-orange-600" : "text-slate-500"}`}><Settings size={20} /></button>
         </div></div>

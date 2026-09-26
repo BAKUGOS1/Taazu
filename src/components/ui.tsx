@@ -2,10 +2,10 @@ import { Phone, MessageCircle, MapPin } from "lucide-react";
 import { STATUS_COL, telHref, waHref, mapUrl } from "../lib/core";
 
 /* ---------------- UI primitives ---------------- */
-export const inputCls = "w-full border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-400";
-export const btn = "inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition";
-export const btnPrimary = `${btn} bg-orange-600 text-white hover:bg-orange-700`;
-export const btnGhost = `${btn} bg-white border border-slate-200 text-slate-700 hover:bg-slate-50`;
+export const inputCls = "w-full border border-stone-200 rounded-xl px-3 py-2 text-sm bg-white/90 placeholder:text-stone-400 transition focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-orange-400";
+export const btn = "inline-flex items-center justify-center gap-2 rounded-xl px-3.5 py-2 text-sm font-semibold transition active:scale-[.98]";
+export const btnPrimary = `${btn} btn-brand text-white`;
+export const btnGhost = `${btn} bg-white border border-stone-200 text-stone-700 shadow-sm hover:bg-stone-50`;
 
 export function Dot({ color, square = false }) {
   return <span className={`inline-block w-2 h-2 shrink-0 ${square ? "rounded-sm" : "rounded-full"}`} style={{ background: color }} />;
@@ -42,8 +42,8 @@ export function PageHead({ title, sub = null, children = null }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
       <div>
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900">{title}</h1>
-        {sub && <p className="text-sm text-slate-500 mt-1">{sub}</p>}
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-stone-900">{title}</h1>
+        {sub && <p className="text-sm text-stone-500 mt-1.5 max-w-2xl">{sub}</p>}
       </div>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
@@ -51,23 +51,24 @@ export function PageHead({ title, sub = null, children = null }) {
 }
 export function Panel({ title = null, icon: Icon = null, action = null, children, className = "" }) {
   return (
-    <section className={`bg-white rounded-xl border border-slate-200 ${className}`}>
+    <section className={`bg-white rounded-2xl border border-stone-200/80 shadow-card ${className}`}>
       {title && (
-        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
-          <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">{Icon && <Icon size={16} className="text-slate-400" />}{title}</div>
+        <div className="flex items-center justify-between px-4 md:px-5 py-3.5 border-b border-stone-100">
+          <div className="flex items-center gap-2.5 text-sm font-bold text-stone-900">{Icon && <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><Icon size={15} /></span>}{title}</div>
           {action}
         </div>
       )}
-      <div className="p-4">{children}</div>
+      <div className="p-4 md:p-5">{children}</div>
     </section>
   );
 }
 export function Stat({ icon: Icon, label, value, hint = null }) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-4">
-      <div className="flex items-center gap-2 text-xs text-slate-500"><Icon size={14} />{label}</div>
-      <div className="text-2xl font-bold text-slate-900 mt-1">{value}</div>
-      {hint && <div className="text-xs text-slate-500 mt-1">{hint}</div>}
+    <div className="relative overflow-hidden bg-white rounded-2xl border border-stone-200/80 shadow-card p-4">
+      <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-orange-100/60" />
+      <div className="relative flex items-center gap-2 text-xs font-medium text-stone-500"><span className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><Icon size={15} /></span>{label}</div>
+      <div className="relative text-2xl md:text-3xl font-extrabold tracking-tight tabular-nums text-stone-900 mt-2">{value}</div>
+      {hint && <div className="relative text-xs text-stone-500 mt-1">{hint}</div>}
     </div>
   );
 }

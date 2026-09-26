@@ -64,17 +64,17 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
     <div>
       <div className="grid grid-cols-4 gap-2 mb-4">
         {stats(filtered, due.length).map(([l, n, c]) => (
-          <div key={l} className="rounded-2xl bg-white border border-slate-200 px-2 py-2.5 text-center">
-            <div className="text-xl font-bold" style={{ color: c }}>{n}</div>
-            <div className="text-[11px] text-slate-500">{l}</div>
+          <div key={l} className="relative overflow-hidden rounded-2xl bg-white border border-stone-200/80 shadow-card px-2 py-3 text-center"><span className="absolute inset-x-0 top-0 h-1" style={{ background: c }} />
+            <div className="text-2xl font-extrabold tabular-nums tracking-tight" style={{ color: c }}>{n}</div>
+            <div className="text-[11px] font-medium text-stone-500">{l}</div>
           </div>
         ))}
       </div>
 
-      <div className="sticky top-[calc(57px+env(safe-area-inset-top))] md:top-0 z-10 -mx-4 px-4 py-2 bg-slate-50/90 backdrop-blur">
-        <div className="grid rounded-xl bg-slate-200/70 p-1" style={{ gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))` }}>
+      <div className="sticky top-[calc(57px+env(safe-area-inset-top))] md:top-0 z-10 -mx-4 px-4 py-2 bg-[#FAF8F5]/85 backdrop-blur-xl">
+        <div className="grid rounded-2xl bg-stone-200/60 p-1" style={{ gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))` }}>
           {tabs.map(({ id, label, icon: Icon }) => (
-            <button key={id} onClick={() => setTab(id)} className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold ${active === id ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}>
+            <button key={id} onClick={() => setTab(id)} className={`flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition ${active === id ? "bg-white text-orange-700 shadow-sm" : "text-stone-500 hover:text-stone-800"}`}>
               <Icon size={14} />{label}
             </button>
           ))}
@@ -93,11 +93,11 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
                   {cities.map(([c, n]) => <option key={c} value={c}>{c} ({n})</option>)}
                 </select>
               )}
-              <button onClick={add} className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-orange-600 px-3 text-sm font-semibold text-white active:bg-orange-700"><Plus size={16} />Add</button>
+              <button onClick={add} className="shrink-0 inline-flex items-center gap-1 rounded-xl btn-brand px-3.5 text-sm font-semibold text-white"><Plus size={16} />Add</button>
             </div>
             <div className="mt-2 flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4">
               {cats.map((c) => (
-                <button key={c} onClick={() => setCat(c)} className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium border ${c === cat ? "bg-slate-900 text-white border-slate-900" : "bg-white border-slate-200 text-slate-600"}`}>{c}</button>
+                <button key={c} onClick={() => setCat(c)} className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold border transition ${c === cat ? "bg-stone-900 text-white border-stone-900 shadow-sm" : "bg-white border-stone-200 text-stone-600 hover:border-stone-300"}`}>{c}</button>
               ))}
             </div>
           </>

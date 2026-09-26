@@ -21,11 +21,11 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
   const badge = cfg.badge?.(r);
   const cat = r[cfg.catKey];
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div className="bg-white rounded-2xl border border-stone-200/80 shadow-card overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lift">
       <button onClick={() => onOpen(r)} className="w-full text-left px-4 pt-3 pb-2 active:bg-slate-50">
         <div className="flex items-start gap-2">
           <div className="min-w-0 flex-1">
-            <div className="font-semibold text-slate-900 leading-snug">{r.name}</div>
+            <div className="font-bold text-stone-900 leading-snug">{r.name}</div>
             <div className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
               <Dot color={COL[cat] || "#64748B"} square /><span className="truncate">{cat}{r.area ? ` · ${r.area}` : ""}{r.city && !String(r.area || "").includes(r.city) ? `, ${r.city}` : ""}</span>
             </div>
@@ -49,7 +49,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
           </div>
         )}
       </button>
-      <div className="grid grid-cols-2 border-t border-slate-100 text-sm font-medium">
+      <div className="grid grid-cols-2 border-t border-stone-100 bg-stone-50/60 text-sm font-semibold">
         {tel
           ? <a href={tel} onClick={() => onCall(r, "call")} className="flex items-center justify-center gap-2 py-3 text-slate-700 active:bg-slate-50"><Phone size={16} />Call</a>
           : <span className="flex items-center justify-center gap-2 py-3 text-slate-300"><Phone size={16} />No phone</span>}

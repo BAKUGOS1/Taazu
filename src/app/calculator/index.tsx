@@ -315,7 +315,7 @@ export function CalcButton({ className = "" }: { className?: string }) {
 export function SidebarCalc() {
   const { open } = useCalc();
   return (
-    <button type="button" onClick={open} className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+    <button type="button" onClick={open} className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-stone-400 hover:bg-white/5 hover:text-white">
       <CalcIcon size={18} />Calculator
     </button>
   );
