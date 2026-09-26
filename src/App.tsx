@@ -220,9 +220,11 @@ function MainApp() {
   return (
     <PrefsCtx.Provider value={prefs}>
     <CalculatorHost enabled={prefs.module("Calculator")}>
-    <div className="min-h-screen text-stone-800 md:flex font-sans antialiased">
+    {/* App shell: the page itself never scrolls, only <main> does. Browsers resize or rubber-band
+        the document at the end of a page, which dragged the fixed bottom dock with it. */}
+    <div className="fixed inset-0 overflow-hidden text-stone-800 md:flex font-sans antialiased">
       {/* ---------- sidebar (desktop) ---------- */}
-      <aside className="hidden md:flex md:flex-col w-64 shrink-0 bg-gradient-to-b from-stone-900 via-stone-900 to-stone-950 text-stone-400 h-screen sticky top-0 px-3 py-5 border-r border-white/5">
+      <aside className="hidden md:flex md:flex-col w-64 shrink-0 bg-gradient-to-b from-stone-900 via-stone-900 to-stone-950 text-stone-400 h-full px-3 py-5 border-r border-white/5">
         <div className="flex items-center gap-2 px-2 mb-6">
           <div className="w-9 h-9 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={19} /></div>
           <div className="leading-tight"><div className="text-white text-lg font-extrabold tracking-tight">taazu</div><div className="text-[11px] text-stone-500">Electrolyte launch</div></div>
@@ -246,7 +248,7 @@ function MainApp() {
       </aside>
 
       {/* ---------- main ---------- */}
-      <main className="flex-1 min-w-0 pb-32 md:pb-0">
+      <main id="app-scroll" className="h-full flex-1 min-w-0 overflow-y-auto overscroll-contain pb-32 md:pb-0">
         {/* mobile header */}
         <div className="md:hidden sticky top-0 z-20 bg-[#FAF8F5]/80 backdrop-blur-xl border-b border-stone-200/70 pt-safe"><div className="px-4 py-3 flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl btn-brand flex items-center justify-center text-white"><Droplets size={17} /></div>
