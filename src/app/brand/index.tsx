@@ -1,79 +1,131 @@
-import { Star, Palette, ListChecks, Check, AlertCircle, X } from "lucide-react";
+import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type } from "lucide-react";
 import { Panel } from "../../components/ui";
-import { BRANDS } from "../../lib/core";
 
-/* ---------------- Brand & Bottle ---------------- */
+/*
+ * Brand: Taazu only. One identity, one product prototype, and the hydration facts we
+ * use in marketing — each with a real, checkable source. Keep claims general and
+ * non-medical; never call Taazu "ORS" or say it treats anything.
+ */
+
+export const TAAZU = {
+  name: "Taazu",
+  gujarati: "તાજું",
+  meaning: "Gujarati for 'fresh'",
+  tagline: { en: "More than water.", hi: "Paani se aage." },
+  promise: "A still, nimbu-namak electrolyte drink made for Ahmedabad's heat — putting back the salts sweat takes out.",
+};
+
+const PALETTE = [
+  { name: "Taazu Orange", hex: "#EA580C", use: "Logo, caps, buttons" },
+  { name: "Nimbu", hex: "#F5D83B", use: "Lemon accents" },
+  { name: "Leaf", hex: "#1F7A3A", use: "Wordmark, fresh cues" },
+  { name: "Cream", hex: "#FFF8E7", use: "Label background" },
+  { name: "Ink", hex: "#1C1917", use: "Text, nutrition panel" },
+];
+
+/* ---------- facts with sources (checked Sep 2026) ---------- */
+export const FACTS = [
+  { stat: "~1 g", title: "Salt leaves with every litre of sweat",
+    body: "Sweat is not just water. Across athletes, sweat sodium averages roughly 40 mmol per litre — close to a gram of sodium — and varies a lot from person to person.",
+    src: "Baker LB. Sports Medicine 2017;47:111–128", url: "https://link.springer.com/article/10.1007/s40279-017-0691-5" },
+  { stat: "0.5–2 L", title: "Sweat per hour in the heat",
+    body: "Hard work or exercise in hot weather can mean half a litre to two litres of sweat an hour. Ahmedabad summers regularly cross 44°C.",
+    src: "ACSM Position Stand: Exercise and Fluid Replacement, 2007", url: "https://pubmed.ncbi.nlm.nih.gov/17277604/" },
+  { stat: "2%", title: "Small loss, real drop",
+    body: "Losing more than about 2% of body weight as water is linked to lower endurance and poorer focus.",
+    src: "ACSM Position Stand: Exercise and Fluid Replacement, 2007", url: "https://pubmed.ncbi.nlm.nih.gov/17277604/" },
+  { stat: "Retain", title: "Salted drinks stay in longer than water",
+    body: "In a controlled trial, an oral rehydration drink with electrolytes was retained noticeably better in the hours after drinking than the same amount of plain water.",
+    src: "Maughan RJ et al. Am J Clin Nutr 2016;103:717–723", url: "https://pubmed.ncbi.nlm.nih.gov/26702122/" },
+  { stat: "13%", title: "Too much plain water has a risk too",
+    body: "Among Boston Marathon runners studied, 13% finished with low blood sodium — mostly from drinking lots of plain fluid over a long race.",
+    src: "Almond CSD et al. N Engl J Med 2005;352:1550–1556", url: "https://pubmed.ncbi.nlm.nih.gov/15829535/" },
+  { stat: "1,344", title: "Heat is a real risk in Ahmedabad",
+    body: "The May 2010 heat wave caused an estimated 1,344 excess deaths in the city, which led to India's first Heat Action Plan.",
+    src: "Azhar GS et al. PLoS ONE 2014;9(3):e91831", url: "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0091831" },
+  { stat: "5.8%", title: "Heat costs working hours",
+    body: "The ILO projects India could lose 5.8% of working hours in 2030 to heat stress — mostly outdoor and factory work.",
+    src: "ILO, Working on a Warmer Planet, 2019", url: "https://www.ilo.org/resource/news/increase-heat-stress-predicted-bring-productivity-loss-equivalent-80" },
+];
+
+/* ---------- bottle prototype ---------- */
 const BOTTLE = "M65,40 L95,40 L95,70 C95,86 140,98 140,130 L140,345 C140,362 128,372 112,372 L48,372 C32,372 20,362 20,345 L20,130 C20,98 65,86 65,70 Z";
-function Bottle({ id, cap, liquid, children }) {
+
+function Bottle({ id, liquid, accent, flavour, sub }: { id: string; liquid: string; accent: string; flavour: string; sub: string }) {
   return (
-    <svg viewBox="0 0 160 390" width="150" height="366">
+    <svg viewBox="0 0 160 390" width="150" height="366" role="img" aria-label={`Taazu ${flavour} bottle`}>
       <defs>
         <clipPath id={"c" + id}><path d={BOTTLE} /></clipPath>
-        <linearGradient id={"g" + id} x1="0" x2="1"><stop offset="0" stopColor="#fff" stopOpacity=".55" /><stop offset=".3" stopColor="#fff" stopOpacity="0" /><stop offset=".85" stopColor="#000" stopOpacity=".08" /></linearGradient>
+        <linearGradient id={"g" + id} x1="0" x2="1"><stop offset="0" stopColor="#fff" stopOpacity=".6" /><stop offset=".28" stopColor="#fff" stopOpacity="0" /><stop offset=".85" stopColor="#000" stopOpacity=".1" /></linearGradient>
       </defs>
       <ellipse cx="80" cy="378" rx="62" ry="7" fill="#000" opacity=".1" />
-      <path d={BOTTLE} fill={liquid} opacity=".85" />
-      <g clipPath={`url(#c${id})`}>{children}<rect x="0" y="0" width="160" height="390" fill={`url(#g${id})`} /></g>
+      <path d={BOTTLE} fill={liquid} opacity=".9" />
+      <g clipPath={`url(#c${id})`}>
+        {/* wrap label */}
+        <rect x="0" y="150" width="160" height="165" fill="#FFF8E7" />
+        <rect x="0" y="150" width="160" height="7" fill="#EA580C" />
+        <rect x="0" y="308" width="160" height="7" fill="#EA580C" />
+        {/* lemon slice */}
+        <circle cx="121" cy="189" r="26" fill={accent} /><circle cx="121" cy="189" r="20" fill="#FFFBE0" opacity=".9" />
+        {[0, 45, 90, 135].map((a) => <line key={a} x1={121 - 20 * Math.cos((a * Math.PI) / 180)} y1={189 - 20 * Math.sin((a * Math.PI) / 180)} x2={121 + 20 * Math.cos((a * Math.PI) / 180)} y2={189 + 20 * Math.sin((a * Math.PI) / 180)} stroke={accent} strokeWidth="1.6" />)}
+        {/* drop mark + wordmark */}
+        <path d="M34,176 C40,186 43,192 39,199 C37,203 31,203 29,199 C25,192 28,186 34,176 Z" fill="#EA580C" />
+        <text x="26" y="238" fontSize="34" fontWeight="900" fill="#1F7A3A" letterSpacing="-1">taazu</text>
+        <text x="28" y="252" fontSize="9" fontWeight="600" fill="#1F7A3A" opacity=".75">તાજું</text>
+        <text x="28" y="272" fontSize="9" fontWeight="800" fill="#EA580C" letterSpacing=".5">{flavour.toUpperCase()}</text>
+        <text x="28" y="285" fontSize="7" fill="#44403C">{sub}</text>
+        <text x="28" y="300" fontSize="7" fill="#44403C">Electrolyte drink · 250 ml</text>
+        <rect x="0" y="0" width="160" height="390" fill={`url(#g${id})`} />
+      </g>
       <path d={BOTTLE} fill="none" stroke="#0003" strokeWidth="1.2" />
-      <rect x="58" y="12" width="44" height="30" rx="5" fill={cap} />
+      <rect x="58" y="12" width="44" height="30" rx="5" fill="#EA580C" />
       {[0, 1, 2, 3, 4, 5, 6].map((i) => <rect key={i} x={61 + i * 6} y="15" width="2" height="24" fill="#0002" />)}
-      <rect x="56" y="40" width="48" height="5" rx="2" fill={cap} opacity=".8" />
+      <rect x="56" y="40" width="48" height="5" rx="2" fill="#C2410C" />
     </svg>
   );
 }
-function Mockups() {
-  const Cap = ({ t, s }) => <div className="mt-2"><div className="text-sm font-semibold text-slate-900">{t}</div><div className="text-xs text-slate-500">{s}</div></div>;
+
+function Stick() {
   return (
-    <div className="flex items-end gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar px-2 md:flex-wrap md:justify-center md:overflow-visible">
-      <div className="text-center shrink-0 snap-center">
-        <Bottle id="r" cap="#E4572E" liquid="#F3EFC4">
-          <defs><pattern id="hex" width="14" height="12" patternUnits="userSpaceOnUse"><polygon points="7,0 14,3.5 14,8.5 7,12 0,8.5 0,3.5" fill="none" stroke="#E8D3B0" strokeWidth="1" /></pattern></defs>
-          <rect x="0" y="158" width="160" height="150" fill="#FFF6E6" /><rect x="0" y="158" width="160" height="150" fill="url(#hex)" />
-          <rect x="0" y="158" width="160" height="10" fill="#E4572E" /><rect x="0" y="298" width="160" height="10" fill="#E4572E" />
-          <text x="80" y="212" textAnchor="middle" fontSize="36" fontWeight="900" fill="#3B1F0E" letterSpacing="3">RANN</text>
-          <text x="80" y="232" textAnchor="middle" fontSize="9" fontWeight="700" fill="#E4572E">NIMBU · JEERA · NAMAK</text>
-          <text x="80" y="250" textAnchor="middle" fontSize="8" fill="#3B1F0E">Electrolyte Drink</text>
-          <circle cx="80" cy="270" r="9" fill="#F7C948" /><circle cx="80" cy="270" r="5.5" fill="none" stroke="#fff" strokeWidth="1.2" />
-          <text x="80" y="292" textAnchor="middle" fontSize="7.5" fill="#3B1F0E">250 ml · Salt of Kutch</text>
-        </Bottle>
-        <Cap t="RANN" s="Salt-flat pattern, saffron cap" />
+    <svg viewBox="0 0 120 300" width="96" height="240" role="img" aria-label="Taazu stick sachet">
+      <path d="M22,18 L98,18 L98,282 L22,282 Z" fill="#FFF8E7" stroke="#E7DCC0" />
+      {[...Array(8)].map((_, i) => <path key={i} d={`M${22 + i * 9.5},18 l4.75,-6 l4.75,6`} fill="#FFF8E7" stroke="#E7DCC0" />)}
+      <rect x="22" y="36" width="76" height="8" fill="#EA580C" />
+      <text x="60" y="160" textAnchor="middle" fontSize="30" fontWeight="900" fill="#1F7A3A" transform="rotate(-90 60 160)">taazu</text>
+      <circle cx="60" cy="226" r="11" fill="#F5D83B" /><circle cx="60" cy="226" r="7" fill="#FFFBE0" />
+      <text x="60" y="256" textAnchor="middle" fontSize="7" fontWeight="800" fill="#EA580C">STICK · MAKES 500 ml</text>
+      <rect x="22" y="266" width="76" height="8" fill="#EA580C" />
+    </svg>
+  );
+}
+
+function BackLabel() {
+  const rows = [["Energy", "— kcal"], ["Carbohydrate", "— g"], ["  of which total sugars", "— g"], ["  of which added sugars", "— g"], ["Sodium", "— mg"], ["Potassium", "— mg"]];
+  return (
+    <div className="mx-auto w-full max-w-sm rounded-xl border border-stone-300 bg-[#FFF8E7] p-4 text-stone-800 shadow-sm">
+      <div className="flex items-baseline justify-between">
+        <span className="text-xl font-black tracking-tight text-[#1F7A3A]">taazu</span>
+        <span className="text-[10px] font-bold uppercase text-[#EA580C]">Nimbu-Namak · 250 ml</span>
       </div>
-      <div className="text-center shrink-0 snap-center">
-        <Bottle id="j" cap="#0B6E4F" liquid="#DDF3E8">
-          <rect x="0" y="158" width="160" height="150" fill="#0A1630" />
-          <path d="M80,176 L100,184 L100,204 C100,218 90,226 80,230 C70,226 60,218 60,204 L60,184 Z" fill="#00B4EE" />
-          <path d="M80,190 C86,198 88,204 84,210 C82,214 78,214 76,210 C72,204 74,198 80,190 Z" fill="#fff" />
-          <text x="80" y="254" textAnchor="middle" fontSize="20" fontWeight="900" fill="#fff">JalKavach</text>
-          <text x="80" y="270" textAnchor="middle" fontSize="8" fontWeight="700" fill="#7FE3FF">HEAT-SHIFT HYDRATION</text>
-          <text x="80" y="292" textAnchor="middle" fontSize="7.5" fill="#B9C8E4">Nimbu · Electrolytes · 250 ml</text>
-        </Bottle>
-        <Cap t="JalKavach" s="Shield mark, B2B look" />
+      <p className="mt-1 text-[11px] leading-snug">Non-carbonated water-based flavoured beverage with electrolytes.</p>
+      <p className="mt-2 text-[10px] leading-snug"><b>Ingredients:</b> Water, lemon juice, sugar, salt, potassium citrate, cumin extract… <i>(final list from co-packer, in descending order)</i></p>
+      <table className="mt-2 w-full border border-stone-800 text-[10px]">
+        <thead><tr className="bg-stone-800 text-white"><th className="px-2 py-1 text-left">Nutrition per 100 ml</th><th className="px-2 py-1 text-right">Amount</th></tr></thead>
+        <tbody>{rows.map(([k, v]) => <tr key={k} className="border-t border-stone-300"><td className="whitespace-pre px-2 py-0.5">{k}</td><td className="px-2 py-0.5 text-right">{v}</td></tr>)}</tbody>
+      </table>
+      <div className="mt-2 grid grid-cols-2 gap-x-3 text-[9px] leading-snug">
+        <span>FSSAI Lic. (brand owner): —</span><span>FSSAI Lic. (mfr.): —</span>
+        <span>Batch · MFD · Best before: —</span><span>MRP ₹__ (incl. all taxes)</span>
       </div>
-      <div className="text-center shrink-0 snap-center">
-        <Bottle id="t" cap="#7CC800" liquid="#EEF9C8">
-          <rect x="0" y="158" width="160" height="150" fill="#FFFFFF" />
-          <circle cx="118" cy="190" r="34" fill="#F7E04A" /><circle cx="118" cy="190" r="27" fill="#FBF3A8" />
-          {[0, 45, 90, 135].map((a) => <line key={a} x1={118 - 27 * Math.cos((a * Math.PI) / 180)} y1={190 - 27 * Math.sin((a * Math.PI) / 180)} x2={118 + 27 * Math.cos((a * Math.PI) / 180)} y2={190 + 27 * Math.sin((a * Math.PI) / 180)} stroke="#F7E04A" strokeWidth="2" />)}
-          <text x="24" y="246" fontSize="34" fontWeight="900" fill="#1F7A1F">taazu</text>
-          <text x="26" y="264" fontSize="8.5" fontWeight="700" fill="#E4572E">nimbu-namak electrolyte</text>
-          <text x="26" y="292" fontSize="7.5" fill="#555">Low sugar* · 250 ml</text>
-        </Bottle>
-        <Cap t="Taazu" s="Lemon slice, playful" />
+      <div className="mt-2 flex items-center justify-between text-[9px]">
+        <span className="inline-flex items-center gap-1"><span className="inline-block h-3 w-3 border-2 border-green-700 p-[1px]"><span className="block h-full w-full rounded-full bg-green-700" /></span>Veg</span>
+        <span>Consumer care: WhatsApp __ · Marketed by Taazu, Ahmedabad</span>
       </div>
-      <div className="text-center shrink-0 snap-center">
-        <svg viewBox="0 0 120 300" width="100" height="250">
-          <path d="M20,20 L100,20 L100,280 L20,280 Z" fill="#FFF6E6" stroke="#E8D3B0" />
-          {[...Array(9)].map((_, i) => <path key={i} d={`M${20 + i * 10},20 l5,-6 l5,6`} fill="#FFF6E6" stroke="#E8D3B0" />)}
-          <rect x="20" y="40" width="80" height="8" fill="#E4572E" />
-          <text x="60" y="100" textAnchor="middle" fontSize="22" fontWeight="900" fill="#3B1F0E" transform="rotate(-90 60 150)">RANN</text>
-          <text x="60" y="235" textAnchor="middle" fontSize="7" fontWeight="700" fill="#E4572E">STICK · MAKES 500 ml</text>
-          <rect x="20" y="252" width="80" height="8" fill="#E4572E" />
-        </svg>
-        <Cap t="RANN stick" s="Same look for powder" />
-      </div>
+      <p className="mt-2 text-[9px] text-stone-500">Values shown as "—" are filled only from the NABL lab report.</p>
     </div>
   );
 }
+
 export default function BrandView() {
   const must = [
     "Brand + true name: \"Non-carbonated water-based flavoured beverage with electrolytes\"",
@@ -83,44 +135,117 @@ export default function BrandView() {
     "Net quantity, MRP (incl. taxes), batch, date of manufacture, best before",
     "Consumer-care contact; allergen & sweetener notes if applicable",
   ];
-  const avoid = ["\"ORS\" anywhere on the pack", "\"Health drink\" or any cure / disease claim", "\"Low sugar\" unless the lab report supports it"];
-  const tips = ["Use the co-packer's stock bottle and cap", "Wrap-around label ~60–70 mm tall (confirm with printer)", "Brand readable from 2 metres", "One colour per flavour; same layout on sachet", "QR code to WhatsApp for reorders", "Print one batch + 20% of labels for the pilot"];
+  const avoid = ["\"ORS\" anywhere on the pack", "\"Health drink\" or any cure / disease claim", "\"Low sugar\" unless the lab report supports it", "Medical words: treats, prevents, cures, doctor-recommended"];
+  const tips = ["Use the co-packer's stock bottle and cap — only label + cap colour are ours", "Wrap-around label ~60–70 mm tall (confirm with printer)", "'taazu' readable from 2 metres on a gym counter", "One accent colour per flavour; same layout on the sachet", "QR code to WhatsApp for reorders", "Print one batch + 20% of labels for the pilot"];
+
   return (
     <div className="space-y-4">
-      <Panel title="Name ideas" icon={Star}>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {BRANDS.map((b) => (
-            <div key={b.name} className={`rounded-lg p-3 border ${b.top ? "border-orange-300 bg-orange-50" : "border-slate-200"}`}>
-              <div className="flex justify-between items-center gap-2">
-                <div className="text-lg font-bold text-slate-900">{b.name}</div>
-                <span className={`inline-flex items-center gap-1 text-xs font-medium ${b.top ? "text-orange-700" : "text-slate-500"}`}>{b.top && <Star size={12} />}{b.pick}</span>
+      {/* identity */}
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 p-6 text-white shadow-lg md:p-8">
+        <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-white/10" />
+        <div className="absolute -bottom-16 right-16 h-36 w-36 rounded-full bg-white/10" />
+        <div className="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><Droplets size={26} /></div>
+              <div>
+                <div className="text-4xl font-black tracking-tight leading-none">taazu</div>
+                <div className="text-sm text-orange-100">{TAAZU.gujarati} · {TAAZU.meaning}</div>
               </div>
-              <div className="text-xs text-slate-500 mt-1">{b.meaning}</div>
-              <div className="text-sm text-slate-700 mt-2">{b.why}</div>
-              <div className="text-xs text-slate-500 mt-2">Trademark risk: {b.risk}</div>
+            </div>
+            <h2 className="mt-6 text-3xl font-extrabold leading-tight md:text-4xl">{TAAZU.tagline.en}<br /><span className="text-orange-100">{TAAZU.tagline.hi}</span></h2>
+            <p className="mt-3 max-w-xl text-sm text-orange-50">{TAAZU.promise}</p>
+          </div>
+          <div className="hidden md:block rounded-2xl bg-white/95 p-3"><Bottle id="hero" liquid="#F3F0B8" accent="#F5D83B" flavour="Nimbu-Namak" sub="Nimbu · Sendha namak" /></div>
+        </div>
+      </section>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Panel title="Colours" icon={Palette}>
+          <div className="grid grid-cols-5 gap-2">
+            {PALETTE.map((c) => (
+              <div key={c.hex} className="text-center">
+                <div className="h-14 rounded-xl border border-black/5" style={{ background: c.hex }} />
+                <div className="mt-1.5 text-[11px] font-semibold text-slate-800 leading-tight">{c.name}</div>
+                <div className="text-[10px] text-slate-500">{c.hex}</div>
+              </div>
+            ))}
+          </div>
+          <ul className="mt-3 space-y-1 text-xs text-slate-600">{PALETTE.map((c) => <li key={c.hex}><b>{c.name}:</b> {c.use}</li>)}</ul>
+        </Panel>
+        <Panel title="Wordmark & type" icon={Type}>
+          <div className="flex items-center gap-4 rounded-xl bg-[#FFF8E7] p-4">
+            <span className="text-5xl font-black tracking-tight text-[#1F7A3A]">taazu</span>
+            <span className="text-lg font-semibold text-[#1F7A3A]/70">તાજું</span>
+          </div>
+          <ul className="mt-3 space-y-1.5 text-sm text-slate-700">
+            <li>• Always lowercase <b>taazu</b> in the logo; "Taazu" in sentences.</li>
+            <li>• Heavy rounded sans (e.g. Poppins Black / Nunito Black) for the wordmark; regular sans for text.</li>
+            <li>• Orange drop mark sits left of the wordmark; keep one drop-height of space around the logo.</li>
+            <li>• Voice: warm, local, straight — Hinglish OK, no medical talk.</li>
+          </ul>
+        </Panel>
+      </div>
+
+      {/* product prototype */}
+      <Panel title="Product prototype · 250 ml stock PET + stick" icon={Droplets}>
+        <div className="rounded-xl bg-slate-50 p-4 md:p-6">
+          <div className="flex items-end gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar px-2 md:justify-center md:overflow-visible">
+            {[
+              { id: "n", flavour: "Nimbu-Namak", sub: "Nimbu · Sendha namak", liquid: "#F3F0B8", accent: "#F5D83B", note: "Hero flavour — launch with this only" },
+              { id: "j", flavour: "Jeera", sub: "Jeera · Nimbu · Namak", liquid: "#EADFC2", accent: "#B7791F", note: "Second flavour after the pilot" },
+              { id: "k", flavour: "Kokum", sub: "Kokum · Namak", liquid: "#F1C6D3", accent: "#9D174D", note: "Summer special idea" },
+            ].map((b) => (
+              <div key={b.id} className="shrink-0 snap-center text-center">
+                <Bottle id={b.id} liquid={b.liquid} accent={b.accent} flavour={b.flavour} sub={b.sub} />
+                <div className="mt-2 text-sm font-semibold text-slate-900">{b.flavour}</div>
+                <div className="text-xs text-slate-500">{b.note}</div>
+              </div>
+            ))}
+            <div className="shrink-0 snap-center text-center">
+              <Stick />
+              <div className="mt-2 text-sm font-semibold text-slate-900">Stick sachet</div>
+              <div className="text-xs text-slate-500">Same look for powder, later</div>
+            </div>
+          </div>
+        </div>
+        <p className="mt-2 text-xs text-slate-400 md:hidden">Swipe sideways to see all.</p>
+        <p className="mt-3 text-xs text-slate-500">Standard bottle shape: only the label and cap colour change, so there's no mould cost. Pilot = one flavour, one size.</p>
+      </Panel>
+
+      <Panel title="Back label prototype" icon={ListChecks}>
+        <BackLabel />
+      </Panel>
+
+      {/* awareness */}
+      <Panel title="Why electrolytes — facts people don't know (with sources)" icon={BookOpen}>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {FACTS.map((f) => (
+            <div key={f.title} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-4">
+              <div className="text-2xl font-black text-orange-600">{f.stat}</div>
+              <div className="mt-1 font-semibold leading-snug text-slate-900">{f.title}</div>
+              <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-600">{f.body}</p>
+              <a href={f.url} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-start gap-1 text-[11px] text-slate-500 hover:text-orange-700">
+                <ExternalLink size={12} className="mt-0.5 shrink-0" />{f.src}
+              </a>
             </div>
           ))}
         </div>
-        <p className="text-xs text-slate-500 mt-3">Search your pick on the IP India trademark portal (class 32) before printing anything.</p>
+        <p className="mt-3 text-xs text-slate-500">Use these for posts, pitch decks and counter standees. They describe hydration in general — never say Taazu treats or prevents anything, and never call it ORS.</p>
       </Panel>
-      <Panel title="Bottle mockups · 250 ml stock PET" icon={Palette}>
-        <div className="bg-slate-50 rounded-lg p-4 md:p-6"><Mockups /></div>
-        <p className="text-xs text-slate-400 mt-2 md:hidden">Swipe sideways to see all four.</p>
-        <p className="text-xs text-slate-500 mt-3">Concept designs on a standard bottle shape — only the label and cap colour change, so no mould cost.</p>
-      </Panel>
-      <div className="grid md:grid-cols-3 gap-4">
+
+      <div className="grid gap-4 md:grid-cols-3">
         <Panel title="Label must include" icon={ListChecks}>
-          <ul className="space-y-2">{must.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><Check size={16} className="text-green-600 shrink-0 mt-0.5" />{m}</li>)}</ul>
+          <ul className="space-y-2">{must.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><Check size={16} className="mt-0.5 shrink-0 text-green-600" />{m}</li>)}</ul>
         </Panel>
         <Panel title="Never put on the label" icon={AlertCircle}>
-          <ul className="space-y-2">{avoid.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><X size={16} className="text-red-600 shrink-0 mt-0.5" />{m}</li>)}</ul>
-          <div className="mt-4 text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3">Competitors launched in 2026: Reliance RasKik Gluco Energy (electrolytes + lemon, ₹10), AQUON and No Secrets sachets. Win on taste or sell where they aren't — direct B2B.</div>
+          <ul className="space-y-2">{avoid.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><X size={16} className="mt-0.5 shrink-0 text-red-600" />{m}</li>)}</ul>
+          <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-slate-600">Before printing: search "Taazu" in class 32 on the IP India trademark portal and file your application (₹4,500 for a proprietor / MSME).</div>
         </Panel>
-        <Panel title="Design tips" icon={Palette}>
-          <ul className="space-y-2">{tips.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><Check size={16} className="text-slate-400 shrink-0 mt-0.5" />{m}</li>)}</ul>
+        <Panel title="Design rules" icon={Palette}>
+          <ul className="space-y-2">{tips.map((m) => <li key={m} className="flex gap-2 text-sm text-slate-700"><Check size={16} className="mt-0.5 shrink-0 text-slate-400" />{m}</li>)}</ul>
         </Panel>
       </div>
     </div>
   );
 }
-

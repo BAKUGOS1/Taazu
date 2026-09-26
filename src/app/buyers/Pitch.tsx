@@ -84,7 +84,7 @@ export default function Pitch() {
       </section>
 
       <p className="text-[11px] leading-relaxed text-slate-400">
-        General hydration information, not medical advice. Never call Taazu "ORS" or say it treats or cures anything. Say "low sugar" only after the lab report confirms it.
+        General hydration information, not medical advice — sources for every fact are in Brand → Why electrolytes. Never call Taazu "ORS" or say it treats or cures anything. Say "low sugar" only after the lab report confirms it.
       </p>
 
       <CallScript

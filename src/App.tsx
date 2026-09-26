@@ -56,7 +56,7 @@ const SUBS = {
   "QR Survey": "Customers scan and answer on their own phone. Answers land in your Google Sheet.",
   Sales: "Pilot rule: cash or UPI only.",
   Budget: "₹55,000 trial — planned vs actual.",
-  Brand: "Names, bottle concepts and label rules.",
+  Brand: "Taazu identity, product prototype, label rules and hydration facts with sources.",
   Settings: "Choose which screens and features you use, plus team and data.",
 };
 const STORE_KEY = "elec-tracker-v1";

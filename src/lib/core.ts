@@ -318,14 +318,7 @@ export const BUDGET = () => mk([
 ], ["bucket", "planned"], { actual: 0, notes: "" });
 
 export const BRANDS = [
-  { name: "RANN", meaning: "Rann of Kutch — Gujarat's salt desert; also 'battle' in Hindi", why: "Short, bold, local salt story; works for bottle, nimbu drink and powder", risk: "Low–Med", pick: "Top pick", top: true },
-  { name: "JalKavach", meaning: "'Water shield' (Jal + Kavach)", why: "Fits B2B heat-safety kits; easy in Gujarati/Hindi", risk: "Med (Kavach is common)", pick: "Best for B2B", top: true },
-  { name: "Taazu", meaning: "Gujarati for 'fresh' (તાજું)", why: "Friendly and local; good for gyms & events", risk: "Low–Med", pick: "Strong local" },
-  { name: "Chhaya", meaning: "'Shade' — relief from the sun", why: "Calm, cooling, family-friendly", risk: "Med (common word)", pick: "Soft option" },
-  { name: "GarmiGuard", meaning: "'Heat guard'", why: "Clear benefit; good for workers", risk: "Med (descriptive)", pick: "Clear but generic" },
-  { name: "Thandak", meaning: "'Coolness'", why: "Emotional, easy to say", risk: "High (widely used)", pick: "Risky" },
-  { name: "Parsevo", meaning: "Gujarati for 'sweat' (પરસેવો)", why: "Honest, memorable Amdavadi humour", risk: "Low", pick: "Bold" },
-  { name: "Salt & Sun", meaning: "English, gym-friendly", why: "Premium feel for urban gyms", risk: "Med", pick: "Urban premium" },
+  { name: "Taazu", meaning: "Gujarati for 'fresh' (તાજું)", why: "Chosen brand — friendly, local, works for bottle and powder", risk: "Check class 32 on IP India before printing", pick: "Our brand", top: true },
 ];
 
 /* ---------------- config ---------------- */
