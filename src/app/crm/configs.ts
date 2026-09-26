@@ -5,8 +5,8 @@ const END_OUTCOMES = ["Not interested", "Wrong number"];
 
 /* ---------------- suppliers ---------------- */
 // Tier 1 already make electrolyte / functional drinks; Tier 2 are local bottlers who might dose our premix.
-const TIER1 = new Set(["Parekh Enterprise (Hydr-Aid)", "Saffron Beverages / Saffron Biotech", "Koladiya Industries (Asterin)", "Ayuray Organics", "Foodsure", "Radius Healthcare Private Limited", "Mbitions Foods & Nutrients Pvt. Ltd."]);
-const TIER2 = new Set(["Gandhi Beverages", "Chill Baby Beverages", "Patel Beverages Pvt Ltd", "Umiya Beverages", "Pharmaco Healthcare", "Zeel Beverages"]);
+const TIER1 = new Set(["Parekh Enterprise (Hydr-Aid)", "Saffron Beverages / Saffron Biotech", "Koladiya Industries (Asterin)", "Ayuray Organics", "Foodsure", "Mbitions Foods & Nutrients Pvt. Ltd."]);
+const TIER2 = new Set(["Energy Beverages Pvt. Ltd.", "Gandhi Beverages", "Chill Baby Beverages", "Patel Beverages Pvt Ltd", "Umiya Beverages", "Pharmaco Healthcare", "Zeel Beverages"]);
 // Step 2 of the call script, by supplier category.
 export const NEED: Record<string, T> = {
   "Co-packer / bottler": { en: "Do you already make an electrolyte / sports drink? Can you make it in a 250 ml bottle with our Taazu label?", hi: "Kya aap electrolyte / sports drink banate hain? Hamare Taazu label ke saath 250 ml bottle mein bana sakte hain?" },
