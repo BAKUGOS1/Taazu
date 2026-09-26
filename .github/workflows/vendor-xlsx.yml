@@ -1,0 +1,30 @@
+# One-time bootstrap: fetch the SheetJS tarball, check it against the lockfile's integrity and
+# commit it to vendor/. Removed once the tarball is in the repo.
+name: Vendor xlsx
+
+on:
+  push:
+    branches: [claude/project-thread-g2cpd3]
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify
+        run: |
+          test -f vendor/xlsx-0.20.3.tgz && { echo "already vendored"; exit 0; }
+          mkdir -p vendor
+          curl -fsSL -o vendor/xlsx-0.20.3.tgz https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+          want=$(node -p "require('./package-lock.json').packages['node_modules/xlsx'].integrity")
+          got="sha512-$(openssl dgst -sha512 -binary vendor/xlsx-0.20.3.tgz | base64 -w0)"
+          echo "want $want"; echo "got  $got"
+          test "$want" = "$got"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vendor/xlsx-0.20.3.tgz
+          git commit -m "chore: vendor xlsx 0.20.3 tarball from cdn.sheetjs.com"
+          git push

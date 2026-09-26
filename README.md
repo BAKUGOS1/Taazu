@@ -39,6 +39,15 @@ npm run dev
 
 The app will run locally at [http://localhost:5173](http://localhost:5173).
 
+### Tests
+
+```bash
+npm test          # calculator maths and sync merge rules
+npm run typecheck
+```
+
+CI runs install, typecheck, tests and build on every pull request. SheetJS (`xlsx`) is not on the npm registry, so its tarball is kept in `vendor/` and installs without reaching cdn.sheetjs.com.
+
 ### Production Build
 
 ```bash
