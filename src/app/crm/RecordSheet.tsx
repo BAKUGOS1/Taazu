@@ -75,6 +75,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
           {alts.map((p) => <a key={p} href={telHref(p)} onClick={() => setType("call")} className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700 active:bg-slate-50"><PhoneForwarded size={12} />{p}</a>)}
         </div>
       )}
+      {r.about && <div className="mt-3 rounded-xl bg-orange-50 px-3 py-2 text-xs text-slate-700"><span className="font-semibold text-orange-800">Expert in: </span>{r.about}</div>}
       {r.use && <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600"><span className="font-semibold text-slate-700">Why call: </span>{r.use}</div>}
 
       {/* quote — one place to keep rate, MOQ etc. up to date (the call script lives in Tasks → Script) */}
