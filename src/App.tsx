@@ -173,7 +173,7 @@ function MainApp() {
   };
   const resetAll = () => {
     if (!armReset) { setArmReset(true); setTimeout(() => setArmReset(false), 4000); return; }
-    setSup(SUPPLIERS()); setBuy(BUYERS()); setTasks(TASKS()); setBud(BUDGET()); setSales([]); setSurv([]); setArmReset(false); say("Reset to starting data");
+    setSup(SUPPLIERS()); setBuy(BUYERS()); setTasks(TASKS()); setBud(BUDGET()); setSales([]); setSurv([]); setPlans([]); setArmReset(false); say("Reset to starting data");
   };
 
   const badge = (id) => (id === "Suppliers" && k.supDue.length ? k.supDue.length : id === "Buyers" && k.follow.length ? k.follow.length : id === "Tasks" && k.overdue.length ? k.overdue.length : 0);
