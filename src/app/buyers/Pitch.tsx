@@ -3,6 +3,7 @@ import { usePrefs } from "../../lib/prefs";
 import { BUYER_CFG, HOOK } from "../crm/configs";
 import type { T } from "../crm/config";
 import CallScript from "../tasks/CallScript";
+import { Lockup } from "../../components/BrandMark";
 
 /*
  * Buyers → Pitch. The top half is meant to be shown to a customer on the phone screen;
@@ -38,10 +39,7 @@ export default function Pitch() {
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10" />
         <div className="absolute -bottom-14 right-10 h-32 w-32 rounded-full bg-white/10" />
         <div className="relative">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20"><Droplets size={20} /></div>
-            <span className="text-2xl font-black tracking-tight">Taazu</span>
-          </div>
+          <Lockup tone="cream" className="h-12 w-auto" />
           <h2 className="mt-5 text-3xl font-extrabold leading-tight">{lang === "hi" ? "Paani se aage." : "More than water."}</h2>
           <p className="mt-2 max-w-md text-sm text-orange-50">
             {lang === "hi" ? "Ahmedabad ka apna electrolyte drink. Nimbu-namak jaisa taste, chilled, 250 ml — garmi mein jo paseene mein jaata hai, woh wapas." : "Ahmedabad's own electrolyte drink. A familiar nimbu-namak taste, served chilled in 250 ml — putting back what the heat takes out."}

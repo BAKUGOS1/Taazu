@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Droplets, Send, CheckCircle2, QrCode, Download, Copy, ExternalLink, Link2, Check, ListChecks, ClipboardList, RefreshCw, Circle, MessageCircle } from "lucide-react";
+import { Send, CheckCircle2, QrCode, Download, Copy, ExternalLink, Link2, Check, ListChecks, ClipboardList, RefreshCw, Circle, MessageCircle } from "lucide-react";
+import { AppIcon } from "../../components/BrandMark";
 import { inputCls, btn, btnPrimary, btnGhost, Panel, Empty, Bar, IconLink } from "../../components/ui";
 import { uid, waHref, SEGS, FLAVOURS, PAYS } from "../../lib/core";
 
@@ -83,7 +84,7 @@ export function PublicSurvey() {
   const shell = (children) => (
     <div className="min-h-screen bg-slate-50 font-sans antialiased flex justify-center px-4 py-8">
       <div className="w-full max-w-md">
-        <div className="flex items-center gap-2 mb-6"><div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white"><Droplets size={18} /></div><span className="font-semibold text-slate-900">Quick taste survey</span></div>
+        <div className="flex items-center gap-2 mb-6"><AppIcon className="h-8 w-8" /><span className="font-semibold text-slate-900">Quick taste survey</span></div>
         {children}
       </div>
     </div>
