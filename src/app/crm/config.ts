@@ -17,7 +17,10 @@ export type ContactLog = {
   id: string; supplierId: string; date: string; type: string; outcome: string; note: string; by?: string; at?: number;
 };
 
-export type Field = { k: string; label: string; type?: string; inputMode?: "decimal" | "numeric"; placeholder?: string; half?: boolean; say?: string | ((r: CrmRecord) => string) };
+export type Field = { k: string; label: string; type?: string; inputMode?: "decimal" | "numeric"; placeholder?: string; half?: boolean; say?: T };
+
+export type Lang = "en" | "hi";           // English (default) or Hinglish, for scripts and WhatsApp messages
+export type T = Record<Lang, string>;
 
 export type CrmConfig = {
   kind: "sup" | "buy";
@@ -35,11 +38,11 @@ export type CrmConfig = {
   dealTitle: string;
   dealFields: Field[];
   detailFields: Field[];
-  waMessage: (r: CrmRecord) => string;
+  waMessage: (r: CrmRecord, lang: Lang) => string;
   sortFresh?: (a: CrmRecord, b: CrmRecord) => number;
   badge?: (r: CrmRecord) => string | null;
   checklist?: Field[];                   // questions to answer on the call; answers are record fields
-  script?: { open: (r: CrmRecord) => string; close: string; tips: string[] }; // call script wrapped around the checklist
+  script?: { open: (r: CrmRecord, lang: Lang) => string; close: T; tips: T[] }; // call script wrapped around the checklist
   verify?: boolean;                      // show GSTIN / FSSAI verification
   tag?: (r: CrmRecord) => string | null; // small highlight on the card, e.g. "Call first"
 };

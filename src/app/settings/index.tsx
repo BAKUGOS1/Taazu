@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, RotateCcw, SlidersHorizontal, Sparkles } from "lucide-react";
+import { ChevronDown, RotateCcw, SlidersHorizontal, Sparkles, Languages } from "lucide-react";
 import { Panel } from "../../components/ui";
 import { MODULES, PRESETS } from "../../lib/modules";
 import { usePrefs } from "../../lib/prefs";
@@ -16,7 +16,7 @@ export function Switch({ on, onChange, label, disabled = false }: { on: boolean;
 
 /* Modules (screens) and the features inside each one. Choices are per person. */
 export default function SettingsView({ children }: { children?: any }) {
-  const { module, on, setModule, setFeature, applyPreset, reset, prefs } = usePrefs();
+  const { module, on, setModule, setFeature, applyPreset, reset, prefs, lang, setLang } = usePrefs();
   const [openId, setOpenId] = useState<string | null>(null);
   const enabled = MODULES.filter((m) => module(m.id)).map((m) => m.id);
   const activePreset = PRESETS.find((p) => p.modules.length === enabled.length && p.modules.every((id) => enabled.includes(id)))?.id;
@@ -24,6 +24,18 @@ export default function SettingsView({ children }: { children?: any }) {
 
   return (
     <div className="max-w-xl space-y-4">
+      <Panel title="Script & WhatsApp language" icon={Languages}>
+        <p className="mb-3 text-xs text-slate-500">Language for the call script and pre-filled WhatsApp messages. Only yours; your partner picks their own.</p>
+        <div className="grid grid-cols-2 gap-2">
+          {([["en", "English", "Hello, this is Taazu…"], ["hi", "Hinglish", "Namaste, main Taazu se…"]] as const).map(([id, label, eg]) => (
+            <button key={id} onClick={() => setLang(id)} className={`rounded-xl border px-4 py-3 text-left active:bg-slate-50 ${lang === id ? "border-orange-400 bg-orange-50" : "border-slate-200"}`}>
+              <div className="text-sm font-semibold text-slate-900">{label}{id === "en" ? " (default)" : ""}</div>
+              <div className="text-xs text-slate-500">{eg}</div>
+            </button>
+          ))}
+        </div>
+      </Panel>
+
       <Panel title="Quick setup" icon={Sparkles}>
         <p className="mb-3 text-xs text-slate-500">Pick what you need today. You can fine-tune every screen below. These choices are only yours; your partner keeps their own.</p>
         <div className="grid gap-2">

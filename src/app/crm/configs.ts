@@ -1,4 +1,4 @@
-import type { CrmConfig, CrmRecord } from "./config";
+import type { CrmConfig, CrmRecord, T } from "./config";
 
 const COMMON_OUTCOMES = ["No answer", "Talked", "Call back later"];
 const END_OUTCOMES = ["Not interested", "Wrong number"];
@@ -8,14 +8,14 @@ const END_OUTCOMES = ["Not interested", "Wrong number"];
 const TIER1 = new Set(["Parekh Enterprise (Hydr-Aid)", "Saffron Beverages / Saffron Biotech", "Koladiya Industries (Asterin)", "Ayuray Organics", "Foodsure"]);
 const TIER2 = new Set(["Gandhi Beverages", "Chill Baby Beverages", "Patel Beverages Pvt Ltd"]);
 // Step 2 of the call script, by supplier category.
-export const NEED: Record<string, string> = {
-  "Co-packer / bottler": "Kya aap electrolyte / sports drink banate hain? Hamare Taazu label ke saath 250 ml bottle mein bana sakte hain?",
-  "Powder private label": "Kya aap electrolyte powder sachet hamare Taazu brand ke naam se bana sakte hain?",
-  "PET bottles / caps": "Hamein 250 ml PET bottle aur cap chahiye — food-grade, chhote order mein de sakte hain?",
-  "Labels & packaging": "Hamein 250 ml bottle ke liye printed label / shrink sleeve chahiye — design hamara hoga, printing aapki.",
-  "Flavour / premix": "Hamein electrolyte drink ke liye flavour / premix chahiye — nimbu, jeera jaise — de sakte hain?",
-  "Testing lab": "Hamein packaged drink ka FSSAI / NABL test karwana hai — nutrition, micro, sodium-potassium — kar sakte hain?",
-  "Hydration station": "Hamein events ke liye 20 L water jars / dispensers chahiye — delivery ke saath de sakte hain?",
+export const NEED: Record<string, T> = {
+  "Co-packer / bottler": { en: "Do you already make an electrolyte / sports drink? Can you make it in a 250 ml bottle with our Taazu label?", hi: "Kya aap electrolyte / sports drink banate hain? Hamare Taazu label ke saath 250 ml bottle mein bana sakte hain?" },
+  "Powder private label": { en: "Can you make electrolyte powder sachets under our Taazu brand?", hi: "Kya aap electrolyte powder sachet hamare Taazu brand ke naam se bana sakte hain?" },
+  "PET bottles / caps": { en: "We need food-grade 250 ml PET bottles and caps — can you supply small quantities?", hi: "Hamein 250 ml PET bottle aur cap chahiye — food-grade, chhote order mein de sakte hain?" },
+  "Labels & packaging": { en: "We need printed labels / shrink sleeves for a 250 ml bottle — our design, your printing.", hi: "Hamein 250 ml bottle ke liye printed label / shrink sleeve chahiye — design hamara hoga, printing aapki." },
+  "Flavour / premix": { en: "We need flavour / premix for an electrolyte drink — lemon, jeera and similar. Can you supply it?", hi: "Hamein electrolyte drink ke liye flavour / premix chahiye — nimbu, jeera jaise — de sakte hain?" },
+  "Testing lab": { en: "We need an FSSAI / NABL test for a packaged drink — nutrition, micro, sodium-potassium. Can you do it?", hi: "Hamein packaged drink ka FSSAI / NABL test karwana hai — nutrition, micro, sodium-potassium — kar sakte hain?" },
+  "Hydration station": { en: "We need 20 L water jars / dispensers for events, with delivery. Can you supply them?", hi: "Hamein events ke liye 20 L water jars / dispensers chahiye — delivery ke saath de sakte hain?" },
 };
 const tierOf = (r: CrmRecord) => (TIER1.has(r.name) ? 0 : TIER2.has(r.name) ? 1 : r.cat === "Co-packer / bottler" ? 2 : 3);
 export const SUP_STAGES = ["To call", "Contacted", "Quote received", "Sample", "Negotiation", "Finalized", "Rejected"] as const;
@@ -44,46 +44,42 @@ export const SUPPLIER_CFG: CrmConfig = {
   detailFields: [
     { k: "use", label: "What we need from them" },
   ],
-  // Ask these on the first call, in this order. Price / MOQ / lead feed the Compare tab.
-  // One call script for every supplier type — only the "what we need" line changes with the category.
-  // Answers save to the record; price / MOQ / lead feed the Compare tab.
+  // One call script for every supplier type (Tasks -> Script); only the "what we need" line changes with the category.
   script: {
-    open: (r) => `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu, Ahmedabad se bol raha hoon. Hum apna electrolyte drink brand launch kar rahe hain aur suppliers se baat kar rahe hain. 2 minute baat kar sakte hain?`,
-    close: "Thank you! Rate, MOQ aur catalogue WhatsApp pe bhej dijiye. Sample mil sakta hai? Main [din] ko follow-up karta hoon.",
+    open: (r, lang) => lang === "hi"
+      ? `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu, Ahmedabad se bol raha hoon. Hum apna electrolyte drink brand launch kar rahe hain aur suppliers se baat kar rahe hain. 2 minute baat kar sakte hain?`
+      : `Hello${r.contact ? " " + r.contact : ""}, this is [your name] from Taazu, Ahmedabad. We're launching our own electrolyte drink brand and speaking to suppliers. Do you have 2 minutes?`,
+    close: { en: "Thank you! Could you WhatsApp me your rates, MOQ and catalogue? Can we get a sample? I'll follow up on [day].", hi: "Thank you! Rate, MOQ aur catalogue WhatsApp pe bhej dijiye. Sample mil sakta hai? Main [din] ko follow-up karta hoon." },
     tips: [
-      "Owner ya sales head se baat karo. Receptionist ho to naam aur direct number maang lo.",
-      "Rate hamesha all-in poochho: product + packing + delivery; GST alag.",
-      "Busy hain? Callback ka time fix karo aur supplier card mein 'Call back later' log karo.",
-      "Rate pe haan-na abhi mat karo. Bolo: 3-4 quotes le rahe hain, compare karke batayenge.",
+      { en: "Ask for the owner or sales head. If you get reception, take a name and direct number.", hi: "Owner ya sales head se baat karo. Receptionist ho to naam aur direct number maang lo." },
+      { en: "Always ask for the all-in rate: product + packing + delivery; GST separate.", hi: "Rate hamesha all-in poochho: product + packing + delivery; GST alag." },
+      { en: "Busy? Fix a callback time and log 'Call back later' on the supplier card.", hi: "Busy hain? Callback ka time fix karo aur supplier card mein 'Call back later' log karo." },
+      { en: "Don't agree to a rate on the call. Say: we're comparing 3-4 quotes and will get back.", hi: "Rate pe haan-na abhi mat karo. Bolo: 3-4 quotes le rahe hain, compare karke batayenge." },
     ],
   },
   // Quote & order fields on the supplier card; `say` is the matching line in Tasks → Script.
   checklist: [
-    { k: "price", label: "Rate ₹/unit (all-in)", say: "Per unit final rate kya hoga — sab milake, GST alag?", inputMode: "decimal", placeholder: "e.g. 13", half: true },
-    { k: "moq", label: "MOQ (units)", say: "Pehla order minimum kitna hona chahiye?", inputMode: "numeric", placeholder: "e.g. 1000", half: true },
-    { k: "lead", label: "Delivery time", say: "Order confirm hone ke baad kitne din mein delivery?", placeholder: "e.g. 10 days", half: true },
-    { k: "terms", label: "Payment terms", say: "Payment kaise — kitna advance, baaki kab?", placeholder: "e.g. 50% advance", half: true },
-    { k: "sampleCost", label: "Sample ₹", say: "Sample mil sakta hai? Kitne ka?", inputMode: "decimal", placeholder: "0 = free", half: true },
-    { k: "q_lab", label: "Test report?", say: "Quality ka koi certificate ya test report hai?", placeholder: "Yes / No", half: true },
+    { k: "price", label: "Rate ₹/unit (all-in)", say: { en: "What is the final per-unit rate, all-in? GST separate.", hi: "Per unit final rate kya hoga — sab milake, GST alag?" }, inputMode: "decimal", placeholder: "e.g. 13", half: true },
+    { k: "moq", label: "MOQ (units)", say: { en: "What is the minimum quantity for the first order?", hi: "Pehla order minimum kitna hona chahiye?" }, inputMode: "numeric", placeholder: "e.g. 1000", half: true },
+    { k: "lead", label: "Delivery time", say: { en: "How many days from order confirmation to delivery?", hi: "Order confirm hone ke baad kitne din mein delivery?" }, placeholder: "e.g. 10 days", half: true },
+    { k: "terms", label: "Payment terms", say: { en: "What are the payment terms — how much advance, balance when?", hi: "Payment kaise — kitna advance, baaki kab?" }, placeholder: "e.g. 50% advance", half: true },
+    { k: "sampleCost", label: "Sample ₹", say: { en: "Can we get a sample? What does it cost?", hi: "Sample mil sakta hai? Kitne ka?" }, inputMode: "decimal", placeholder: "0 = free", half: true },
+    { k: "q_lab", label: "Test report?", say: { en: "Do you have a quality certificate or lab test report?", hi: "Quality ka koi certificate ya test report hai?" }, placeholder: "Yes / No", half: true },
     { k: "orderQty", label: "Our order qty", inputMode: "numeric", placeholder: "when we order", half: true },
     { k: "orderDate", label: "Order date", type: "date", half: true },
     { k: "q_label", label: "What they offer / can they do it?", placeholder: "e.g. Yes – nimbu & orange, 250 ml, our label" },
-    { k: "gstin", label: "GSTIN", say: "Aapka GSTIN number bata dijiye, bill ke liye chahiye.", placeholder: "24ABCDE1234F1Z5", half: true },
-    { k: "fssai", label: "FSSAI no.", say: "Food product hai to — aapka FSSAI licence number?", inputMode: "numeric", placeholder: "14-digit, if food", half: true },
+    { k: "gstin", label: "GSTIN", say: { en: "Could you share your GSTIN for billing?", hi: "Aapka GSTIN number bata dijiye, bill ke liye chahiye." }, placeholder: "24ABCDE1234F1Z5", half: true },
+    { k: "fssai", label: "FSSAI no.", say: { en: "If it is a food product — what is your FSSAI licence number?", hi: "Food product hai to — aapka FSSAI licence number?" }, inputMode: "numeric", placeholder: "14-digit, if food", half: true },
   ],
   verify: true,
   tag: (r) => (TIER1.has(r.name) ? "Call first" : null),
   sortFresh: (a, b) => tierOf(a) - tierOf(b),
-  waMessage: (r) => {
-    const ask: Record<string, string> = {
-      "Co-packer / bottler": "kya aap apna electrolyte drink hamare Taazu label ke saath 250 ml PET mein bana sakte hain? MOQ, per-bottle rate aur dispatch time bata dijiye. Apna GSTIN aur FSSAI number bhi share kar dijiye.",
-      "Powder private label": "Electrolyte powder sachet private label ke liye MOQ, rate aur sample ka process bata sakte hain?",
-      "PET bottles / caps": "250 ml PET bottle + cap ka rate, MOQ aur delivery time bata sakte hain?",
-      "Labels & packaging": "250 ml bottle ke liye label / shrink sleeve ka rate aur MOQ bata sakte hain?",
-      "Flavour / premix": "Electrolyte drink ke liye flavour / premix ka rate, MOQ aur sample mil sakta hai?",
-      "Testing lab": "Packaged beverage ka FSSAI / NABL test ka charge aur report time bata sakte hain?",
-    };
-    return `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu (Ahmedabad) se baat kar raha hoon. Hum ek electrolyte drink launch kar rahe hain. ${ask[r.cat] || "Aapki service ke baare mein details bata sakte hain?"}`;
+  waMessage: (r, lang) => {
+    const need = NEED[r.cat] ? NEED[r.cat][lang] : { en: "Could you share details of what you supply, with rates?", hi: "Aapki service ke baare mein details aur rate bata sakte hain?" }[lang];
+    const ids = { en: "Please also share your GSTIN and FSSAI number.", hi: "Apna GSTIN aur FSSAI number bhi share kar dijiye." }[lang];
+    return lang === "hi"
+      ? `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu (Ahmedabad) se baat kar raha hoon. Hum apna electrolyte drink brand launch kar rahe hain. ${need} MOQ, rate aur delivery time bata dijiye. ${ids}`
+      : `Hello${r.contact ? " " + r.contact : ""}, this is Taazu from Ahmedabad. We are launching our own electrolyte drink brand. ${need} Please share your MOQ, rate and delivery time. ${ids}`;
   },
   badge: (r) => (Number(r.price) > 0 ? `₹${r.price}/unit${r.moq ? ` · MOQ ${r.moq}` : ""}` : null),
 };
@@ -118,18 +114,21 @@ export const BUYER_CFG: CrmConfig = {
   detailFields: [
     { k: "why", label: "Why / angle" },
   ],
-  waMessage: (r) => {
-    const pitch: Record<string, string> = {
-      Gym: "gym members ke liye 250 ml electrolyte drink (nimbu-namak / jeera) — counter pe rakhne ke liye free sample dena chahte hain.",
-      "Box cricket / turf": "players ke liye thanda electrolyte drink — match ke time counter pe rakhne ke liye free sample dena chahte hain.",
-      "Cricket academy": "practice ke baad bachchon ke liye electrolyte drink — ek batch ke liye free sample dena chahte hain.",
-      Running: "runs ke liye hydration partner banna chahte hain — electrolyte drink ke free sample ke saath.",
-      Construction: "garmi mein site workers ke liye electrolyte drink — heat-safety ke liye ek site pe trial karna chahte hain.",
-      Factory: "shop floor workers ke liye electrolyte drink — garmi mein dehydration kam karne ke liye trial karna chahte hain.",
-      "Canteen / facility partner": "aapke canteens ke liye electrolyte drink supply karna chahte hain — rate aur sample share kar sakte hain.",
-      Events: "aapke events ke liye hydration station / electrolyte drink supply kar sakte hain — rate share kar sakte hain.",
+  waMessage: (r, lang) => {
+    const pitch: Record<string, T> = {
+      Gym: { en: "a 250 ml electrolyte drink (lemon-salt / jeera) for your members — we'd like to leave a free sample crate at your counter.", hi: "gym members ke liye 250 ml electrolyte drink (nimbu-namak / jeera) — counter pe rakhne ke liye free sample dena chahte hain." },
+      "Box cricket / turf": { en: "a chilled electrolyte drink for players — we'd like to leave free samples at your counter for match time.", hi: "players ke liye thanda electrolyte drink — match ke time counter pe rakhne ke liye free sample dena chahte hain." },
+      "Cricket academy": { en: "an electrolyte drink for kids after practice — we'd like to give one batch a free sample.", hi: "practice ke baad bachchon ke liye electrolyte drink — ek batch ke liye free sample dena chahte hain." },
+      Running: { en: "we'd like to be your hydration partner for runs, with free samples of our electrolyte drink.", hi: "runs ke liye hydration partner banna chahte hain — electrolyte drink ke free sample ke saath." },
+      Construction: { en: "an electrolyte drink for site workers in the heat — we'd like to run a heat-safety trial at one site.", hi: "garmi mein site workers ke liye electrolyte drink — heat-safety ke liye ek site pe trial karna chahte hain." },
+      Factory: { en: "an electrolyte drink for shop-floor workers to cut dehydration in summer — we'd like to run a trial.", hi: "shop floor workers ke liye electrolyte drink — garmi mein dehydration kam karne ke liye trial karna chahte hain." },
+      "Canteen / facility partner": { en: "we'd like to supply an electrolyte drink to your canteens — happy to share rates and a sample.", hi: "aapke canteens ke liye electrolyte drink supply karna chahte hain — rate aur sample share kar sakte hain." },
+      Events: { en: "we can run a hydration station / supply electrolyte drinks for your events — happy to share rates.", hi: "aapke events ke liye hydration station / electrolyte drink supply kar sakte hain — rate share kar sakte hain." },
     };
-    return `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu (Ahmedabad) se. Hum local electrolyte drink bana rahe hain — ${pitch[r.seg] || "aapke liye electrolyte drink supply karna chahte hain."} 10 minute baat kar sakte hain?`;
+    const p = pitch[r.seg]?.[lang] || { en: "we'd like to supply our electrolyte drink to you.", hi: "aapke liye electrolyte drink supply karna chahte hain." }[lang];
+    return lang === "hi"
+      ? `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu (Ahmedabad) se. Hum local electrolyte drink bana rahe hain — ${p} 10 minute baat kar sakte hain?`
+      : `Hello${r.contact ? " " + r.contact : ""}, this is Taazu from Ahmedabad. We make a local electrolyte drink — ${p} Could we talk for 10 minutes?`;
   },
   sortFresh: (a: CrmRecord, b: CrmRecord) => (PRI_RANK[a.priority] ?? 3) - (PRI_RANK[b.priority] ?? 3),
   badge: (r) => {

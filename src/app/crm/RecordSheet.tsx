@@ -37,7 +37,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
     setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setNext(r?.next || ""); setArmDel(false);
   }, [r?.id, startLog]);
 
-  const { on, module: moduleOn } = usePrefs(); // before the early return: hooks must run in the same order every render
+  const { on, module: moduleOn, lang } = usePrefs(); // before the early return: hooks must run in the same order every render
   if (!r) return null;
   const tel = telHref(r.phone), wa = waHref(r.phone) || waHref(r.phone2), map = mapUrl(r);
   const alts = String(r.phone2 || "").split(/[,/]/).map((p) => p.trim()).filter((p) => telHref(p));
@@ -64,7 +64,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
       {/* contact buttons */}
       <div className="grid grid-cols-3 gap-2">
         <a href={tel || undefined} onClick={() => setType("call")} className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${tel ? "bg-slate-900 text-white active:bg-slate-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><Phone size={18} />Call</a>
-        <a href={wa ? `${wa}?text=${encodeURIComponent(cfg.waMessage(r))}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
+        <a href={wa ? `${wa}?text=${encodeURIComponent(cfg.waMessage(r, lang))}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
           className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${wa ? "bg-green-600 text-white active:bg-green-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MessageCircle size={18} />WhatsApp</a>
         <a href={map || undefined} target="_blank" rel="noreferrer" className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${map ? "bg-blue-50 text-blue-700 active:bg-blue-100" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MapPin size={18} />Map</a>
       </div>

@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { SUPPLIER_CFG as cfg, NEED } from "../crm/configs";
+import { usePrefs } from "../../lib/prefs";
 
 /* One supplier call script for the whole team — read it once, then fill answers in the supplier card. */
 const Step = ({ n, children }) => (
@@ -10,30 +11,31 @@ const Step = ({ n, children }) => (
 );
 
 export default function CallScript() {
+  const { lang } = usePrefs();
   const s = cfg.script!;
-  const asks = (cfg.checklist || []).filter((f) => typeof f.say === "string");
+  const asks = (cfg.checklist || []).filter((f) => f.say);
   let n = 2;
   return (
     <div className="space-y-4">
       <section className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
         <div className="mb-2 text-sm font-semibold text-amber-900">Before you dial</div>
-        <ul className="list-disc space-y-1 pl-4 text-sm text-amber-900">{s.tips.map((t) => <li key={t}>{t}</li>)}</ul>
+        <ul className="list-disc space-y-1 pl-4 text-sm text-amber-900">{s.tips.map((t) => <li key={t.en}>{t[lang]}</li>)}</ul>
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">
         <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900"><Phone size={15} />Supplier call script</div>
         <ol className="space-y-3">
-          <Step n={1}>“{s.open({} as any)}”</Step>
+          <Step n={1}>“{s.open({} as any, lang)}”</Step>
           <Step n={2}>
-            <div className="mb-1.5">Batao hamein kya chahiye — supplier ke type ke hisaab se:</div>
+            <div className="mb-1.5">{lang === "hi" ? "Batao hamein kya chahiye — supplier ke type ke hisaab se:" : "Say what we need — pick the line for this supplier type:"}</div>
             <div className="space-y-1.5">
               {Object.entries(NEED).map(([cat, line]) => (
-                <div key={cat} className="rounded-lg bg-slate-50 px-2.5 py-1.5"><span className="text-xs font-semibold text-slate-500">{cat}: </span>“{line}”</div>
+                <div key={cat} className="rounded-lg bg-slate-50 px-2.5 py-1.5"><span className="text-xs font-semibold text-slate-500">{cat}: </span>“{line[lang]}”</div>
               ))}
             </div>
           </Step>
-          {asks.map((f) => <Step key={f.k} n={++n}>“{f.say as string}”</Step>)}
-          <Step n={++n}>“{s.close}”</Step>
+          {asks.map((f) => <Step key={f.k} n={++n}>“{f.say![lang]}”</Step>)}
+          <Step n={++n}>“{s.close[lang]}”</Step>
         </ol>
       </section>
 
