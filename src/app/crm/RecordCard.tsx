@@ -7,9 +7,9 @@ import { answered, fmtTime, type CrmConfig, type CrmRecord, type ContactLog } fr
 
 const fmtDate = (d: string) => new Date(d + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 
-export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
+export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall, onStage }: {
   cfg: CrmConfig; r: CrmRecord; lastLog?: ContactLog | null;
-  onOpen: (r: CrmRecord) => void; onCall: (r: CrmRecord, via: string) => void;
+  onOpen: (r: CrmRecord) => void; onCall: (r: CrmRecord, via: string) => void; onStage?: (r: CrmRecord) => void;
 }) {
   const { lang } = usePrefs();
   const [open, setOpen] = useState(false); // details start closed; tap "Details" to view
@@ -24,7 +24,9 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
   const cat = r[cfg.catKey];
   return (
     <div className="bg-white rounded-2xl border border-stone-200/80 shadow-card overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lift">
-      <button onClick={() => onOpen(r)} className="w-full text-left px-4 pt-3 pb-2 active:bg-slate-50">
+      {/* A div, not a button, so the stage pill inside can be its own button. */}
+      <div role="button" tabIndex={0} onClick={() => onOpen(r)} onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onOpen(r); } }}
+        className="w-full text-left px-4 pt-3 pb-2 cursor-pointer active:bg-slate-50">
         <div className="flex items-start gap-2">
           <div className="min-w-0 flex-1">
             <div className="font-bold text-stone-900 leading-snug">{r.name}</div>
@@ -32,7 +34,14 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
               <Dot color={COL[cat] || "#64748B"} square /><span className="truncate">{cat}{r.area ? ` · ${r.area}` : ""}{r.city && !String(r.area || "").includes(r.city) ? `, ${r.city}` : ""}</span>
             </div>
           </div>
-          <span className="shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ color: col, background: col + "18" }}>{r.status}</span>
+          {onStage
+            ? <button type="button" onClick={(e) => { e.stopPropagation(); onStage(r); }} aria-label={`Stage: ${r.status}. Change stage`}
+                className="shrink-0 -my-1.5 -mr-1.5 p-1.5 rounded-full active:scale-95 transition">
+                <span className="inline-flex max-w-[40vw] md:max-w-[10rem] items-center gap-0.5 rounded-full py-0.5 pl-2 pr-1 text-[11px] font-semibold" style={{ color: col, background: col + "18" }}>
+                  <span className="truncate">{r.status}</span><ChevronDown size={12} className="shrink-0" />
+                </span>
+              </button>
+            : <span className="shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ color: col, background: col + "18" }}>{r.status}</span>}
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
           {r.follow && (
@@ -50,7 +59,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall }: {
             {r.next ? <><span className="text-slate-400">Next: </span>{r.next}</> : <><span className="text-slate-400">{lastLog.outcome || lastLog.type}: </span>{lastLog.note}</>}
           </div>
         )}
-      </button>
+      </div>
       {(r.about || r.gstin || r.contact || r.source) && (
         <div className="px-4 pb-2">
           <button onClick={() => setOpen((v) => !v)} aria-expanded={open} className="inline-flex items-center gap-1 text-xs font-semibold text-orange-700">

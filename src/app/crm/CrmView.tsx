@@ -1,10 +1,12 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Search, Plus, BellRing, Columns3, List } from "lucide-react";
 import { Empty, inputCls } from "../../components/ui";
 import { uid, cityOf } from "../../lib/core";
 import { usePrefs } from "../../lib/prefs";
 import RecordCard from "./RecordCard";
 import RecordSheet from "./RecordSheet";
+import StagePicker from "./StagePicker";
 import { isActive, dueList, agenda, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
 
 type Extra = { id: string; label: string; icon: any; render: (open: (r: CrmRecord) => void) => any };
@@ -22,6 +24,9 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
   const [city, setCity] = useState("All cities");
   const [openId, setOpenId] = useState<string | null>(null);
   const [startLog, setStartLog] = useState<string | null>(null);
+  const [stageId, setStageId] = useState<string | null>(null);
+  const [toast, setToast] = useState("");
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const dueCount = dueList(cfg, rows).length;
   const tabs = [
@@ -58,7 +63,20 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
     setRows((rs) => [r, ...rs]);
     open(r);
   };
-  const card = (r: CrmRecord) => <RecordCard key={r.id} cfg={cfg} r={r} lastLog={lastLog[r.id]} onOpen={open} onCall={open} />;
+  const stageRec = rows.find((r) => r.id === stageId) || null;
+  const pickStage = (s: string) => {
+    if (stageRec && s !== stageRec.status) {
+      patch(stageRec.id, { status: s });
+      setToast(`${stageRec.name} → ${s}`);
+      clearTimeout(toastTimer.current);
+      toastTimer.current = setTimeout(() => setToast(""), 2200);
+    }
+    setStageId(null);
+  };
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
+  const closeStage = useCallback(() => setStageId(null), []);
+  const pickFor = useCallback((r: CrmRecord) => setStageId(r.id), []);
+  const card = (r: CrmRecord) => <RecordCard key={r.id} cfg={cfg} r={r} lastLog={lastLog[r.id]} onOpen={open} onCall={open} onStage={pickFor} />;
 
   return (
     <div>
@@ -151,6 +169,9 @@ export default function CrmView({ cfg, rows, setRows, logs, setLogs, me = "", st
 
         {extra && active === extra.id && extra.render(open)}
       </div>
+
+      <StagePicker cfg={cfg} r={stageRec} onPick={pickStage} onClose={closeStage} />
+      {toast && createPortal(<div role="status" className="fixed bottom-[calc(10rem+env(safe-area-inset-bottom))] md:bottom-6 left-1/2 -translate-x-1/2 z-[70] w-max max-w-[calc(100vw-2rem)] rounded-lg bg-slate-900 px-4 py-2 text-center text-sm text-white shadow-lg line-clamp-2">{toast}</div>, document.body)}
 
       <RecordSheet
         cfg={cfg} r={current} logs={logs} startLog={startLog} onClose={close}
