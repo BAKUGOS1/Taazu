@@ -17,6 +17,16 @@ export const NEED: Record<string, T> = {
   "Testing lab": { en: "We need an FSSAI / NABL test for a packaged drink — nutrition, micro, sodium-potassium. Can you do it?", hi: "Hamein packaged drink ka FSSAI / NABL test karwana hai — nutrition, micro, sodium-potassium — kar sakte hain?" },
   "Hydration station": { en: "We need 20 L water jars / dispensers for events, with delivery. Can you supply them?", hi: "Hamein events ke liye 20 L water jars / dispensers chahiye — delivery ke saath de sakte hain?" },
 };
+// What we need from each category, phrased to finish "looking for a reliable partner for ..." in the WhatsApp message.
+const WA_NEED: Record<string, string> = {
+  "Co-packer / bottler": "contract filling of a non-carbonated flavoured drink in 250 ml PET bottles under our Taazu label (we provide the formula)",
+  "Powder private label": "private-label electrolyte powder sachets under the Taazu brand",
+  "PET bottles / caps": "food-grade 250 ml PET bottles and caps, starting with small quantities",
+  "Labels & packaging": "printed labels or shrink sleeves for a 250 ml bottle (we provide the artwork)",
+  "Flavour / premix": "food-grade flavours and premix for an electrolyte drink, such as lemon and jeera",
+  "Testing lab": "FSSAI / NABL testing of a packaged drink (nutrition, microbiology, sodium and potassium)",
+  "Hydration station": "20 L water jars and dispensers for events, including delivery",
+};
 // Verified suppliers (GSTIN checked) come first, then the hand-picked tiers.
 const tierOf = (r: CrmRecord) => (r.verified ? -1 : TIER1.has(r.name) ? 0 : TIER2.has(r.name) ? 1 : r.cat === "Co-packer / bottler" ? 2 : 3);
 export const SUP_STAGES = ["To call", "Contacted", "Quote received", "Sample", "Negotiation", "Finalized", "Rejected"] as const;
@@ -76,25 +86,18 @@ export const SUPPLIER_CFG: CrmConfig = {
   verify: true,
   tag: (r) => (TIER1.has(r.name) ? "Call first" : null),
   sortFresh: (a, b) => tierOf(a) - tierOf(b),
-  // One message for every supplier: who we are, the one thing we need from their category, then the same 4 questions.
-  waMessage: (r, lang) => {
+  // One professional English message for every supplier (whatever the app language): who we are,
+  // what we need from their category, then the same 4 questions.
+  waMessage: (r) => {
     const who = (r.contact || "").replace(/\s*\(.*?\)/g, "").trim(); // "Hemendra Kanojia (AGM)" -> "Hemendra Kanojia"
-    const need = NEED[r.cat] ? NEED[r.cat][lang] : { en: "Could you share what you supply, with rates?", hi: "Aap kya supply karte hain, rate ke saath bata sakte hain?" }[lang];
-    return lang === "hi"
-      ? [
-          `Namaste${who ? " " + who + " ji" : ""},`,
-          "Main *Taazu* (Ahmedabad) se baat kar raha hoon. Hum apna electrolyte drink brand launch kar rahe hain. Pehle chhota trial order, sab theek raha to har mahine repeat.",
-          `*Aapse kya chahiye:* ${need}`,
-          "*Please ye 4 cheezein bata dijiye:*\n1. Rate (GST alag ya included)\n2. Minimum order (MOQ), aur trial ke liye sabse chhota order\n3. Sample milega? Kitne din mein, free ya paid?\n4. Aapka FSSAI licence aur GSTIN (photo chalegi)",
-          "Aapka reply aate hi call karta hoon. Dhanyavaad!",
-        ].join("\n\n")
-      : [
-          `Hello${who ? " " + who : ""},`,
-          "This is *Taazu* from Ahmedabad. We are launching our own electrolyte drink brand. We start with a small trial order, then repeat monthly if it works.",
-          `*What we need from you:* ${need}`,
-          "*Please share these 4 things:*\n1. Rate (GST extra or included)\n2. Minimum order (MOQ), and the smallest trial order\n3. Can you send a sample? How many days, free or paid?\n4. Your FSSAI licence and GSTIN (a photo is fine)",
-          "I'll call as soon as you reply. Thank you!",
-        ].join("\n\n");
+    return [
+      `Dear ${who || "Sir/Madam"},`,
+      `I'm writing from *Taazu*, a new electrolyte drink brand based in Ahmedabad. We are preparing our first production run and are looking for a reliable partner for ${WA_NEED[r.cat] || "the products and services you offer"}.`,
+      "We would like to begin with a small trial order and, if it goes well, move to regular monthly orders.",
+      "Could you please share:\n1. Your price per unit (and whether GST is included)\n2. Your minimum order quantity, and the smallest trial order you can accept\n3. Whether you can send a sample, and how soon\n4. A copy of your FSSAI licence and your GSTIN",
+      "I'd be glad to set up a short call at a time that suits you. Looking forward to hearing from you.",
+      "Best regards,\nTaazu, Ahmedabad",
+    ].join("\n\n");
   },
   badge: (r) => (Number(r.price) > 0 ? `₹${r.price}/unit${r.moq ? ` · MOQ ${r.moq}` : ""}` : null),
 };
