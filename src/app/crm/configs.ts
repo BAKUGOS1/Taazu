@@ -9,7 +9,7 @@ const TIER1 = new Set(["Parekh Enterprise (Hydr-Aid)", "Saffron Beverages / Saff
 const TIER2 = new Set(["Energy Beverages Pvt. Ltd.", "Gandhi Beverages", "Chill Baby Beverages", "Patel Beverages Pvt Ltd", "Umiya Beverages", "Pharmaco Healthcare", "Zeel Beverages"]);
 // Step 2 of the call script, by supplier category.
 export const NEED: Record<string, T> = {
-  "Co-packer / bottler": { en: "Do you already make an electrolyte / sports drink? Can you make it in a 250 ml bottle with our Taazu label?", hi: "Kya aap electrolyte / sports drink banate hain? Hamare Taazu label ke saath 250 ml bottle mein bana sakte hain?" },
+  "Co-packer / bottler": { en: "Can you fill a non-carbonated (no gas) flavoured drink in 250 ml PET with our Taazu label? Our formula, your filling line.", hi: "Kya aap bina gas wala (non-carbonated) flavoured drink 250 ml PET mein hamare Taazu label ke saath bhar sakte hain? Formula hamara, filling line aapki." },
   "Powder private label": { en: "Can you make electrolyte powder sachets under our Taazu brand?", hi: "Kya aap electrolyte powder sachet hamare Taazu brand ke naam se bana sakte hain?" },
   "PET bottles / caps": { en: "We need food-grade 250 ml PET bottles and caps — can you supply small quantities?", hi: "Hamein 250 ml PET bottle aur cap chahiye — food-grade, chhote order mein de sakte hain?" },
   "Labels & packaging": { en: "We need printed labels / shrink sleeves for a 250 ml bottle — our design, your printing.", hi: "Hamein 250 ml bottle ke liye printed label / shrink sleeve chahiye — design hamara hoga, printing aapki." },
@@ -76,12 +76,25 @@ export const SUPPLIER_CFG: CrmConfig = {
   verify: true,
   tag: (r) => (TIER1.has(r.name) ? "Call first" : null),
   sortFresh: (a, b) => tierOf(a) - tierOf(b),
+  // One message for every supplier: who we are, the one thing we need from their category, then the same 4 questions.
   waMessage: (r, lang) => {
-    const need = NEED[r.cat] ? NEED[r.cat][lang] : { en: "Could you share details of what you supply, with rates?", hi: "Aapki service ke baare mein details aur rate bata sakte hain?" }[lang];
-    const ids = { en: "Please also share your GSTIN and FSSAI number.", hi: "Apna GSTIN aur FSSAI number bhi share kar dijiye." }[lang];
+    const who = (r.contact || "").replace(/\s*\(.*?\)/g, "").trim(); // "Hemendra Kanojia (AGM)" -> "Hemendra Kanojia"
+    const need = NEED[r.cat] ? NEED[r.cat][lang] : { en: "Could you share what you supply, with rates?", hi: "Aap kya supply karte hain, rate ke saath bata sakte hain?" }[lang];
     return lang === "hi"
-      ? `Namaste${r.contact ? " " + r.contact + " ji" : ""}, main Taazu (Ahmedabad) se baat kar raha hoon. Hum apna electrolyte drink brand launch kar rahe hain. ${need} MOQ, rate aur delivery time bata dijiye. ${ids}`
-      : `Hello${r.contact ? " " + r.contact : ""}, this is Taazu from Ahmedabad. We are launching our own electrolyte drink brand. ${need} Please share your MOQ, rate and delivery time. ${ids}`;
+      ? [
+          `Namaste${who ? " " + who + " ji" : ""},`,
+          "Main *Taazu* (Ahmedabad) se baat kar raha hoon. Hum apna electrolyte drink brand launch kar rahe hain. Pehle chhota trial order, sab theek raha to har mahine repeat.",
+          `*Aapse kya chahiye:* ${need}`,
+          "*Please ye 4 cheezein bata dijiye:*\n1. Rate (GST alag ya included)\n2. Minimum order (MOQ), aur trial ke liye sabse chhota order\n3. Sample milega? Kitne din mein, free ya paid?\n4. Aapka FSSAI licence aur GSTIN (photo chalegi)",
+          "Aapka reply aate hi call karta hoon. Dhanyavaad!",
+        ].join("\n\n")
+      : [
+          `Hello${who ? " " + who : ""},`,
+          "This is *Taazu* from Ahmedabad. We are launching our own electrolyte drink brand. We start with a small trial order, then repeat monthly if it works.",
+          `*What we need from you:* ${need}`,
+          "*Please share these 4 things:*\n1. Rate (GST extra or included)\n2. Minimum order (MOQ), and the smallest trial order\n3. Can you send a sample? How many days, free or paid?\n4. Your FSSAI licence and GSTIN (a photo is fine)",
+          "I'll call as soon as you reply. Thank you!",
+        ].join("\n\n");
   },
   badge: (r) => (Number(r.price) > 0 ? `₹${r.price}/unit${r.moq ? ` · MOQ ${r.moq}` : ""}` : null),
 };
