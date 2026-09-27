@@ -13,11 +13,16 @@ describe("supplier order", () => {
 });
 
 describe("supplier WhatsApp message", () => {
-  it("names the category's need and asks the same 4 questions", () => {
+  it("is professional English with the category's need and the same 4 questions", () => {
     const msg = SUPPLIER_CFG.waMessage({ id: "x", name: "A", cat: "PET bottles / caps", contact: "Ravi (Owner)" } as any, "hi");
-    expect(msg).toContain("Namaste Ravi ji");
-    expect(msg).toContain("PET bottle aur cap");
-    expect(msg).toContain("4. Aapka FSSAI licence aur GSTIN");
+    expect(msg.startsWith("Dear Ravi,")).toBe(true);
+    expect(msg).toContain("food-grade 250 ml PET bottles and caps");
+    expect(msg).toContain("4. A copy of your FSSAI licence and your GSTIN");
     expect(msg).not.toMatch(/\bORS\b/);
+  });
+  it("falls back to Sir/Madam and a generic ask", () => {
+    const msg = SUPPLIER_CFG.waMessage({ id: "y", name: "B", cat: "Other" } as any, "en");
+    expect(msg).toContain("Dear Sir/Madam,");
+    expect(msg).toContain("the products and services you offer");
   });
 });
