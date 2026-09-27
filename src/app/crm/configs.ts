@@ -19,7 +19,7 @@ export const NEED: Record<string, T> = {
 };
 // What we need from each category, phrased to finish "looking for a reliable partner for ..." in the WhatsApp message.
 const WA_NEED: Record<string, string> = {
-  "Co-packer / bottler": "contract filling of a non-carbonated flavoured drink in 250 ml PET bottles under our Taazu label (we provide the formula)",
+  "Co-packer / bottler": "contract filling of a non-carbonated flavoured drink in 250 ml PET bottles under our Taazu label, ideally with your help on the formulation",
   "Powder private label": "private-label electrolyte powder sachets under the Taazu brand",
   "PET bottles / caps": "food-grade 250 ml PET bottles and caps, starting with small quantities",
   "Labels & packaging": "printed labels or shrink sleeves for a 250 ml bottle (we provide the artwork)",
