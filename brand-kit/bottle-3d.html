@@ -695,7 +695,7 @@
       const bandH = 110;
       ctx.fillStyle = flv.bandColor;
       ctx.beginPath();
-      ctx.roundRect(fx - 280, bandY, 560, bandH, 20);
+      ctx.roundRect(fx - 280, bandY, 560, bandH, 16);
       ctx.fill();
 
       // Flavour Title
@@ -704,25 +704,30 @@
       ctx.textAlign = 'center';
       ctx.fillText(flv.name.toUpperCase(), fx, bandY + 70);
 
-      // Thin Accent Line
-      ctx.fillStyle = flv.accentColor;
-      ctx.fillRect(fx - 280, bandY + bandH + 16, 560, 6);
+      // Thin Leaf Green Strip (Part B Specification)
+      const stripY = bandY + bandH + 12;
+      const stripH = 38;
+      ctx.fillStyle = '#1F7A3A';
+      ctx.beginPath();
+      ctx.roundRect(fx - 280, stripY, 560, stripH, 8);
+      ctx.fill();
 
-      // Tagline: "Paani se aage"
-      ctx.font = '700 32px "Baloo Bhai 2", sans-serif';
+      ctx.font = '800 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.letterSpacing = '1.5px';
+      ctx.fillText(flavorKey === 'jeera' ? 'SPICED CUMIN ELECTROLYTE DRINK' : 'LEMON-SALT ELECTROLYTE DRINK', fx, stripY + 26);
+      ctx.letterSpacing = '0px';
+
+      // Tagline in Orange: "REHYDRATE | REFRESH | RECOVER"
+      ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = CONFIG.colors.orange;
       ctx.textAlign = 'center';
-      ctx.fillText('PAANI SE AAGE', fx, bandY + bandH + 62);
+      ctx.fillText('REHYDRATE  |  REFRESH  |  RECOVER', fx, stripY + stripH + 52);
 
-      // Subtitle
-      ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
-      ctx.fillStyle = '#78716C';
-      ctx.fillText('STILL LEMON-SALT ELECTROLYTE DRINK • 250 ML', fx, bandY + bandH + 104);
-
-      // Freshness Icons
-      ctx.font = '700 16px "Plus Jakarta Sans", sans-serif';
-      ctx.fillStyle = '#A8A29E';
-      ctx.fillText('REHYDRATE  •  REFRESH  •  RECOVER', fx, bandY + bandH + 140);
+      // Bottom Spec: "STILL | 250 ml"
+      ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#292524';
+      ctx.fillText('STILL  |  250 ml', fx, stripY + stripH + 90);
 
       // SIDE PANEL (Centered at x = 1146)
       const sx = W * 0.56;
