@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from "react";
-import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight, QrCode } from "lucide-react";
+import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight, QrCode, Box } from "lucide-react";
 import { Panel } from "../../components/ui";
 import wordLeaf from "../../../brand-kit/logos/wordmark-leaf.svg?url";
 import { Lockup, markUrl } from "../../components/BrandMark";
@@ -15,6 +15,7 @@ const Prompts = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.
 
 const TABS = [
   { id: "overview", label: "Overview", icon: LayoutGrid },
+  { id: "bottle3d", label: "3D Bottle", icon: Box },
   { id: "logos", label: "Logos", icon: Shapes },
   { id: "creatives", label: "Creatives", icon: Images },
   { id: "qr", label: "QR code", icon: QrCode },
@@ -30,7 +31,7 @@ export default function BrandView() {
   const setTab = (t: TabId) => { setTabState(t); try { localStorage.setItem(TAB_KEY, t); } catch { /* storage blocked */ } };
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-4 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-7">
+      <div className="grid grid-cols-4 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-8">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} type="button" onClick={() => setTab(id)} aria-pressed={tab === id}
             className={`flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition ${tab === id ? "bg-white text-orange-700 shadow-sm" : "text-stone-500 hover:text-stone-800"}`}>
@@ -40,6 +41,7 @@ export default function BrandView() {
       </div>
       <Suspense fallback={<div className="rounded-2xl bg-white p-8 text-center text-sm text-stone-500">Brand kit khul raha hai…</div>}>
         {tab === "overview" && <Overview go={setTab} />}
+        {tab === "bottle3d" && <Bottle3dPanel />}
         {tab === "logos" && <LogosPanel />}
         {tab === "creatives" && <Creatives />}
         {tab === "qr" && <QrMaker />}
@@ -271,6 +273,15 @@ function Overview({ go }: { go: (t: TabId) => void }) {
         </div>
         <p className="mt-2 text-xs text-slate-400 md:hidden">Swipe sideways to see all.</p>
         <p className="mt-3 text-xs text-slate-500">Standard bottle shape: only the label and cap colour change, so there's no mould cost. Pilot = one flavour, one size.</p>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-orange-50 p-3 border border-orange-200">
+          <div>
+            <div className="text-xs font-bold text-orange-950">Realistic 3D Bottle Studio (WebGL)</div>
+            <div className="text-[11px] text-orange-800">Rotate, switch flavours, inspect label wraps, and download .GLB 3D files.</div>
+          </div>
+          <button type="button" onClick={() => go("bottle3d")} className="inline-flex items-center gap-1.5 rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-orange-700">
+            <Box size={14} /> Open 3D Studio
+          </button>
+        </div>
       </Panel>
 
       <Panel title="Back label prototype" icon={ListChecks}>
@@ -309,3 +320,100 @@ function Overview({ go }: { go: (t: TabId) => void }) {
     </div>
   );
 }
+
+function Bottle3dPanel() {
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white p-4 shadow-sm border border-stone-200">
+        <div>
+          <h2 className="text-lg font-bold text-stone-900">Taazu 250 ml PET 3D Bottle Studio</h2>
+          <p className="text-xs text-stone-500">Built with Three.js • PCO 1881 standard finish • MeshPhysicalMaterial • Dynamic canvas label wrap</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <a
+            href="/bottle-3d.html"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-orange-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-orange-700 transition"
+          >
+            <ExternalLink size={14} /> Open Fullscreen Studio
+          </a>
+        </div>
+      </div>
+      <div className="overflow-hidden rounded-2xl border border-stone-200 bg-[#FFF8E7] shadow-sm" style={{ height: "660px" }}>
+        <iframe src="/bottle-3d.html" className="h-full w-full border-none" title="Taazu 3D Bottle Studio" />
+      </div>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">A1 · Hero Reference (Nimbu Namak)</h3>
+          <p className="mt-1 text-xs text-stone-500">250 ml clear PET, cloudy nimbu liquid, orange cap, full wrap label.</p>
+          <img src="/creatives/09-hero-bottle-a1.jpg" alt="Hero Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+        </div>
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">A2 · Jeera Masala Flavour</h3>
+          <p className="mt-1 text-xs text-stone-500">Warm roasted-cumin brown cap (#8A4B1F), amber golden drink, cumin seeds band.</p>
+          <img src="/creatives/11-jeera-masala-a2.jpg" alt="Jeera Masala Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+        </div>
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">A4 · Orthographic Technical Drawing</h3>
+          <p className="mt-1 text-xs text-stone-500">4-view orthographic drawing with 55 mm body diameter & 160 mm total height.</p>
+          <img src="/creatives/10-orthographic-views-a4.jpg" alt="Orthographic Drawing" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+        </div>
+      </div>
+      <div className="rounded-2xl border border-stone-200 bg-white p-4">
+        <h3 className="text-sm font-bold text-stone-900">A3 · Both Flavours Side-by-Side (Duo on Solid Saffron Orange #EA580C)</h3>
+        <p className="mt-1 text-xs text-stone-500">Both 250 ml PET bottles standing on crushed ice with lemon halves and pink rock salt on a solid orange studio backdrop.</p>
+        <div className="mt-3 rounded-xl border border-stone-200 bg-[#EA580C] p-2 text-center overflow-hidden">
+          <img src="/creatives/12-both-flavours-duo.jpg" alt="Both Flavours Duo" className="max-h-[460px] mx-auto object-contain rounded-lg shadow-sm" />
+        </div>
+        <div className="mt-2.5 flex items-center justify-end gap-2">
+          <a href="/creatives/12-both-flavours-duo.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
+            Download 4K JPG
+          </a>
+          <a href="/creatives/12-both-flavours-duo.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
+            Download Lossless PNG
+          </a>
+        </div>
+      </div>
+
+      {/* Packaging Label Flat Sleeves & Concepts */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">Classic Nimbu Namak · Full Wrap (175 × 95 mm)</h3>
+          <p className="mt-1 text-xs text-stone-500">Unwrapped 3-panel shrink sleeve: Ingredients, Nutrition Table, Front Brand, FSSAI & Barcode.</p>
+          <img src="/creatives/13-label-classic-wrap.jpg" alt="Classic Wrap Label" className="mt-3 rounded-xl border border-stone-200 max-h-56 mx-auto object-contain" />
+          <div className="mt-2.5 flex items-center justify-end gap-2">
+            <a href="/creatives/13-label-classic-wrap.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">JPG</a>
+            <a href="/creatives/13-label-classic-wrap.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">PNG</a>
+            <a href="/creatives/13-label-classic-wrap.svg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Vector SVG</a>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">Jeera Masala · Full Wrap (175 × 95 mm)</h3>
+          <p className="mt-1 text-xs text-stone-500">Warm roasted-cumin brown band, Desi twist tagline, cumin seeds, black salt & digestive table.</p>
+          <img src="/creatives/14-label-jeera-wrap.jpg" alt="Jeera Wrap Label" className="mt-3 rounded-xl border border-stone-200 max-h-56 mx-auto object-contain" />
+          <div className="mt-2.5 flex items-center justify-end gap-2">
+            <a href="/creatives/14-label-jeera-wrap.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">JPG</a>
+            <a href="/creatives/14-label-jeera-wrap.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">PNG</a>
+            <a href="/creatives/14-label-jeera-wrap.svg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Vector SVG</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-stone-200 bg-white p-4">
+        <h3 className="text-sm font-bold text-stone-900">Front Label · 3 Architecture Style Concepts (60 × 95 mm each)</h3>
+        <p className="mt-1 text-xs text-stone-500">Side-by-side comparison: 1. Minimal & Clean (Cream) • 2. Bold & Playful (Orange) • 3. Desi Retro (Stamp Seal).</p>
+        <div className="mt-3 rounded-xl border border-stone-200 bg-[#F4EFE6] p-3 text-center">
+          <img src="/creatives/15-label-front-3options.jpg" alt="3 Front Label Style Concepts" className="max-h-80 mx-auto object-contain rounded-lg" />
+        </div>
+        <div className="mt-2.5 flex items-center justify-end gap-2">
+          <a href="/creatives/15-label-front-3options.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Download 4K JPG</a>
+          <a href="/creatives/15-label-front-3options.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Download PNG</a>
+          <a href="/creatives/15-label-front-3options.svg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Download Vector SVG</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+

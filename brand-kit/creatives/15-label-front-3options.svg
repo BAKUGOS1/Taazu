@@ -1,0 +1,190 @@
+
+<svg width="2200" height="1350" viewBox="0 0 2200 1350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap');
+      .font-title { font-family: 'Baloo Bhai 2', 'Arial Black', sans-serif; }
+      .font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    </style>
+    <!-- Soft Drop Shadow for cards -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#1C1917" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Studio Presentation Backdrop -->
+  <rect width="2200" height="1350" fill="#F4EFE6"/>
+
+  <!-- Header -->
+  <g transform="translate(1100, 100)" text-anchor="middle">
+    <text class="font-title" font-size="44" font-weight="800" fill="#1C1917" letter-spacing="1">TAAZU · FRONT LABEL DESIGN CONCEPTS</text>
+    <text y="38" class="font-sans" font-size="18" font-weight="600" fill="#78716C">250 ml Slim PET Bottle (60 mm × 95 mm) • 3 Distinct Brand Architecture Options</text>
+  </g>
+
+  <!-- =======================================================================
+       OPTION 1: MINIMAL & CLEAN (Cream bg, big orange wordmark, yellow tag)
+       ======================================================================= -->
+  <g transform="translate(140, 220)">
+    <!-- Label Card -->
+    <rect width="600" height="950" rx="16" fill="#FFF8E7" stroke="#E7DFCE" stroke-width="2" filter="url(#cardShadow)"/>
+
+    <g transform="translate(300, 80)" text-anchor="middle">
+      <!-- Water Drop Icon -->
+      <g transform="translate(-60, 20)">
+        
+<g transform="scale(0.38)">
+  <path d="M256 44C236 92 112 200 112 316A144 144 0 0 0 400 316C400 200 276 92 256 44Z" fill="#EA580C"/>
+  <circle cx="256" cy="322" r="104" fill="#F5D83B"/>
+  <circle cx="256" cy="322" r="91.5" fill="#FFF8E7"/>
+  <circle cx="256" cy="322" r="81" fill="#F5D83B"/>
+  <line x1="179" y1="290" x2="333" y2="354" stroke="#FFF8E7" stroke-width="7" stroke-linecap="round"/>
+  <line x1="224" y1="245" x2="288" y2="399" stroke="#FFF8E7" stroke-width="7" stroke-linecap="round"/>
+  <line x1="288" y1="245" x2="224" y2="399" stroke="#FFF8E7" stroke-width="7" stroke-linecap="round"/>
+  <line x1="333" y1="290" x2="179" y2="354" stroke="#FFF8E7" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="256" cy="322" r="10.5" fill="#FFF8E7"/>
+</g>
+
+      </g>
+
+      <!-- Big Orange TAAZU Wordmark -->
+      <text x="0" y="240" class="font-title" font-size="96" font-weight="800" fill="#EA580C" letter-spacing="3">TAAZU</text>
+
+      <!-- Yellow Flavour Tag -->
+      <rect x="-160" y="275" width="320" height="42" rx="21" fill="#F5D83B"/>
+      <text x="0" y="303" class="font-sans" font-size="16" font-weight="800" fill="#1C1917" letter-spacing="1">CLASSIC NIMBU NAMAK</text>
+
+      <!-- Leaf Green Divider Line -->
+      <rect x="-80" y="345" width="160" height="4" rx="2" fill="#1F7A3A"/>
+
+      <!-- Clean Minimal Copy -->
+      <text x="0" y="420" class="font-sans" font-size="18" font-weight="700" fill="#1C1917">STILL ELECTROLYTE</text>
+      <text x="0" y="450" class="font-sans" font-size="14" font-weight="500" fill="#78716C">Himalayan Salt • Real Lemon • Potassium</text>
+
+      <!-- Subtle Geometric Lemon Line Icon -->
+      <circle cx="0" cy="560" r="54" fill="none" stroke="#F5D83B" stroke-width="4"/>
+      <circle cx="0" cy="560" r="46" fill="#FFFDF8"/>
+      <circle cx="0" cy="560" r="38" fill="#FEF08A" opacity="0.6"/>
+      <line x1="0" y1="560" x2="38" y2="560" stroke="#FFF8E7" stroke-width="3"/>
+                                   <line x1="0" y1="560" x2="-38" y2="560" stroke="#FFF8E7" stroke-width="3"/><line x1="0" y1="560" x2="26.870057685088806" y2="586.8700576850888" stroke="#FFF8E7" stroke-width="3"/>
+                                   <line x1="0" y1="560" x2="-26.870057685088806" y2="533.1299423149112" stroke="#FFF8E7" stroke-width="3"/><line x1="0" y1="560" x2="2.326828918379971e-15" y2="598" stroke="#FFF8E7" stroke-width="3"/>
+                                   <line x1="0" y1="560" x2="-2.326828918379971e-15" y2="522" stroke="#FFF8E7" stroke-width="3"/><line x1="0" y1="560" x2="-26.870057685088803" y2="586.8700576850888" stroke="#FFF8E7" stroke-width="3"/>
+                                   <line x1="0" y1="560" x2="26.870057685088803" y2="533.1299423149112" stroke="#FFF8E7" stroke-width="3"/>
+
+      <text x="0" y="690" class="font-title" font-size="28" font-weight="700" fill="#EA580C" letter-spacing="2">PAANI SE AAGE</text>
+      <text x="0" y="730" class="font-sans" font-size="13" font-weight="700" fill="#78716C">250 ml • ₹25</text>
+    </g>
+
+    <!-- Option Footnote -->
+    <text x="300" y="995" class="font-sans" font-size="18" font-weight="800" fill="#1C1917" text-anchor="middle">OPTION 1: MINIMAL &amp; CLEAN</text>
+    <text x="300" y="1025" class="font-sans" font-size="13" font-weight="500" fill="#78716C" text-anchor="middle">Clean cream canvas, maximum wordmark prominence</text>
+  </g>
+
+  <!-- =======================================================================
+       OPTION 2: BOLD & PLAYFUL (Orange bg, cream wordmark, lemon illustration)
+       ======================================================================= -->
+  <g transform="translate(800, 220)">
+    <!-- Label Card (Vibrant Orange Background) -->
+    <rect width="600" height="950" rx="16" fill="#EA580C" stroke="#C2410C" stroke-width="2" filter="url(#cardShadow)"/>
+
+    <g transform="translate(300, 80)" text-anchor="middle">
+      <!-- Cream Drop Icon -->
+      <g transform="translate(-60, 20) scale(0.38)">
+        <path d="M256 44C236 92 112 200 112 316A144 144 0 0 0 400 316C400 200 276 92 256 44Z" fill="#FFF8E7"/>
+        <circle cx="256" cy="322" r="104" fill="#F5D83B"/>
+        <circle cx="256" cy="322" r="91.5" fill="#EA580C"/>
+        <circle cx="256" cy="322" r="81" fill="#F5D83B"/>
+      </g>
+
+      <!-- Bold Cream TAAZU Wordmark -->
+      <text x="0" y="240" class="font-title" font-size="96" font-weight="800" fill="#FFF8E7" letter-spacing="3">TAAZU</text>
+
+      <!-- Yellow Tag -->
+      <rect x="-170" y="275" width="340" height="42" rx="21" fill="#F5D83B"/>
+      <text x="0" y="303" class="font-sans" font-size="16" font-weight="800" fill="#1C1917" letter-spacing="1">CLASSIC NIMBU NAMAK</text>
+
+      <!-- Big Juicy Sliced Lemon Illustration -->
+      <g transform="translate(0, 480)">
+        <circle cx="0" cy="0" r="95" fill="#F5D83B" stroke="#FFF8E7" stroke-width="5"/>
+        <circle cx="0" cy="0" r="80" fill="#FFF8E7"/>
+        <circle cx="0" cy="0" r="70" fill="#FDE047"/>
+        <line x1="0" y1="0" x2="70" y2="0" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="-70" y2="0" stroke="#FFF8E7" stroke-width="3.5"/><line x1="0" y1="0" x2="60.62177826491071" y2="34.99999999999999" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="-60.62177826491071" y2="-34.99999999999999" stroke="#FFF8E7" stroke-width="3.5"/><line x1="0" y1="0" x2="35.00000000000001" y2="60.6217782649107" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="-35.00000000000001" y2="-60.6217782649107" stroke="#FFF8E7" stroke-width="3.5"/><line x1="0" y1="0" x2="4.2862637970157365e-15" y2="70" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="-4.2862637970157365e-15" y2="-70" stroke="#FFF8E7" stroke-width="3.5"/><line x1="0" y1="0" x2="-34.999999999999986" y2="60.62177826491071" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="34.999999999999986" y2="-60.62177826491071" stroke="#FFF8E7" stroke-width="3.5"/><line x1="0" y1="0" x2="-60.62177826491071" y2="34.99999999999999" stroke="#FFF8E7" stroke-width="3.5"/>
+                                             <line x1="0" y1="0" x2="60.62177826491071" y2="-34.99999999999999" stroke="#FFF8E7" stroke-width="3.5"/>
+        <circle cx="0" cy="0" r="10" fill="#FFF8E7"/>
+      </g>
+
+      <!-- Recipe Line -->
+      <rect x="-195" y="620" width="390" height="42" rx="8" fill="#9A3412"/>
+      <text x="0" y="647" class="font-sans" font-size="14.5" font-weight="800" fill="#FED7AA" letter-spacing="1">NIMBU + NAMAK + POTASSIUM</text>
+
+      <text x="0" y="700" class="font-sans" font-size="15" font-weight="700" fill="#FFF8E7">STILL ELECTROLYTE DRINK</text>
+      <text x="0" y="730" class="font-sans" font-size="13" font-weight="700" fill="#FED7AA">250 ml • ₹25</text>
+    </g>
+
+    <text x="300" y="995" class="font-sans" font-size="18" font-weight="800" fill="#1C1917" text-anchor="middle">OPTION 2: BOLD &amp; PLAYFUL</text>
+    <text x="300" y="1025" class="font-sans" font-size="13" font-weight="500" fill="#78716C" text-anchor="middle">All-orange billboard impact, oversized fruit graphic</text>
+  </g>
+
+  <!-- =======================================================================
+       OPTION 3: DESI RETRO (Cream bg, round stamp-style seal, hand-drawn feel)
+       ======================================================================= -->
+  <g transform="translate(1460, 220)">
+    <!-- Label Card -->
+    <rect width="600" height="950" rx="16" fill="#FFF8E7" stroke="#E7DFCE" stroke-width="2" filter="url(#cardShadow)"/>
+
+    <g transform="translate(300, 80)" text-anchor="middle">
+      <!-- Retro Stamp Seal -->
+      <g transform="translate(0, 140)">
+        <circle cx="0" cy="0" r="115" fill="none" stroke="#EA580C" stroke-width="3"/>
+        <circle cx="0" cy="0" r="108" fill="none" stroke="#EA580C" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <circle cx="0" cy="0" r="75" fill="#EA580C"/>
+
+        <!-- Center Drop Inside Seal -->
+        <g transform="translate(-32, -32) scale(0.25)">
+          <path d="M256 44C236 92 112 200 112 316A144 144 0 0 0 400 316C400 200 276 92 256 44Z" fill="#FFF8E7"/>
+          <circle cx="256" cy="322" r="104" fill="#F5D83B"/>
+        </g>
+
+        <!-- Circular Arc Text Mockup -->
+        <text x="0" y="-84" class="font-title" font-size="15" font-weight="800" fill="#EA580C" letter-spacing="3">TAAZU • AMDAVAD</text>
+        <text x="0" y="96" class="font-title" font-size="15" font-weight="800" fill="#EA580C" letter-spacing="3">PAANI SE AAGE</text>
+      </g>
+
+      <!-- Brand Wordmark -->
+      <text x="0" y="325" class="font-title" font-size="82" font-weight="800" fill="#EA580C" letter-spacing="3">TAAZU</text>
+
+      <rect x="-160" y="355" width="320" height="38" rx="6" fill="#FFFDF8" stroke="#1F7A3A" stroke-width="2"/>
+      <text x="0" y="380" class="font-sans" font-size="15" font-weight="800" fill="#1F7A3A" letter-spacing="1">CLASSIC NIMBU NAMAK</text>
+
+      <!-- Hand-drawn Vintage Botanical Illustrations -->
+      <g transform="translate(0, 500)">
+        <!-- Engraving style citrus half -->
+        <circle cx="0" cy="0" r="48" fill="#FEF08A" stroke="#8A4B1F" stroke-width="2"/>
+        <circle cx="0" cy="0" r="40" fill="#FFFDF8" stroke="#8A4B1F" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="40" y2="0" stroke="#8A4B1F" stroke-width="1.2"/>
+                                     <line x1="0" y1="0" x2="-40" y2="0" stroke="#8A4B1F" stroke-width="1.2"/><line x1="0" y1="0" x2="28.284271247461902" y2="28.2842712474619" stroke="#8A4B1F" stroke-width="1.2"/>
+                                     <line x1="0" y1="0" x2="-28.284271247461902" y2="-28.2842712474619" stroke="#8A4B1F" stroke-width="1.2"/><line x1="0" y1="0" x2="2.4492935982947065e-15" y2="40" stroke="#8A4B1F" stroke-width="1.2"/>
+                                     <line x1="0" y1="0" x2="-2.4492935982947065e-15" y2="-40" stroke="#8A4B1F" stroke-width="1.2"/><line x1="0" y1="0" x2="-28.2842712474619" y2="28.284271247461902" stroke="#8A4B1F" stroke-width="1.2"/>
+                                     <line x1="0" y1="0" x2="28.2842712474619" y2="-28.284271247461902" stroke="#8A4B1F" stroke-width="1.2"/>
+
+        <!-- Rock salt shards -->
+        <polygon points="-70,18 -55,6 -60,26 -76,24" fill="#FECDD3" stroke="#8A4B1F" stroke-width="1.2"/>
+        <polygon points="55,18 70,8 74,28 58,26" fill="#FECDD3" stroke="#8A4B1F" stroke-width="1.2"/>
+      </g>
+
+      <!-- Heritage tagline -->
+      <text x="0" y="605" class="font-title" font-size="24" font-weight="700" fill="#8A4B1F" letter-spacing="1">ગરમીમાં પણ તાજું</text>
+      <text x="0" y="635" class="font-sans" font-size="14" font-weight="600" fill="#78716C">Crafted for the dry heat of Ahmedabad</text>
+
+      <rect x="-140" y="685" width="280" height="34" rx="4" fill="#F6EEDC"/>
+      <text x="0" y="707" class="font-mono" font-size="13" font-weight="700" fill="#1C1917">ORIGINAL RECIPE • 250 ML</text>
+    </g>
+
+    <text x="300" y="995" class="font-sans" font-size="18" font-weight="800" fill="#1C1917" text-anchor="middle">OPTION 3: DESI RETRO</text>
+    <text x="300" y="1025" class="font-sans" font-size="13" font-weight="500" fill="#78716C" text-anchor="middle">Apothecary stamp seal, vintage Gujarati pride</text>
+  </g>
+</svg>
