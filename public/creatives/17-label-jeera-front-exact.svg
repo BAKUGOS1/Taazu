@@ -1,118 +1,18 @@
 
-<svg width="2100" height="1140" viewBox="0 0 2100 1140" xmlns="http://www.w3.org/2000/svg">
+<svg width="720" height="1140" viewBox="0 0 720 1140" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap');
       .font-title { font-family: 'Baloo Bhai 2', 'Arial Black', sans-serif; }
       .font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
-      .font-mono { font-family: 'JetBrains Mono', monospace; }
     </style>
   </defs>
 
-  <!-- Background Cream -->
-  <rect width="2100" height="1140" fill="#FFF8E7"/>
+  <rect width="720" height="1140" fill="#FFF8E7"/>
+  <rect x="8" y="8" width="704" height="1124" rx="12" fill="none" stroke="#E7DFCE" stroke-width="1.5"/>
 
-  <!-- Trim & Bleed Guides -->
-  <rect x="12" y="12" width="2076" height="1116" fill="none" stroke="#E7DFCE" stroke-width="1.5" stroke-dasharray="6,6"/>
-
-  <!-- Fold / Panel Division Lines -->
-  <line x1="680" y1="20" x2="680" y2="1120" stroke="#EFE7D4" stroke-width="2" stroke-dasharray="4,8"/>
-  <line x1="1420" y1="20" x2="1420" y2="1120" stroke="#EFE7D4" stroke-width="2" stroke-dasharray="4,8"/>
-
-  <!-- =======================================================================
-       LEFT PANEL: INGREDIENTS & NUTRITION TABLE (x: 50 to 620)
-       ======================================================================= -->
-  <g transform="translate(60, 75)">
-    <text x="0" y="30" class="font-sans" font-size="20" font-weight="800" fill="#1C1917" letter-spacing="1">NUTRITION INFORMATION</text>
-    <text x="0" y="56" class="font-sans" font-size="13.5" font-weight="600" fill="#78716C">Serving Size: 250 ml (1 Bottle) • Servings Per Pack: 1</text>
-
-    <!-- Table -->
-    <rect x="0" y="75" width="530" height="430" rx="8" fill="#FFFDF8" stroke="#D6D0C0" stroke-width="1.5"/>
-    <rect x="0" y="75" width="530" height="44" rx="8" fill="#F6EEDC"/>
-    <text x="20" y="103" class="font-sans" font-size="15" font-weight="800" fill="#1C1917">Nutrient Parameter</text>
-    <text x="510" y="103" class="font-sans" font-size="15" font-weight="800" fill="#1C1917" text-anchor="end">Per 250 ml</text>
-
-    
-        
-        <text x="20" y="155" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Energy</text>
-        <text x="510" y="155" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">40 kcal</text>
-        <line x1="15" y1="167" x2="515" y2="167" stroke="#EFE9DC" stroke-width="1"/>
-      
-        
-        <text x="20" y="193" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Carbohydrates</text>
-        <text x="510" y="193" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">9.5 g</text>
-        <line x1="15" y1="205" x2="515" y2="205" stroke="#EFE9DC" stroke-width="1"/>
-      
-        
-        <text x="20" y="231" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Total Natural Sugars</text>
-        <text x="510" y="231" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">8.8 g</text>
-        <line x1="15" y1="243" x2="515" y2="243" stroke="#EFE9DC" stroke-width="1"/>
-      
-        
-        <text x="20" y="269" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Added Sugars (Zero refined cane sugar)</text>
-        <text x="510" y="269" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">2.0 g</text>
-        <line x1="15" y1="281" x2="515" y2="281" stroke="#EFE9DC" stroke-width="1"/>
-      
-        <rect x="1" y="283" width="528" height="36" fill="#FEFCE8" opacity="0.8"/>
-        <text x="20" y="307" class="font-sans" font-size="14" font-weight="700" fill="#15803D">Sodium (as NaCl &amp; Kala Namak)</text>
-        <text x="510" y="307" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">260 mg</text>
-        <line x1="15" y1="319" x2="515" y2="319" stroke="#EFE9DC" stroke-width="1"/>
-      
-        <rect x="1" y="321" width="528" height="36" fill="#FEFCE8" opacity="0.8"/>
-        <text x="20" y="345" class="font-sans" font-size="14" font-weight="700" fill="#15803D">Potassium (as Potassium Citrate)</text>
-        <text x="510" y="345" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">125 mg</text>
-        <line x1="15" y1="357" x2="515" y2="357" stroke="#EFE9DC" stroke-width="1"/>
-      
-        <rect x="1" y="359" width="528" height="36" fill="#FEFCE8" opacity="0.8"/>
-        <text x="20" y="383" class="font-sans" font-size="14" font-weight="700" fill="#15803D">Chloride</text>
-        <text x="510" y="383" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">330 mg</text>
-        <line x1="15" y1="395" x2="515" y2="395" stroke="#EFE9DC" stroke-width="1"/>
-      
-        
-        <text x="20" y="421" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Cumin Polyphenols (Antioxidants)</text>
-        <text x="510" y="421" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">18 mg</text>
-        <line x1="15" y1="433" x2="515" y2="433" stroke="#EFE9DC" stroke-width="1"/>
-      
-        
-        <text x="20" y="459" class="font-sans" font-size="14" font-weight="500" fill="#44403C">Total Fat / Protein</text>
-        <text x="510" y="459" class="font-sans" font-size="14" font-weight="700" fill="#1C1917" text-anchor="end">0.0 g</text>
-        
-      
-
-    <!-- Ingredients Block -->
-    <g transform="translate(0, 545)">
-      <text x="0" y="24" class="font-sans" font-size="15" font-weight="800" fill="#1C1917" letter-spacing="0.5">INGREDIENTS:</text>
-      <text x="0" y="52" class="font-sans" font-size="13" font-weight="500" fill="#57534E">
-        
-          <tspan x="0" dy="0">Treated Water, Roasted Cumin Extract (Jeera), Fresh Lemon Juice (4%),</tspan>
-          <tspan x="0" dy="24">Raw Sugar, Himalayan Black Salt (Kala Namak), Rock Salt (Sendha Namak),</tspan>
-          <tspan x="0" dy="24">Potassium Citrate, Black Pepper Extract, Mint Oil, Acidity Regulator (INS 330),</tspan>
-          <tspan x="0" dy="24">Antioxidant (INS 300). NO ARTIFICIAL COLOURS OR PRESERVATIVES.</tspan>
-        
-      </text>
-
-      <!-- Storage & Recyclable Notice -->
-      <rect x="0" y="165" width="530" height="95" rx="8" fill="#FBF6E9" stroke="#E7DFCE" stroke-width="1"/>
-      <text x="16" y="195" class="font-sans" font-size="12.5" font-weight="700" fill="#78716C">STORAGE &amp; HANDLING:</text>
-      <text x="16" y="218" class="font-sans" font-size="12" font-weight="500" fill="#78716C">
-        <tspan x="16" dy="0">Store in a cool, dry place. Keep chilled before drinking for peak taste.</tspan>
-        <tspan x="16" dy="18">Natural juice &amp; spice particles may settle — shake gently before opening.</tspan>
-      </text>
-
-      <g transform="translate(0, 305)">
-        <polygon points="18,0 36,32 0,32" fill="none" stroke="#1F7A3A" stroke-width="2.5"/>
-        <text x="18" y="24" class="font-sans" font-size="13" font-weight="800" fill="#1F7A3A" text-anchor="middle">1</text>
-        <text x="48" y="18" class="font-sans" font-size="13" font-weight="700" fill="#1F7A3A">100% RECYCLABLE PET BOTTLE</text>
-        <text x="48" y="34" class="font-sans" font-size="11.5" font-weight="500" fill="#78716C">Crush bottle after use • Clean Amdavad initiative</text>
-      </g>
-    </g>
-  </g>
-
-  <!-- =======================================================================
-       CENTRE PANEL: EXACT 1:1 REPLICA OF THE 3D BOTTLE FACE (x: 680 to 1420)
-       ======================================================================= -->
   
-    <g transform="translate(1050, 40)" text-anchor="middle">
+    <g transform="translate(360, 85)" text-anchor="middle">
       <!-- 1. Top Teardrop Emblem -->
       <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABuCAYAAACjttSEAAAACXBIWXMAAC4jAAAuIwF4pT92AAAgAElEQVR4nO29Z5Bd5dXnq/G8d+admpqaurem7msbYxMtQIhgohA5B5OTMWCTEYggMhIKSEI5dkut1FLnnHPu0336pD4555xTRyXAGH639tPA67dmPtwPYMDWv2rV3md36+jod9Zez1rreZ6tefNO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6ZRO6TuUxm1c8P7mjy/4Lt/zlP5G+7s71zy7YcPqv712St+hXt93yP5WWY3tu3zPU/pa5UO9tz6/ex/rukZ4dV/pzd9cP6XvSEt37h5cUd/JbqWVFY39/d/V+57SvHnz6tTq3z22bhtb+lUc0LrZ3K/hzf2ll56C8x3prX2H+17aV8F+lY1yc4B9ahur6tp7vqv3/6dWu37s5odXb2BNm4wyg5tKo5dyo4cdfXI+KKm+/Yf+fD9pubPBn72zZ7fplaISCscsVJv9VGod1Jg8lGqsrGvutn54sORnP/Tn/MmqcVz5wmNr1rOxfYAynYtao4cKjYVag5M6k5fCYTUrSquf/6E/509SvlTw/3l9d2F+6f4yDirMNFj81BldVChN1IzbaLL6KNfa2draO7mmuOR//dCf9yen+tGB4ic+3sT2PhW1Rh9NlgB1Ose3gJttfgH5oEzNhprWQz/05/1JyRzxXPHKpi1frqhooGTcQbM1SJstIMBWqS3CGgwuOp0h6vUOinrlX64tqVj0Q3/un4SCGe9/KWxptb20bQ+HRrUi7nY7I7SafQJwtcZKrcZBo95FpyNIhz1AldLMrqYuW0Ft9X/5oT//j15ym+7jFzZsZXPbgBjMJC/tc0VoMbio1zqE59aNO2kYt9Nu9tLvDtNpDVA+PM726vqPf+jP/6OWNxu6aNX+vZ+/vb9UpGMtFi9DvgS9zrAA3Ghw0micA92sd9JqdDLgDjPsidNucHOod+SLbZWVpyq8/5PiE/5/qZb16V/avJXDcq3w3kFvFJk/TqfFQ6veRYvZQ7PJLcKDBLxZZ6PP7kPujSNzRWjU2ChobjeXtDT+X//Hv+SfWTqfeflr27exubVLDFydVj/yUIJBV5Aus4t2k4t2o4d2s4820xzwVoODHrOLMW8UdTBJvyNI+ZCCgvrmD37of8+PSv60d/6WsoOfvn/wCNUGu7j95YEkqlCcQYeXXoubbouXLrOPTpNXWIfRRZveRpfRhtwZQBdMMB5O02V0cLhX9llBTe2pmQ9J4ZTrZ81KmeKNHbs4MqoW3ttr86KNpFD6owzaPPTb5iD3W/30mDx0G930mr0CZo/RzpDZhc4fwxhKog3FaVYbOdDWpTncWP+f5/2zyxSwLftw3z62t3bTanGL214TSmCMZpC7/Azb3AzZvQzafML6LR4GrF76zG76zE76jQ4GTQ7GfSEs4QSWWAqFO0TdiIqiuqY35v0zy5/2n11YV318ZXGZ8NwWvR2ZO4Q5nkMXjDNq9zJi8zBs9TBi9yGzeb816dqQ1cWQ2SkAy+1urKEEtnASeyzLsMlFdf/o8T3V1WfN+2dULOv9WbtaPvpu4V4qFDraTC66TU5MsSzWWBa1OyQAjzn9yB3+vzn3CejSa7kE2uISJrM40Hn8uKJJXNE0jmiWTo2J8q4+ZVlT3T9fx83ks7y55uAhCjp66bb7aTfY0fhj2BN5LOEUiq+hSkDH7H9jDg8Kp1d4rMLmZtTmYsTiZsRkR+1wYwuGcYUTuGMpNL4IjaMqihqa/7lChS/hPWtffe2xzdX1tJulDMEtbnt7MoszkcXgj6C0+wRklSsojhLUb+CqHF7UTp84Ku0eYWNWFwqrA4Pbizsaxx6KifeS2T1U9I+c2FVZce68fwZFM56ftStH5Z8cKadZZ2HAGWDQ7BKDkyeVxZ3MoHH5BTzJxt0BYRqXdO5D7fSgcXoYd3nFUfJald3FmNWB0uac8+JACE8sgTU8B7lLa+JIW5dqT2XFP35WYfJZ3t5cVka5TMmoPybSMK0/jC+Tx5dMYw9FBCTJQ78B+w1cKcZq3RJc99c2B1k6KmzOb03ndAsvdkmeHE2gC0RoHRunsLr+rXn/yPInffMPNdefPNjeLTxX7gmhcPmE5wbSWfypDCavXwCWoEmmdfsERAms3uURIUAcPXOvpesapwuV04nCbkfpcKCxucT7+BIp3LEEllBUhJGGYcWnO0pL/zELkETe/7MuhUyxt76JfosLVSAm4EohIZjOEkhlcEZiwvvmPNWH3hv4Fug3cCUzer2YfD6MHp94rXE6UbskcwnIEmC90409GJ6DHI1jCoQZNDkp7ejR7K868o8XKvRu43t762ppUmnRRpOovUHhWZHcBNFUllAqg9U/B9Tg9n9tXkweL0a3Z+74NVjJOyW4Zr9fXJO8WYI87nKhdTpRWWzoHC70dhfOYIRgMiMgaz1hutQ6DjY2vjvvH0n+uHt+ZUfrp9UDw6iDcYyRBEZ/iHA2TyydI57OEIzHBcRvPNPsC3wL1ur1i6PZ6/sPP5fASoAl0NK5ZBLgcZtDeLDW6sDm9uMLxwRkRzguUrvmUeWnhRWl8+f9IyiV8f2sWzk6VtzSwZjTizWexuANi7CQnpgmmc2RyKRxB/1YvB4B0ez1Y/EFBNhvrll8fszi3CPO517PXZdM+jK+sXGbHa3dIbxYZ3Ni9/jxx5MEk2lxVwwardT296uLa8p++gWIyWl4payjg26dGVsiI2KhVAjEchOkcnlSuSzRZAKn34vV58bi84pQIcznxeb3CdDS+Tdm8wWweOau/+252ePG5HFjcDnROebM4HAJc/lDhNIp/MmUSOl61VrK29uWzPspyx12/LJpsG+6ZXQMQziOPZbGFowSyeTITk6RzudIZzOEYlFcPq+AbA/MmSPoE69dAR+uQACHz/e1ebB7vX/zes6ka998SQanTcDW250YnW4BWPpivLEowfTcYDpitNChVM8erK/51byfqvpV8tYmmQyly4MrmRFwQ6ksualpsvkc2XyGTC6NLxQUgN3B/2iugEeEDgmq+AK8HhwetzhKr+1et/gCpJ87fC7cIWlQs+EIObH4bBhddkxu17cm3Q3BVJJwOvd1qDBTPzjYNe+nKJ1D+1iLbJghk0XAlUpXVyRKZmqKbG5CAM5NZIknY3iDgTkL+fCF/XhDHmGeoBuPBNrvFub0uYRJ5+6AR5xLR+l3XSErrrAOk2+M9uFaPHE7Nq8Nm8eFxeXC6nZjdDlxhoICsD+ZRm6x0zOuo6an+9F5PyW5g+b/2aMYTPbqxjGGozjjKVG+xrNZMhN5chN5JibmPDgcDREIBQVcfyQgAPvCXmHfgPb658zj+3fQLr9z7gsIOXBHzPgzBhzJQT7e8yJvr3sab9oooEueLXm6zeMRYUMaNP2RuIAsNYaG9CY6VZp0eVvz/z3vp6IRrbykV60Qyb8vkxVwA4kU2ckJJqby5PNZJifzpNNJQmEfoVCAYDhAJBYmKL2O+MVRskDIiy/gxh/0CPP6XXh8TnxBF96wHXdETyCnZtRRyju7buOlT67h+VU3og9244pasHudc7Hd653LSDxSWAmIvFuKx1LJPaA10TQ0dHjeT0EW+/iNfYqRr+RWK+5kEkckgjMYFoNafnKCXC4jAEseHIuHiEQDhMNBwhE/4WjgW7DfQJagfnP0B9wEgm68ATuesBlfQktoUklZ9wqeW30pL29bwLKiK/jj8gV06vYSzNpxBpwiRjv9/m8hS+HCF4kQTmdFU2jUaKd/XP9VbU/nrfN+zAqGHf9tWDUakOl0WMMR/Ok0tkBQFBJzYWFiDu5Unmw+RTQWFIAlm4PtJxYP/ofXkgVDHsIRnzj6Aw78YQvehBpXpoeNpU/y9Opzea1wAe+VLeTNgwt4fuMFFDYtJTxhwRuai9ffZClSTJYAS7BDiYSAbPQEGNQa6JAr/ZWtjf9t3o9VWot27YhWJ/oGUuPGHgzhi8e+9VzJJiYzTE5lSKYi38KVQEtAozEJbFAcJYtEvYSjLsIRD6GwW1ggYiWQHMed7eejovt4bv0FvHXgIt4vv4iPWy7nzcPzeWXXeSzbdQuBnAZv2CnCitvvE9nHN/FYgix5dTSXxRtPil5yr9ZIw0D/j3N1kNtn/rVsXHNC6s1KHSzpQzsCIVFMSN6by6fI5+NMTsbJ5SIk0wHiiZAAKsH9dwt+bX4icQ+JjI9o3EMo4iQcdRCM6fHlBll94EGeW3+e8Ny3D17ExvbreatkPkuKzmBp0fk8vWYBxmAP3qhNDJjfZCJSmid575wXu/FH5/JyayBEv94o5cYna3s6z5z3Y5NSr2hXmCyixxDM5ERoiCZT38KdmIgxPeFletLBdN5CJmUmnnART8x5bSIZEYClYyIZJp70Ec24kGs7sPnGSE46iWdspI8ZKWpaMhcWdl/E81vP4LDiD3xQfilvFJ/DK/t+w2sH5vPo8jMZsdQQTDn/PUx8DViKyZIXW1wOAVsqo4UX25z0avU0Dg+3zPsxyekx36YwaBm3u/GncnhicVE15SbyZHPJObiTLk7OapnOdGHX7iXgrBeQk0kvyUSYZCJCKhkR59JR8tzUrJ33Nz3NkpX3YEl0kv+LFaWrgj+vms9bRZfy0uYLqNEupVz1LM/v+A0v7z+TF4tO5+V95/DQ+7+mW32IcMqFPyRlIQERhyXAc3HYKfJjs9Mp7jQpL5aco09noE2hoaKj9a55PwbFE45/URvGPWqLVaRjoUxOJPPJbEZ47mQ+xMyEmc9mFWRDhzGNLmd8eBXZaBuTWQPZtIdMMkQ2FSWTjgm46VSUVM5PfNbEBzv/wOPvX8LHZY+T/FJOUcurvLzlApYVXcSGyntxfVrGirLreGn3WSwtPpcX9p3OcwVncv87p9GlOkgs6yUQ9vxvgL8pQCTAJpdHOIU9GmPU5qBDpaducNhV3lL9Lz8033kOt2GJ2mxA73SJvNKfiBOMR8nkkuTzYY5OWvh8qoekcxOWoaexj7xEPlLBiSkl0xNG8jkn2bSfXDoiAEuWTodJZj3Ej5n4cO8T/HHdhby8+3KsRyvZ1/M8Ozvu4/WCi+l1fEKbeQ0vbZ/Pkr1nsvTIOTy/99c8v/Ms7n/r9LkQkXDM5cx+Dw6vU5jN5cTisH8L2OB0iI6cNMWk9fjpVOppGlFQ0tH20g8KNxx1/Pdx83hKY7WIjCGQSuKPhgXcXE7yXCt/mRkmaV+Duf9hXCOPM+1bw5fTbeL6VLqTiWQvM1kDkxknuUyAdDpIJiMNjl4yJ+2sL32Bx9aey1PbzubAyHMcHHqGTY33sKHmHgKfNbLy8F28sONcXtj7a14pPos/7z6dP206k8feOx9LZBBv2CpChFQFShXg3wKW4BrtdsatFrR2G9ZgEEs4xpDRQfOomvL+wdT+hqr//oMBtrrMqxQmnWgLCu+NRklkk2RzMWYnHXwxKyPv24pz8Pf4Rn5P2vYBzNby5VQ9s5ED+DVv4Ne+w0ysmuP5MaaydnIZP9lskOyEn+xxF6V9a3lkzdk8U3AOK6quZ0XpDby240q6rGtQRHby0paFvLj7HF45dA7P7zuD53afw+Mfnc07O+4jkDXi8dvm0jSvC7vHgc3jwOK0CjM5bBhsFvRWq4AstTltkaiY1ZYmSauGRjnQ0vTRDwI3mnD9L4VBM6swm8VMsFQKRxJxkeNOTQT5dHqcY/F92IceIaK8i6TucZg4AjONfJ45QFD7EinjYyRMj5Mwv83ReBlHszImsxbyGS9pyYNnPCjcNTy04iyeK5jP9t77ePfgIpZuugbHVDVF3c/wyq4Lef3wBbxy6FyeLTiTZ3dcyN2vnkmropBwxo7H75hL0aT465PyXydmp13A1VvNArDWbEZlMqIym+ZmTAJhusdNVMsUlPb2z+6rLf/772Jy+CzrhrUalDa7KCqkcjgzKZXAEU7M2PliuhO/8o/4x24hpLyXz2Kr4FgLzDYQ1b9EUHUHKfMtZG23kzA8RFi/hOnYYY7mh5lMm+cGv7yH0JSGZ9dfyTNbz2Nr572sr7mb2uGVeKZaWLZnES/v/i1vli3k+b1n8syu87n/vbN4Z/ujhPJGXAGL6MaJvNfnRQploiHvdKB3SF5rQho/1GYTSqMBud6Axm7HHIwwbLZTIxujYnBE8uK1f1e4ybT3f4wZlFNDOp1IbSTAUsU2NZtjdtrHl0dVpJwb8MlvJjR2DTHDn+HoYZht4VhsLz7lvaRN15MxX0Xefh0zzjtJmR4hYHiNyfhhZjMj5FJGMtIAeNxGlWwtj384nw8O3ciaw3fjnuhEZj/Akm2X8vqBhbx66EKe2TWfBz48iyeXL8abU+OL2/CEPXjDYYbUGnYfPsyuQ4fZUFCAVG1KoNUWs4Area/ia8AjOoOY0VZ7AjQqNJQPj3K4u39qT03p//i7AXYFbO8PqJXIDEa86Qy+WIJkLsX0bIrj02Y+z1XjHH2csGIxwbHrOBbeCMeaYbaGoG4p/rGbiGsvJ6a5iLjud2SNi0kZbiFmeIiI6VWmYyVMpQfJpw3kpuzEpzUs3/4oL6xaxPbqZ8l/qWVfy9u8suMK3jjwO14suIT73juLp5dfjzE0QHTCjy/qE7n4qE7PzoPFDI/riOSn6R4dY/3O3ZQ1NotwIKWX0u9IJv3OoFYnymZpOWyn3kz5sJySARkFdTV/n5noTNb9r6MGZbpXpUZutoiqTRrcJqeyzEyF+fKkjrR9BV75bURUVxPT3gMzVTDTxWepQryKx0jqbyZruoppx3XkLYuFTdhu4rjvfrLOpwgaljERLWU2N0o2pSE/ZSaQkvPh5ieo69skCo4VO5/mz6uu4PmNV/LI+xeyvvRFQtN6ghk34WRUzPl1DMmo7+oTzRxpMYs3kRGQoxNTbCzYw/b9BxnWahkzmhnSaAXcXo2GAa0BjTco1iZXDY9ROiBnX0tban9V8b9+74CjSceTHXKZ1KQWvdRILi/m1GZmMhyf9vKX6V7ccmlgu5bA2FXk7M/C8U6Y7WHSuwLf2J0k9Ncx47qJGdctJHSLCKsuJ2VYzDHPXSSNtxHSPoRfv1R48tHcELmUltyEi/SknWjOTDxvp6n3IHsqV9Im34/e30ti1k045yOYDoteb31HL+UN7cSnjpOa/ZQRnYVRrenrxShJUVhI4WDZ6jUUVdWKZVp9Gp0waUJUWrU56vTRrNRROqCguKufnSXFT3zvgO0e43Dz8BCtY2qR0sTyOWKJKCeOpfjLcRu5QBG+0TuIa67Gr7iBE+HlcKwPZrqJG14gorqRqOZKphw3cMx7JzPu25l23krKsIiE7iqylhuYcN5DzvW08OTJcAkzGbnILnJZN8m0l1QuQHIiQGbGz9SJOKmJEJFkiFgmRWpqhuqWTkpqWxhWm1FbvMjGrbQOjKIwWMUKIk8kNjfTHI0zpDOycttuth+ponlEIQa3llElfXozcoeHLr1VAD7SN8KOisrB7xVuKus5c0Q7+mXt4BAdGh3+bA5fPEIqG+PEsRBfHhvDN/4uUfUtxNRXEVTdw1+z22C2jy+nmonq/kBKfy1Jw+VkLVeSMS3muO8u/hp5gEnrDRz13kROChm2m8jY7iJqeJSY7R1mktUCcj5rI5F0k0yFSKTnLJ4NE5K6b5kMrkiMhu5BBlR6fIlJxox2euU6umQa2oZVok8iNXWkFT/eaEL8fmr2BOZQkqKaFl78cDWNMiUtco3oR0iAB8wOKofmAO+ub/6qqKbs7O8NcDwbXFff10m9TE6f0TYHOBJiYjLJZ8dcfDbZilP+J2Lq64UHhzSPw3QxHB3ks2yNyB4kL80YLyehu5iQ8mKy5mvJma4VcThruZqIZiEh1UIm7DdzLPgIOfezxGwrmEnUMZvXkE5YSSbnGvHSDIg0uCZyObFEak9JFdUdA8RnPsOTnKSxW8aI1kYwd5SWQQU1Xb2iLemWthr4guSOn0Tr8FDVOcCA3o49NUlhTTNlXYP06a1fe7GPxjEdh7plFLZ2s7XsyPeXsrliHltpRxsVAzJGHF4xwHnDQaam03x+zM5sdC/esYdIaK8hprmGsO7PMFvJV8eGmU2U4VXeT1x7tQCcNV9O3nYNE/bFpIxXEFAsIGu6goxZsqvIWq9j1vd7EpZ7iVn/TNK5iulEE9NZLfmMm1jMRzIVFauCpCVYTb2DNPSPorB5MQeSDGmtjBgcmAMJQvljDOtsNPQOi8WGNmnZrFKLPRCltKmDl99bTVn7II70FOOBOOsOltOqNtCpNohV9u3jFop7Rihs6+OTI4cs3wvc3KTv33Ruy1cHmltECakJRMWSU8mDp6fTfHXSSsq5ioDiNpK6KwTkuPFlOFrPV8flzKYbsI0+hV99F0H1zQSU1xLT3UzGegcJ402kLbeStdxMynidOM647xLX0ta7ybufIutZRsiyialUL9NZM5mUj0w2LqrH2rZuGvtkeDOTDGgtdI6Os+twFW0DCjpGNHSPjDOgMdKr1NHYP4TGIhUbPrQ2NwqTg+qOQboVJur65RTVd/D+9v1UDylpVWrFfpA+g5Mj3SPsae9nY1npV819DT//zgFn8r4nhwxa9ja1UDkwij6UEAumpebOsWNZvjxpIGZ6najmBlLai0nqFpMwLYGjzXxxVMPJaQVTyTKmYtvJ+T4iYXuDmPVlQoY/EdY/ScTwBH71/XgVdxFQ3klAeTthzV0ENHcTNT5CyPAMnvG3CDv2ko2PkIhbSaXDYipIAixtfIlNn8ATzxLMTGHyhhlU6kX2YHAGxJ6NAZXUs5bWRsSx+0OYXF6cgRjOUJJgegaVPcDra7aws6aNdq2dphG12MEkbRUr6x9ld0sP60vLKGsq++6ziexk8HCbQs7e5naqBuXYknmxBCmSlFK0BJ/PKghpnyE5fi0Z3UX/DvhYkwB8fFLOX2ab+DRfxOeZ7TC1lS9za/lrbiVMrIRJ6biczxOvcyK8hJORJXweX8qJ6BImfS8wG36HrGclCc9u4oEOQgEV8bgbs8NCW98gg2odMq1ZLHvNHv8LY3obQyqD8FazJ0j/mEYsBpRmkd3S1oJgBHcggt0TEJA90Qz9ahNbD9fw7tYiGhVG6oeV9GjNDFmkfFjJzqYuPimrpKjiQPF3D3gipG2QDUmbrakcmgMsNdilQebYbIIvZkcJav5IUruInOESAThuehGO1/PXE3KOZltwqV/Ar/k9AcXNwtPDmhuIjN9IWHMTMb3Um7iXqO5uksYHmXQ/zaz/WWb8LzDtf5Xj0RUcT2xnNl3GVHKAbFLHRM5PLBkgmk6KcnjHoTJ6FFqsoRRKs5NwbobE5FEBWGWwYfH4BViHNyjAukIRzG6veO0KSlsO0riTU6woOEj5gJymUQ3tar3YQ1I7qmF7Qwdrj5Sx41CB+jsHnJkIZmuGBtjd3E7NiBJzTJo1DpPOzgE+ke0VWUNq/HKy+oWkdNeIW5/ZMjg5wtF0NU75fUTVVxFXSz9fwIT5MiasV5PUX0nKeC1T7nuYcj1Axno/ScsDpGyPEjE8TNTwBBHjS7jUb+A1rudErks07I/NWEkmzKK1afOZOVJfT59KjzEQR+eNYI9Ia4KTyDQmHP6o8FhpvbDLH8bq8oqZDAmyP5IQXuyOZcSfe3P9drr0dhpH1DSPaYQHNyh0bKtv5+PDpWzYuyPznQPOToY+rx7sZ3dzp/g2LfGsWHokebBUIkuA/cqHSGsvmwOsv5KI7mG+yO+F4zJO5OrwKn5PVH0pYfmZJMfPIqX/LZOO3xHXXYxv7CKiumuJaG8g57iXo6EnyHsfZtL3OGn7Y6Rsz+HTv8GJVJHIVmLOAj6dGSAR6SQRGWBy0oorZKdboaRLoUNuC9CpNHGwto1epQF/IosjEMYdCOOVNsf4g8Lc4SiuUBRHMIYrOcHLK9ayurCYNo2Z2sExESakHaUNinG21Lay6uBh1u7e8tn3AriyTwLcTbVMhSmewRqIzDV5JkMczXQSUD38NeAFpA2XER6/k08TG/hqdoC/TrXiU9xPSHERcfU5JLVnEBr7BWHlbwgqzhOlc9ZyIzPee5ny3Id//DqCuhtIOe4jrL+PqPEpvprYTN6/krBxKS7NaxzLluM27cCu20QqXE86o0Whl7F6+3Zq+0YYMLjYX9ch0jdpQlYa2BzeudAggZXMG0/gjaUJTxxlw74SPthWSLvKQK1MKQbzmmGFANyk0rGxtoUPiw6yaufm7wFwPjhZ2dsjPFh6JoPh68XUiVyK/ESA6WQbPsWDpLSXkNdfQM5wEXHt9Ux5X4MTfXC0k4juSbyyi4lrfkvWeA4JzZlEVWdz1H29AJyxXMuM704m3beTtNxA3HQDMcvdeDSP8pfMSo5F3yFle5aE9UkCuqf4PF9IwLICj+5lPPo3CfsOEUsM0yNvp3VkBFs8T4dCz5jVIxo+0oYYyWudvqCALCyaxJ2Y4P1Nu1j2yTZ6dFZaFTrqpSmjPhkVg6Ni03mDysAnNa28tbuI5Vs/yX/ngHMToUjNQD87GtpE2aiLptF5A0RzSVIZH/lEGz7lI8KDJcCSJXWXETc+CrNNouEz4VqGe+gqAmPzCYz8gpjqTJLa85h1XUfGtAi/YqGwqP4qwrrFBMZvwq+5G6ZWMx18U8TjrOMRJl0PETE8yMnUJ8QcbxE0PkLM+iRew2uEfftIZBQMjw9Q3d1Fy4gaX3YGnXNuB6g0RS+ZL5YU3TVzIMaS5Wt5b1MBbUojjWPjAnDl4Ii0Q1R00/qsLupUetZXt7J06y6Wb98Y+j4Am1vHRtnV2EpxzzD6WEbsxJSW5UsrcHKJLryqR+cGOe1vmTTMFwNZWH0bn6WL4EQbnyW3YB++najmciLKs5ix/Y60/kIBPKRaQNJ0GQnD5STN1xHV34pHdS9f5j/i0/gy4ubHSJnvEYXJhO0Ogurb+Sy9hrjtVQLaO4mZbyNkeADn+HPEQ4dIZOXUdNRQ1dWFyR/F6AmJQfrfOUgAABI7SURBVFnaaiDFYl8yi9IZ4Nl3P2J9UTmdGhuNI+NiYJPCgxQaBOBBuXheReXoOKsrWnhu/WbWFm41fueA81PBpl6dmh31Text7UETSYvd7u5oTKycSSd68aqfJqa+kqz2PHLas0jrfktYdQ0Tng/gWDXMluJW/gnX0GUkNAtIaRcy67iajOkyAThru4qkeTGh8ZsIjN8LMx8zE3qDsPZ+ptwPM+m6m6z9ZiYdtxIdv4NPEx+Rsr+KX3MjGduNxIzXEzbej0u3hFj4MOGkgh0Hd1BQWioqOas/KFJLVzwrZo6fWvYBm0tr6dY6aBrV0yQ9Rkw2B1gCW9ozRPXQGIMOPxUjGlaUNPDEijVsLS6o/84B5yZ9n4zZjeysq6egpYsRXxylOyR2WTrDbmKRfpHnhlXXktYuID1+Bhnt2cQ0vyOkeRgmC2C2jpnINhxD15MzXyPAJvUXMW27kknbImLjlxFQLRY9CyY/5kRk6Vwlp7tdpHBJ8/WkLNeLbptUbp+MryDlWEJQcz1R7aVEdFcSN819ORblc4R8RzBY2/lk90axejI0MY0vO0XDsJKn313J3sZOGpV60cypG9EIkzxXKpMrBsco7xulQa5lwO6jZFDBe8U1PPzeBxTXlaz77gHnvU87Y14K6uvZ0dgpHlqk9McZ1BmxBjx4vL24tW/hHbuZ2PhCUprfCMhJzfmEVdcx41/Gl9M1ArJf/SQu2TX4RhfiHj6LsHIBYdXv8MoX4R67DXKrOBZ8g5D6buL6W0SvImW5gbD2CgExbV6MZ2wxx6MfErO8gHfsatKmy0kZLyNnu5aQ6ip86nsxyF8mEatFY2xn95G9hCZzdCjHeeDl19nT0kub1iIqNMlra4ZV4ljRLxdwS/tGKOkeFuma9ByLos5BXis8wgNvvk3bYMuT3zngfNZ1bmIqzsHmRgG4VmNj1BOjXTmOymHF6urDaVgriomw6hKS6l+TVP2K9PhZorCI6+/n88w+vpio5a8T+7ENP4JndK7IiI1fQVCxGLf8QZhYyxeJtwmq7iKuvZFJxy1Mu24TjfisdTFZ6yJy1kX4xq7heOx90rYX8cuvFN25lOFSMc8XUV1CVHcjQd2DeExvEo3UotA1cqC6mCUrP6KwsY3aMS1VI2oqhue8VXjsgPxbz5WsrHeYdp2VNr2DLQ2dPLe5gEfefhu1Wfb9PEVl4mgi2jDQy6bqZg4MqFGEsiIRH7VJdX8bZuNuTPIn8ckvI64+g9jYv5FQnkZKfbaYn8u53+KvEyV8nq/iZHIPpoG78ShuF9NIUpHC1Gb+Ev+IiPoe0vpbRENegilNLcWk219/GccCNzHlXIxHfgVHI2+Tcy4hIL+cuPoCElIvWT6f8Nj5c5Oqxhuxyu9Er3yNdKoZtbmNw03lNI2NfjvXVtI/KqCW9Moo7ZVT1jcHWPJeKQ5LD2NqUFtZVVLLH1ZtYMmGtdF535cmZ0LlSquOTyoa2NY6zLA3Sc2IWnT9+1SDqA1laOVv4JFfR0RxpvDguOLnpNSnE1MtIKS6nWPhlXyWreLTfCtHE8Xoh5biULwFk3v5Mr2W6PiDRBSLyOqlluclIjZnjFcT1UgV3yVMuxeRs12OY/hiZgNvkne9gn/0MtH/kEz6e3zD5xDRXEzCcDUuxSIsI/fgs75PLFaDytBIaWsV5T39lPXLREYkgZXakVLP93DvKMVdgxzqHBAho8/io3xExzt7Snjk/Q/ZWn7wyPcGeCLveSSYDrG5upGPq9rosPhp1TnFrTVg1NIzWo12fBO2kTsIyM8jPPYrEspffG1nijI5qLlXeO+JbDOfTfZyMt/Np7lOvpysIKB6muDYDWR0V5JQX0Bw9BzRhA9LMx+mRWJAjGrOI6Kej21wIcdC7zDlfh3fyO/IGy9l0ixlJwtFsZM2zDXuo9orCI3fgFN5H1bNG2TSLQyrmjnSUkNxWzuHuwc42NHPwa5hYfs75uBK1qIxiUc27u6Q8er2Ih544w3alH0Pfm+Acxn7v+aOJqfL+gZYcaia0hEdXbYgh3rkNKs0NAy1MKTYjWH0j7hGriAweibRsV8Qlf+/xBS/JKE5l7DyCqL6p8TyKalpczw/yhczY8TsO7EN/J7g6JWkNBeT1Mwnpp5P3nQ5eeMijrtuJGe6mNDYGYQVZ2EfuJDZwFtMuF/DM3gxCfV5xFXnk9FfKgBHFQvF4OkfPZ+Q8lL8isUY+m/Ba/yAaKidrqFaDtaVc6i1jQPtPQLsvvYBijoGKGrrF97cqrNTq7LwUXkLT63dwlMfvD1p9Gr/6/cGWECeDB1UuBysOlTGpvpO2p1Rioc1lA6NUT8mo7Z7L4rRt9AP3YFn9EJC8tMEZCkeJzWnCRAhxfVihllaoHIi38fxCRnHMg2Y+h7FJ7uRgOxCUuMXiiIkJD9XhIsTnhsIjv6awMhpBOVnYOtbSN75JjO+d3EPXEJ09FyCI2cTU51Pzng5oVHpDpiPZ1DKUhYSUlyOdeAaxnseIew6Qio9Ts9IA0eaKyhsaKCgqZPC1l7pMbkUNvdQIzeIZ2Hu7x1j6Z5S7l32Pp8c3L1v3vetTM55WXQiwY6KapaX1HJE46Rc42BnWz+lQ6Mc6SinvX8z6tElWGWLCSrOIaY4/esB799E6ibdxhHVzcSNS/gsc4Rj2R4+mxrk01QJlv4n8A3fQEz5O8JjUpj5LQnVhaS1CwmPnUFIfjqRsXOw915MxvYms/4P8cuuJK1eQEx5nhjsJsxXimxC8uSwfAG+kQsIjC3C0HMD+oE/kQ3VkE4MkkgO0jl0hD21JexsaGZXUwc7GzspahukVmGiUmFiVXkzf95UwF1Lln7Vp+z7+zzZNTcV7u/XqllWWMy6pgHqzCE2N/Wxq62f8sE+qroOMSBbj370ETHaS14YHztNAE6pf0FSLUG+iJDqVjFvdyJdwslcG19MtPOXTAnO4Sewdl2Le/Ay4porSGouxd33G0KjZwgLDJ+DuetSso7lzAbW4ui9irjyIuLKBSKL8I2cJ+K2VFX6R6/APbQIY9f1OGRPMBPewWy8inysHpthJ83tayioKmBbbR3b61vZVt/J4T4F1QoTOztkvLhtH/e+vYI3t2z8++1pzuc814dyEdaV17DsQBXFY1YOyo1sauznyKCCopYGESpGZe9iGn5QDEKxsTNFNpFU/VIcM+Pnkhy/eG5mQ/sUx2PbOZGu4US2lS/z9cSMKxhvvwNb/2L8I1fhHz6fiOJ8fMNn4x9egL79auLWNUwFd2DpvYnAyBVEFZeK2BuUXywyC8/wNZh7bsTQ8zBx60ccjx3imLSCM7oHt/pdhjqeprZ+CYU1O9hSW82mmkZ2t/RRJtNyZFjHWwdq+cPqLfz+1dfoHZctnvf3VHoy3NuhH+e1nftZ19BDtTnIhoYBtjT2cqBHRklPPa29O9FpVmCW3Y1v5BIiynNFASIBTmt+TVYntSwXEFJK5fGDZDxrOZkp50Syls/SFXyeKCBjfQuX7AH0HYux9F6NsesKzN3XMt5xL5OhYk5manGOPo++61YsPdfhGLgBS++NGLpvwTrwADHTm5yI7eHzdKmwSd8ObMPPIW97hPaGJyirXsqe+r1srKpha10b+3rkFA9r+aSuh6fWF3LHK2/z4Y7NHfP+3kpl7OcEc5FPN5WX8dreEvaOmDmitLOurpsNjT3sbGtnT2MxjX07UMqWYRm9H4/8MiLKs0UZnVKfRlJ9uihIosrz8MsvwSm7XvSMZ4JrORHfz4lEKSclr05VMhM7yGRgO0H9cvzjH5H2FDEZ72Aq3sPRVAMh81Y86hWEjGtIOrcyHTrAyXQFX+SqBdijwe3E9UsxdN+Lpv0e+poeo6L6NfZWb2BT2SE2VDaKELe/X0VBr5IXtxdz3/vruPvlpSfHTGM/zPMvk1nP2jGXkSXbCni/rIVqg5+d3UrePtzA8vJ61tfUsbfpMM0921DJP8A89hBu+dWEFBcQV59FQnU60bFfElGcLmKrX3Yu7qFLsQ/cSkT3IlPejRyNHmQ2VsrxZAUnk2V8mirns1QNs7FaJqPt5MLtzCY7OZps4WSqTvxM+lI+zczdBdPBAqLGD8TgqW2/A3X7nfTU3U9V5XMcqNnAtooDbCivYntTLwWdIwLuGwdqeHD5Bhb/6QUK66pXzvuhlEiY/mskHzQc7unlpW172dw2RI0lJAa+D8qbWVXdys72Tva1VYuYLJOvRiv/E/bRG/DIzicoP0s03YOynxMe/SW+4dPwDv4Gd/98HL0X4xxYRGDsHjKmZ5j2vM2xwGo+jW3hZHQ3nyUPCg//BvzJxGE+TxRxIryVWe8astY38Y39AWvv7Rg6r8PcdzuKtrvpqH2csso3OFizlR0VB1lfWsH2+nYK2mUU9qlYXtnO/Su2svjZV3n541U6W9D8w/7PBvGU/WxnKjQjTWe/snM/uwfGaXDEWNcyyAfl7ayu7mJLYze7Gqo53LyD3uG1qOUvYhi+E/vwlbiGpNmNswXckOw0AkO/wNP3czy9v8Lb9xtcPWfj6FqArfsy7D3X4xy4C6/sYfzKP+FXPYdf+QIB1Yv4xp7BLXsCe9+9WLpvxdp1PebOqzH3Xoe2+2YGW+6kpfYJyqve5FBdgbTGjLVHytla1yngFnQrWF3Xx8Ord3LTK+9x58uvTo8aFT+OLbWJjPdhrc/21Vu797B0zxGKFWYanXE2Nsv4qKKTVVWdbGrqYntjDYUNe6nv2crA8Ieoh/6IceAmUTRIBYG7/zS8/b/A23cant5fCnN1/xx3z2k4e379NexzcXTPx955Aab287F0LRRm7rwQU9sFmNsXYG5fiKnjcrQd1zPcchct9X+gsuZ1yho2caB+P9srStlYUcP2hi5RBhf2alhTN8BDa/dw8+uruP7PL3xZ0d36wLwfkxK5wNJ+s4E3dhfy9v4yiuUm2l0ptraP8VF1Nx9Vd/JJQzebG5vZUX+E/Q1baej4gKGBl1H2P4Cu9wZMvVdg6VmItfu32LvPxt71KwF3DvIvhHn7Tsfdczqu7l/h6D4dR/dvsHaeiaVzPtbuheg7LkXdtghZ8y20195HTfVzlNas4EDdTgpqStlUVsUn5fXsau6jsGtUhIXV9f08sq6QW95YzZVPPk9hTdWyeT9GxSbDm7u0SpbtKmRZUQlF/Ro63Gn2DxlYU9PNx7U9rK3vZGNjOxuqy9havZfC2s2Ut66mrfsdhvteYKznAdQdN6Ftvwx9+/mY2s8VsG1dZ2DvPhNHz1k4us7G2nE2lq5zsXSej7Xrd+g6rkbRcgu9Db+nufZpkSEUV39MUdUuEWu3VpbxSVkV2+ra2NsxxN6eMfb0jbOiupsHPy7k9rfWcs3Tz/PJkYMb5v1YlU7Z/lNqKrq5W6vhvcJ9vLP3CDvah2m1R6k3hdjaNSYGESnj+Lihh9VVzawur+STigNsr9rK/toV1LW8TWf7Swx0Psloz6OMdd+LouN21D23oe6+BUXHjai6bkbddSvytlsZbrmDvvq7aa99iIaaP1NasZQDFavYVbaDLWWHWFdSwbrSWjbXtFPQOsCBPgUHBzUiW3jnSDMPrtkp4C7600tsLC3e6Ahb/9O8H7tSk+HXRyy6L1ceKObdfaWsqmzjsMJGgzXCfpmRdU1DvFfWzvvlHayo6WR1TQtrKitZVVLE+rKdbKvcxu7KDRyoW09p08dUtaykrn0F9e0fUtv0rrDqpg8pa/iQ4pqP2F+5hj0VG9hZvo3NpbtYV1zE6kPFrD5Sweb6DnY3D7KvR8GhoXH2DYyzrUPBy4WVPLB6J3e+u4abX1z6VVFj3U/reZaZqchDhqB7ZlN5Be/vL+P9QzVsaOwTxUiJxsu2Hi0r6od5s6SDd0vbeL+ileVVzaypbWVNVYPw7I/LjrC+/CAbK/axpXwPW8t3salkO1vKdrO5rJB1hwtYe7iIj48Us+JgMR8cOMLywxWsLKljY10XO1oH2dutZH+fhgNDBjGYrSjv4I/ri3h41Q7uXLaCB955b7pBPvjjGtD+/yqTC/zGnw5qSjq7+GDvIZbtreCdQ418VNPLzkETBTIrm7o0rGuW8V5ZGx9WdvJOaRPvlTazsqqNVZVNrK1pYV11PatKy1lXXsW68krWlJSzqqSSlUcqWHGkkg8PVfJRWb0IOevru9jeNsSeXhX7B7UcGDZSNGBgZUU3z2w7zMOrd3H/8i3c+eq7vL5po0HtMXx/ey7mzZv3/wF5Xb/Lv6dlJAAAAABJRU5ErkJggg==" x="-48" y="15" width="96" height="120" preserveAspectRatio="xMidYMid meet"/>
 
@@ -121,8 +21,8 @@
       <text x="195" y="165" class="font-sans" font-size="22" font-weight="800" fill="#EA580C">™</text>
 
       <!-- 3. Flavour Block: Solid Roasted-Cumin Brown Band -->
-      <g transform="translate(-350, 285)">
-        <rect width="700" height="185" fill="#8A4B1F" stroke="#6F3610" stroke-width="2"/>
+      <g transform="translate(-340, 285)">
+        <rect width="680" height="185" fill="#8A4B1F" stroke="#6F3610" stroke-width="2"/>
         
         <!-- Left Cumin Seed Cluster on Band -->
         
@@ -145,25 +45,25 @@
   
 
         <!-- JEERA (Line 1) -->
-        <text x="350" y="82" class="font-title" font-size="82" font-weight="800" fill="#FFFFFF" stroke="#451A03" stroke-width="2.5" paint-order="stroke fill" text-anchor="middle" letter-spacing="3">JEERA</text>
+        <text x="340" y="82" class="font-title" font-size="82" font-weight="800" fill="#FFFFFF" stroke="#451A03" stroke-width="2.5" paint-order="stroke fill" text-anchor="middle" letter-spacing="3">JEERA</text>
         <!-- MASALA (Line 2) -->
-        <text x="350" y="158" class="font-title" font-size="80" font-weight="800" fill="#FFFFFF" stroke="#451A03" stroke-width="2.5" paint-order="stroke fill" text-anchor="middle" letter-spacing="2">MASALA</text>
+        <text x="340" y="158" class="font-title" font-size="80" font-weight="800" fill="#FFFFFF" stroke="#451A03" stroke-width="2.5" paint-order="stroke fill" text-anchor="middle" letter-spacing="2">MASALA</text>
 
         <!-- Right Cumin Seed Cluster on Band -->
         
-    <g transform="translate(635, 60) rotate(35) scale(1.2)">
+    <g transform="translate(615, 60) rotate(35) scale(1.2)">
       <ellipse cx="0" cy="0" rx="13" ry="4.5" fill="#8A4B1F" stroke="#451A03" stroke-width="1.2"/>
       <line x1="-9" y1="0" x2="9" y2="0" stroke="#FED7AA" stroke-width="1" stroke-linecap="round"/>
     </g>
   
         
-    <g transform="translate(615, 95) rotate(-20) scale(1.1)">
+    <g transform="translate(595, 95) rotate(-20) scale(1.1)">
       <ellipse cx="0" cy="0" rx="13" ry="4.5" fill="#8A4B1F" stroke="#451A03" stroke-width="1.2"/>
       <line x1="-9" y1="0" x2="9" y2="0" stroke="#FED7AA" stroke-width="1" stroke-linecap="round"/>
     </g>
   
         
-    <g transform="translate(645, 130) rotate(50) scale(1)">
+    <g transform="translate(625, 130) rotate(50) scale(1)">
       <ellipse cx="0" cy="0" rx="13" ry="4.5" fill="#8A4B1F" stroke="#451A03" stroke-width="1.2"/>
       <line x1="-9" y1="0" x2="9" y2="0" stroke="#FED7AA" stroke-width="1" stroke-linecap="round"/>
     </g>
@@ -171,9 +71,9 @@
       </g>
 
       <!-- 4. Sub-category Stripe: Rich Dark Forest Green -->
-      <g transform="translate(-350, 470)">
-        <rect width="700" height="56" fill="#15803D" stroke="#166534" stroke-width="1.5"/>
-        <text x="350" y="36" class="font-sans" font-size="23" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">SPICED CUMIN ELECTROLYTE DRINK</text>
+      <g transform="translate(-340, 470)">
+        <rect width="680" height="56" fill="#15803D" stroke="#166534" stroke-width="1.5"/>
+        <text x="340" y="36" class="font-sans" font-size="23" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">SPICED CUMIN ELECTROLYTE DRINK</text>
       </g>
 
       <!-- 5. Fresh Ingredients Illustration & Scattered Cumin Seeds -->
@@ -261,69 +161,4 @@
       </g>
     </g>
   
-
-  <!-- =======================================================================
-       RIGHT PANEL: FSSAI, BATCH/MFG, BARCODE, ADDRESS (x: 1480 to 2040)
-       ======================================================================= -->
-  <g transform="translate(1480, 75)">
-    <!-- FSSAI Mark Box -->
-    <rect x="0" y="0" width="540" height="110" rx="8" fill="#FFFDF8" stroke="#8A4B1F" stroke-width="2"/>
-    <rect x="15" y="15" width="130" height="42" rx="4" fill="#8A4B1F"/>
-    <text x="80" y="44" class="font-sans" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="middle">fssai</text>
-    <text x="165" y="38" class="font-sans" font-size="15" font-weight="700" fill="#1C1917">Lic. No. 10724999000123</text>
-    <text x="165" y="60" class="font-sans" font-size="12.5" font-weight="500" fill="#57534E">Central FSSAI Standard Compliant</text>
-    <text x="16" y="92" class="font-sans" font-size="11.5" font-weight="600" fill="#8A4B1F">CATEGORY 14.1.4: NON-CARBONATED READY TO DRINK BEVERAGE</text>
-
-    <!-- Manufacturing & Pricing Box -->
-    <g transform="translate(0, 135)">
-      <rect x="0" y="0" width="540" height="235" rx="8" fill="#FFFDF8" stroke="#D6D0C0" stroke-width="1.5"/>
-      <rect x="0" y="0" width="540" height="38" rx="8" fill="#F6EEDC"/>
-      <text x="20" y="25" class="font-sans" font-size="14" font-weight="800" fill="#1C1917">MANUFACTURING &amp; PRICING DETAILS</text>
-
-      <text x="20" y="70" class="font-sans" font-size="13.5" font-weight="700" fill="#1C1917">BATCH NO:</text>
-      <text x="170" y="70" class="font-mono" font-size="15" font-weight="700" fill="#0369A1">TAZ-JMS-260928</text>
-
-      <text x="20" y="105" class="font-sans" font-size="13.5" font-weight="700" fill="#1C1917">MFG DATE:</text>
-      <text x="170" y="105" class="font-mono" font-size="15" font-weight="700" fill="#1C1917">28 / 09 / 2026</text>
-
-      <text x="20" y="140" class="font-sans" font-size="13.5" font-weight="700" fill="#1C1917">BEST BEFORE:</text>
-      <text x="170" y="140" class="font-mono" font-size="15" font-weight="700" fill="#15803D">6 MONTHS FROM MFG</text>
-
-      <text x="20" y="175" class="font-sans" font-size="13.5" font-weight="700" fill="#1C1917">MAX RETAIL PRICE:</text>
-      <text x="170" y="175" class="font-sans" font-size="16" font-weight="800" fill="#EA580C">₹ 25.00 (₹ 0.10/ml)</text>
-
-      <text x="20" y="210" class="font-sans" font-size="11.5" font-weight="500" fill="#78716C">Incl. of all taxes • For sale in India only</text>
-    </g>
-
-    <!-- Barcode Box -->
-    <g transform="translate(0, 400)">
-      <rect x="0" y="0" width="540" height="160" rx="8" fill="#FFFFFF" stroke="#D6D0C0" stroke-width="1.5"/>
-      <rect x="85.0" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="95.3" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="105.6" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="115.8" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="126.1" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="136.4" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="146.7" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="156.9" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="167.2" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="177.5" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="187.8" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="198.1" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="208.3" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="218.6" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="228.9" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="239.2" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="249.4" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="259.7" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="270.0" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="280.3" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="290.6" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="300.8" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="311.1" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="321.4" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="331.7" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="341.9" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="352.2" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="362.5" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="372.8" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="383.1" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="393.3" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="403.6" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="413.9" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="424.2" y="25" width="11.0" height="80" fill="#1C1917"/><rect x="434.4" y="25" width="6.2" height="80" fill="#1C1917"/><rect x="444.7" y="25" width="11.0" height="80" fill="#1C1917"/><text x="270" y="121" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#44403C" text-anchor="middle" letter-spacing="3">8 901234 567890</text>
-    </g>
-
-    <!-- Manufacturer Address -->
-    <g transform="translate(0, 590)">
-      <rect x="0" y="0" width="540" height="200" rx="8" fill="#FFFDF8" stroke="#D6D0C0" stroke-width="1.5"/>
-      <text x="20" y="32" class="font-sans" font-size="14" font-weight="800" fill="#1C1917">MANUFACTURED &amp; MARKETED BY:</text>
-      <text x="20" y="60" class="font-sans" font-size="13.5" font-weight="700" fill="#EA580C">TAAZU BEVERAGES LLP</text>
-      <text x="20" y="85" class="font-sans" font-size="12.5" font-weight="500" fill="#57534E">
-        <tspan x="20" dy="0">Survey No. 412, Changodar Industrial Estate,</tspan>
-        <tspan x="20" dy="20">Sarkhej-Bavla Road, Ahmedabad, Gujarat - 382213</tspan>
-      </text>
-
-      <line x1="20" y1="125" x2="520" y2="125" stroke="#EFE9DC" stroke-width="1"/>
-
-      <text x="20" y="150" class="font-sans" font-size="12" font-weight="700" fill="#1C1917">CONSUMER CARE &amp; ORDERS:</text>
-      <text x="20" y="172" class="font-sans" font-size="12.5" font-weight="700" fill="#15803D">WhatsApp: +91 91737 36652  •  hello@taazu.in</text>
-    </g>
-
-    <!-- Made in Ahmedabad Badge -->
-    <g transform="translate(270, 860)" text-anchor="middle">
-      <circle cx="0" cy="0" r="44" fill="#8A4B1F"/>
-      <circle cx="0" cy="0" r="40" fill="none" stroke="#FFF8E7" stroke-width="1.5"/>
-      <text x="0" y="-8" class="font-title" font-size="13" font-weight="800" fill="#FFF8E7" letter-spacing="1">MADE IN</text>
-      <text x="0" y="12" class="font-title" font-size="15" font-weight="800" fill="#F5D83B" letter-spacing="1.5">AHMEDABAD</text>
-      <text x="0" y="26" class="font-sans" font-size="9" font-weight="700" fill="#FFF8E7">GUJARAT • INDIA</text>
-    </g>
-  </g>
 </svg>

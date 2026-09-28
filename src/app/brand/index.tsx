@@ -401,9 +401,38 @@ function Bottle3dPanel() {
         </div>
       </div>
 
+      {/* Standalone Exact Bottle Front Labels */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">Classic Nimbu Namak · Exact Bottle Front Label (60 × 95 mm)</h3>
+          <p className="mt-1 text-xs text-stone-500">Exact front artwork used on 3D prototype render: teardrop emblem, TAAZU™ wordmark, sunny yellow band, fresh lemon cutouts & mint.</p>
+          <div className="mt-3 rounded-xl border border-stone-200 bg-[#F7F2E6] p-3 text-center">
+            <img src="/creatives/16-label-classic-front-exact.jpg" alt="Exact Classic Bottle Front Label" className="max-h-72 mx-auto object-contain rounded-lg" />
+          </div>
+          <div className="mt-2.5 flex items-center justify-end gap-2">
+            <a href="/creatives/16-label-classic-front-exact.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">JPG</a>
+            <a href="/creatives/16-label-classic-front-exact.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">PNG</a>
+            <a href="/creatives/16-label-classic-front-exact.svg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Vector SVG</a>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-stone-200 bg-white p-4">
+          <h3 className="text-sm font-bold text-stone-900">Jeera Masala · Exact Bottle Front Label (60 × 95 mm)</h3>
+          <p className="mt-1 text-xs text-stone-500">Exact front artwork used on 3D prototype render: roasted cumin brown band (#8A4B1F), etched cumin seeds, spiced cumin drink stripe.</p>
+          <div className="mt-3 rounded-xl border border-stone-200 bg-[#F7F2E6] p-3 text-center">
+            <img src="/creatives/17-label-jeera-front-exact.jpg" alt="Exact Jeera Bottle Front Label" className="max-h-72 mx-auto object-contain rounded-lg" />
+          </div>
+          <div className="mt-2.5 flex items-center justify-end gap-2">
+            <a href="/creatives/17-label-jeera-front-exact.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">JPG</a>
+            <a href="/creatives/17-label-jeera-front-exact.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">PNG</a>
+            <a href="/creatives/17-label-jeera-front-exact.svg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">Vector SVG</a>
+          </div>
+        </div>
+      </div>
+
       <div className="rounded-2xl border border-stone-200 bg-white p-4">
-        <h3 className="text-sm font-bold text-stone-900">Front Label · 3 Architecture Style Concepts (60 × 95 mm each)</h3>
-        <p className="mt-1 text-xs text-stone-500">Side-by-side comparison: 1. Minimal & Clean (Cream) • 2. Bold & Playful (Orange) • 3. Desi Retro (Stamp Seal).</p>
+        <h3 className="text-sm font-bold text-stone-900">Front Label · Packaging Architecture Concepts (60 × 95 mm each)</h3>
+        <p className="mt-1 text-xs text-stone-500">Side-by-side comparison: Option 1 (Official Classic Bottle Label) • Option 2 (Official Jeera Bottle Label) • Option 3 (Bold All-Orange Variant).</p>
         <div className="mt-3 rounded-xl border border-stone-200 bg-[#F4EFE6] p-3 text-center">
           <img src="/creatives/15-label-front-3options.jpg" alt="3 Front Label Style Concepts" className="max-h-80 mx-auto object-contain rounded-lg" />
         </div>
