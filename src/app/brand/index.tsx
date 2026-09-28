@@ -356,7 +356,7 @@ function Bottle3dPanel() {
         </div>
         <div className="rounded-2xl border border-stone-200 bg-white p-4">
           <h3 className="text-sm font-bold text-stone-900">A4 · Orthographic Technical Drawing</h3>
-          <p className="mt-1 text-xs text-stone-500">4-view orthographic drawing with 55 mm body diameter & 160 mm total height.</p>
+          <p className="mt-1 text-xs text-stone-500">4-view orthographic drawing with 95 mm label area, 55 mm body diameter & 160 mm total height.</p>
           <img src="/creatives/10-orthographic-views-a4.jpg" alt="Orthographic Drawing" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
         </div>
       </div>
