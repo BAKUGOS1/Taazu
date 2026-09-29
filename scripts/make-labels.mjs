@@ -331,15 +331,15 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
   </g>
 
   <!-- ===================================================================== -->
-  <!-- LAYER 2: FLAVOUR BAND & GREEN STRIP (Runs full width into Bleed)      -->
+  <!-- LAYER 2: FLAVOUR BAND & GREEN STRIP (Runs across Front Panel)          -->
   <!-- ===================================================================== -->
   <g id="layer-flavour-band">
-    <rect x="0" y="${bandY}" width="${canvasW}" height="${bandH}" fill="${bandColor}" />
+    <rect x="${bleed + LABEL_SPECS.panels.back + LABEL_SPECS.panels.side1}" y="${bandY}" width="${canvasW - (bleed + LABEL_SPECS.panels.back + LABEL_SPECS.panels.side1)}" height="${bandH}" fill="${bandColor}" />
     ${!isClassic ? getBandCuminSeedsSvg(frontCenterX, bandY + 10) : ''}
   </g>
 
   <g id="layer-green-strip">
-    <rect x="0" y="${greenY}" width="${canvasW}" height="${greenH}" fill="${c.leafGreen}" />
+    <rect x="${bleed + LABEL_SPECS.panels.back + LABEL_SPECS.panels.side1}" y="${greenY}" width="${canvasW - (bleed + LABEL_SPECS.panels.back + LABEL_SPECS.panels.side1)}" height="${greenH}" fill="${c.leafGreen}" />
   </g>
 
   <!-- ===================================================================== -->
@@ -411,31 +411,18 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
   <!-- Regulatory & FSSAI Mandatory Statutory Information Card               -->
   <!-- ===================================================================== -->
   <g id="layer-back-panel">
-    <!-- Clean, High-Contrast White Regulatory Card Container -->
-    <rect x="${backPanelX}" y="6.0" width="${backPanelW}" height="89.0" rx="2.0"
-          fill="${c.white}" stroke="${c.borderGray}" stroke-width="0.35" />
+    <!-- Plain Cream Canvas (No white card container) -->
 
-    <!-- Top Header: Drop Icon + Product Title -->
-    <g id="back-header" transform="translate(${backCenterX}, 7.5)">
-      ${logoIconDataUri ? `
-      <image href="${logoIconDataUri}" x="-2.5" y="0.5" width="5.0" height="6.5" preserveAspectRatio="xMidYMid meet" />
-      ` : `
-      <circle cx="0" cy="3" r="2.5" fill="${c.orange}" />
-      `}
-      <text class="font-display-bold" x="0" y="10.4" font-size="2.5" fill="${c.inkDark}" text-anchor="middle" letter-spacing="0.3">${productName.toUpperCase()}</text>
-      <text class="font-body" x="0" y="12.8" font-size="1.6" font-weight="500" fill="${c.inkMuted}" text-anchor="middle">Electrolyte Drink (Non-carbonated)</text>
+    <!-- Ingredients empty placeholder box -->
+    <g id="back-ingredients" transform="translate(${backPanelX + 2.5}, 7.0)">
+      <rect x="0" y="0" width="${backPanelW - 5.0}" height="14.0" fill="${c.white}" stroke="${c.borderGray}" stroke-width="0.3" rx="0.6"/>
+      <text class="font-body" font-size="1.55" fill="${c.inkDark}" font-weight="700" x="2.5" y="4.5">Ingredients:</text>
     </g>
 
-    <!-- Ingredients in descending order -->
-    <g id="back-ingredients" transform="translate(${backPanelX + 2.5}, 22.0)">
-      <text class="font-body" font-size="1.55" fill="${c.inkDark}" font-weight="600" x="0" y="0">Ingredients: <tspan font-weight="400" fill="${c.inkMuted}">[Water, Lemon Juice Concentrate, Sugar, Dextrose, Sodium Chloride,</tspan></text>
-      <text class="font-body" font-size="1.55" fill="${c.inkMuted}" font-weight="400" x="0" y="2.2">Potassium Citrate, Acidity Regulators (INS 330, INS 296), Natural &amp; Nature Identical Flavours]</text>
-    </g>
-
-    <!-- Nutrition Information Table (Per 100 ml & Per serve 250 ml) -->
-    <g id="back-nutrition-table" transform="translate(${backPanelX + 2.5}, 26.2)">
+    <!-- Nutrition Information Table (Empty cells without numbers/text) -->
+    <g id="back-nutrition-table" transform="translate(${backPanelX + 2.5}, 24.0)">
       <!-- Table Outline -->
-      <rect x="0" y="0" width="${backPanelW - 5.0}" height="22.6" fill="${c.tableBg}" stroke="${c.borderGray}" stroke-width="0.3" rx="0.6"/>
+      <rect x="0" y="0" width="${backPanelW - 5.0}" height="22.6" fill="${c.white}" stroke="${c.borderGray}" stroke-width="0.3" rx="0.6"/>
       <!-- Header Row -->
       <rect x="0" y="0" width="${backPanelW - 5.0}" height="3.8" fill="#F4EBD4" stroke="${c.borderGray}" stroke-width="0.3" rx="0.6"/>
       <text class="font-body" font-size="1.55" font-weight="700" fill="${c.inkDark}" x="2.0" y="2.6">NUTRITION INFORMATION</text>
@@ -455,16 +442,16 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
       <line x1="27.5" y1="3.8" x2="27.5" y2="22.6" stroke="${c.borderGray}" stroke-width="0.18"/>
       <line x1="39.0" y1="3.8" x2="39.0" y2="22.6" stroke="${c.borderGray}" stroke-width="0.18"/>
 
-      <!-- Rows -->
+      <!-- Rows (Empty Values) -->
       <g class="font-body" font-size="1.4" fill="${c.inkDark}">
-        <text x="2.0" y="5.6" font-weight="600">Energy (kcal)</text><text x="33" y="5.6" text-anchor="middle">[x]</text><text x="44.5" y="5.6" text-anchor="middle">[x]</text>
-        <text x="2.0" y="7.9">Protein (g)</text><text x="33" y="7.9" text-anchor="middle">[x]</text><text x="44.5" y="7.9" text-anchor="middle">[x]</text>
-        <text x="2.0" y="10.2">Carbohydrate (g)</text><text x="33" y="10.2" text-anchor="middle">[x]</text><text x="44.5" y="10.2" text-anchor="middle">[x]</text>
-        <text x="3.2" y="12.5" fill="${c.inkMuted}">Total sugars (g)</text><text x="33" y="12.5" text-anchor="middle">[x]</text><text x="44.5" y="12.5" text-anchor="middle">[x]</text>
-        <text x="3.2" y="14.8" fill="${c.inkMuted}">Added sugars (g)</text><text x="33" y="14.8" text-anchor="middle">[x]</text><text x="44.5" y="14.8" text-anchor="middle">[x]</text>
-        <text x="2.0" y="17.1">Total fat (g)</text><text x="33" y="17.1" text-anchor="middle">[x]</text><text x="44.5" y="17.1" text-anchor="middle">[x]</text>
-        <text x="2.0" y="19.4" font-weight="600">Sodium (mg)</text><text x="33" y="19.4" text-anchor="middle" font-weight="600">[x]</text><text x="44.5" y="19.4" text-anchor="middle" font-weight="600">[x]</text>
-        <text x="2.0" y="21.7" font-weight="600">Potassium (mg)</text><text x="33" y="21.7" text-anchor="middle" font-weight="600">[x]</text><text x="44.5" y="21.7" text-anchor="middle" font-weight="600">[x]</text>
+        <text x="2.0" y="5.6" font-weight="600">Energy (kcal)</text>
+        <text x="2.0" y="7.9">Protein (g)</text>
+        <text x="2.0" y="10.2">Carbohydrate (g)</text>
+        <text x="3.2" y="12.5" fill="${c.inkMuted}">Total sugars (g)</text>
+        <text x="3.2" y="14.8" fill="${c.inkMuted}">Added sugars (g)</text>
+        <text x="2.0" y="17.1">Total fat (g)</text>
+        <text x="2.0" y="19.4" font-weight="600">Sodium (mg)</text>
+        <text x="2.0" y="21.7" font-weight="600">Potassium (mg)</text>
       </g>
     </g>
 
@@ -504,34 +491,9 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
       <text class="font-body" font-size="1.4" font-weight="600" fill="${c.inkDark}" x="0" y="2.6">Customer care: <tspan font-weight="400" fill="${c.inkMuted}">[phone] · [email]</tspan></text>
     </g>
 
-    <!-- Barcode EAN-13 Box (25 x 15 mm) & Origin -->
+    <!-- Barcode EAN-13 Box (Empty Placeholder Box) & Origin -->
     <g id="back-barcode-origin" transform="translate(${backPanelX + 2.5}, 77.2)">
       <rect x="0" y="0" width="24.0" height="15.0" fill="${c.white}" stroke="${c.borderGray}" stroke-width="0.28" rx="0.5"/>
-      <g fill="#111827">
-        <rect x="1.5" y="1.2" width="0.4" height="10.2"/>
-        <rect x="2.2" y="1.2" width="0.4" height="10.2"/>
-        <rect x="3.0" y="1.2" width="0.7" height="9.0"/>
-        <rect x="4.1" y="1.2" width="0.4" height="9.0"/>
-        <rect x="4.8" y="1.2" width="0.9" height="9.0"/>
-        <rect x="6.1" y="1.2" width="0.4" height="9.0"/>
-        <rect x="6.8" y="1.2" width="0.6" height="9.0"/>
-        <rect x="7.8" y="1.2" width="0.7" height="9.0"/>
-        <rect x="8.9" y="1.2" width="0.4" height="9.0"/>
-        <rect x="9.7" y="1.2" width="0.7" height="9.0"/>
-        <rect x="11.0" y="1.2" width="0.4" height="10.2"/>
-        <rect x="11.7" y="1.2" width="0.4" height="10.2"/>
-        <rect x="12.5" y="1.2" width="0.7" height="9.0"/>
-        <rect x="13.6" y="1.2" width="0.6" height="9.0"/>
-        <rect x="14.5" y="1.2" width="0.4" height="9.0"/>
-        <rect x="15.3" y="1.2" width="0.7" height="9.0"/>
-        <rect x="16.4" y="1.2" width="0.4" height="9.0"/>
-        <rect x="17.2" y="1.2" width="0.9" height="9.0"/>
-        <rect x="18.5" y="1.2" width="0.6" height="9.0"/>
-        <rect x="19.4" y="1.2" width="0.7" height="9.0"/>
-        <rect x="20.6" y="1.2" width="0.4" height="10.2"/>
-        <rect x="21.3" y="1.2" width="0.4" height="10.2"/>
-      </g>
-      <text class="font-body" font-size="1.4" font-weight="600" fill="${c.inkDark}" x="12.0" y="13.5" text-anchor="middle">[8 900000 000000]</text>
 
       <!-- Origin badge -->
       <g transform="translate(26.0, 2.5)">
