@@ -192,9 +192,37 @@
   </g>
 
       
-      <!-- Classic Flanking Elements (Scattered lemon slices & mint leaves near edges) -->
+      <!-- Classic Flanking Elements (Scattered lemon slices & mint leaves near edges matching Ref 13) -->
       
-  <g transform="translate(80, 69) rotate(-45) scale(0.7)">
+  <g transform="translate(74, 88) rotate(-20) scale(0.75)">
+    <!-- Contact Shadow -->
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
+
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
+
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
+      <path d="M 0 2.3 L 0 -2.0"/>
+      <path d="M 0 2.3 L -2.4 -1.4"/>
+      <path d="M 0 2.3 L 2.4 -1.4"/>
+      <path d="M 0 2.3 L -4.2 0.2"/>
+      <path d="M 0 2.3 L 4.2 0.2"/>
+    </g>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+      
+  <g transform="translate(70, 92) rotate(-40) scale(0.7)">
     <!-- Main Upright Leaf -->
     <g transform="translate(0, 0) rotate(-10)">
       <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
@@ -210,63 +238,7 @@
     </g>
   </g>
       
-  <g transform="translate(81, 78) rotate(30) scale(0.7)">
-    <!-- Contact Shadow -->
-    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
-
-    <!-- Outer Bright Yellow Rind -->
-    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
-    <!-- Crisp White Pith Arc -->
-    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
-    <!-- Radiant Sunny Pulp Core -->
-    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
-    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
-
-    <!-- Radial Dividing Membranes -->
-    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
-      <path d="M 0 2.3 L 0 -2.0"/>
-      <path d="M 0 2.3 L -2.4 -1.4"/>
-      <path d="M 0 2.3 L 2.4 -1.4"/>
-      <path d="M 0 2.3 L -4.2 0.2"/>
-      <path d="M 0 2.3 L 4.2 0.2"/>
-    </g>
-
-    <!-- Glistening Juicy Highlights -->
-    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
-    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
-    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
-    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
-  </g>
-      
-  <g transform="translate(143, 70) rotate(-25) scale(0.7)">
-    <!-- Contact Shadow -->
-    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
-
-    <!-- Outer Bright Yellow Rind -->
-    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
-    <!-- Crisp White Pith Arc -->
-    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
-    <!-- Radiant Sunny Pulp Core -->
-    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
-    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
-
-    <!-- Radial Dividing Membranes -->
-    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
-      <path d="M 0 2.3 L 0 -2.0"/>
-      <path d="M 0 2.3 L -2.4 -1.4"/>
-      <path d="M 0 2.3 L 2.4 -1.4"/>
-      <path d="M 0 2.3 L -4.2 0.2"/>
-      <path d="M 0 2.3 L 4.2 0.2"/>
-    </g>
-
-    <!-- Glistening Juicy Highlights -->
-    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
-    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
-    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
-    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
-  </g>
-      
-  <g transform="translate(144, 78) rotate(45) scale(0.7)">
+  <g transform="translate(74, 70) rotate(-45) scale(0.7)">
     <!-- Main Upright Leaf -->
     <g transform="translate(0, 0) rotate(-10)">
       <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
@@ -282,7 +254,7 @@
     </g>
   </g>
       
-  <g transform="translate(82, 91) rotate(-15) scale(0.65)">
+  <g transform="translate(164, 22) rotate(-25) scale(0.75)">
     <!-- Contact Shadow -->
     <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
 
@@ -310,7 +282,95 @@
     <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
   </g>
       
-  <g transform="translate(143, 93) rotate(135) scale(0.65)">
+  <g transform="translate(168, 18) rotate(35) scale(0.7)">
+    <!-- Main Upright Leaf -->
+    <g transform="translate(0, 0) rotate(-10)">
+      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#2E7D32" opacity="0.9"/>
+      <path d="M 0 0 L 0 -9.5" stroke="#A5D6A7" stroke-width="0.25" stroke-linecap="round"/>
+      <path d="M 0 -2.5 L -1.5 -4.2 M 0 -2.5 L 1.5 -4.2 M 0 -5 L -1.8 -6.8 M 0 -5 L 1.8 -6.8 M 0 -7.5 L -1.2 -8.8 M 0 -7.5 L 1.2 -8.8" stroke="#A5D6A7" stroke-width="0.2"/>
+    </g>
+    <!-- Second Leaf -->
+    <g transform="translate(3.2, 0.5) rotate(35) scale(0.8)">
+      <path d="M 0 0 C -2.0 -2.8, -3.2 -6, 0 -9 C 3.2 -6, 2.0 -2.8, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.2 -2.4, -2.0 -5, 0 -8.2 C 2.0 -5, 1.2 -2.4, 0 0 Z" fill="#2E7D32"/>
+      <path d="M 0 0 L 0 -7.5" stroke="#81C784" stroke-width="0.22" stroke-linecap="round"/>
+    </g>
+  </g>
+      
+  <g transform="translate(166, 70) rotate(25) scale(0.75)">
+    <!-- Contact Shadow -->
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
+
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
+
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
+      <path d="M 0 2.3 L 0 -2.0"/>
+      <path d="M 0 2.3 L -2.4 -1.4"/>
+      <path d="M 0 2.3 L 2.4 -1.4"/>
+      <path d="M 0 2.3 L -4.2 0.2"/>
+      <path d="M 0 2.3 L 4.2 0.2"/>
+    </g>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+      
+  <g transform="translate(170, 76) rotate(45) scale(0.7)">
+    <!-- Main Upright Leaf -->
+    <g transform="translate(0, 0) rotate(-10)">
+      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#2E7D32" opacity="0.9"/>
+      <path d="M 0 0 L 0 -9.5" stroke="#A5D6A7" stroke-width="0.25" stroke-linecap="round"/>
+      <path d="M 0 -2.5 L -1.5 -4.2 M 0 -2.5 L 1.5 -4.2 M 0 -5 L -1.8 -6.8 M 0 -5 L 1.8 -6.8 M 0 -7.5 L -1.2 -8.8 M 0 -7.5 L 1.2 -8.8" stroke="#A5D6A7" stroke-width="0.2"/>
+    </g>
+    <!-- Second Leaf -->
+    <g transform="translate(3.2, 0.5) rotate(35) scale(0.8)">
+      <path d="M 0 0 C -2.0 -2.8, -3.2 -6, 0 -9 C 3.2 -6, 2.0 -2.8, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.2 -2.4, -2.0 -5, 0 -8.2 C 2.0 -5, 1.2 -2.4, 0 0 Z" fill="#2E7D32"/>
+      <path d="M 0 0 L 0 -7.5" stroke="#81C784" stroke-width="0.22" stroke-linecap="round"/>
+    </g>
+  </g>
+      
+  <g transform="translate(164, 88) rotate(18) scale(0.75)">
+    <!-- Contact Shadow -->
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
+
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
+
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
+      <path d="M 0 2.3 L 0 -2.0"/>
+      <path d="M 0 2.3 L -2.4 -1.4"/>
+      <path d="M 0 2.3 L 2.4 -1.4"/>
+      <path d="M 0 2.3 L -4.2 0.2"/>
+      <path d="M 0 2.3 L 4.2 0.2"/>
+    </g>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+      
+  <g transform="translate(170, 92) rotate(135) scale(0.7)">
     <!-- Main Upright Leaf -->
     <g transform="translate(0, 0) rotate(-10)">
       <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
@@ -335,8 +395,8 @@
 
     <!-- 6. STILL | 250 ml WITH VECTOR ℮ MARK -->
     <g id="front-spec">
-      <text class="font-display-semibold" x="110.5" y="91.5" font-size="2.7" fill="#57534E" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
-      <g transform="translate(120.935, 89.4) scale(0.0023333333333333335) translate(-40, -40)"><path d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="#57534E"/></g>
+      <text class="font-display-semibold" x="110.315" y="91.5" font-size="2.7" fill="#57534E" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
+      <path transform="translate(121.35, 89.4) scale(0.0023333333333333335) translate(-40, -40)" d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="#57534E" stroke="#57534E" stroke-width="36"/>
     </g>
   </g>
 

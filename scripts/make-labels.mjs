@@ -346,9 +346,9 @@ function getBandCuminSeedsSvg(centerX, centerY) {
 }
 
 // Official European & International Standard Estimated Sign (U+212E / e-mark, EU Directive 2009/34/EC)
-function getEstimatedSignSvg(x, y, height = 2.1, fill = '#57534E') {
+function getEstimatedSignSvg(x, y, height = 2.1, fill = '#57534E', strokeW = 36) {
   const scale = height / 900;
-  return `<g transform="translate(${x}, ${y}) scale(${scale}) translate(-40, -40)"><path d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="${fill}"/></g>`;
+  return `<path transform="translate(${x}, ${y}) scale(${scale}) translate(-40, -40)" d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="${fill}" stroke="${strokeW > 0 ? fill : 'none'}" stroke-width="${strokeW}"/>`;
 }
 
 // ============================================================================
@@ -475,27 +475,33 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
       ${getCenterLemonDuoSvg(frontCenterX, 74.0, 0.95, !isClassic)}
 
       ${isClassic ? `
-      <!-- Classic Flanking Elements (Scattered lemon slices & mint leaves near edges) -->
-      ${getMintSprigSvg(frontCenterX - 32, 69, 0.7, -45)}
-      ${getBrightLemonWedgeSvg(frontCenterX - 31, 78, 0.7, 30)}
-      ${getBrightLemonWedgeSvg(frontCenterX + 31, 70, 0.7, -25)}
-      ${getMintSprigSvg(frontCenterX + 32, 78, 0.7, 45)}
-      ${getBrightLemonWedgeSvg(frontCenterX - 30, 91, 0.65, -15)}
-      ${getMintSprigSvg(frontCenterX + 31, 93, 0.65, 135)}
+      <!-- Classic Flanking Elements (Scattered lemon slices & mint leaves near edges matching Ref 13) -->
+      ${getBrightLemonWedgeSvg(frontCenterX - 38, 88, 0.75, -20)}
+      ${getMintSprigSvg(frontCenterX - 42, 92, 0.7, -40)}
+      ${getMintSprigSvg(frontCenterX - 38, 70, 0.7, -45)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 52, 22, 0.75, -25)}
+      ${getMintSprigSvg(frontCenterX + 56, 18, 0.7, 35)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 54, 70, 0.75, 25)}
+      ${getMintSprigSvg(frontCenterX + 58, 76, 0.7, 45)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 52, 88, 0.75, 18)}
+      ${getMintSprigSvg(frontCenterX + 58, 92, 0.7, 135)}
       ` : `
-      <!-- Jeera Flanking Elements (Scattered cumin seeds + lemon slice near edges matching Ref 14) -->
+      <!-- Jeera Flanking Elements (Scattered cumin seeds & lemon slices near edges matching Ref 14) -->
       ${getCuminSeedSvg(frontCenterX - 18, 68, 0.85, -30)}
-      ${getCuminSeedSvg(frontCenterX - 13, 70, 0.75, 20)}
-      ${getCuminSeedSvg(frontCenterX + 15, 68, 0.85, 40)}
-      ${getCuminSeedSvg(frontCenterX + 19, 71, 0.75, -15)}
-      ${getCuminSeedSvg(frontCenterX - 28, 73, 0.95, 55)}
-      ${getCuminSeedSvg(frontCenterX - 30, 79, 0.85, -45)}
-      ${getCuminSeedSvg(frontCenterX + 28, 73, 0.95, -60)}
-      ${getCuminSeedSvg(frontCenterX + 32, 77, 0.9, 20)}
-      ${getCuminSeedSvg(frontCenterX - 32, 92, 0.85, 45)}
-      ${getCuminSeedSvg(frontCenterX + 32, 93, 0.85, -45)}
-      ${getBrightLemonWedgeSvg(frontCenterX + 29, 87, 0.85, 18)}
-      ${getMintSprigSvg(frontCenterX + 22, 89, 0.6, 55)}
+      ${getCuminSeedSvg(frontCenterX - 13, 71, 0.75, 20)}
+      ${getCuminSeedSvg(frontCenterX - 22, 74, 0.85, 45)}
+      ${getCuminSeedSvg(frontCenterX + 16, 68, 0.85, 40)}
+      ${getCuminSeedSvg(frontCenterX + 20, 71, 0.75, -20)}
+      ${getCuminSeedSvg(frontCenterX - 36, 76, 0.95, 55)}
+      ${getCuminSeedSvg(frontCenterX - 38, 84, 0.85, -45)}
+      ${getCuminSeedSvg(frontCenterX - 35, 92, 0.85, 30)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 52, 16, 0.8, -25)}
+      ${getCuminSeedSvg(frontCenterX + 46, 24, 0.85, 35)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 54, 28, 0.85, 30)}
+      ${getCuminSeedSvg(frontCenterX + 48, 36, 0.9, -45)}
+      ${getCuminSeedSvg(frontCenterX + 56, 39, 0.8, 15)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 53, 83, 0.85, 18)}
+      ${getCuminSeedSvg(frontCenterX + 55, 91, 0.85, -35)}
       `}
     </g>
 
@@ -506,8 +512,8 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
 
     <!-- 6. STILL | 250 ml WITH VECTOR ℮ MARK -->
     <g id="front-spec">
-      <text class="font-display-semibold" x="${frontCenterX - 1.5}" y="91.5" font-size="2.7" fill="${c.inkMuted}" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
-      ${getEstimatedSignSvg(frontCenterX + 8.935, 89.4, 2.1, c.inkMuted)}
+      <text class="font-display-semibold" x="${frontCenterX - 1.685}" y="91.5" font-size="2.7" fill="${c.inkMuted}" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
+      ${getEstimatedSignSvg(frontCenterX + 9.35, 89.4, 2.1, c.inkMuted, 36)}
     </g>
   </g>
 
@@ -699,8 +705,8 @@ export function generateOutlinedLabelSvg(flavor = 'classic', options = {}) {
   const pBand2 = textToVectorPath(fontBarlowBold, bandLine2, frontCenterX, bandY + 16.6, 7.6, bandTextColor, 'middle', 0.9);
   const pGreen = textToVectorPath(fontBarlowSemi, greenText, frontCenterX, greenY + 4.2, 2.65, c.white, 'middle', 0.65);
   const pTagline = textToVectorPath(fontBarlowBold, 'REHYDRATE | REFRESH | RECOVER', frontCenterX, 86.2, 3.2, c.orange, 'middle', 0.75);
-  const pStillText = textToVectorPath(fontBarlowSemi, 'STILL | 250 ml', frontCenterX - 1.5, 91.5, 2.7, c.inkMuted, 'middle', 0.5);
-  const pStillEmark = getEstimatedSignSvg(frontCenterX + 8.935, 89.4, 2.1, c.inkMuted);
+  const pStillText = textToVectorPath(fontBarlowSemi, 'STILL | 250 ml', frontCenterX - 1.685, 91.5, 2.7, c.inkMuted, 'middle', 0.5);
+  const pStillEmark = getEstimatedSignSvg(frontCenterX + 9.35, 89.4, 2.1, c.inkMuted, 36);
   const pStill = pStillText + '\n' + pStillEmark;
 
   let outlinedSvg = baseSvg
@@ -1546,10 +1552,10 @@ async function run() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'taazu-label-classic-outlined.svg'), classicOutlinedSvg);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'taazu-label-jeera-outlined.svg'), jeeraOutlinedSvg);
 
-  // Step 3: Export 300 DPI PNGs and Prepress PDFs
+  // Step 3: Export 300 DPI PNGs and Prepress PDFs (using outlined vector paths for prepress precision)
   console.log('3. Exporting 300 DPI PNGs and PDFs...');
-  await exportPngAndPdf('classic', classicSvg);
-  await exportPngAndPdf('jeera', jeeraSvg);
+  await exportPngAndPdf('classic', classicOutlinedSvg);
+  await exportPngAndPdf('jeera', jeeraOutlinedSvg);
 
   // Step 4: Generate Interactive QA Preview & Readme
   console.log('4. Generating preview.html and README.md...');
