@@ -231,10 +231,27 @@
     <div class="card">
       <div class="card-header">
         <h2 id="flat-title">Flat Vector Label — Classic Nimbu Namak</h2>
-        <span class="badge" id="flat-dim">2205 x 1193 px (300 DPI)</span>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn active" id="btn-glue-overlap" style="border: 1px solid var(--border); padding: 4px 10px; font-size: 11px;">Glue Overlap Guide: ON</button>
+          <span class="badge" id="flat-dim">2205 x 1193 px (300 DPI)</span>
+        </div>
       </div>
       <div class="card-body">
-        <img id="flat-viewer" src="taazu-label-classic.png" alt="Taazu Label Flat View" />
+        <div id="flat-stage" style="position: relative; display: inline-block; width: 100%; max-width: 960px; line-height: 0;">
+          <img id="flat-viewer" src="taazu-label-classic.png" alt="Taazu Label Flat View" style="width: 100%; display: block; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
+          <svg id="glue-overlap-overlay" style="position: absolute; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 187 101" preserveAspectRatio="none">
+            <defs>
+              <pattern id="preview-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="4" stroke="#9CA3AF" stroke-width="0.8" opacity="0.6"/>
+              </pattern>
+            </defs>
+            <g id="overlap-content">
+              <rect id="overlay-rect" x="176" y="3" width="8" height="95" fill="url(#preview-hatch)" opacity="0.45" />
+              <line id="overlay-line" x1="176" y1="3" x2="176" y2="98" stroke="#4B5563" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+              <text id="overlay-text" x="180" y="50.5" font-family="'Inter', sans-serif" font-size="2.0" font-weight="700" fill="#374151" transform="rotate(-90 180 50.5)" text-anchor="middle" letter-spacing="0.5">GLUE OVERLAP AREA (NO TEXT)</text>
+            </g>
+          </svg>
+        </div>
       </div>
       <div class="specs-grid">
         <div class="spec-item">
@@ -345,7 +362,52 @@
       flatViewer.src = 'taazu-label-' + currentFlavor + modeSuffix + '.png';
       flatTitle.textContent = 'Flat Vector Label — ' + (currentFlavor === 'classic' ? 'Classic Nimbu Namak' : 'Jeera Masala');
       flatDim.textContent = currentMode === 'trim' ? '2134 x 1122 px (Trim Size)' : '2205 x 1193 px (300 DPI Bleed)';
+
+      const overlaySvg = document.getElementById('glue-overlap-overlay');
+      const overlayRect = document.getElementById('overlay-rect');
+      const overlayLine = document.getElementById('overlay-line');
+      const overlayText = document.getElementById('overlay-text');
+      if (currentMode === 'trim') {
+        overlaySvg.setAttribute('viewBox', '0 0 181 95');
+        overlayRect.setAttribute('x', '173');
+        overlayRect.setAttribute('y', '0');
+        overlayRect.setAttribute('width', '8');
+        overlayRect.setAttribute('height', '95');
+        overlayLine.setAttribute('x1', '173');
+        overlayLine.setAttribute('y1', '0');
+        overlayLine.setAttribute('x2', '173');
+        overlayLine.setAttribute('y2', '95');
+        overlayText.setAttribute('x', '177');
+        overlayText.setAttribute('y', '47.5');
+        overlayText.setAttribute('transform', 'rotate(-90 177 47.5)');
+      } else {
+        overlaySvg.setAttribute('viewBox', '0 0 187 101');
+        overlayRect.setAttribute('x', '176');
+        overlayRect.setAttribute('y', '3');
+        overlayRect.setAttribute('width', '8');
+        overlayRect.setAttribute('height', '95');
+        overlayLine.setAttribute('x1', '176');
+        overlayLine.setAttribute('y1', '3');
+        overlayLine.setAttribute('x2', '176');
+        overlayLine.setAttribute('y2', '98');
+        overlayText.setAttribute('x', '180');
+        overlayText.setAttribute('y', '50.5');
+        overlayText.setAttribute('transform', 'rotate(-90 180 50.5)');
+      }
+
       update3DTexture();
+    }
+
+    let showGlueGuide = true;
+    const btnGlueGuide = document.getElementById('btn-glue-overlap');
+    const overlapContent = document.getElementById('overlap-content');
+    if (btnGlueGuide && overlapContent) {
+      btnGlueGuide.addEventListener('click', () => {
+        showGlueGuide = !showGlueGuide;
+        overlapContent.style.display = showGlueGuide ? 'block' : 'none';
+        btnGlueGuide.textContent = 'Glue Overlap Guide: ' + (showGlueGuide ? 'ON' : 'OFF');
+        btnGlueGuide.classList.toggle('active', showGlueGuide);
+      });
     }
 
     document.querySelectorAll('#flavor-select .btn').forEach(btn => {

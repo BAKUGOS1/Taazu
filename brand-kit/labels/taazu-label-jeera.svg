@@ -53,63 +53,75 @@
     <rect x="77" y="38" width="110" height="20" fill="#8A4B1F" />
     
   <!-- Left Side Seeds on Brown Band -->
-  <g opacity="0.7">
+  <g opacity="0.75">
     
   <g transform="translate(88, 45) rotate(-35) scale(1.15)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
   </g>
     
   <g transform="translate(84.5, 50.5) rotate(25) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
   </g>
     
   <g transform="translate(90, 52.5) rotate(-60) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
   </g>
   <!-- Right Side Seeds on Brown Band -->
-  <g opacity="0.7">
+  <g opacity="0.75">
     
   <g transform="translate(136, 45) rotate(35) scale(1.15)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
   </g>
     
   <g transform="translate(139.5, 50.5) rotate(-25) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
   </g>
     
   <g transform="translate(134, 52.5) rotate(60) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
   </g>
   </g>
@@ -146,16 +158,656 @@
       <!-- Main Center Duo: Two lemon slices + mint leaf, seated comfortably below green strip -->
       
   <g transform="translate(112, 74) scale(0.95)">
-    <!-- Ground Shadow -->
-    <ellipse cx="0" cy="6.2" rx="11.5" ry="1.8" fill="#2E1C0A" opacity="0.22" filter="url(#soft-blur)"/>
+    
+    <!-- Jeera Roasted Cumin Seed Mound Under Lemons (Matching Reference 14) -->
+    <g id="cumin-seed-pile"><ellipse cx="0" cy="4.4" rx="15.674999999999999" ry="3.61" fill="#241004" opacity="0.32" filter="url(#soft-blur)"/>
+
+  <g transform="translate(-14.25, 4.81) rotate(-25) scale(0.8075)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-12.54, 4.24) rotate(35) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-10.924999999999999, 3.575) rotate(-45) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-9.025, 2.91) rotate(15) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-7.6, 2.34) rotate(-60) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-5.89, 1.96) rotate(30) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(5.89, 1.96) rotate(-30) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(7.6, 2.34) rotate(60) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(9.31, 3.005) rotate(-20) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(11.21, 3.67) rotate(45) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(12.825, 4.335) rotate(-35) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(14.44, 5) rotate(25) scale(0.8075)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-4.2749999999999995, 1.6749999999999998) rotate(-15) scale(0.8075)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-1.9, 1.4849999999999999) rotate(20) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(0.475, 1.39) rotate(-10) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(2.8499999999999996, 1.58) rotate(40) scale(0.8075)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#52280C"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#8B481C" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#321504" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#A86230" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-13.299999999999999, 5.38) rotate(55) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-11.589999999999998, 5) rotate(-15) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-9.69, 4.5249999999999995) rotate(40) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-8.075, 4.05) rotate(-30) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-6.175, 3.8599999999999994) rotate(65) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-4.2749999999999995, 3.7649999999999997) rotate(-10) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-2.375, 3.8599999999999994) rotate(30) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-0.475, 3.955) rotate(-45) scale(1.14)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(1.71, 3.8599999999999994) rotate(15) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(3.61, 3.7649999999999997) rotate(-35) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(5.51, 3.955) rotate(50) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(7.409999999999999, 4.24) rotate(-20) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(9.31, 4.62) rotate(35) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(11.21, 5.095) rotate(-50) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(13.11, 5.569999999999999) rotate(20) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-7.125, 5.1899999999999995) rotate(-65) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-4.75, 5.095) rotate(25) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-1.9, 5.285) rotate(-15) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(0.95, 5.285) rotate(35) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(3.8, 5.1899999999999995) rotate(-40) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(6.46, 5.285) rotate(60) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-14.725, 5.95) rotate(-10) scale(0.76)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-12.825, 6.14) rotate(40) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-10.924999999999999, 6.234999999999999) rotate(-25) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-9.025, 6.33) rotate(15) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-7.125, 6.425) rotate(-45) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-5.225, 6.52) rotate(30) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-3.3249999999999997, 6.71) rotate(-15) scale(1.14)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-1.14, 6.805000000000001) rotate(20) scale(1.14)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(1.14, 6.805000000000001) rotate(-30) scale(1.14)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(3.3249999999999997, 6.71) rotate(45) scale(1.0924999999999998)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(5.225, 6.52) rotate(-10) scale(1.045)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(7.125, 6.425) rotate(55) scale(0.9974999999999999)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(9.025, 6.33) rotate(-35) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(10.924999999999999, 6.14) rotate(20) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(12.825, 5.95) rotate(-60) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(14.25, 5.76) rotate(35) scale(0.76)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-7.6, 7.47) rotate(80) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(-3.8, 7.66) rotate(-20) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(0, 7.755) rotate(10) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(4.2749999999999995, 7.565) rotate(-50) scale(0.9025)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#A05828"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#E5AF7A" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#6D3410" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#FDE2C4" stroke-width="0.16" fill="none"/>
+  </g>
+
+  <g transform="translate(7.789999999999999, 7.375) rotate(40) scale(0.855)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#924E22"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="#DCA068" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#622F0E" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#F5C698" stroke-width="0.16" fill="none"/>
+  </g></g>
+    
 
     <!-- Fresh Mint Leaves tucked behind -->
     
   <g transform="translate(-0.5, -0.5) rotate(5) scale(0.65)">
     <!-- Main Upright Leaf -->
     <g transform="translate(0, 0) rotate(-10)">
-      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#2E7D32"/>
-      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#388E3C" opacity="0.9"/>
+      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#2E7D32" opacity="0.9"/>
       <path d="M 0 0 L 0 -9.5" stroke="#A5D6A7" stroke-width="0.25" stroke-linecap="round"/>
       <path d="M 0 -2.5 L -1.5 -4.2 M 0 -2.5 L 1.5 -4.2 M 0 -5 L -1.8 -6.8 M 0 -5 L 1.8 -6.8 M 0 -7.5 L -1.2 -8.8 M 0 -7.5 L 1.2 -8.8" stroke="#A5D6A7" stroke-width="0.2"/>
     </g>
@@ -167,22 +819,22 @@
     </g>
   </g>
 
-    <!-- Left Lemon Round (Juicy Cross Section) -->
+    <!-- Left Lemon Round (Juicy Cross Section, Bright Lemon Yellow) -->
     
   <g transform="translate(-5.2, 1.2) rotate(-14) scale(1.05)">
     <!-- Soft Contact Shadow -->
-    <ellipse cx="0" cy="7.8" rx="8.5" ry="2.2" fill="#2E1C0A" opacity="0.22" filter="url(#soft-blur)"/>
+    <ellipse cx="0" cy="7.8" rx="8.5" ry="2.2" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
 
-    <!-- Outer Citrus Rind -->
-    <circle cx="0" cy="0" r="7.5" fill="#F4D03F" stroke="#E59866" stroke-width="0.3"/>
-    <!-- White Inner Pith -->
-    <circle cx="0" cy="0" r="6.8" fill="#FFFDE8"/>
-    <!-- Translucent Pulp Background -->
-    <circle cx="0" cy="0" r="6.2" fill="#F9E79F"/>
+    <!-- Outer Citrus Rind (Bright Sunny Lemon Yellow) -->
+    <circle cx="0" cy="0" r="7.5" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <circle cx="0" cy="0" r="7.3" fill="none" stroke="#FFEE58" stroke-width="0.2"/>
+    <!-- Crisp White Inner Pith -->
+    <circle cx="0" cy="0" r="6.8" fill="#FFFFFF"/>
+    <!-- Radiant Translucent Pulp Base -->
+    <circle cx="0" cy="0" r="6.2" fill="#FFF59D"/>
 
-    <!-- Segment Wedges with Radial Membranes -->
-    <g fill="#FAD7A0" stroke="#FFFDE8" stroke-width="0.32">
-      <!-- 8 Segments around center -->
+    <!-- 8 Juicy Triangular Segments -->
+    <g fill="#FDD835" stroke="#FFFFFF" stroke-width="0.38">
       <path d="M 0 0 L 0 -5.8 A 5.8 5.8 0 0 1 4.1 -4.1 Z"/>
       <path d="M 0 0 L 4.1 -4.1 A 5.8 5.8 0 0 1 5.8 0 Z"/>
       <path d="M 0 0 L 5.8 0 A 5.8 5.8 0 0 1 4.1 4.1 Z"/>
@@ -193,137 +845,217 @@
       <path d="M 0 0 L -4.1 -4.1 A 5.8 5.8 0 0 1 0 -5.8 Z"/>
     </g>
 
-    <!-- Center White Core -->
-    <circle cx="0" cy="0" r="1.1" fill="#FFFDE8"/>
+    <!-- Inner segment highlights -->
+    <g fill="#FFEE58" opacity="0.85">
+      <circle cx="2.2" cy="-3.6" r="1.1"/>
+      <circle cx="3.6" cy="-2.2" r="1.1"/>
+      <circle cx="3.6" cy="2.2" r="1.1"/>
+      <circle cx="2.2" cy="3.6" r="1.1"/>
+      <circle cx="-2.2" cy="3.6" r="1.1"/>
+      <circle cx="-3.6" cy="2.2" r="1.1"/>
+      <circle cx="-3.6" cy="-2.2" r="1.1"/>
+      <circle cx="-2.2" cy="-3.6" r="1.1"/>
+    </g>
 
-    <!-- Juice Vesicle Highlights -->
-    <circle cx="1.8" cy="-2.5" r="0.45" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="-2.2" cy="1.6" r="0.4" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="2.6" cy="1.8" r="0.45" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="-1.5" cy="-2.8" r="0.4" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Center White Star / Core -->
+    <circle cx="0" cy="0" r="1.15" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="0.6" fill="#FFF9C4"/>
 
-    <!-- Realistic Seed -->
-    <path d="M 0.5 0.5 C 1.4 0.9, 1.8 1.8, 1.2 2.2 C 0.6 2.5, 0.2 1.6, 0.5 0.5 Z" fill="#F5EEB5" stroke="#D4AC0D" stroke-width="0.15"/>
+    <!-- Specular Juicy Droplet Glints -->
+    <circle cx="1.8" cy="-2.5" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-2.2" cy="1.6" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="2.6" cy="1.8" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-1.5" cy="-2.8" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="-3.8" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="3.8" cy="0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
   </g>
 
-    <!-- Right Lemon Wedge tilted slightly -->
+    <!-- Right Lemon Wedge tilted slightly (Bright Lemon Yellow) -->
     
   <g transform="translate(5.2, 2) rotate(22) scale(1)">
     <!-- Contact Shadow -->
-    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.2" filter="url(#soft-blur)"/>
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
 
-    <!-- Outer Yellow Rind -->
-    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#F4D03F" stroke="#E59866" stroke-width="0.25"/>
-    <!-- White Pith -->
-    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFDE8"/>
-    <!-- Pulp Core -->
-    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#F9E79F"/>
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
 
-    <!-- Radial Membranes -->
-    <g stroke="#FFFDE8" stroke-width="0.32" fill="none">
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
       <path d="M 0 2.3 L 0 -2.0"/>
       <path d="M 0 2.3 L -2.4 -1.4"/>
       <path d="M 0 2.3 L 2.4 -1.4"/>
       <path d="M 0 2.3 L -4.2 0.2"/>
       <path d="M 0 2.3 L 4.2 0.2"/>
     </g>
-    <!-- Highlight -->
-    <circle cx="-1.5" cy="-0.5" r="0.4" fill="#FFFFFF" opacity="0.7"/>
-    <circle cx="1.6" cy="0.6" r="0.4" fill="#FFFFFF" opacity="0.7"/>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
   </g>
   </g>
 
       
-      <!-- Jeera Flanking Elements (Scattered cumin seeds around lemon & edges) -->
+      <!-- Jeera Flanking Elements (Scattered cumin seeds + lemon slice near edges matching Ref 14) -->
       
   <g transform="translate(94, 68) rotate(-30) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(99, 70) rotate(20) scale(0.75)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(127, 68) rotate(40) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(131, 71) rotate(-15) scale(0.75)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(84, 73) rotate(55) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(82, 79) rotate(-45) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
-  <g transform="translate(140, 75) rotate(-60) scale(0.95)">
+  <g transform="translate(140, 73) rotate(-60) scale(0.95)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
-  <g transform="translate(143, 79) rotate(20) scale(0.9)">
+  <g transform="translate(144, 77) rotate(20) scale(0.9)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
   <g transform="translate(80, 92) rotate(45) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
   </g>
       
-  <g transform="translate(144, 92) rotate(-45) scale(0.85)">
+  <g transform="translate(144, 93) rotate(-45) scale(0.85)">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
     <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="#7A3F18"/>
     <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
+    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="#4E240B" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="#D9985F" stroke-width="0.16" fill="none"/>
+  </g>
+      
+  <g transform="translate(141, 87) rotate(18) scale(0.85)">
+    <!-- Contact Shadow -->
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
+
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
+
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
+      <path d="M 0 2.3 L 0 -2.0"/>
+      <path d="M 0 2.3 L -2.4 -1.4"/>
+      <path d="M 0 2.3 L 2.4 -1.4"/>
+      <path d="M 0 2.3 L -4.2 0.2"/>
+      <path d="M 0 2.3 L 4.2 0.2"/>
+    </g>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+      
+  <g transform="translate(134, 89) rotate(55) scale(0.6)">
+    <!-- Main Upright Leaf -->
+    <g transform="translate(0, 0) rotate(-10)">
+      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#2E7D32" opacity="0.9"/>
+      <path d="M 0 0 L 0 -9.5" stroke="#A5D6A7" stroke-width="0.25" stroke-linecap="round"/>
+      <path d="M 0 -2.5 L -1.5 -4.2 M 0 -2.5 L 1.5 -4.2 M 0 -5 L -1.8 -6.8 M 0 -5 L 1.8 -6.8 M 0 -7.5 L -1.2 -8.8 M 0 -7.5 L 1.2 -8.8" stroke="#A5D6A7" stroke-width="0.2"/>
+    </g>
+    <!-- Second Leaf -->
+    <g transform="translate(3.2, 0.5) rotate(35) scale(0.8)">
+      <path d="M 0 0 C -2.0 -2.8, -3.2 -6, 0 -9 C 3.2 -6, 2.0 -2.8, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.2 -2.4, -2.0 -5, 0 -8.2 C 2.0 -5, 1.2 -2.4, 0 0 Z" fill="#2E7D32"/>
+      <path d="M 0 0 L 0 -7.5" stroke="#81C784" stroke-width="0.22" stroke-linecap="round"/>
+    </g>
   </g>
       
     </g>
@@ -333,9 +1065,10 @@
       <text class="font-display-bold" x="112" y="86.2" font-size="3.2" fill="#E0561B" text-anchor="middle" letter-spacing="0.75">REHYDRATE | REFRESH | RECOVER</text>
     </g>
 
-    <!-- 6. STILL | 250 ml WITH ℮ MARK -->
+    <!-- 6. STILL | 250 ml WITH VECTOR ℮ MARK -->
     <g id="front-spec">
-      <text class="font-display-semibold" x="112" y="91.5" font-size="2.7" fill="#57534E" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml &#x212E;</text>
+      <text class="font-display-semibold" x="110.5" y="91.5" font-size="2.7" fill="#57534E" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
+      <g transform="translate(120.935, 89.4) scale(0.0023333333333333335) translate(-40, -40)"><path d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="#57534E"/></g>
     </g>
   </g>
 
@@ -440,17 +1173,7 @@
   <!-- ===================================================================== -->
   <!-- LAYER 5: SIDE STRIPS & GLUE OVERLAP (8 mm on Right Edge, No Text)    -->
   <!-- ===================================================================== -->
-  <g id="layer-glue-overlap">
-    <rect x="176" y="3"
-          width="8" height="95"
-          fill="url(#overlap-hatch)" opacity="0.3" />
-    <line x1="176" y1="3"
-          x2="176" y2="98"
-          stroke="#9CA3AF" stroke-width="0.4" stroke-dasharray="1 1" />
-    <text class="font-body" font-size="1.6" font-weight="600" fill="#9CA3AF"
-          transform="translate(180.5, 50.5) rotate(-90)"
-          text-anchor="middle" letter-spacing="0.4">GLUE OVERLAP AREA (NO TEXT)</text>
-  </g>
+  
 
   
 </svg>

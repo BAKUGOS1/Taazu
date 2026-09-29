@@ -116,24 +116,107 @@ function fileToDataUri(filePath) {
 }
 
 // ============================================================================
-// 2. Realistic Vector Illustration Components (Lemon Slices, Mint, Cumin)
+// 2. Realistic Vector Illustration Components (Bright Lemon Slices, Mint, Cumin)
 // ============================================================================
-function getRealisticLemonSliceSvg(x, y, scale = 1.0, rotation = 0) {
+function getCuminSeed(x, y, scale = 1.0, rot = 0, tone = 'mid') {
+  let bodyFill = '#7A3F18';
+  let ridgeStroke = '#B87333';
+  let darkStroke = '#4E240B';
+  let lightStroke = '#D9985F';
+
+  if (tone === 'dark') {
+    bodyFill = '#52280C';
+    ridgeStroke = '#8B481C';
+    darkStroke = '#321504';
+    lightStroke = '#A86230';
+  } else if (tone === 'light') {
+    bodyFill = '#924E22';
+    ridgeStroke = '#DCA068';
+    darkStroke = '#622F0E';
+    lightStroke = '#F5C698';
+  } else if (tone === 'golden') {
+    bodyFill = '#A05828';
+    ridgeStroke = '#E5AF7A';
+    darkStroke = '#6D3410';
+    lightStroke = '#FDE2C4';
+  }
+
+  return `
+  <g transform="translate(${x}, ${y}) rotate(${rot}) scale(${scale})">
+    <!-- Seed Drop Shadow -->
+    <path d="M 0.2 -2.4 C 0.85 -1.4, 0.85 1.5, 0.2 2.5 C -0.55 1.5, -0.55 -1.4, 0.2 -2.4 Z" fill="#200C02" opacity="0.45" transform="translate(0.18, 0.28)"/>
+    <!-- Seed Body -->
+    <path d="M 0 -2.6 C 0.78 -1.5, 0.78 1.5, 0 2.6 C -0.78 1.5, -0.78 -1.5, 0 -2.6 Z" fill="${bodyFill}"/>
+    <!-- Longitudinal Ridges -->
+    <path d="M 0 -2.3 L 0 2.3" stroke="${ridgeStroke}" stroke-width="0.22" stroke-linecap="round"/>
+    <path d="M -0.38 -1.8 C -0.52 -0.9, -0.52 0.9, -0.38 1.8" stroke="${darkStroke}" stroke-width="0.16" fill="none"/>
+    <path d="M 0.38 -1.8 C 0.52 -0.9, 0.52 0.9, 0.38 1.8" stroke="${lightStroke}" stroke-width="0.16" fill="none"/>
+  </g>`;
+}
+
+function getCuminSeedPileSvg(cx, cy, scale = 1.0) {
+  // Generates a rich, wide mound of roasted cumin seeds under the lemons matching reference 14
+  const seeds = [];
+
+  // Deep background shadow bed
+  seeds.push(`<ellipse cx="${cx}" cy="${cy + 3.2}" rx="${16.5 * scale}" ry="${3.8 * scale}" fill="#241004" opacity="0.32" filter="url(#soft-blur)"/>`);
+
+  // Layer 1: Back & Flanking wings of the mound (extends to x = +/- 15)
+  const layer1 = [
+    [-15.0, 3.8, 0.85, -25, 'dark'], [-13.2, 3.2, 0.9, 35, 'dark'], [-11.5, 2.5, 0.95, -45, 'dark'],
+    [-9.5, 1.8, 1.0, 15, 'dark'], [-8.0, 1.2, 0.95, -60, 'dark'], [-6.2, 0.8, 0.9, 30, 'dark'],
+    [6.2, 0.8, 0.9, -30, 'dark'], [8.0, 1.2, 0.95, 60, 'dark'], [9.8, 1.9, 1.0, -20, 'dark'],
+    [11.8, 2.6, 0.95, 45, 'dark'], [13.5, 3.3, 0.9, -35, 'dark'], [15.2, 4.0, 0.85, 25, 'dark'],
+    [-4.5, 0.5, 0.85, -15, 'dark'], [-2.0, 0.3, 0.9, 20, 'dark'], [0.5, 0.2, 0.9, -10, 'dark'],
+    [3.0, 0.4, 0.85, 40, 'dark']
+  ];
+
+  // Layer 2: Mid-mound density (tight cluster forming the pile body)
+  const layer2 = [
+    [-14.0, 4.4, 0.9, 55, 'mid'], [-12.2, 4.0, 1.0, -15, 'mid'], [-10.2, 3.5, 1.05, 40, 'mid'],
+    [-8.5, 3.0, 1.1, -30, 'mid'], [-6.5, 2.8, 1.15, 65, 'mid'], [-4.5, 2.7, 1.1, -10, 'mid'],
+    [-2.5, 2.8, 1.15, 30, 'mid'], [-0.5, 2.9, 1.2, -45, 'mid'], [1.8, 2.8, 1.15, 15, 'mid'],
+    [3.8, 2.7, 1.1, -35, 'mid'], [5.8, 2.9, 1.15, 50, 'mid'], [7.8, 3.2, 1.1, -20, 'mid'],
+    [9.8, 3.6, 1.05, 35, 'mid'], [11.8, 4.1, 1.0, -50, 'mid'], [13.8, 4.6, 0.9, 20, 'mid'],
+    [-7.5, 4.2, 1.0, -65, 'mid'], [-5.0, 4.1, 1.05, 25, 'mid'], [-2.0, 4.3, 1.1, -15, 'mid'],
+    [1.0, 4.3, 1.1, 35, 'mid'], [4.0, 4.2, 1.05, -40, 'mid'], [6.8, 4.3, 1.0, 60, 'mid']
+  ];
+
+  // Layer 3: Foreground face & bottom edge (overlapping, crisp roasted cumin seeds)
+  const layer3 = [
+    [-15.5, 5.0, 0.8, -10, 'light'], [-13.5, 5.2, 0.9, 40, 'light'], [-11.5, 5.3, 0.95, -25, 'golden'],
+    [-9.5, 5.4, 1.05, 15, 'light'], [-7.5, 5.5, 1.1, -45, 'golden'], [-5.5, 5.6, 1.15, 30, 'light'],
+    [-3.5, 5.8, 1.2, -15, 'golden'], [-1.2, 5.9, 1.2, 20, 'light'], [1.2, 5.9, 1.2, -30, 'golden'],
+    [3.5, 5.8, 1.15, 45, 'light'], [5.5, 5.6, 1.1, -10, 'golden'], [7.5, 5.5, 1.05, 55, 'light'],
+    [9.5, 5.4, 1.0, -35, 'golden'], [11.5, 5.2, 0.95, 20, 'light'], [13.5, 5.0, 0.9, -60, 'golden'],
+    [15.0, 4.8, 0.8, 35, 'light'],
+    [-8.0, 6.6, 0.9, 80, 'light'], [-4.0, 6.8, 0.95, -20, 'golden'],
+    [0.0, 6.9, 1.0, 10, 'light'], [4.5, 6.7, 0.95, -50, 'golden'], [8.2, 6.5, 0.9, 40, 'light']
+  ];
+
+  for (const s of [...layer1, ...layer2, ...layer3]) {
+    seeds.push(getCuminSeed(cx + s[0] * scale, cy + s[1] * scale, s[2] * scale, s[3], s[4]));
+  }
+
+  return `<g id="cumin-seed-pile">${seeds.join('\n')}</g>`;
+}
+
+function getBrightLemonSliceSvg(x, y, scale = 1.0, rotation = 0) {
   return `
   <g transform="translate(${x}, ${y}) rotate(${rotation}) scale(${scale})">
     <!-- Soft Contact Shadow -->
-    <ellipse cx="0" cy="7.8" rx="8.5" ry="2.2" fill="#2E1C0A" opacity="0.22" filter="url(#soft-blur)"/>
+    <ellipse cx="0" cy="7.8" rx="8.5" ry="2.2" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
 
-    <!-- Outer Citrus Rind -->
-    <circle cx="0" cy="0" r="7.5" fill="#F4D03F" stroke="#E59866" stroke-width="0.3"/>
-    <!-- White Inner Pith -->
-    <circle cx="0" cy="0" r="6.8" fill="#FFFDE8"/>
-    <!-- Translucent Pulp Background -->
-    <circle cx="0" cy="0" r="6.2" fill="#F9E79F"/>
+    <!-- Outer Citrus Rind (Bright Sunny Lemon Yellow) -->
+    <circle cx="0" cy="0" r="7.5" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <circle cx="0" cy="0" r="7.3" fill="none" stroke="#FFEE58" stroke-width="0.2"/>
+    <!-- Crisp White Inner Pith -->
+    <circle cx="0" cy="0" r="6.8" fill="#FFFFFF"/>
+    <!-- Radiant Translucent Pulp Base -->
+    <circle cx="0" cy="0" r="6.2" fill="#FFF59D"/>
 
-    <!-- Segment Wedges with Radial Membranes -->
-    <g fill="#FAD7A0" stroke="#FFFDE8" stroke-width="0.32">
-      <!-- 8 Segments around center -->
+    <!-- 8 Juicy Triangular Segments -->
+    <g fill="#FDD835" stroke="#FFFFFF" stroke-width="0.38">
       <path d="M 0 0 L 0 -5.8 A 5.8 5.8 0 0 1 4.1 -4.1 Z"/>
       <path d="M 0 0 L 4.1 -4.1 A 5.8 5.8 0 0 1 5.8 0 Z"/>
       <path d="M 0 0 L 5.8 0 A 5.8 5.8 0 0 1 4.1 4.1 Z"/>
@@ -144,44 +227,60 @@ function getRealisticLemonSliceSvg(x, y, scale = 1.0, rotation = 0) {
       <path d="M 0 0 L -4.1 -4.1 A 5.8 5.8 0 0 1 0 -5.8 Z"/>
     </g>
 
-    <!-- Center White Core -->
-    <circle cx="0" cy="0" r="1.1" fill="#FFFDE8"/>
+    <!-- Inner segment highlights -->
+    <g fill="#FFEE58" opacity="0.85">
+      <circle cx="2.2" cy="-3.6" r="1.1"/>
+      <circle cx="3.6" cy="-2.2" r="1.1"/>
+      <circle cx="3.6" cy="2.2" r="1.1"/>
+      <circle cx="2.2" cy="3.6" r="1.1"/>
+      <circle cx="-2.2" cy="3.6" r="1.1"/>
+      <circle cx="-3.6" cy="2.2" r="1.1"/>
+      <circle cx="-3.6" cy="-2.2" r="1.1"/>
+      <circle cx="-2.2" cy="-3.6" r="1.1"/>
+    </g>
 
-    <!-- Juice Vesicle Highlights -->
-    <circle cx="1.8" cy="-2.5" r="0.45" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="-2.2" cy="1.6" r="0.4" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="2.6" cy="1.8" r="0.45" fill="#FFFFFF" opacity="0.75"/>
-    <circle cx="-1.5" cy="-2.8" r="0.4" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Center White Star / Core -->
+    <circle cx="0" cy="0" r="1.15" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="0.6" fill="#FFF9C4"/>
 
-    <!-- Realistic Seed -->
-    <path d="M 0.5 0.5 C 1.4 0.9, 1.8 1.8, 1.2 2.2 C 0.6 2.5, 0.2 1.6, 0.5 0.5 Z" fill="#F5EEB5" stroke="#D4AC0D" stroke-width="0.15"/>
+    <!-- Specular Juicy Droplet Glints -->
+    <circle cx="1.8" cy="-2.5" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-2.2" cy="1.6" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="2.6" cy="1.8" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="-1.5" cy="-2.8" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="-3.8" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="3.8" cy="0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
   </g>`;
 }
 
-function getRealisticLemonWedgeSvg(x, y, scale = 1.0, rotation = 0) {
+function getBrightLemonWedgeSvg(x, y, scale = 1.0, rotation = 0) {
   return `
   <g transform="translate(${x}, ${y}) rotate(${rotation}) scale(${scale})">
     <!-- Contact Shadow -->
-    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.2" filter="url(#soft-blur)"/>
+    <ellipse cx="0" cy="5.2" rx="6.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
 
-    <!-- Outer Yellow Rind -->
-    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#F4D03F" stroke="#E59866" stroke-width="0.25"/>
-    <!-- White Pith -->
-    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFDE8"/>
-    <!-- Pulp Core -->
-    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#F9E79F"/>
+    <!-- Outer Bright Yellow Rind -->
+    <path d="M -6.5 3 C -6.5 -3.5, 6.5 -3.5, 6.5 3 C 5.5 5.5, -5.5 5.5, -6.5 3 Z" fill="#FDD835" stroke="#FBC02D" stroke-width="0.3"/>
+    <!-- Crisp White Pith Arc -->
+    <path d="M -5.8 2.6 C -5.8 -2.8, 5.8 -2.8, 5.8 2.6 C 4.8 4.8, -4.8 4.8, -5.8 2.6 Z" fill="#FFFFFF"/>
+    <!-- Radiant Sunny Pulp Core -->
+    <path d="M -5.2 2.3 C -5.2 -2.2, 5.2 -2.2, 5.2 2.3 C 4.2 4.2, -4.2 4.2, -5.2 2.3 Z" fill="#FDD835"/>
+    <path d="M -4.5 1.8 C -4.5 -1.6, 4.5 -1.6, 4.5 1.8 C 3.6 3.4, -3.6 3.4, -4.5 1.8 Z" fill="#FFEE58" opacity="0.85"/>
 
-    <!-- Radial Membranes -->
-    <g stroke="#FFFDE8" stroke-width="0.32" fill="none">
+    <!-- Radial Dividing Membranes -->
+    <g stroke="#FFFFFF" stroke-width="0.38" fill="none" stroke-linecap="round">
       <path d="M 0 2.3 L 0 -2.0"/>
       <path d="M 0 2.3 L -2.4 -1.4"/>
       <path d="M 0 2.3 L 2.4 -1.4"/>
       <path d="M 0 2.3 L -4.2 0.2"/>
       <path d="M 0 2.3 L 4.2 0.2"/>
     </g>
-    <!-- Highlight -->
-    <circle cx="-1.5" cy="-0.5" r="0.4" fill="#FFFFFF" opacity="0.7"/>
-    <circle cx="1.6" cy="0.6" r="0.4" fill="#FFFFFF" opacity="0.7"/>
+
+    <!-- Glistening Juicy Highlights -->
+    <circle cx="-1.5" cy="-0.5" r="0.45" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="1.6" cy="0.6" r="0.5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="0" cy="1.0" r="0.4" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="-3.2" cy="0.8" r="0.35" fill="#FFFFFF" opacity="0.85"/>
   </g>`;
 }
 
@@ -190,8 +289,8 @@ function getMintSprigSvg(x, y, scale = 1.0, rotation = 0) {
   <g transform="translate(${x}, ${y}) rotate(${rotation}) scale(${scale})">
     <!-- Main Upright Leaf -->
     <g transform="translate(0, 0) rotate(-10)">
-      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#2E7D32"/>
-      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#388E3C" opacity="0.9"/>
+      <path d="M 0 0 C -2.2 -3, -3.8 -7, 0 -11 C 3.8 -7, 2.2 -3, 0 0 Z" fill="#1B5E20"/>
+      <path d="M 0 0 C -1.4 -2.6, -2.4 -6, 0 -10 C 2.4 -6, 1.4 -2.6, 0 0 Z" fill="#2E7D32" opacity="0.9"/>
       <path d="M 0 0 L 0 -9.5" stroke="#A5D6A7" stroke-width="0.25" stroke-linecap="round"/>
       <path d="M 0 -2.5 L -1.5 -4.2 M 0 -2.5 L 1.5 -4.2 M 0 -5 L -1.8 -6.8 M 0 -5 L 1.8 -6.8 M 0 -7.5 L -1.2 -8.8 M 0 -7.5 L 1.2 -8.8" stroke="#A5D6A7" stroke-width="0.2"/>
     </g>
@@ -204,49 +303,52 @@ function getMintSprigSvg(x, y, scale = 1.0, rotation = 0) {
   </g>`;
 }
 
-function getCenterLemonDuoSvg(x, y, scale = 1.0) {
+function getCenterLemonDuoSvg(x, y, scale = 1.0, isJeera = false) {
   return `
   <g transform="translate(${x}, ${y}) scale(${scale})">
-    <!-- Ground Shadow -->
-    <ellipse cx="0" cy="6.2" rx="11.5" ry="1.8" fill="#2E1C0A" opacity="0.22" filter="url(#soft-blur)"/>
+    ${isJeera ? `
+    <!-- Jeera Roasted Cumin Seed Mound Under Lemons (Matching Reference 14) -->
+    ${getCuminSeedPileSvg(0, 1.2, 0.95)}
+    ` : `
+    <!-- Classic Soft Ground Shadow -->
+    <ellipse cx="0" cy="6.2" rx="11.5" ry="1.8" fill="#2E1C0A" opacity="0.16" filter="url(#soft-blur)"/>
+    `}
 
     <!-- Fresh Mint Leaves tucked behind -->
     ${getMintSprigSvg(-0.5, -0.5, 0.65, 5)}
 
-    <!-- Left Lemon Round (Juicy Cross Section) -->
-    ${getRealisticLemonSliceSvg(-5.2, 1.2, 1.05, -14)}
+    <!-- Left Lemon Round (Juicy Cross Section, Bright Lemon Yellow) -->
+    ${getBrightLemonSliceSvg(-5.2, 1.2, 1.05, -14)}
 
-    <!-- Right Lemon Wedge tilted slightly -->
-    ${getRealisticLemonWedgeSvg(5.2, 2.0, 1.0, 22)}
+    <!-- Right Lemon Wedge tilted slightly (Bright Lemon Yellow) -->
+    ${getBrightLemonWedgeSvg(5.2, 2.0, 1.0, 22)}
   </g>`;
 }
 
 function getCuminSeedSvg(x, y, scale = 1.0, rotation = 0) {
-  return `
-  <g transform="translate(${x}, ${y}) rotate(${rotation}) scale(${scale})">
-    <!-- Seed Body -->
-    <path d="M 0 -2.6 C 0.8 -1.6, 0.8 1.6, 0 2.6 C -0.8 1.6, -0.8 -1.6, 0 -2.6 Z" fill="#8A4B1F"/>
-    <!-- Longitudinal Ridges -->
-    <path d="M 0 -2.3 L 0 2.3" stroke="#B87333" stroke-width="0.2" stroke-linecap="round"/>
-    <path d="M -0.38 -1.8 C -0.55 -0.9, -0.55 0.9, -0.38 1.8" stroke="#5D3012" stroke-width="0.16" fill="none"/>
-    <path d="M 0.38 -1.8 C 0.55 -0.9, 0.55 0.9, 0.38 1.8" stroke="#D39257" stroke-width="0.16" fill="none"/>
-  </g>`;
+  return getCuminSeed(x, y, scale, rotation, 'mid');
 }
 
 function getBandCuminSeedsSvg(centerX, centerY) {
   return `
   <!-- Left Side Seeds on Brown Band -->
-  <g opacity="0.7">
-    ${getCuminSeedSvg(centerX - 24, centerY - 3, 1.15, -35)}
-    ${getCuminSeedSvg(centerX - 27.5, centerY + 2.5, 0.95, 25)}
-    ${getCuminSeedSvg(centerX - 22, centerY + 4.5, 0.85, -60)}
+  <g opacity="0.75">
+    ${getCuminSeed(centerX - 24, centerY - 3, 1.15, -35, 'golden')}
+    ${getCuminSeed(centerX - 27.5, centerY + 2.5, 0.95, 25, 'light')}
+    ${getCuminSeed(centerX - 22, centerY + 4.5, 0.85, -60, 'mid')}
   </g>
   <!-- Right Side Seeds on Brown Band -->
-  <g opacity="0.7">
-    ${getCuminSeedSvg(centerX + 24, centerY - 3, 1.15, 35)}
-    ${getCuminSeedSvg(centerX + 27.5, centerY + 2.5, 0.95, -25)}
-    ${getCuminSeedSvg(centerX + 22, centerY + 4.5, 0.85, 60)}
+  <g opacity="0.75">
+    ${getCuminSeed(centerX + 24, centerY - 3, 1.15, 35, 'golden')}
+    ${getCuminSeed(centerX + 27.5, centerY + 2.5, 0.95, -25, 'light')}
+    ${getCuminSeed(centerX + 22, centerY + 4.5, 0.85, 60, 'mid')}
   </g>`;
+}
+
+// Official European & International Standard Estimated Sign (U+212E / e-mark, EU Directive 2009/34/EC)
+function getEstimatedSignSvg(x, y, height = 2.1, fill = '#57534E') {
+  const scale = height / 900;
+  return `<g transform="translate(${x}, ${y}) scale(${scale}) translate(-40, -40)"><path d="m540 40a500 450 0 0 0 -500 450 500 450 0 0 0 500 450 500 450 0 0 0 395 -174h-75a423 423 0 0 1 -320 147 423 423 0 0 1 -291 -116 85 85 0 0 1 -26 -61v-220a13 13 0 0 1 13 -13h804v-13a500 450 0 0 0 -500 -450zm0 27a423 423 0 0 1 291 116 85 85 0 0 1 26 61v221a13 13 0 0 1 -13 13h-608a13 13 0 0 1 -13 -13v-221a85 85 0 0 1 26 -61 423 423 0 0 1 291 -116z" fill="${fill}"/></g>`;
 }
 
 // ============================================================================
@@ -370,28 +472,30 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
     <!-- 4. CENTER ILLUSTRATION & SCATTERED FLAVOUR ELEMENTS -->
     <g id="front-illustrations">
       <!-- Main Center Duo: Two lemon slices + mint leaf, seated comfortably below green strip -->
-      ${getCenterLemonDuoSvg(frontCenterX, 74.0, 0.95)}
+      ${getCenterLemonDuoSvg(frontCenterX, 74.0, 0.95, !isClassic)}
 
       ${isClassic ? `
       <!-- Classic Flanking Elements (Scattered lemon slices & mint leaves near edges) -->
       ${getMintSprigSvg(frontCenterX - 32, 69, 0.7, -45)}
-      ${getRealisticLemonWedgeSvg(frontCenterX - 31, 78, 0.7, 30)}
-      ${getRealisticLemonWedgeSvg(frontCenterX + 31, 70, 0.7, -25)}
+      ${getBrightLemonWedgeSvg(frontCenterX - 31, 78, 0.7, 30)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 31, 70, 0.7, -25)}
       ${getMintSprigSvg(frontCenterX + 32, 78, 0.7, 45)}
-      ${getRealisticLemonWedgeSvg(frontCenterX - 30, 91, 0.65, -15)}
+      ${getBrightLemonWedgeSvg(frontCenterX - 30, 91, 0.65, -15)}
       ${getMintSprigSvg(frontCenterX + 31, 93, 0.65, 135)}
       ` : `
-      <!-- Jeera Flanking Elements (Scattered cumin seeds around lemon & edges) -->
+      <!-- Jeera Flanking Elements (Scattered cumin seeds + lemon slice near edges matching Ref 14) -->
       ${getCuminSeedSvg(frontCenterX - 18, 68, 0.85, -30)}
       ${getCuminSeedSvg(frontCenterX - 13, 70, 0.75, 20)}
       ${getCuminSeedSvg(frontCenterX + 15, 68, 0.85, 40)}
       ${getCuminSeedSvg(frontCenterX + 19, 71, 0.75, -15)}
       ${getCuminSeedSvg(frontCenterX - 28, 73, 0.95, 55)}
       ${getCuminSeedSvg(frontCenterX - 30, 79, 0.85, -45)}
-      ${getCuminSeedSvg(frontCenterX + 28, 75, 0.95, -60)}
-      ${getCuminSeedSvg(frontCenterX + 31, 79, 0.9, 20)}
+      ${getCuminSeedSvg(frontCenterX + 28, 73, 0.95, -60)}
+      ${getCuminSeedSvg(frontCenterX + 32, 77, 0.9, 20)}
       ${getCuminSeedSvg(frontCenterX - 32, 92, 0.85, 45)}
-      ${getCuminSeedSvg(frontCenterX + 32, 92, 0.85, -45)}
+      ${getCuminSeedSvg(frontCenterX + 32, 93, 0.85, -45)}
+      ${getBrightLemonWedgeSvg(frontCenterX + 29, 87, 0.85, 18)}
+      ${getMintSprigSvg(frontCenterX + 22, 89, 0.6, 55)}
       `}
     </g>
 
@@ -400,9 +504,10 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
       <text class="font-display-bold" x="${frontCenterX}" y="86.2" font-size="3.2" fill="${c.orange}" text-anchor="middle" letter-spacing="0.75">REHYDRATE | REFRESH | RECOVER</text>
     </g>
 
-    <!-- 6. STILL | 250 ml WITH ℮ MARK -->
+    <!-- 6. STILL | 250 ml WITH VECTOR ℮ MARK -->
     <g id="front-spec">
-      <text class="font-display-semibold" x="${frontCenterX}" y="91.5" font-size="2.7" fill="${c.inkMuted}" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml &#x212E;</text>
+      <text class="font-display-semibold" x="${frontCenterX - 1.5}" y="91.5" font-size="2.7" fill="${c.inkMuted}" text-anchor="middle" letter-spacing="0.5">STILL | 250 ml</text>
+      ${getEstimatedSignSvg(frontCenterX + 8.935, 89.4, 2.1, c.inkMuted)}
     </g>
   </g>
 
@@ -507,6 +612,7 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
   <!-- ===================================================================== -->
   <!-- LAYER 5: SIDE STRIPS & GLUE OVERLAP (8 mm on Right Edge, No Text)    -->
   <!-- ===================================================================== -->
+  ${options.showGlueOverlap ? `
   <g id="layer-glue-overlap">
     <rect x="${canvasW - bleed - LABEL_SPECS.panels.overlap}" y="${bleed}"
           width="${LABEL_SPECS.panels.overlap}" height="${LABEL_SPECS.trimHeightMm}"
@@ -518,6 +624,7 @@ export function generateLabelSvg(flavor = 'classic', options = {}) {
           transform="translate(${canvasW - bleed - 3.5}, ${canvasH / 2}) rotate(-90)"
           text-anchor="middle" letter-spacing="0.4">GLUE OVERLAP AREA (NO TEXT)</text>
   </g>
+  ` : ''}
 
   ${options.showGuides ? `
   <!-- LAYER 6: PRINT PREPRESS GUIDES (Bleed, Trim, Safe Margins) -->
@@ -592,7 +699,9 @@ export function generateOutlinedLabelSvg(flavor = 'classic', options = {}) {
   const pBand2 = textToVectorPath(fontBarlowBold, bandLine2, frontCenterX, bandY + 16.6, 7.6, bandTextColor, 'middle', 0.9);
   const pGreen = textToVectorPath(fontBarlowSemi, greenText, frontCenterX, greenY + 4.2, 2.65, c.white, 'middle', 0.65);
   const pTagline = textToVectorPath(fontBarlowBold, 'REHYDRATE | REFRESH | RECOVER', frontCenterX, 86.2, 3.2, c.orange, 'middle', 0.75);
-  const pStill = textToVectorPath(fontBarlowSemi, 'STILL | 250 ml \u212E', frontCenterX, 91.5, 2.7, c.inkMuted, 'middle', 0.5);
+  const pStillText = textToVectorPath(fontBarlowSemi, 'STILL | 250 ml', frontCenterX - 1.5, 91.5, 2.7, c.inkMuted, 'middle', 0.5);
+  const pStillEmark = getEstimatedSignSvg(frontCenterX + 8.935, 89.4, 2.1, c.inkMuted);
+  const pStill = pStillText + '\n' + pStillEmark;
 
   let outlinedSvg = baseSvg
     .replace(/<g id="front-band-text"[\s\S]*?<\/g>/, `<g id="front-band-text" filter="${isClassic ? 'url(#classic-shadow)' : 'url(#jeera-shadow)'}">\n${pBand1}\n${pBand2}\n</g>`)
@@ -946,10 +1055,27 @@ function generatePreviewHtml() {
     <div class="card">
       <div class="card-header">
         <h2 id="flat-title">Flat Vector Label — Classic Nimbu Namak</h2>
-        <span class="badge" id="flat-dim">2205 x 1193 px (300 DPI)</span>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn active" id="btn-glue-overlap" style="border: 1px solid var(--border); padding: 4px 10px; font-size: 11px;">Glue Overlap Guide: ON</button>
+          <span class="badge" id="flat-dim">2205 x 1193 px (300 DPI)</span>
+        </div>
       </div>
       <div class="card-body">
-        <img id="flat-viewer" src="taazu-label-classic.png" alt="Taazu Label Flat View" />
+        <div id="flat-stage" style="position: relative; display: inline-block; width: 100%; max-width: 960px; line-height: 0;">
+          <img id="flat-viewer" src="taazu-label-classic.png" alt="Taazu Label Flat View" style="width: 100%; display: block; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
+          <svg id="glue-overlap-overlay" style="position: absolute; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%;" viewBox="0 0 187 101" preserveAspectRatio="none">
+            <defs>
+              <pattern id="preview-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="4" stroke="#9CA3AF" stroke-width="0.8" opacity="0.6"/>
+              </pattern>
+            </defs>
+            <g id="overlap-content">
+              <rect id="overlay-rect" x="176" y="3" width="8" height="95" fill="url(#preview-hatch)" opacity="0.45" />
+              <line id="overlay-line" x1="176" y1="3" x2="176" y2="98" stroke="#4B5563" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+              <text id="overlay-text" x="180" y="50.5" font-family="'Inter', sans-serif" font-size="2.0" font-weight="700" fill="#374151" transform="rotate(-90 180 50.5)" text-anchor="middle" letter-spacing="0.5">GLUE OVERLAP AREA (NO TEXT)</text>
+            </g>
+          </svg>
+        </div>
       </div>
       <div class="specs-grid">
         <div class="spec-item">
@@ -1060,7 +1186,52 @@ function generatePreviewHtml() {
       flatViewer.src = 'taazu-label-' + currentFlavor + modeSuffix + '.png';
       flatTitle.textContent = 'Flat Vector Label — ' + (currentFlavor === 'classic' ? 'Classic Nimbu Namak' : 'Jeera Masala');
       flatDim.textContent = currentMode === 'trim' ? '2134 x 1122 px (Trim Size)' : '2205 x 1193 px (300 DPI Bleed)';
+
+      const overlaySvg = document.getElementById('glue-overlap-overlay');
+      const overlayRect = document.getElementById('overlay-rect');
+      const overlayLine = document.getElementById('overlay-line');
+      const overlayText = document.getElementById('overlay-text');
+      if (currentMode === 'trim') {
+        overlaySvg.setAttribute('viewBox', '0 0 181 95');
+        overlayRect.setAttribute('x', '173');
+        overlayRect.setAttribute('y', '0');
+        overlayRect.setAttribute('width', '8');
+        overlayRect.setAttribute('height', '95');
+        overlayLine.setAttribute('x1', '173');
+        overlayLine.setAttribute('y1', '0');
+        overlayLine.setAttribute('x2', '173');
+        overlayLine.setAttribute('y2', '95');
+        overlayText.setAttribute('x', '177');
+        overlayText.setAttribute('y', '47.5');
+        overlayText.setAttribute('transform', 'rotate(-90 177 47.5)');
+      } else {
+        overlaySvg.setAttribute('viewBox', '0 0 187 101');
+        overlayRect.setAttribute('x', '176');
+        overlayRect.setAttribute('y', '3');
+        overlayRect.setAttribute('width', '8');
+        overlayRect.setAttribute('height', '95');
+        overlayLine.setAttribute('x1', '176');
+        overlayLine.setAttribute('y1', '3');
+        overlayLine.setAttribute('x2', '176');
+        overlayLine.setAttribute('y2', '98');
+        overlayText.setAttribute('x', '180');
+        overlayText.setAttribute('y', '50.5');
+        overlayText.setAttribute('transform', 'rotate(-90 180 50.5)');
+      }
+
       update3DTexture();
+    }
+
+    let showGlueGuide = true;
+    const btnGlueGuide = document.getElementById('btn-glue-overlap');
+    const overlapContent = document.getElementById('overlap-content');
+    if (btnGlueGuide && overlapContent) {
+      btnGlueGuide.addEventListener('click', () => {
+        showGlueGuide = !showGlueGuide;
+        overlapContent.style.display = showGlueGuide ? 'block' : 'none';
+        btnGlueGuide.textContent = 'Glue Overlap Guide: ' + (showGlueGuide ? 'ON' : 'OFF');
+        btnGlueGuide.classList.toggle('active', showGlueGuide);
+      });
     }
 
     document.querySelectorAll('#flavor-select .btn').forEach(btn => {
