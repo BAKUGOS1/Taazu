@@ -164,12 +164,12 @@ async function buildDuoProductPhoto() {
     .jpeg({ quality: 95, mozjpeg: true })
     .toBuffer();
 
-  fs.writeFileSync('brand-kit/creatives/12-both-flavours-duo.jpg', finalImage);
-  fs.writeFileSync('public/creatives/12-both-flavours-duo.jpg', finalImage);
+  fs.writeFileSync('brand-kit/creatives/bottle-renders/12-both-flavours-duo.jpg', finalImage);
+  fs.writeFileSync('public/creatives/bottle-renders/12-both-flavours-duo.jpg', finalImage);
 
   // Also write PNG
-  await sharp(finalImage).png().toFile('brand-kit/creatives/12-both-flavours-duo.png');
-  await sharp(finalImage).png().toFile('public/creatives/12-both-flavours-duo.png');
+  await sharp(finalImage).png().toFile('brand-kit/creatives/bottle-renders/12-both-flavours-duo.png');
+  await sharp(finalImage).png().toFile('public/creatives/bottle-renders/12-both-flavours-duo.png');
 
   console.log('Successfully generated 12-both-flavours-duo.jpg and .png (1600x1200, 4K crisp)!');
 }

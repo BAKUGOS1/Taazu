@@ -34,10 +34,12 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // Creatives and the promo video are big downloads; fetch them only when opened.
+        globIgnores: ['creatives/**'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: '/index.html',
         // Never cache Supabase/API traffic: team data must always be live.
-        navigateFallbackDenylist: [/^\/api/],
+        navigateFallbackDenylist: [/^\/api/, /^\/creatives\//],
         runtimeCaching: [],
       },
     }),

@@ -4,8 +4,8 @@ const path = require('path');
 
 async function extractPristineCutouts() {
   console.log('Extracting pristine bottle cutouts...');
-  const { data: d1, info: i1 } = await sharp('brand-kit/creatives/09-hero-bottle-a1.jpg').raw().toBuffer({ resolveWithObject: true });
-  const { data: d2, info: i2 } = await sharp('brand-kit/creatives/11-jeera-masala-a2.jpg').raw().toBuffer({ resolveWithObject: true });
+  const { data: d1, info: i1 } = await sharp('brand-kit/creatives/bottle-renders/09-hero-bottle-a1.jpg').raw().toBuffer({ resolveWithObject: true });
+  const { data: d2, info: i2 } = await sharp('brand-kit/creatives/bottle-renders/11-jeera-masala-a2.jpg').raw().toBuffer({ resolveWithObject: true });
   
   const isBg = (data, info, x, y) => {
     if (x < 0 || x >= info.width || y < 0 || y >= info.height) return true;
@@ -452,10 +452,10 @@ async function buildDuoMasterpiece() {
     .jpeg({ quality: 96, mozjpeg: true })
     .toBuffer();
 
-  const outJpgPath = 'brand-kit/creatives/12-both-flavours-duo.jpg';
-  const outPngPath = 'brand-kit/creatives/12-both-flavours-duo.png';
-  const pubJpgPath = 'public/creatives/12-both-flavours-duo.jpg';
-  const pubPngPath = 'public/creatives/12-both-flavours-duo.png';
+  const outJpgPath = 'brand-kit/creatives/bottle-renders/12-both-flavours-duo.jpg';
+  const outPngPath = 'brand-kit/creatives/bottle-renders/12-both-flavours-duo.png';
+  const pubJpgPath = 'public/creatives/bottle-renders/12-both-flavours-duo.jpg';
+  const pubPngPath = 'public/creatives/bottle-renders/12-both-flavours-duo.png';
 
   fs.writeFileSync(outJpgPath, finalImage);
   fs.writeFileSync(pubJpgPath, finalImage);

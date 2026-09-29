@@ -1148,7 +1148,7 @@ function generatePreviewHtml() {
       </div>
       <div class="compare-grid">
         <div class="compare-card">
-          <img src="../../brand-kit/creatives/09-hero-bottle-a1.jpg" alt="Ref 09 Classic" />
+          <img src="../../brand-kit/creatives/bottle-renders/09-hero-bottle-a1.jpg" alt="Ref 09 Classic" />
           <div class="caption">
             <span>Reference Photo 09</span>
             <span style="color: #F59E0B;">Approved Target</span>
@@ -1162,7 +1162,7 @@ function generatePreviewHtml() {
           </div>
         </div>
         <div class="compare-card">
-          <img src="../../brand-kit/creatives/11-jeera-masala-a2.jpg" alt="Ref 11 Jeera" />
+          <img src="../../brand-kit/creatives/bottle-renders/11-jeera-masala-a2.jpg" alt="Ref 11 Jeera" />
           <div class="caption">
             <span>Reference Photo 11</span>
             <span style="color: #F59E0B;">Approved Target</span>

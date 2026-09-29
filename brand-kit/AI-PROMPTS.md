@@ -6,7 +6,7 @@ Prompts for image and video AI tools, plus captions for the ready creatives.
 
 1. **AI se sirf photo/background banwao, text nahi.** AI tools Hindi aur Gujarati text bigaad dete hain, aur English text bhi kabhi-kabhi. Headline, logo aur source line Canva mein upar lagao.
 2. **Har prompt ke end mein brand style line jodo** (neeche di hai), taaki saari images ek family jaisi lagein.
-3. **Asli bottle dikhana ho** to ChatGPT ya Gemini mein bottle ki photo (ya `creatives/06-poster-a4-gym-turf.png` se crop) upload karo aur "Reference image" prompt use karo. AI ko label dobara banane mat do.
+3. **Asli bottle dikhana ho** to ChatGPT ya Gemini mein bottle ki photo (ya `creatives/social-posts/06-poster-a4-gym-turf.png` se crop) upload karo aur "Reference image" prompt use karo. AI ko label dobara banane mat do.
 4. Aspect ratio: Instagram post 4:5, story/reel 9:16, poster 3:4 ya A4. Midjourney mein `--ar 4:5`, baaki tools mein size dropdown se.
 5. Log asli jaise dikhein: Indian faces, Amdavadi jagah, normal kapde. Construction workers ko respectfully dikhao, dayaneey (pitiable) nahi.
 

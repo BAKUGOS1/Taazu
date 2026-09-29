@@ -6,6 +6,7 @@ import { useBrandLogo } from "../../../lib/brandLogo";
 import { loadFonts } from "./fonts";
 import { canShareFiles, maxScale, nodeToPng, saveBlob, shareBlob, slug } from "./export";
 import { Chips, Label, readStore, writeStore } from "./bits";
+import ReadyFiles from "./ReadyFiles";
 
 const KEY = "taazu.brandkit.creatives.v1";
 type Saved = { shared: Shared; values: Record<string, Values>; active: string };
@@ -105,6 +106,8 @@ export default function Creatives() {
   return (
     <LogoConceptCtx.Provider value={concept}>
     <div className="space-y-4">
+      <ReadyFiles />
+
       <Panel title="Price aur WhatsApp · har creative mein">
         <div className="grid gap-3 sm:grid-cols-2">
           <div><Label hint="{price}">Price</Label><input className={inputCls} value={s.price} onChange={(e) => setSaved((c) => ({ ...c, shared: { ...c.shared, price: e.target.value } }))} /></div>
