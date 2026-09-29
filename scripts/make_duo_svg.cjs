@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const img1Path = path.resolve('brand-kit/creatives/09-hero-bottle-a1.jpg');
-const img2Path = path.resolve('brand-kit/creatives/11-jeera-masala-a2.jpg');
+const img1Path = path.resolve('brand-kit/creatives/bottle-renders/09-hero-bottle-a1.jpg');
+const img2Path = path.resolve('brand-kit/creatives/bottle-renders/11-jeera-masala-a2.jpg');
 
 const b1 = fs.readFileSync(img1Path).toString('base64');
 const b2 = fs.readFileSync(img2Path).toString('base64');
@@ -131,6 +131,6 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 </svg>
 `;
 
-fs.writeFileSync('brand-kit/creatives/12-both-flavours-duo.svg', svg);
-fs.writeFileSync('public/creatives/12-both-flavours-duo.svg', svg);
+fs.writeFileSync('brand-kit/creatives/bottle-renders/12-both-flavours-duo.svg', svg);
+fs.writeFileSync('public/creatives/bottle-renders/12-both-flavours-duo.svg', svg);
 console.log('Successfully created 12-both-flavours-duo.svg in brand-kit and public!');

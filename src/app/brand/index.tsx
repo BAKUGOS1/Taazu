@@ -347,30 +347,30 @@ function Bottle3dPanel() {
         <div className="rounded-2xl border border-stone-200 bg-white p-4">
           <h3 className="text-sm font-bold text-stone-900">A1 · Hero Reference (Nimbu Namak)</h3>
           <p className="mt-1 text-xs text-stone-500">250 ml clear PET, cloudy nimbu liquid, orange cap, full wrap label.</p>
-          <img src="/creatives/09-hero-bottle-a1.jpg" alt="Hero Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+          <img src="/creatives/bottle-renders/09-hero-bottle-a1.jpg" alt="Hero Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
         </div>
         <div className="rounded-2xl border border-stone-200 bg-white p-4">
           <h3 className="text-sm font-bold text-stone-900">A2 · Jeera Masala Flavour</h3>
           <p className="mt-1 text-xs text-stone-500">Warm roasted-cumin brown cap (#8A4B1F), amber golden drink, cumin seeds band.</p>
-          <img src="/creatives/11-jeera-masala-a2.jpg" alt="Jeera Masala Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+          <img src="/creatives/bottle-renders/11-jeera-masala-a2.jpg" alt="Jeera Masala Bottle" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
         </div>
         <div className="rounded-2xl border border-stone-200 bg-white p-4">
           <h3 className="text-sm font-bold text-stone-900">A4 · Orthographic Technical Drawing</h3>
           <p className="mt-1 text-xs text-stone-500">4-view orthographic drawing with 95 mm label area, 55 mm body diameter & 160 mm total height.</p>
-          <img src="/creatives/10-orthographic-views-a4.jpg" alt="Orthographic Drawing" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
+          <img src="/creatives/bottle-renders/10-orthographic-views-a4.jpg" alt="Orthographic Drawing" className="mt-3 rounded-xl border border-stone-200 max-h-72 mx-auto object-contain" />
         </div>
       </div>
       <div className="rounded-2xl border border-stone-200 bg-white p-4">
         <h3 className="text-sm font-bold text-stone-900">A3 · Both Flavours Side-by-Side (Duo on Solid Saffron Orange #EA580C)</h3>
         <p className="mt-1 text-xs text-stone-500">Both 250 ml PET bottles standing on crushed ice with lemon halves and pink rock salt on a solid orange studio backdrop.</p>
         <div className="mt-3 rounded-xl border border-stone-200 bg-[#EA580C] p-2 text-center overflow-hidden">
-          <img src="/creatives/12-both-flavours-duo.jpg" alt="Both Flavours Duo" className="max-h-[460px] mx-auto object-contain rounded-lg shadow-sm" />
+          <img src="/creatives/bottle-renders/12-both-flavours-duo.jpg" alt="Both Flavours Duo" className="max-h-[460px] mx-auto object-contain rounded-lg shadow-sm" />
         </div>
         <div className="mt-2.5 flex items-center justify-end gap-2">
-          <a href="/creatives/12-both-flavours-duo.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
+          <a href="/creatives/bottle-renders/12-both-flavours-duo.jpg" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
             Download 4K JPG
           </a>
-          <a href="/creatives/12-both-flavours-duo.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
+          <a href="/creatives/bottle-renders/12-both-flavours-duo.png" download className="rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition-colors">
             Download Lossless PNG
           </a>
         </div>

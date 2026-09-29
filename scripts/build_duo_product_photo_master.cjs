@@ -290,10 +290,10 @@ async function buildDuoProductPhotoMaster() {
     .jpeg({ quality: 96, mozjpeg: true })
     .toBuffer();
 
-  const outJpg1 = 'brand-kit/creatives/12-both-flavours-duo.jpg';
-  const outPng1 = 'brand-kit/creatives/12-both-flavours-duo.png';
-  const pubJpg1 = 'public/creatives/12-both-flavours-duo.jpg';
-  const pubPng1 = 'public/creatives/12-both-flavours-duo.png';
+  const outJpg1 = 'brand-kit/creatives/bottle-renders/12-both-flavours-duo.jpg';
+  const outPng1 = 'brand-kit/creatives/bottle-renders/12-both-flavours-duo.png';
+  const pubJpg1 = 'public/creatives/bottle-renders/12-both-flavours-duo.jpg';
+  const pubPng1 = 'public/creatives/bottle-renders/12-both-flavours-duo.png';
 
   fs.writeFileSync(outJpg1, finalImage);
   fs.writeFileSync(pubJpg1, finalImage);
