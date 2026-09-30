@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taazu Reel 2 — "Andar Kya Hai?" Storyboard</title>
+  <style>
+    :root {
+      --brand-orange: #EA580C;
+      --brand-yellow: #F5D83B;
+      --brand-green: #1F7A3A;
+      --brand-cream: #FFF8E7;
+      --brand-brown: #8A4B1F;
+      --bg-dark: #0f1115;
+      --card-bg: #181c24;
+      --card-border: #283040;
+      --text-main: #f0f3f8;
+      --text-muted: #9aa4b2;
+      --accent: #f97316;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    header {
+      max-width: 1400px;
+      margin: 0 auto 2.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(234, 88, 12, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .badge.secondary {
+      background: rgba(31, 122, 58, 0.15);
+      color: #4ade80;
+      border-color: rgba(31, 122, 58, 0.3);
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    button.btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    button.btn:hover {
+      background: #232a36;
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    button.btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: #3e4a60;
+      transform: translateY(-2px);
+    }
+
+    .card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: #0b0d11;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card-media:hover img {
+      transform: scale(1.02);
+    }
+
+    .placeholder-media {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(180deg, #1b202a 0%, #11141b 100%);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .placeholder-media span.icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .placeholder-media p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Safe zone overlay */
+    .safe-zone-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+    }
+
+    .safe-zone-overlay.visible {
+      display: block;
+    }
+
+    .safe-zone-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 15%;
+      background: rgba(239, 68, 68, 0.25);
+      border-bottom: 1px dashed rgba(239, 68, 68, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fca5a5;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .safe-zone-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: rgba(239, 68, 68, 0.25);
+      border-top: 1px dashed rgba(239, 68, 68, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fca5a5;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .card-body {
+      padding: 1rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+
+    .frame-number {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .frame-time {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #222733;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .card-actions button, .card-actions a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.45rem;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: #202633;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .card-actions button:hover, .card-actions a:hover {
+      background: #2d3648;
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img-wrap {
+      max-height: 90vh;
+      max-width: 90vw;
+      aspect-ratio: 9 / 16;
+      position: relative;
+    }
+
+    .lightbox-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #222;
+      border: 1px solid #444;
+      color: #fff;
+      font-size: 1.25rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="badge-bar">
+        <span class="badge">Reel 2 Storyboard</span>
+        <span class="badge secondary">Vertical 9:16</span>
+        <span class="badge" style="background: rgba(245, 216, 59, 0.15); color: #facc15; border-color: rgba(245, 216, 59, 0.3);">30 Seconds</span>
+      </div>
+      <h1>Taazu · "Andar Kya Hai?" Storyboard</h1>
+      <p class="subtitle">Complete frame sequence with 9:16 high-resolution ad visuals and Instagram safe zone guides</p>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="safeZoneBtn" onclick="toggleSafeZones()">
+        📐 Toggle IG Safe Zones (15% / 35%)
+      </button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- Frame 1 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-01-hook.jpg')">
+        <img src="frame-01-hook.jpg" alt="Frame 1 - Hook: bottle close-up">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 01</span>
+          <span class="frame-time">0 – 3s</span>
+        </div>
+        <div class="card-title">Hook: Bottle Close-Up</div>
+        <div class="card-desc">Chilled 250 ml PET bottle with condensation droplets running down the label, warm cream background with soft orange ambient glow.</div>
+        <div class="card-actions">
+          <a href="frame-01-hook.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(1)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 2 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-02-nimbu.jpg')">
+        <img src="frame-02-nimbu.jpg" alt="Frame 2 - NIMBU">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 02</span>
+          <span class="frame-time">3 – 5s</span>
+        </div>
+        <div class="card-title">NIMBU (Lemon Slice)</div>
+        <div class="card-desc">Juicy lemon slice suspended mid-air dripping fresh juice droplets directly into the open neck of the full Taazu Classic bottle, with its orange cap resting naturally at the base.</div>
+        <div class="card-actions">
+          <a href="frame-02-nimbu.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(2)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 3 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-03-namak.jpg')">
+        <img src="frame-03-namak.jpg" alt="Frame 3 - NAMAK">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 03</span>
+          <span class="frame-time">5 – 7s</span>
+        </div>
+        <div class="card-title">NAMAK (Rock Salt)</div>
+        <div class="card-desc">Coarse white & pink Himalayan rock salt crystals raining down in crisp lighting over slate blue-grey contrast backdrop.</div>
+        <div class="card-actions">
+          <a href="frame-03-namak.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(3)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 4 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-04-jeera.jpg')">
+        <img src="frame-04-jeera.jpg" alt="Frame 4 - JEERA">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 04</span>
+          <span class="frame-time">7 – 9s</span>
+        </div>
+        <div class="card-title">JEERA (Roasted Cumin)</div>
+        <div class="card-desc">Toasted cumin seeds bursting outward in a high-speed explosion freeze, warm earthen brown to cream gradient.</div>
+        <div class="card-actions">
+          <a href="frame-04-jeera.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(4)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 5 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-05-pudina.jpg')">
+        <img src="frame-05-pudina.jpg" alt="Frame 5 - PUDINA">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 05</span>
+          <span class="frame-time">9 – 11s</span>
+        </div>
+        <div class="card-title">PUDINA (Fresh Mint)</div>
+        <div class="card-desc">Three dewy fresh mint leaves gracefully floating with water micro-droplets on lush botanical green gradient.</div>
+        <div class="card-actions">
+          <a href="frame-05-pudina.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(5)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 6 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-06-thanda.jpg')">
+        <img src="frame-06-thanda.jpg" alt="Frame 6 - THANDA">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 06</span>
+          <span class="frame-time">11 – 13s</span>
+        </div>
+        <div class="card-title">THANDA (Ice Clink)</div>
+        <div class="card-desc">Crystal clear ice cubes dropping with frost mist and water splash, alongside the chilled authentic Taazu bottle under cool blue light.</div>
+        <div class="card-actions">
+          <a href="frame-06-thanda.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(6)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 7 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-07-swirl.jpg')">
+        <img src="frame-07-swirl.jpg" alt="Frame 7 - Swirl">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 07</span>
+          <span class="frame-time">13 – 15s</span>
+        </div>
+        <div class="card-title">Sab Ek Saath (Swirl)</div>
+        <div class="card-desc">Lemon, rock salt, jeera, mint and ice swirling in a dynamic vortex around a glossy orange droplet.</div>
+        <div class="card-actions">
+          <a href="frame-07-swirl.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(7)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 8 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-08-splash.jpg')">
+        <img src="frame-08-splash.jpg" alt="Frame 8 - Splash">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 08</span>
+          <span class="frame-time">15 – 17s</span>
+        </div>
+        <div class="card-title">Splash Crown & Logo Drop</div>
+        <div class="card-desc">Taazu glossy logo drop hovering over majestic liquid crown splash, with the authentic Taazu bottle resting on dark reflective water.</div>
+        <div class="card-actions">
+          <a href="frame-08-splash.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(8)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 9 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-09-classic-hero.jpg')">
+        <img src="frame-09-classic-hero.jpg" alt="Frame 9 - Classic Hero">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 09</span>
+          <span class="frame-time">17 – 19s</span>
+        </div>
+        <div class="card-title">Classic Hero Bottle</div>
+        <div class="card-desc">Taazu Classic Nimbu Namak bottle with orange cap emerging from a splash, floating lemon slices and mint leaves.</div>
+        <div class="card-actions">
+          <a href="frame-09-classic-hero.jpg" target="_blank">Full Res</a>
+          <button onclick="copyPrompt(9)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 10 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-10-jeera-hero-ref.jpg')">
+        <img src="frame-10-jeera-hero-ref.jpg" alt="Frame 10 - Jeera Hero Reference" style="object-fit: contain; background: #2a1b12;">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 10</span>
+          <span class="frame-time">19 – 22s</span>
+        </div>
+        <div class="card-title">Jeera Hero (Reference Ready)</div>
+        <div class="card-desc">Taazu Jeera Masala bottle with brown cap, cumin seeds orbiting, warm brown to cream background. Ready for regeneration upon quota reset.</div>
+        <div class="card-actions">
+          <a href="frame-10-jeera-hero-ref.jpg" target="_blank">Reference Asset</a>
+          <button onclick="copyPrompt(10)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 11 -->
+    <div class="card">
+      <div class="card-media" onclick="openLightbox('frame-11-duo-ref.png')">
+        <img src="frame-11-duo-ref.png" alt="Frame 11 - Duo Reference" style="object-fit: contain; background: #fff8e7;">
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 11</span>
+          <span class="frame-time">22 – 25s</span>
+        </div>
+        <div class="card-title">Duo: Classic + Jeera</div>
+        <div class="card-desc">Both bottles side by side with ice, lemon slice, and mint at the base on cream background (#FFF8E7) with soft orange glow.</div>
+        <div class="card-actions">
+          <a href="frame-11-duo-ref.png" target="_blank">Reference Asset</a>
+          <button onclick="copyPrompt(11)">Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 12 -->
+    <div class="card">
+      <div class="card-media">
+        <div class="placeholder-media" style="background: radial-gradient(circle, #fff8e7 20%, #ffeed2 100%);">
+          <span class="icon">🪔</span>
+          <p style="color: #8A4B1F; font-weight: 700; font-size: 1rem;">Navratri End Card</p>
+          <p style="color: #665; font-size: 0.8rem; margin-top: 0.25rem;">Warm cream (#FFF8E7) with marigold & diya corner touches. Center clear for brand logo & CTA.</p>
+        </div>
+        <div class="safe-zone-overlay">
+          <div class="safe-zone-top">TOP 15% SAFE ZONE</div>
+          <div class="safe-zone-bottom">BOTTOM 35% UI SAFE ZONE</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="frame-number">Frame 12</span>
+          <span class="frame-time">25 – 30s</span>
+        </div>
+        <div class="card-title">Festive End Card</div>
+        <div class="card-desc">Cream festive canvas for logo reveal, retail locator WhatsApp CTA (91737 36652) and slogan: Rehydrate · Refresh · Recover.</div>
+        <div class="card-actions">
+          <button onclick="copyPrompt(12)" style="flex: 2;">Copy Frame 12 Prompt</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <div class="lightbox-img-wrap" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Fullscreen Preview">
+    </div>
+  </div>
+
+  <script>
+    const prompts = {
+      1: `Extreme close-up of a chilled 250 ml clear PET bottle of Taazu Classic Nimbu Namak with an orange cap (use the attached bottle as reference), cold condensation droplets running down the label, slight low angle, warm cream background (#FFF8E7) with a soft orange glow behind the bottle. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      2: `A juicy lemon slice falling in the upper-middle of the frame, frozen mid-air, with a few clear juice droplets dripping from it straight down into the open neck of the bottle. Show the FULL bottle, standing upright in the lower-middle of the frame, with its base fully visible and resting on a soft reflective surface with a gentle shadow. The bottle takes about 40% of the frame height, and its bottom sits at about 70% of the frame height, so the bottom 30% of the image is just the clean gradient background and surface. At the bottle neck: a small, realistic splash of clear lemony liquid at the rim where the droplets land. The orange cap rests on the surface next to the bottle base, tilted naturally. The bottle: crisp clean edges, clear PET with light lemon-coloured liquid inside, cold condensation droplets, and the full label clearly visible and sharp (Taazu drop logo, TAAZU wordmark, CLASSIC NIMBU NAMAK). Background: smooth gradient from bright lemon yellow (#F5D83B) at the top to warm orange (#EA580C) at the bottom, with soft studio light from the top left and a subtle glow behind the bottle. Vertical 9:16, photorealistic beverage ad.`,
+      3: `Coarse white and pink rock salt crystals raining down from the top and landing in a small heap in the centre, crystals sparkling in the light, cool slate blue-grey gradient background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      4: `Roasted cumin seeds (jeera) bursting outward from the centre like a small explosion, a few seeds in sharp focus in front, warm brown (#8A4B1F) to cream gradient background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      5: `Three fresh mint leaves floating and gently turning in the air, dewy with water droplets, fresh green (#1F7A3A) to light mint gradient background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      6: `Three crystal-clear ice cubes dropping and clinking together, frost mist and tiny water splashes, icy light blue background with a cold glow. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      7: `A lemon slice, rock salt crystals, cumin seeds, mint leaves and ice cubes swirling in a circular vortex around a glossy glass-like orange water drop in the centre, motion trails, warm cream background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      8: `A big glossy water drop hitting a surface and exploding into a crown-shaped splash of clear lemony liquid, droplets flying, bright orange (#EA580C) background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      9: `Taazu Classic Nimbu Namak bottle with orange cap (attached reference) standing in the centre, rising out of a small splash, lemon slices and mint leaves floating around it, condensation on the bottle, warm yellow-orange gradient background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      10: `Taazu Jeera Masala bottle with brown cap (attached reference) standing in the centre, roasted cumin seeds orbiting around it, cold condensation on the bottle, warm brown (#8A4B1F) to cream gradient background. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      11: `Both Taazu bottles side by side, Classic with orange cap on the left and Jeera Masala with brown cap on the right (attached references), a few ice cubes, a lemon slice and a mint leaf at their base, cream background (#FFF8E7) with a soft orange glow. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos except the bottle label, keep the top 15% and bottom 35% of the frame simple and uncluttered.`,
+      12: `Plain warm cream background (#FFF8E7) with subtle festive Navratri touches only at the edges: a few small marigold flowers and tiny glowing diyas in the bottom corners, soft bokeh lights, the whole centre left empty for the logo and text. Vertical 9:16, premium beverage ad photography, clean studio set, soft warm light, crisp focus, high detail, no people, no hands, no cartoon, no text, no logos, keep the top 15% and bottom 35% of the frame simple and uncluttered.`
+    };
+
+    function toggleSafeZones() {
+      const overlays = document.querySelectorAll('.safe-zone-overlay');
+      const btn = document.getElementById('safeZoneBtn');
+      const isVisible = overlays[0].classList.toggle('visible');
+      for (let i = 1; i < overlays.length; i++) {
+        overlays[i].classList.toggle('visible', isVisible);
+      }
+      btn.classList.toggle('active', isVisible);
+    }
+
+    function copyPrompt(frameNum) {
+      if (prompts[frameNum]) {
+        navigator.clipboard.writeText(prompts[frameNum]).then(() => {
+          alert(`Prompt for Frame ${frameNum} copied to clipboard!`);
+        });
+      }
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

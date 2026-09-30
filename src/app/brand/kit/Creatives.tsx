@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Download, ImagePlus, RotateCcw, Share2, Trash2 } from "lucide-react";
+import { Download, Film, Folder, ImagePlus, RotateCcw, Share2, Sparkles, Trash2 } from "lucide-react";
 import { Panel, btnGhost, btnPrimary, inputCls } from "../../../components/ui";
 import { LogoConceptCtx, TEMPLATES, customTemplate, type Shared, type Tpl, type Values } from "./templates";
 import { useBrandLogo } from "../../../lib/brandLogo";
@@ -7,6 +7,7 @@ import { loadFonts } from "./fonts";
 import { canShareFiles, maxScale, nodeToPng, saveBlob, shareBlob, slug } from "./export";
 import { Chips, Label, readStore, writeStore } from "./bits";
 import ReadyFiles from "./ReadyFiles";
+import FolderAssetManager from "./FolderAssetManager";
 
 const KEY = "taazu.brandkit.creatives.v1";
 type Saved = { shared: Shared; values: Record<string, Values>; active: string };
@@ -48,6 +49,7 @@ async function readPhoto(file: File, max = 2600): Promise<string> {
 }
 
 export default function Creatives() {
+  const [viewMode, setViewMode] = useState<"folders" | "videos" | "generator">("folders");
   const [saved, setSaved] = useState<Saved>(() => { const r = readStore(KEY, DEFAULT); return { ...DEFAULT, ...r, shared: { ...DEFAULT.shared, ...r.shared } }; });
   const [photo, setPhoto] = useState(""); // kept in memory only: photos are too big for browser storage
   const [, setFontsReady] = useState(false);
@@ -105,15 +107,56 @@ export default function Creatives() {
 
   return (
     <LogoConceptCtx.Provider value={concept}>
-    <div className="space-y-4">
-      <ReadyFiles />
+      <div className="space-y-4">
+        {/* Top Switcher: Folders vs Ready Reels vs Generator */}
+      <div className="flex flex-wrap items-center justify-between gap-1 rounded-2xl bg-stone-200/70 p-1">
+        <button
+          type="button"
+          onClick={() => setViewMode("folders")}
+          className={`flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold transition ${
+            viewMode === "folders"
+              ? "bg-white text-orange-700 shadow-sm"
+              : "text-stone-600 hover:text-stone-900"
+          }`}
+        >
+          <Folder size={15} /> Brand Folders (Reels, Renders, Ingredients)
+        </button>
+        <button
+          type="button"
+          onClick={() => setViewMode("videos")}
+          className={`flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold transition ${
+            viewMode === "videos"
+              ? "bg-white text-orange-700 shadow-sm"
+              : "text-stone-600 hover:text-stone-900"
+          }`}
+        >
+          <Film size={15} /> Ready Reels & MP4
+        </button>
+        <button
+          type="button"
+          onClick={() => setViewMode("generator")}
+          className={`flex flex-1 min-w-[130px] items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold transition ${
+            viewMode === "generator"
+              ? "bg-white text-orange-700 shadow-sm"
+              : "text-stone-600 hover:text-stone-900"
+          }`}
+        >
+          <Sparkles size={15} /> Template Generator (Text & Canvas)
+        </button>
+      </div>
 
-      <Panel title="Price aur WhatsApp · har creative mein">
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div><Label hint="{price}">Price</Label><input className={inputCls} value={s.price} onChange={(e) => setSaved((c) => ({ ...c, shared: { ...c.shared, price: e.target.value } }))} /></div>
-          <div><Label hint="{wa} · QR bhi isi se banta hai">WhatsApp number</Label><input className={inputCls} inputMode="tel" value={s.wa} onChange={(e) => setSaved((c) => ({ ...c, shared: { ...c.shared, wa: e.target.value } }))} /></div>
-        </div>
-      </Panel>
+      {viewMode === "folders" && <FolderAssetManager />}
+
+      {viewMode === "videos" && <ReadyFiles />}
+
+      {viewMode === "generator" && (
+        <>
+          <Panel title="Price aur WhatsApp · har creative mein">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div><Label hint="{price}">Price</Label><input className={inputCls} value={s.price} onChange={(e) => setSaved((c) => ({ ...c, shared: { ...c.shared, price: e.target.value } }))} /></div>
+              <div><Label hint="{wa} · QR bhi isi se banta hai">WhatsApp number</Label><input className={inputCls} inputMode="tel" value={s.wa} onChange={(e) => setSaved((c) => ({ ...c, shared: { ...c.shared, wa: e.target.value } }))} /></div>
+            </div>
+          </Panel>
 
       <Panel title="Creative chuno">
         <div ref={galleryBox} className="grid gap-3" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
@@ -194,6 +237,8 @@ export default function Creatives() {
       <div aria-hidden style={{ position: "fixed", left: -100000, top: 0, pointerEvents: "none" }}>
         <div ref={exportRef} style={{ width: tpl.w, height: tpl.h }}>{tpl.render(v, s)}</div>
       </div>
+      </>
+      )}
     </div>
     </LogoConceptCtx.Provider>
   );
