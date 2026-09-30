@@ -7,7 +7,7 @@ Taazu (તાજું, Gujarati for "fresh") is a still nimbu-namak electrolyte
 | `logos/` | 3 logo concepts + seal, each as icon-only and with name, in SVG (print) and PNG (social). Text is converted to shapes, so the SVGs open correctly anywhere without the font. |
 | `creatives/social-posts/` | 8 ready awareness creatives: 5 Instagram posts (1080×1350), 1 story (1080×1920), 1 A4 counter poster (300 dpi), 1 Navratri post. |
 | `creatives/bottle-renders/` | Gemini bottle renders (Classic, Jeera, duo), orthographic drawing and flat label references. |
-| `creatives/video/` | "Garmi ka Reset" promo reel: 30 s 9:16 MP4 with music, 15 s silent cut, storyboard, music file, concept and AI video prompts. `source/` has the code to re-render it. |
+| `creatives/video/` | Promo reels, one folder each: `reel1-garmi-ka-reset/` (30 s with music, 15 s silent cut) and `reel2-andar-kya-hai/` (30 s product-only, ingredients to bottle). Each has the MP4, storyboard, music, plan and a `source/` folder with the code to re-render it. |
 | `AI-PROMPTS.md` | Prompts for Midjourney, Ideogram, ChatGPT, Gemini, Firefly and video tools, plus captions for each creative. |
 
 Claims rule for everything below: keep hydration facts general and sourced. Never call Taazu "ORS", never say it treats, prevents or cures anything, and don't write "low sugar" until the NABL lab report supports it.
