@@ -2,7 +2,20 @@ import { Download, Film, FolderOpen } from "lucide-react";
 import { Panel, btnGhost, btnPrimary } from "../../../components/ui";
 
 /* Finished files from brand-kit/creatives, served from public/creatives with the same folders. */
-const VIDEO = "/creatives/video/taazu-reel-30s.mp4";
+const VIDEOS = [
+  {
+    title: "Andar kya hai? (30 sec, 9:16)",
+    file: "taazu-reel2-30s",
+    story: "Bottle close-up → nimbu, namak, jeera, pudina, thanda ek-ek karke → sab Taazu boond mein → Classic → Jeera → Rehydrate | Refresh | Recover → \"Navratri pe milenge!\" + WhatsApp number. Koi insaan ya cartoon nahi, sirf product.",
+    folder: "reel2-andar-kya-hai",
+  },
+  {
+    title: "Garmi ka Reset (30 sec, 9:16)",
+    file: "taazu-reel-30s",
+    story: "Amdavad 44° → garba night → gym, turf, site, traffic → boond aur splash → Classic Nimbu Namak → Jeera Masala → Rehydrate | Refresh | Recover → \"Navratri stalls me milenge!\"",
+    folder: "reel1-garmi-ka-reset",
+  },
+];
 
 const FOLDERS = [
   {
@@ -25,23 +38,26 @@ const label = (f: string) => f.replace(/^\d+-/, "").replace(/\.\w+$/, "").replac
 export default function ReadyFiles() {
   return (
     <div className="space-y-4">
-      <Panel title="Promo video · Garmi ka Reset (30 sec, 9:16)" icon={Film}>
-        <div>
-          <div className="grid items-start gap-4 md:grid-cols-[320px_1fr]">
-            <video src={VIDEO} poster="/creatives/video/taazu-reel-30s_poster.jpg" controls playsInline preload="metadata"
-              className="mx-auto w-full max-w-[320px] rounded-2xl border border-stone-200 bg-black shadow-lg" style={{ aspectRatio: "9 / 16" }} />
-            <div className="space-y-3 text-sm text-stone-600">
-              <p>Amdavad 44° → garba night → gym, turf, site, traffic → boond aur splash → Classic Nimbu Namak → Jeera Masala → Rehydrate | Refresh | Recover → "Navratri stalls me milenge!"</p>
-              <p className="text-xs text-stone-500">Music humara khud banaya hai (dhol, dandiya, shehnai tune), copyright ka issue nahi. Instagram par chaho to trending track laga sakte ho.</p>
-              <div className="flex flex-wrap gap-2">
-                <a className={btnPrimary} href={VIDEO} download="taazu-reel-30s.mp4"><Download size={16} />Download video</a>
-                <a className={btnGhost} href="/creatives/video/taazu-reel-30s_storyboard.jpg" target="_blank" rel="noreferrer">Storyboard</a>
+      {VIDEOS.map((v) => {
+        const src = `/creatives/video/${v.file}.mp4`;
+        return (
+          <Panel key={v.file} title={`Promo video · ${v.title}`} icon={Film}>
+            <div className="grid items-start gap-4 md:grid-cols-[320px_1fr]">
+              <video src={src} poster={`/creatives/video/${v.file}_poster.jpg`} controls playsInline preload="metadata"
+                className="mx-auto w-full max-w-[320px] rounded-2xl border border-stone-200 bg-black shadow-lg" style={{ aspectRatio: "9 / 16" }} />
+              <div className="space-y-3 text-sm text-stone-600">
+                <p>{v.story}</p>
+                <p className="text-xs text-stone-500">Music humara khud banaya hai, copyright ka issue nahi. Instagram par chaho to trending track laga sakte ho.</p>
+                <div className="flex flex-wrap gap-2">
+                  <a className={btnPrimary} href={src} download={`${v.file}.mp4`}><Download size={16} />Download video</a>
+                  <a className={btnGhost} href={`/creatives/video/${v.file}_storyboard.jpg`} target="_blank" rel="noreferrer">Storyboard</a>
+                </div>
+                <p className="text-xs text-stone-500">Full quality file, music aur source code: repo mein <code>brand-kit/creatives/video/{v.folder}/</code>.</p>
               </div>
-              <p className="text-xs text-stone-500">Full quality file, 15 sec cut, music aur source code: repo mein <code>brand-kit/creatives/video/</code>.</p>
             </div>
-          </div>
-        </div>
-      </Panel>
+          </Panel>
+        );
+      })}
 
       {FOLDERS.map((f) => (
         <Panel key={f.name} title={`creatives/${f.name}`} icon={FolderOpen}>
