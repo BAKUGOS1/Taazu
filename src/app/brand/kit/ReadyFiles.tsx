@@ -6,7 +6,7 @@ const VIDEOS = [
   {
     title: "Andar kya hai? (30 sec, 9:16)",
     file: "taazu-reel2-30s",
-    story: "Bottle close-up → nimbu, namak, jeera, pudina, thanda ek-ek karke → sab Taazu boond mein → Classic → Jeera → Rehydrate | Refresh | Recover → \"Navratri pe milenge!\" + WhatsApp number. Koi insaan ya cartoon nahi, sirf product.",
+    story: "Bottle close-up → asli nimbu, sendha namak, jeera, pudina, barf ek-ek karke → sab Taazu boond mein → Classic → Jeera → Rehydrate | Refresh | Recover → \"Navratri pe milenge!\" + WhatsApp number. Koi insaan ya cartoon nahi, sirf product.",
     folder: "reel2-andar-kya-hai",
   },
   {

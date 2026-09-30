@@ -67,25 +67,26 @@ const tx={
 };
 
 /* ---------- ingredient elements ---------- */
-const lemon=img('lemon_wedge.png',420);
+const lemon=img('g_lemon.png',470);
+const saltHeap=img('g_salt_heap.png',640);const jeeraHeap=img('g_jeera_heap.png',600);
 const R=rng(11);
 // salt crystals: small faceted translucent polygons
 const fx=$('fx');const defs=el('defs',{},fx);
-const sg=el('linearGradient',{id:'salt',x1:0,y1:0,x2:1,y2:1},defs);[['0','#FFFFFF'],['.5','#EEF3F7'],['1','#C9D3DC']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sg));
-const sp=el('linearGradient',{id:'saltp',x1:0,y1:0,x2:1,y2:1},defs);[['0','#FFF1F4'],['1','#E8B7C4']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sp));
+const sg=el('linearGradient',{id:'salt',x1:0,y1:0,x2:1,y2:1},defs);[['0','#FFFFFF'],['.5','#F7ECEA'],['1','#D9C2BE']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sg));
+const sp=el('linearGradient',{id:'saltp',x1:0,y1:0,x2:1,y2:1},defs);[['0','#F9D7C8'],['1','#C9826E']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sp));
 const salts=[];const saltG=el('g',{},fx);
-for(let i=0;i<90;i++){const n=5+Math.floor(R()*3),r=18+R()*30;let d='';for(let k=0;k<n;k++){const a=k/n*Math.PI*2+R()*.5,rr=r*(.7+R()*.4);d+=(k?'L':'M')+(Math.cos(a)*rr).toFixed(1)+' '+(Math.sin(a)*rr).toFixed(1)}
-  const g=el('g',{},saltG);el('path',{d:d+'Z',fill:i%6===0?'url(#saltp)':'url(#salt)',stroke:'#fff','stroke-width':2,opacity:.95},g);el('path',{d:`M${-r*.3} ${-r*.4} L${r*.1} ${-r*.5}`,stroke:'#fff','stroke-width':3,'stroke-linecap':'round'},g);
-  salts.push({g,x:200+R()*680,land:640+R()*220,delay:R()*0.9,rot:R()*360,sp:(R()-.5)*300})}
+for(let i=0;i<70;i++){const n=5+Math.floor(R()*3),r=16+R()*22;let d='';for(let k=0;k<n;k++){const a=k/n*Math.PI*2+R()*.5,rr=r*(.7+R()*.4);d+=(k?'L':'M')+(Math.cos(a)*rr).toFixed(1)+' '+(Math.sin(a)*rr).toFixed(1)}
+  const g=el('g',{},saltG);el('path',{d:d+'Z',fill:i%2===0?'url(#saltp)':'url(#salt)',stroke:'#fff','stroke-width':2,opacity:.95},g);el('path',{d:`M${-r*.3} ${-r*.4} L${r*.1} ${-r*.5}`,stroke:'#fff','stroke-width':3,'stroke-linecap':'round'},g);
+  salts.push({g,x:200+R()*680,land:600+R()*230,delay:R()*0.9,rot:R()*360,sp:(R()-.5)*300})}
 // splash droplets
 const drops=[];for(let i=0;i<26;i++){drops.push({a:-Math.PI*(0.1+R()*0.8),v:500+R()*800,r:6+R()*14,e:el('circle',{fill:'#E9F6FF',stroke:'#A9D6F5','stroke-width':2},fx)})}
 const ring=el('ellipse',{cx:540,cy:760,rx:0,ry:0,fill:'none',stroke:'#9ED2F2','stroke-width':10},fx);
 // jeera seeds, mint leaves, ice cubes (images)
-const seeds=[];for(let i=0;i<46;i++)seeds.push({e:img('seed.png',70),a:R()*Math.PI*2,d:120+R()*380,rot:R()*360,sp:(R()-.5)*500,s:.8+R()*.7});
-const mints=[0,1,2].map(i=>({e:img('mint.png',300),x:[380,700,560][i],y:[640,610,800][i],r:[-25,30,5][i],s:[1,.85,1.2][i]}));
-const ices=[0,1,2].map(i=>({e:img('ice.png',260),x:[330,760,545][i],y:[560,600,760][i],r:[-12,18,4][i],d:i*.22}));
+const seeds=[];for(let i=0;i<46;i++)seeds.push({e:img('g_seed0.png',32),a:R()*Math.PI*2,d:120+R()*380,rot:R()*360,sp:(R()-.5)*500,s:.8+R()*.7});
+const mints=[0,1,2].map(i=>({e:img('g_mint.png',330),x:[380,700,560][i],y:[640,610,800][i],r:[-25,30,5][i],s:[1,.85,1.2][i]}));
+const ices=[0,1,2].map(i=>({e:img('g_ice.png',250),x:[330,760,545][i],y:[560,600,760][i],r:[-12,18,4][i],d:i*.22}));
 // mini versions that swirl into the drop
-const minis=[['lemon_wedge.png',150],['seed.png',60],['mint.png',130],['ice.png',120],['lemon_wedge.png',120],['seed.png',60],['mint.png',110],['seed.png',55]].map(([s,w],i)=>({e:img(s,w,'items2'),a:i/8*Math.PI*2}));
+const minis=[['g_lemon.png',150],['g_seed0.png',28],['g_mint.png',140],['g_ice.png',120],['g_lemon.png',120],['g_seed0.png',28],['g_mint.png',120],['g_seed0.png',26]].map(([s,w],i)=>({e:img(s,w,'items2'),a:i/8*Math.PI*2}));
 // bottles + orbiting lemons/seeds
 function makeBottle(fl){const d=document.createElement('div');d.className='bottle';
   d.innerHTML=`<div style="position:absolute;left:-40px;top:960px;width:480px;height:80px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.35),rgba(0,0,0,0))"></div>
@@ -97,8 +98,8 @@ const B1=makeBottle('classic'),B2=makeBottle('jeera');
 function setBottle(B,o,x,y,s,deg=0,rot=0,blur=0){if(o<=.001){B.d.style.display='none';return}B.d.style.display='block';B.d.style.opacity=o;
   B.d.style.transform=`translate(${x-200}px,${y-1000}px) scale(${s}) rotate(${rot}deg)`;B.d.style.filter=blur?`blur(${blur}px)`:'none';
   B.rot.style.transform=`perspective(1800px) rotateY(${deg}deg)`;B.gl.style.backgroundPosition=`${100-((RT*45+(B.fl==='jeera'?60:0))%160)}% 0`}
-const orb=[...Array(6)].map((_,i)=>({e:img(i%2?'lemon_wedge.png':'mint.png',i%2?170:150,'items2'),a:i/6*Math.PI*2}));
-const orbJ=[...Array(14)].map((_,i)=>({e:img('seed.png',70,'items2'),a:i/14*Math.PI*2,rr:.8+((i*37)%10)/25}));
+const orb=[...Array(6)].map((_,i)=>({e:img(i%2?'g_lemon.png':'g_mint.png',160,'items2'),a:i/6*Math.PI*2}));
+const orbJ=[...Array(14)].map((_,i)=>({e:img('g_seed0.png',34,'items2'),a:i/14*Math.PI*2,rr:.8+((i*37)%10)/25}));
 // rays
 const rays=$('rays');const rayG=el('g',{},rays);const rayP=[];for(let i=0;i<18;i++){const a0=i/18*Math.PI*2,a1=a0+Math.PI/36,L=1700;rayP.push(el('path',{d:`M0 0L${L*Math.cos(a0)} ${L*Math.sin(a0)}L${L*Math.cos(a1)} ${L*Math.sin(a1)}Z`},rayG))}
 
@@ -126,9 +127,11 @@ function renderCore(t){
   const so=t>=2&&t<4.15;saltG.style.display=so?'block':'none';
   if(so){const out=seg(t,3.85,4.1);salts.forEach(s=>{const p=seg(t,2.0+s.delay*.5,2.55+s.delay*.5);const y=lerp(-80,s.land,eIn(p))+(p>=1?Math.sin((t-2.6)*20)*2*(1-seg(t,2.6,2.9)):0);
     s.g.setAttribute('transform',`translate(${s.x-out*1000} ${y}) rotate(${s.rot+s.sp*p})`);s.g.setAttribute('opacity',p>0?1:0)})}
+  { const hp=seg(t,2.25,2.75),out=seg(t,3.85,4.1); if(t<2.2||t>=4.15)saltHeap.style.display='none'; else put(saltHeap,Math.min(1,hp*2)*(1-out),540-out*1000,lerp(900,800,eOut(hp)),lerp(.6,1,eBack(hp)),0) }
   show(tx.w2,seg(t,2.3,2.45)*(1-seg(t,3.85,4.0)),0,0,lerp(1.5,1,eBack(seg(t,2.3,2.65))));
 
   /* jeera burst */
+  { const hp=seg(t,4.0,4.25),out=seg(t,5.85,6.1); if(t<4||t>=6.1)jeeraHeap.style.display='none'; else put(jeeraHeap,(1-out),540,760+out*400,lerp(.3,1,eBack(hp))*(1+.02*Math.sin(t*6)),0) }
   seeds.forEach(s=>{if(t<4||t>=6.1){s.e.style.display='none';return}const p=eOut(seg(t,4.15,4.9)),out=seg(t,5.85,6.1);const a=s.a+seg(t,4.9,6)*.3;
     put(s.e,1-out,540+Math.cos(a)*s.d*p,720+Math.sin(a)*s.d*p*.8,s.s*(1-out*.5),s.rot+t*s.sp*.2)});
   show(tx.w3,seg(t,4.2,4.35)*(1-seg(t,5.85,6.0)),0,0,lerp(1.5,1,eBack(seg(t,4.2,4.55))));
