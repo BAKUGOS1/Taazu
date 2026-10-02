@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from "react";
-import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight, QrCode, Box } from "lucide-react";
+import { Palette, ListChecks, Check, AlertCircle, X, BookOpen, ExternalLink, Droplets, Type, LayoutGrid, Shapes, Images, MessageSquareQuote, Compass, Wand2, ArrowRight, QrCode, Box, FolderOpen } from "lucide-react";
 import { Panel } from "../../components/ui";
 import wordLeaf from "../../../brand-kit/logos/wordmark-leaf.svg?url";
 import { Lockup, markUrl } from "../../components/BrandMark";
@@ -11,6 +11,7 @@ const Creatives = lazy(() => import("./kit/Creatives"));
 const Slogans = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Slogans })));
 const Strategy = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Strategy })));
 const QrMaker = lazy(() => import("./kit/QrMaker"));
+const Docs = lazy(() => import("./kit/Docs"));
 const Prompts = lazy(() => import("./kit/TextPanels").then((m) => ({ default: m.Prompts })));
 
 const TABS = [
@@ -18,6 +19,7 @@ const TABS = [
   { id: "bottle3d", label: "3D Bottle", icon: Box },
   { id: "logos", label: "Logos", icon: Shapes },
   { id: "creatives", label: "Creatives", icon: Images },
+  { id: "docs", label: "Docs", icon: FolderOpen },
   { id: "qr", label: "QR code", icon: QrCode },
   { id: "slogans", label: "Slogans", icon: MessageSquareQuote },
   { id: "strategy", label: "Strategy", icon: Compass },
@@ -31,7 +33,7 @@ export default function BrandView() {
   const setTab = (t: TabId) => { setTabState(t); try { localStorage.setItem(TAB_KEY, t); } catch { /* storage blocked */ } };
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-4 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-8">
+      <div className="grid grid-cols-3 gap-1 rounded-2xl bg-stone-200/60 p-1 md:grid-cols-9">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button key={id} type="button" onClick={() => setTab(id)} aria-pressed={tab === id}
             className={`flex items-center justify-center gap-1.5 rounded-xl py-2 text-xs font-bold transition ${tab === id ? "bg-white text-orange-700 shadow-sm" : "text-stone-500 hover:text-stone-800"}`}>
@@ -44,6 +46,7 @@ export default function BrandView() {
         {tab === "bottle3d" && <Bottle3dPanel />}
         {tab === "logos" && <LogosPanel />}
         {tab === "creatives" && <Creatives />}
+        {tab === "docs" && <Docs />}
         {tab === "qr" && <QrMaker />}
         {tab === "slogans" && <Slogans />}
         {tab === "strategy" && <Strategy />}
