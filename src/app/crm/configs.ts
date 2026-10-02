@@ -18,7 +18,7 @@ export const NEED: Record<string, T> = {
   "Hydration station": { en: "We need 20 L water jars / dispensers for events, with delivery. Can you supply them?", hi: "Hamein events ke liye 20 L water jars / dispensers chahiye — delivery ke saath de sakte hain?" },
 };
 // What we need from each category, phrased to finish "looking for a reliable partner for ..." in the WhatsApp message.
-const WA_NEED: Record<string, string> = {
+export const WA_NEED: Record<string, string> = {
   "Co-packer / bottler": "contract filling of a non-carbonated flavoured drink in 250 ml PET bottles under our Taazu label, ideally with your help on the formulation",
   "Powder private label": "private-label electrolyte powder sachets under the Taazu brand",
   "PET bottles / caps": "food-grade 250 ml PET bottles and caps, starting with small quantities",

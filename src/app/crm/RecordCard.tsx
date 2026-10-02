@@ -4,6 +4,7 @@ import { COL, telHref, waHref, today } from "../../lib/core";
 import { Dot } from "../../components/ui";
 import { usePrefs } from "../../lib/prefs";
 import { answered, fmtTime, type CrmConfig, type CrmRecord, type ContactLog } from "./config";
+import { messageFor, useWaTemplates } from "./waTemplates";
 
 const fmtDate = (d: string) => new Date(d + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 
@@ -12,6 +13,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall, onS
   onOpen: (r: CrmRecord) => void; onCall: (r: CrmRecord, via: string) => void; onStage?: (r: CrmRecord) => void;
 }) {
   const { lang } = usePrefs();
+  const { list: tpls } = useWaTemplates();
   const [open, setOpen] = useState(false); // details start closed; tap "Details" to view
   const tel = telHref(r.phone) || telHref(String(r.phone2 || "").split(/[,/]/)[0]);
   const wa = waHref(r.phone) || waHref(r.phone2);
@@ -82,7 +84,7 @@ export default function RecordCard({ cfg, r, lastLog = null, onOpen, onCall, onS
           ? <a href={tel} onClick={() => onCall(r, "call")} className="flex items-center justify-center gap-2 py-3 text-slate-700 active:bg-slate-50"><Phone size={16} />Call</a>
           : <span className="flex items-center justify-center gap-2 py-3 text-slate-300"><Phone size={16} />No phone</span>}
         {wa
-          ? <a href={`${wa}?text=${encodeURIComponent(cfg.waMessage(r, lang))}`} target="_blank" rel="noreferrer" onClick={() => onCall(r, "whatsapp")}
+          ? <a href={`${wa}?text=${encodeURIComponent(messageFor(tpls, cfg, r, lang))}`} target="_blank" rel="noreferrer" onClick={() => onCall(r, "whatsapp")}
               className="flex items-center justify-center gap-2 py-3 border-l border-slate-100 text-green-700 active:bg-green-50"><MessageCircle size={16} />WhatsApp</a>
           : <span className="flex items-center justify-center gap-2 py-3 border-l border-slate-100 text-slate-300"><MessageCircle size={16} />WhatsApp</span>}
       </div>
