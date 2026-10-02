@@ -5,6 +5,7 @@ import { usePrefs } from "../../lib/prefs";
 import { CalcButton } from "../calculator";
 import { Dot, inputCls } from "../../components/ui";
 import { COL, mapUrl, telHref, waHref, today } from "../../lib/core";
+import { messageFor, pickTemplate, useWaTemplates } from "./waTemplates";
 import { LOG_TYPES, FOLLOW_CHIPS, addDays, newLog, stageAfter, answered, type CrmConfig, type CrmRecord, type ContactLog, type Field } from "./config";
 
 const TYPE_ICON = { call: Phone, whatsapp: MessageSquare, visit: Footprints, email: Mail };
@@ -32,14 +33,23 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
   const [followTime, setFollowTime] = useState("");
   const [next, setNext] = useState("");
   const [armDel, setArmDel] = useState(false);
+  const [tplSel, setTplSel] = useState("auto"); // "auto" = first matching template, "builtin", or a template id
+  const [draft, setDraft] = useState<string | null>(null); // the message after a hand edit
+  const [msgOpen, setMsgOpen] = useState(false);
 
   // Fresh form each time a different record opens (or a Call/WhatsApp tap pre-selects the type).
   useEffect(() => {
     setType(startLog || "call"); setOutcome(""); setNote(""); setFollow(addDays(3)); setFollowTime(""); setNext(r?.next || ""); setArmDel(false);
+    setTplSel("auto"); setDraft(null);
   }, [r?.id, startLog]);
 
   const { on, module: moduleOn, lang } = usePrefs(); // before the early return: hooks must run in the same order every render
+  const { list: tpls } = useWaTemplates();
   if (!r) return null;
+  const mineTpls = tpls.filter((t) => t.kind === cfg.kind);
+  const auto = pickTemplate(tpls, r, cfg);
+  const forced = tplSel === "auto" ? undefined : tplSel === "builtin" ? null : mineTpls.find((t) => t.id === tplSel) || undefined;
+  const msg = draft ?? messageFor(tpls, cfg, r, lang, forced);
   const tel = telHref(r.phone), wa = waHref(r.phone) || waHref(r.phone2), map = mapUrl(r);
   const alts = String(r.phone2 || "").split(/[,/]/).map((p) => p.trim()).filter((p) => telHref(p));
   const mine = logs.filter((l) => l.supplierId === r.id).sort((a, b) => (b.date + (b.at || 0)).localeCompare(a.date + (a.at || 0)));
@@ -65,7 +75,7 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
       {/* contact buttons */}
       <div className="grid grid-cols-3 gap-2">
         <a href={tel || undefined} onClick={() => setType("call")} className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${tel ? "bg-slate-900 text-white active:bg-slate-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><Phone size={18} />Call</a>
-        <a href={wa ? `${wa}?text=${encodeURIComponent(cfg.waMessage(r, lang))}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
+        <a href={wa ? `${wa}?text=${encodeURIComponent(msg)}` : undefined} target="_blank" rel="noreferrer" onClick={() => setType("whatsapp")}
           className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${wa ? "bg-green-600 text-white active:bg-green-700" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MessageCircle size={18} />WhatsApp</a>
         <a href={map || undefined} target="_blank" rel="noreferrer" className={`flex flex-col items-center gap-1 rounded-2xl py-3 text-xs font-medium ${map ? "bg-blue-50 text-blue-700 active:bg-blue-100" : "bg-slate-100 text-slate-300 pointer-events-none"}`}><MapPin size={18} />Map</a>
       </div>
@@ -74,6 +84,24 @@ export default function RecordSheet({ cfg, r, logs, startLog, onClose, onChange,
         <div className="mt-2 flex flex-wrap justify-center gap-2">
           {alts.map((p) => <a key={p} href={telHref(p)} onClick={() => setType("call")} className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700 active:bg-slate-50"><PhoneForwarded size={12} />{p}</a>)}
         </div>
+      )}
+      {wa && (
+        <div className="mt-2 text-center">
+          <button onClick={() => setMsgOpen((v) => !v)} aria-expanded={msgOpen} className="text-xs font-semibold text-green-700">
+            {msgOpen ? "Hide WhatsApp message" : `WhatsApp message: ${tplSel === "auto" ? (auto ? auto.name : "Built-in") : tplSel === "builtin" ? "Built-in" : forced?.name || "Built-in"}${draft !== null ? " (edited)" : ""} · Edit`}
+          </button>
+        </div>
+      )}
+      {wa && msgOpen && (
+        <section className="mt-2 rounded-2xl border border-green-200 bg-green-50/40 p-3">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
+            <button className={chip(tplSel === "auto")} onClick={() => { setTplSel("auto"); setDraft(null); }}>Auto{auto ? `: ${auto.name}` : ""}</button>
+            {mineTpls.map((t) => <button key={t.id} className={chip(tplSel === t.id)} onClick={() => { setTplSel(t.id); setDraft(null); }}>{t.name}</button>)}
+            <button className={chip(tplSel === "builtin")} onClick={() => { setTplSel("builtin"); setDraft(null); }}>Built-in</button>
+          </div>
+          <textarea className={inputCls + " mt-2 min-h-[160px] text-xs"} value={msg} onChange={(e) => setDraft(e.target.value)} aria-label="WhatsApp message" />
+          <div className="mt-1 text-[11px] text-slate-500">Edits here are only for this send. Make reusable messages in Settings → WhatsApp messages.</div>
+        </section>
       )}
       {r.about && <div className="mt-3 rounded-xl bg-orange-50 px-3 py-2 text-xs text-slate-700"><span className="font-semibold text-orange-800">Expert in: </span>{r.about}</div>}
       {r.use && <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600"><span className="font-semibold text-slate-700">Why call: </span>{r.use}</div>}

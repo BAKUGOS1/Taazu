@@ -35,6 +35,8 @@ import BrandView from "./app/brand";
 import { AppIcon, FaviconSync, Wordmark } from "./components/BrandMark";
 import { BrandLogoCtx, useBrandLogoValue } from "./lib/brandLogo";
 import SettingsView from "./app/settings";
+import WaTemplatesPanel from "./app/settings/WaTemplates";
+import { WaTplCtx, useWaTemplatesValue } from "./app/crm/waTemplates";
 import DataPanel from "./app/dataio/DataPanel";
 import { exportAll } from "./lib/dataio/xlsx";
 import { CalculatorHost, SidebarCalc } from "./app/calculator";
@@ -98,6 +100,7 @@ function MainApp() {
   const auth = useAuth();
   const prefs = usePrefsValue(auth.session.user.id, cfgRows, setCfgRows);
   const brandLogo = useBrandLogoValue(cfgRows, setCfgRows);
+  const waTpls = useWaTemplatesValue(cfgRows, setCfgRows);
   const navGroups = NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((n) => n.id === "Settings" || prefs.module(n.id)) })).filter((g) => g.items.length);
   const allNav = navGroups.flatMap((g) => g.items);
   const mobileMain = MOBILE_PREF.filter((id) => allNav.some((n) => n.id === id)).slice(0, 4);
@@ -182,7 +185,7 @@ function MainApp() {
   const badge = (id) => (id === "Suppliers" && k.supDue.length ? k.supDue.length : id === "Buyers" && k.follow.length ? k.follow.length : id === "Tasks" && k.overdue.length ? k.overdue.length : 0);
 
   return (
-    <PrefsCtx.Provider value={prefs}><BrandLogoCtx.Provider value={brandLogo}><FaviconSync />
+    <PrefsCtx.Provider value={prefs}><BrandLogoCtx.Provider value={brandLogo}><WaTplCtx.Provider value={waTpls}><FaviconSync />
     <CalculatorHost enabled={prefs.module("Calculator")}>
     {/* App shell: the page itself never scrolls, only <main> does. Browsers resize or rubber-band
         the document at the end of a page, which dragged the fixed bottom dock with it. */}
@@ -330,6 +333,7 @@ function MainApp() {
           {tab === "Brand" && <BrandView />}
           {tab === "Settings" && (
             <SettingsView>
+              <WaTemplatesPanel sup={sup} buy={buy} />
               <Panel><TeamPanel /></Panel>
               <DataPanel stores={stores} exportEverything={exportEverything} resetAll={resetAll} armReset={armReset} say={say} />
             </SettingsView>
@@ -368,6 +372,6 @@ function MainApp() {
       {toast && <div className="fixed bottom-28 md:bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm rounded-lg px-4 py-2 shadow-lg z-50">{toast}</div>}
     </div>
     </CalculatorHost>
-    </BrandLogoCtx.Provider></PrefsCtx.Provider>
+    </WaTplCtx.Provider></BrandLogoCtx.Provider></PrefsCtx.Provider>
   );
 }
